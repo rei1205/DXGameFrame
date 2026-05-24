@@ -21,11 +21,13 @@
   <ItemGroup>
     <ClInclude Include="Source\main.h" />
     <ClInclude Include="Source\System\Debug.h" />
+    <ClInclude Include="Source\System\GameTime.h" />
     <ClInclude Include="Source\System\GameWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\System\Debug.cpp" />
+    <ClCompile Include="Source\System\GameTime.cpp" />
     <ClCompile Include="Source\System\GameWindow.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
