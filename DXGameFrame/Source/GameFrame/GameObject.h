@@ -38,7 +38,7 @@ public:
 	 * @brief Transformコンポーネントを取得する
 	 * @return Transformコンポーネントへのポインタ
 	 */
-	Transform* GetTransform()
+	Transform* GetTransform() const
 	{
 		return m_pTransform;
 	}

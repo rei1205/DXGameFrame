@@ -13,11 +13,15 @@ Component::Component():
 
 bool Component::IsActiveHierarchy() const
 {
-	return false;
+	return m_isEnabled && !IsDestroyed() &&
+		m_pGameObject->IsActiveHierarchy();
 }
 
 void Component::Init(GameObject* pGameObject, uint32_t classID)
 {
+	if (pGameObject == nullptr)
+		return;
+
 	m_pGameObject = pGameObject;
 	m_pTransform = pGameObject->GetTransform();
 	m_classID = classID;
@@ -27,6 +31,9 @@ void Component::Init(GameObject* pGameObject, uint32_t classID)
 
 void Component::Uninit()
 {
+	if (m_pGameObject == nullptr)
+		return;
+
 	m_pGameObject->UnregisterComponent(this);
 
 	m_pGameObject = nullptr;

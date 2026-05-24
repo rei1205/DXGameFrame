@@ -23,6 +23,7 @@
     <ClInclude Include="Source\GameFrame\Component.h" />
     <ClInclude Include="Source\GameFrame\ComponentArray.h" />
     <ClInclude Include="Source\GameFrame\ComponentManager.h" />
+    <ClInclude Include="Source\GameFrame\Component\Transform.h" />
     <ClInclude Include="Source\GameFrame\GameObject.h" />
     <ClInclude Include="Source\GameFrame\GameObjectManager.h" />
     <ClInclude Include="Source\GameFrame\Object.h" />
@@ -40,6 +41,7 @@
   <ItemGroup>
     <ClCompile Include="Source\GameFrame\Component.cpp" />
     <ClCompile Include="Source\GameFrame\ComponentManager.cpp" />
+    <ClCompile Include="Source\GameFrame\Component\Transform.cpp" />
     <ClCompile Include="Source\GameFrame\GameObject.cpp" />
     <ClCompile Include="Source\GameFrame\GameObjectManager.cpp" />
     <ClCompile Include="Source\GameFrame\Object.cpp" />

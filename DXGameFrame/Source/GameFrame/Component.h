@@ -1,7 +1,6 @@
 // Component.h
 #pragma once
 #include "Object.h"
-#include "ComponentManager.h"
 
 class GameObject;
 class Transform;
@@ -83,7 +82,7 @@ public:
 	 * @brief クラス識別用IDを取得する
 	 * @return クラスID
 	 */
-	uint32_t GetClassID()
+	uint32_t GetClassID() const
 	{
 		return m_classID;
 	}
