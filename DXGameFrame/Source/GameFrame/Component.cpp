@@ -5,7 +5,7 @@
 Component::Component():
 	m_pGameObject(nullptr),
 	m_pTransform(nullptr),
-	m_isEnabled(false),
+	m_isEnabled(true),
 	m_isStarted(false),
 	m_classID(0)
 {

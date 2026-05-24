@@ -21,6 +21,12 @@ public:
     template <typename T>
 	T* AddComponent(GameObject* pGameObject);
 
+    /**
+     * @brief コンポーネントを削除する
+     * @param pComponent 削除するコンポーネントへのポインタ
+     */
+	void RemoveComponent(Component* pComponent);
+
 	/**
      * @brief 全てのコンポーネントの呼び出し可能な開始処理を呼び出す
      */
@@ -40,6 +46,11 @@ public:
      * @brief 削除予定コンポーネントを実際に削除する
      */
     void ApplyDestroy();
+
+    /**
+     * @brief 全てのコンポーネント配列を削除する
+     */
+    void ClearAll();
 
 private:
 	ComponentManager() = default;

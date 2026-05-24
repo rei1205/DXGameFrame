@@ -1,5 +1,13 @@
 // ComponentManager.cpp
 #include "ComponentManager.h"
+#include "Component.h"
+
+void ComponentManager::RemoveComponent(Component* pComponent)
+{
+	auto it = m_componentArrayMap.find(pComponent->GetClassID());
+	if (it != m_componentArrayMap.end())
+		it->second->Remove(pComponent);
+}
 
 void ComponentManager::StartAll()
 {
@@ -31,4 +39,9 @@ void ComponentManager::ApplyDestroy()
 	{
 		componentArray.second->ApplyDestroy();
 	}
+}
+
+void ComponentManager::ClearAll()
+{
+	m_componentArrayMap.clear();
 }

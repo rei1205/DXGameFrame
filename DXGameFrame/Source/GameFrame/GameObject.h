@@ -11,7 +11,7 @@ class GameObject : public Object
 	friend class Component;
 
 public:
-	GameObject() = default;
+	GameObject();
 	~GameObject() = default;
 
 	/**
@@ -67,6 +67,11 @@ public:
 		m_isActive = isActive;
 	}
 
+	/**
+	 * @brief ゲームオブジェクト削除時の処理
+	 */
+	void OnDestroy();
+
 private:
 	/// このゲームオブジェクトが持つコンポーネントのリスト
 	std::vector<Component*> m_components;
@@ -88,6 +93,13 @@ private:
 	 * @param pComponent 登録解除するコンポーネントへのポインタ
 	 */
 	void UnregisterComponent(Component* pComponent);
+
+public:
+	/**
+	 * @brief ゲームオブジェクトを作成する
+	 * @return 作成したゲームオブジェクトへのポインタ
+	 */
+	static GameObject* Create();
 };
 
 template<typename T>

@@ -79,6 +79,15 @@ public:
 		m_isStarted = true;
 	}
 
+	/**
+	 * @brief クラス識別用IDを取得する
+	 * @return クラスID
+	 */
+	uint32_t GetClassID()
+	{
+		return m_classID;
+	}
+
 private:
 	/// 親ゲームオブジェクトへのポインタ
 	GameObject* m_pGameObject;

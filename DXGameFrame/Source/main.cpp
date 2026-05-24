@@ -44,7 +44,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	// FPS設定
 	GameTime::Init(DefaultFPS);
 
-
 	// メッセージループ
 	MSG message = {};
 	while (message.message != WM_QUIT && !g_isGameExit)

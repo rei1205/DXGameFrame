@@ -33,6 +33,12 @@ public:
     virtual void LateUpdateAll() = 0;
 
     /**
+     * @brief コンポーネントを削除する
+     * @param pComponent 削除するコンポーネントへのポインタ
+     */
+    virtual void Remove(Component* pComponent) = 0;
+
+    /**
      * @brief 削除予定コンポーネントを実際に削除する
      */
     virtual void ApplyDestroy() = 0;
@@ -77,7 +83,7 @@ public:
      * @brief コンポーネントを削除する
      * @param pComponent 削除するコンポーネントへのポインタ
      */
-    void Remove(Component* pComponent);
+    void Remove(Component* pComponent) override;
 
     /**
      * @brief 削除予定コンポーネントを実際に削除する
@@ -132,7 +138,7 @@ inline void ComponentArray<T>::StartAll()
     if constexpr (HasStart)
     {
         // Start関数を呼び出す
-        int count = m_components.size();
+        int count = (int)m_components.size();
         for (int i = 0; i < count; ++i)
         {
             T* component = m_components[i].get();
@@ -147,7 +153,7 @@ inline void ComponentArray<T>::StartAll()
     else
     {
         // Start呼び出し済みフラグの更新のみ行う
-        int count = m_components.size();
+        int count = (int)m_components.size();
         for (int i = 0; i < count; ++i)
         {
             T* component = m_components[i].get();
@@ -165,7 +171,7 @@ inline void ComponentArray<T>::UpdateAll()
     if constexpr (HasUpdate)
     {
         // Update関数を呼び出す
-        int count = m_components.size();
+        int count = (int)m_components.size();
         for (int i = 0; i < count; ++i)
         {
             T* component = m_components[i].get();
@@ -184,7 +190,7 @@ inline void ComponentArray<T>::LateUpdateAll()
     if constexpr (HasLateUpdate)
     {
         // LateUpdate関数を呼び出す
-        int count = m_components.size();
+        int count = (int)m_components.size();
         for (int i = 0; i < count; ++i)
         {
             T* component = m_components[i].get();
@@ -220,7 +226,7 @@ inline void ComponentArray<T>::Remove(Component* pComponent)
 {
     // 削除対象を検索
     auto it = std::find_if(m_components.begin(), m_components.end(),
-        [pComponent](std::unique_ptr<T> ptr)
+        [pComponent](std::unique_ptr<T>& ptr)
         { return  pComponent == ptr.get(); }
     );
 
@@ -240,7 +246,7 @@ template<typename T>
 inline void ComponentArray<T>::ApplyDestroy()
 {
     // 新規追加コンポーネントは処理対象外にする
-    int count = m_components.size();
+    int count = (int)m_components.size();
 
     for (int i = 0; i < count; ++i)
     {
