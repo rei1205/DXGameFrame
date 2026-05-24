@@ -19,12 +19,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\GameFrame\Object.h" />
+    <ClInclude Include="Source\GameFrame\ObjPtr.h" />
     <ClInclude Include="Source\main.h" />
     <ClInclude Include="Source\System\Debug.h" />
     <ClInclude Include="Source\System\GameTime.h" />
     <ClInclude Include="Source\System\GameWindow.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\GameFrame\Object.cpp" />
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\System\Debug.cpp" />
     <ClCompile Include="Source\System\GameTime.cpp" />
