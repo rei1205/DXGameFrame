@@ -1,6 +1,7 @@
 // GameObject.h
 #pragma once
 #include "Component.h"
+#include "ComponentManager.h"
 
 /**
  * @brief コンポーネントの追加・取得・削除などを行う
@@ -88,3 +89,49 @@ private:
 	 */
 	void UnregisterComponent(Component* pComponent);
 };
+
+template<typename T>
+inline T* GameObject::GetComponent()
+{
+	static_assert(std::is_base_of<Component, T>::value,
+		"GetComponentに無効なクラスが指定されました");
+
+	for (auto& component : m_components)
+	{
+		// 型キャスト可能か調べる
+		if (auto ptr = dynamic_cast<T*>(component))
+		{
+			return ptr;
+		}
+	}
+	return nullptr;
+}
+
+template<typename T>
+inline T* GameObject::AddComponent()
+{
+	static_assert(std::is_base_of<Component, T>::value,
+		"AddComponentに無効なクラスが指定されました");
+
+	// コンポーネント追加
+	T* ptr = ComponentManager::Instance().AddComponent<T>(this);
+	m_components.push_back(ptr);
+	return ptr;
+}
+
+template<typename T>
+inline void GameObject::RemoveComponent()
+{
+	static_assert(std::is_base_of<Component, T>::value,
+		"GetComponentに無効なクラスが指定されました");
+
+	for (auto& component : m_components)
+	{
+		// 型キャスト可能か調べる
+		if (auto ptr = dynamic_cast<T*>(component))
+		{
+			ptr->Destroy();
+			return;
+		}
+	}
+}
