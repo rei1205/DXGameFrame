@@ -365,6 +365,7 @@ FodyWeavers.xsd
 # 追加の除外設定
 **/Assets/**
 **/output/**
+**/Doxygen/**
 **/imgui.ini
 
 # 除外解除
