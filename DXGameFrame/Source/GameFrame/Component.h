@@ -2,10 +2,8 @@
 #pragma once
 #include "Object.h"
 
-
 class GameObject;
 class Transform;
-
 
 /**
  * @brief コンポーネントの基底クラス

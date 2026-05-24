@@ -2,7 +2,6 @@
 #pragma once
 #include <chrono>
 
-
 /**
  * @brief 時間管理・FPS制御を行うクラス
  */

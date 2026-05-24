@@ -1,13 +1,11 @@
 // GameTime.cpp
 #include "GameTime.h"
 
-
 GameTime::TimePoint GameTime::s_startTimePoint;
 GameTime::TimePoint GameTime::s_lastTimePoint;
 unsigned int GameTime::s_targetFPS;
 float GameTime::s_processingTime;
 float GameTime::s_deltaTime;
-
 
 void GameTime::Init(unsigned int targetFPS)
 {

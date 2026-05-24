@@ -2,7 +2,6 @@
 #pragma once
 #include <vector>
 
-
 /**
  * @brief ˆêˆÓ‚ÈID‚Ì¶¬EŠÇ—‚ğs‚¤
  */

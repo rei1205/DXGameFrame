@@ -2,7 +2,6 @@
 #pragma once
 #include <string>
 
-
 /**
  * @brief デバッグ用機能を扱うクラス
  */

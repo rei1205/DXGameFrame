@@ -1,7 +1,6 @@
 // Object.cpp
 #include "Object.h"
 
-
 Object::Object() :
 	m_isDestroyed(false)
 {

@@ -2,12 +2,10 @@
 #include "GameWindow.h"
 #include "Debug.h"
 
-
 HWND GameWindow::s_hWnd = nullptr;
 UINT GameWindow::s_windowStyle;
 GameWindow::Size GameWindow::s_clientSize;
 GameWindow::Size GameWindow::s_windowSize;
-
 
 bool GameWindow::Create(HINSTANCE hInstance, WNDPROC wndProc, UINT windowStyle,
 	const std::string& title, UINT clientWidth, UINT clientHeight)

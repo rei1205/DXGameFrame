@@ -3,7 +3,6 @@
 #include <Windows.h>
 #include <string>
 
-
 /**
  * @brief ウィンドウを作成・管理するクラス
  */

@@ -3,9 +3,7 @@
 #include <vector>
 #include <memory>
 
-
 class Component;
-
 
 /**
  * @brief コンポーネント配列の基底クラス
@@ -36,7 +34,6 @@ public:
      */
     virtual void ApplyDestroy() = 0;
 };
-
 
 /**
  * @brief コンポーネントを管理する配列

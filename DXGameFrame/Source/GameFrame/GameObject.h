@@ -2,9 +2,7 @@
 #pragma once
 #include "Component.h"
 
-
 class Scene;
-
 
 /**
  * @brief コンポーネントの追加・取得・削除などを行う

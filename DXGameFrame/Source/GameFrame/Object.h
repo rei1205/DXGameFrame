@@ -2,10 +2,8 @@
 #pragma once
 #include <vector>
 
-
 template<typename ObjectType>
 class ObjPtr;
-
 
 /**
  * @brief ゲーム内オブジェクトの基底クラス

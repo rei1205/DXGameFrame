@@ -2,7 +2,6 @@
 #pragma once
 #include "../Utility/IDManager.h"
 
-
 /**
  * @brief クラス固有ID管理の基底クラス
  */
@@ -19,7 +18,6 @@ protected:
 private:
 	IClassID() = delete;
 };
-
 
 /**
  * @brief クラス固有IDを設定するクラス

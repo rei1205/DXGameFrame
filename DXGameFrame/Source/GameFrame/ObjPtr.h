@@ -2,7 +2,6 @@
 #pragma once
 #include "Object.h"
 
-
 /**
  * @brief オブジェクト専用のポインタ
  * @details ポインタ先削除時に、自動的に無効化される

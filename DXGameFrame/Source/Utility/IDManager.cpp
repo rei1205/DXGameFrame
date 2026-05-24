@@ -1,7 +1,6 @@
 // IDManager.cpp
 #include "IDManager.h"
 
-
 IDManager::IDManager() :
 	m_nextID(0)
 {
