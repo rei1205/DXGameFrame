@@ -2,14 +2,12 @@
 #pragma once
 #include "Component.h"
 
-class Scene;
-
 /**
  * @brief コンポーネントの追加・取得・削除などを行う
  */
 class GameObject : public Object
 {
-	friend class Scene;
+	friend class Component;
 
 public:
 	GameObject() = default;
@@ -77,4 +75,16 @@ private:
 
 	/// このゲームオブジェクトの有効状態
 	bool m_isActive;
+
+	/**
+	 * @brief コンポーネントを登録する
+	 * @param pComponent 登録するコンポーネントへのポインタ
+	 */
+	void RegisterComponent(Component* pComponent);
+
+	/**
+	 * @brief コンポーネントの登録を解除する
+	 * @param pComponent 登録解除するコンポーネントへのポインタ
+	 */
+	void UnregisterComponent(Component* pComponent);
 };

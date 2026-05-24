@@ -2,8 +2,11 @@
 #pragma once
 #include <vector>
 #include <memory>
+#include "Component.h"
+#include "ClassID.h"
 
 class Component;
+class GameObject;
 
 /**
  * @brief コンポーネント配列の基底クラス
@@ -65,9 +68,16 @@ public:
 
     /**
      * @brief コンポーネントを生成する
+     * @param pGameObject 親となるゲームオブジェクトへのポインタ
      * @return 生成したコンポーネントへのポインタ
      */
-    T* Add();
+    T* Add(GameObject* pGameObject);
+
+    /**
+     * @brief コンポーネントを削除する
+     * @param pComponent 削除するコンポーネントへのポインタ
+     */
+    void Remove(Component* pComponent);
 
     /**
      * @brief 削除予定コンポーネントを実際に削除する
@@ -79,6 +89,13 @@ private:
     std::vector<std::unique_ptr<T>> m_components;
 
 private:
+    /// Awake関数所持判定
+    static constexpr bool HasAwake =
+        requires(T t)
+    {
+        t.Awake();
+    };
+
     /// Start関数所持判定
     static constexpr bool HasStart =
         requires(T t)
@@ -181,14 +198,42 @@ inline void ComponentArray<T>::LateUpdateAll()
 }
 
 template<typename T>
-inline T* ComponentArray<T>::Add()
+inline T* ComponentArray<T>::Add(GameObject* pGameObject)
 {
     // コンポーネントを追加
     auto component = std::make_unique<T>();
     T* ptr = component.get();
     m_components.push_back(std::move(component));
 
+    // コンポーネントの初期化
+    ptr->Init(pGameObject, ClassID<T>::GetID());
+    if constexpr (HasAwake)
+    {
+        ptr->Awake();
+    }
+
     return ptr;
+}
+
+template<typename T>
+inline void ComponentArray<T>::Remove(Component* pComponent)
+{
+    // 削除対象を検索
+    auto it = std::find_if(m_components.begin(), m_components.end(),
+        [pComponent](std::unique_ptr<T> ptr)
+        { return  pComponent == ptr.get(); }
+    );
+
+    if (it == m_components.end())
+        return;
+
+    // コンポーネントを削除
+    if constexpr (HasOnDestroy)
+    {
+        (*it)->OnDestroy();
+    }
+    (*it)->Uninit();
+    m_components.erase(it);
 }
 
 template<typename T>
@@ -203,10 +248,12 @@ inline void ComponentArray<T>::ApplyDestroy()
         if (!component->IsDestroyed())
             continue;
 
+        // コンポーネント削除時の処理
         if constexpr (HasOnDestroy)
         {
             component->OnDestroy();
         }
+        component->Uninit();
 
         // コンポーネントを削除し、インデックスを補正する
         m_components.erase(m_components.begin() + i);

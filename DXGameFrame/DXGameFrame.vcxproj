@@ -33,7 +33,9 @@
     <ClInclude Include="Source\Utility\IDManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\GameFrame\Component.cpp" />
     <ClCompile Include="Source\GameFrame\ComponentManager.cpp" />
+    <ClCompile Include="Source\GameFrame\GameObject.cpp" />
     <ClCompile Include="Source\GameFrame\Object.cpp" />
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\System\Debug.cpp" />

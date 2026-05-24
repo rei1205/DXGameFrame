@@ -1,6 +1,7 @@
 // Component.h
 #pragma once
 #include "Object.h"
+#include "ComponentManager.h"
 
 class GameObject;
 class Transform;
@@ -10,6 +11,11 @@ class Transform;
  */
 class Component : public Object
 {
+	template<typename T>
+	friend class ComponentArray;
+
+	friend class GameObject;
+
 public:
 	Component();
 	virtual ~Component() = default;
@@ -36,7 +42,7 @@ public:
 	 * @brief 親子関係を考慮した有効状態を取得する
 	 * @return ヒエラルキー上の有効状態
 	 */
-	bool IsActiveHierarchy();
+	bool IsActiveHierarchy() const;
 
 	/**
 	 * @brief このコンポーネントの有効状態を取得する
@@ -60,7 +66,7 @@ public:
 	 * @brief 開始処理の呼び出し状態を取得する
 	 * @return 開始処理呼び出し済みフラグ
 	 */
-	bool IsStarted()
+	bool IsStarted() const
 	{
 		return m_isStarted;
 	}
@@ -86,10 +92,18 @@ private:
 	/// 開始処理呼び出し済みフラグ
 	bool m_isStarted;
 
+	/// クラス識別用ID
+	uint32_t m_classID;
+
 	/**
 	 * @brief コンポーネントの初期化を行う
 	 * @param pGameObject 親ゲームオブジェクトへのポインタ
-	 * @param pTransform Transformコンポーネントへのポインタ
+	 * @param classID クラス識別用ID
 	 */
-	void Init(GameObject* pGameObject, Transform* pTransform);
+	void Init(GameObject* pGameObject, uint32_t classID);
+
+	/**
+	 * @brief コンポーネントの終了処理
+	 */
+	void Uninit();
 };

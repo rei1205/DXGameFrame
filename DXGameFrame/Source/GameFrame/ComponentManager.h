@@ -13,8 +13,13 @@ class Component;
 class ComponentManager
 {
 public:
-	template <typename T>
-	T* AddComponent();
+    /**
+     * @brief コンポーネントを追加する
+     * @param pGameObject 親ゲームオブジェクトへのポインタ
+     * @return 追加したコンポーネントへのポインタ
+     */
+    template <typename T>
+	T* AddComponent(GameObject* pGameObject);
 
 	/**
      * @brief 全てのコンポーネントの呼び出し可能な開始処理を呼び出す
@@ -60,11 +65,12 @@ public:
 	}
 };
 
+
 template<typename T>
-inline T* ComponentManager::AddComponent()
+inline T* ComponentManager::AddComponent(GameObject* pGameObject)
 {
     ComponentArray<T>* componentArray = GetComponentArray<T>();
-    return componentArray->Add();
+    return componentArray->Add(pGameObject);
 }
 
 template<typename T>
