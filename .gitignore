@@ -361,3 +361,12 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# 追加の除外設定
+**/Assets/**
+**/output/**
+**/imgui.ini
+
+# 除外解除
+!ThirdParty/
+!ThirdParty/**
