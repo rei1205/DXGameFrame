@@ -28,6 +28,8 @@
     <ClInclude Include="Source\GameFrame\GameObjectManager.h" />
     <ClInclude Include="Source\GameFrame\Object.h" />
     <ClInclude Include="Source\GameFrame\ObjPtr.h" />
+    <ClInclude Include="Source\GameFrame\Scene.h" />
+    <ClInclude Include="Source\GameFrame\SceneManager.h" />
     <ClInclude Include="Source\main.h" />
     <ClInclude Include="Source\System\Debug.h" />
     <ClInclude Include="Source\System\GameTime.h" />
@@ -45,6 +47,8 @@
     <ClCompile Include="Source\GameFrame\GameObject.cpp" />
     <ClCompile Include="Source\GameFrame\GameObjectManager.cpp" />
     <ClCompile Include="Source\GameFrame\Object.cpp" />
+    <ClCompile Include="Source\GameFrame\Scene.cpp" />
+    <ClCompile Include="Source\GameFrame\SceneManager.cpp" />
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\System\Debug.cpp" />
     <ClCompile Include="Source\System\GameTime.cpp" />

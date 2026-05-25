@@ -1,5 +1,10 @@
 // GameObjectManager.cpp
 #include "GameObjectManager.h"
+#include "GameObject.h"
+
+// 不完全な型のスマートポインタを持つためにcppで定義
+GameObjectManager::GameObjectManager() = default;
+GameObjectManager::~GameObjectManager() = default;
 
 GameObject* GameObjectManager::CreateGameObject()
 {

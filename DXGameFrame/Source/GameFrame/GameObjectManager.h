@@ -1,6 +1,5 @@
 // GameObjectManager.h
 #pragma once
-#include "GameObject.h"
 #include <vector>
 #include <memory>
 #include <string>
@@ -30,8 +29,8 @@ public:
 	void Clear();
 
 private:
-	GameObjectManager() = default;
-	~GameObjectManager() = default;
+	GameObjectManager();
+	~GameObjectManager();
 
 	/// ゲームオブジェクト配列
 	std::vector<std::unique_ptr<GameObject>> m_gameObjects;
