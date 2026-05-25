@@ -8,6 +8,7 @@
 #include "System/Debug.h"
 #include "System/GameTime.h"
 #include "GameFrame/SceneManager.h"
+#include "DirectX/Direct3D.h"
 
 #include "TestScene.h"
 
@@ -44,6 +45,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	// ウィンドウの表示
 	GameWindow::Show(nCmdShow);
 
+	// Direct3Dの初期化
+	Direct3D::Init(GameWindow::GetWindowHandle(), DefaultClientWidth, DefaultClientHeight, false);
+
 	// シーンマネージャーの初期化
 	SceneManager::Init(std::make_unique<TestScene>());
 
@@ -75,6 +79,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	// 終了処理
 	SceneManager::Uninit();
+	Direct3D::Uninit();
 	return 0;
 }
 

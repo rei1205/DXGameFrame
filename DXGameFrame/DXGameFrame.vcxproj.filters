@@ -21,6 +21,9 @@
     <Filter Include="ソース ファイル\System">
       <UniqueIdentifier>{82c4e214-4776-4b9f-bee5-a91dcbec973c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\DirectX">
+      <UniqueIdentifier>{3c941dce-b39a-4eb7-8ce6-eb96a4cfa9e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\main.cpp">
@@ -79,6 +82,9 @@
     </ClCompile>
     <ClCompile Include="Source\TestComponent.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX\Direct3D.cpp">
+      <Filter>ソース ファイル\DirectX</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +156,12 @@
     </ClInclude>
     <ClInclude Include="Source\GameFrame\Component_inl.h">
       <Filter>ソース ファイル\GameFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\Direct3D.h">
+      <Filter>ソース ファイル\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\DirectXInclude.h">
+      <Filter>ソース ファイル\DirectX</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\DirectX\Direct3D.h" />
+    <ClInclude Include="Source\DirectX\DirectXInclude.h" />
     <ClInclude Include="Source\GameFrame\ClassID.h" />
     <ClInclude Include="Source\GameFrame\Component.h" />
     <ClInclude Include="Source\GameFrame\ComponentArray.h" />
@@ -44,6 +46,7 @@
     <ClInclude Include="Source\Utility\Vector3.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\DirectX\Direct3D.cpp" />
     <ClCompile Include="Source\GameFrame\Component.cpp" />
     <ClCompile Include="Source\GameFrame\ComponentManager.cpp" />
     <ClCompile Include="Source\GameFrame\Component\Transform.cpp" />
