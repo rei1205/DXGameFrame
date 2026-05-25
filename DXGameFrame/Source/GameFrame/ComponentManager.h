@@ -2,7 +2,6 @@
 #pragma once
 #include "ComponentArray.h"
 #include <unordered_map>
-#include "ClassID.h"
 
 class GameObject;
 class Component;
@@ -13,6 +12,9 @@ class Component;
 class ComponentManager
 {
 public:
+    ComponentManager() = default;
+    ~ComponentManager() = default;
+
     /**
      * @brief コンポーネントを追加する
      * @param pGameObject 親ゲームオブジェクトへのポインタ
@@ -53,9 +55,6 @@ public:
     void ClearAll();
 
 private:
-	ComponentManager() = default;
-	~ComponentManager() = default;
-
 	using ComponentArrayMap = std::unordered_map<uint32_t, std::unique_ptr<IComponentArray>>;
 
 	/// コンポーネント配列のマップ
@@ -67,13 +66,6 @@ private:
      */
     template <typename T>
     ComponentArray<T>* GetComponentArray();
-
-public:
-	static ComponentManager& Instance()
-	{
-		static ComponentManager s_instance;
-		return s_instance;
-	}
 };
 
 

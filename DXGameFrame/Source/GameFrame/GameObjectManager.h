@@ -12,6 +12,9 @@ class GameObject;
 class GameObjectManager
 {
 public:
+	GameObjectManager();
+	~GameObjectManager();
+
 	/**
 	 * @brief 空のゲームオブジェクトを生成する
 	 * @return 生成したゲームオブジェクトへのポインタ
@@ -29,16 +32,6 @@ public:
 	void Clear();
 
 private:
-	GameObjectManager();
-	~GameObjectManager();
-
 	/// ゲームオブジェクト配列
 	std::vector<std::unique_ptr<GameObject>> m_gameObjects;
-
-public:
-	static GameObjectManager& Instance()
-	{
-		static GameObjectManager s_instance;
-		return s_instance;
-	}
 };

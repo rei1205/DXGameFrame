@@ -148,5 +148,8 @@
     <ClInclude Include="Source\TestComponent.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameFrame\Component_inl.h">
+      <Filter>ソース ファイル\GameFrame</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

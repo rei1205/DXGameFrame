@@ -1,16 +1,22 @@
 // Scene.cpp
 #include "Scene.h"
-#include "ComponentManager.h"
-#include "GameObjectManager.h"
+
+Scene::~Scene()
+{
+	m_componentManager.ClearAll();
+	m_gameObjectManager.Clear();
+}
 
 void Scene::Update()
 {
-	ComponentManager& componentManager = ComponentManager::Instance();
-	componentManager.StartAll();
-	componentManager.UpdateAll();
-	componentManager.LateUpdateAll();
-	componentManager.ApplyDestroy();
-	GameObjectManager::Instance().ApplyDestroy();
+	// コンポーネントの更新
+	m_componentManager.StartAll();
+	m_componentManager.UpdateAll();
+	m_componentManager.LateUpdateAll();
+
+	// 削除を適用
+	m_componentManager.ApplyDestroy();
+	m_gameObjectManager.ApplyDestroy();
 }
 
 void Scene::Draw()

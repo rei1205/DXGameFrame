@@ -24,6 +24,7 @@
     <ClInclude Include="Source\GameFrame\ComponentArray.h" />
     <ClInclude Include="Source\GameFrame\ComponentManager.h" />
     <ClInclude Include="Source\GameFrame\Component\Transform.h" />
+    <ClInclude Include="Source\GameFrame\Component_inl.h" />
     <ClInclude Include="Source\GameFrame\GameObject.h" />
     <ClInclude Include="Source\GameFrame\GameObjectManager.h" />
     <ClInclude Include="Source\GameFrame\Object.h" />

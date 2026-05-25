@@ -5,6 +5,6 @@
 
 void TestScene::Init()
 {
-	auto obj = GameObject::Create();
+	auto obj = GameObject::Create(this);
 	obj->AddComponent<TestComponent>();
 }

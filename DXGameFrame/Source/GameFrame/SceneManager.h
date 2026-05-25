@@ -1,6 +1,6 @@
+// Scene.h
 #pragma once
 #include "Scene.h"
-#include <memory>
 
 /**
  * @brief ƒV[ƒ“‚ÌŠÇ—‚ğs‚¤

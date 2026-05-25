@@ -1,7 +1,9 @@
 // GameObject.h
 #pragma once
 #include "Component.h"
-#include "ComponentManager.h"
+#include "Scene.h"
+
+class Scene;
 
 /**
  * @brief コンポーネントの追加・取得・削除などを行う
@@ -33,6 +35,15 @@ public:
 	 */
 	template <typename T>
 	void RemoveComponent();
+
+	/**
+	 * @brief 所属するシーンを取得する
+	 * @return シーンへのポインタ
+	 */
+	Scene* GetScene()
+	{
+		return m_pScene;
+	}
 
 	/**
 	 * @brief Transformコンポーネントを取得する
@@ -76,6 +87,9 @@ private:
 	/// このゲームオブジェクトが持つコンポーネントのリスト
 	std::vector<Component*> m_components;
 	
+	/// 所属するシーンへのポインタ
+	Scene* m_pScene;
+
 	/// Transformコンポーネントへのポインタ
 	Transform* m_pTransform;
 
@@ -97,9 +111,10 @@ private:
 public:
 	/**
 	 * @brief ゲームオブジェクトを作成する
+	 * @param pScene 追加先シーンへのポインタ
 	 * @return 作成したゲームオブジェクトへのポインタ
 	 */
-	static GameObject* Create();
+	static GameObject* Create(Scene* pScene);
 };
 
 template<typename T>
@@ -126,7 +141,8 @@ inline T* GameObject::AddComponent()
 		"AddComponentに無効なクラスが指定されました");
 
 	// コンポーネント追加
-	T* ptr = ComponentManager::Instance().AddComponent<T>(this);
+	auto& a = m_pScene->GetComponentManager();
+	T* ptr = a.AddComponent<T>(this);
 	m_components.push_back(ptr);
 	return ptr;
 }
@@ -147,3 +163,6 @@ inline void GameObject::RemoveComponent()
 		}
 	}
 }
+
+// GameObject.hに依存するコンポーネントのテンプレート関数の実装
+#include "Component_inl.h"

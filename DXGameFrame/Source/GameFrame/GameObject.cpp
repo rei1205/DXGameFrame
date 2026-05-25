@@ -1,6 +1,5 @@
 // GameObject.cpp
 #include "GameObject.h"
-#include "GameObjectManager.h"
 #include "Component/Transform.h"
 
 GameObject::GameObject():
@@ -31,7 +30,7 @@ void GameObject::OnDestroy()
 	{
 		Component* component = m_components.back();
 		m_components.pop_back();
-		ComponentManager::Instance().RemoveComponent(component);
+		m_pScene->GetComponentManager().RemoveComponent(component);
 	}
 }
 
@@ -47,13 +46,14 @@ void GameObject::UnregisterComponent(Component* pComponent)
 		m_components.erase(it);
 }
 
-GameObject* GameObject::Create()
+GameObject* GameObject::Create(Scene* pScene)
 {
 	// ゲームオブジェクトとTransformコンポーネントを生成
-	GameObject* gameobject = GameObjectManager::Instance().CreateGameObject();
-	Transform* transform = ComponentManager::Instance().AddComponent<Transform>(gameobject);
+	GameObject* gameobject = pScene->GetGameObjectManager().CreateGameObject();
+	Transform* transform = pScene->GetComponentManager().AddComponent<Transform>(gameobject);
 
-	// Transformコンポーネントのポインタをセット
+	// 各種ポインタをセット
+	gameobject->m_pScene = pScene;
 	gameobject->m_pTransform = transform;
 	static_cast<Component*>(transform)->m_pTransform = transform;
 

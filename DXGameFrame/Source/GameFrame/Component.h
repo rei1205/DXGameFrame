@@ -2,6 +2,7 @@
 #pragma once
 #include "Object.h"
 
+class Scene;
 class GameObject;
 class Transform;
 
@@ -18,6 +19,12 @@ class Component : public Object
 public:
 	Component();
 	virtual ~Component() = default;
+
+	/**
+	 * @brief 所属するシーンを取得する
+	 * @return シーンへのポインタ
+	 */
+	Scene* GetScene();
 
 	/**
 	 * @brief 親ゲームオブジェクトを取得する
@@ -86,6 +93,26 @@ public:
 	{
 		return m_classID;
 	}
+
+	/**
+	 * @brief コンポーネントを取得する
+	 * @return コンポーネントへのポインタ
+	 */
+	template <typename T>
+	T* GetComponent();
+
+	/**
+	 * @brief コンポーネントを追加する
+	 * @return 追加したコンポーネントへのポインタ
+	 */
+	template <typename T>
+	T* AddComponent();
+
+	/**
+	 * @brief コンポーネントを削除する
+	 */
+	template <typename T>
+	void RemoveComponent();
 
 private:
 	/// 親ゲームオブジェクトへのポインタ

@@ -11,6 +11,11 @@ Component::Component():
 {
 }
 
+Scene* Component::GetScene()
+{
+	return m_pGameObject->GetScene();
+}
+
 bool Component::IsActiveHierarchy() const
 {
 	return m_isEnabled && !IsDestroyed() &&
