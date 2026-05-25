@@ -7,6 +7,9 @@
 #include "System/GameWindow.h"
 #include "System/Debug.h"
 #include "System/GameTime.h"
+#include "GameFrame/SceneManager.h"
+
+#include "TestScene.h"
 
 
 constexpr int DefaultClientWidth = 1280;
@@ -41,8 +44,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	// ウィンドウの表示
 	GameWindow::Show(nCmdShow);
 
+	// シーンマネージャーの初期化
+	SceneManager::Init(std::make_unique<TestScene>());
+
 	// FPS設定
 	GameTime::Init(DefaultFPS);
+
 
 	// メッセージループ
 	MSG message = {};
@@ -55,17 +62,19 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		}
 		else
 		{
-			// メイン処理
-
+			// ----- メイン処理 -----
+			
 			// FPS固定
 			GameTime::Update();
-
 			ShowProssingTime();
+
+			SceneManager::Execute();
 		}
 	}
 
 
 	// 終了処理
+	SceneManager::Uninit();
 	return 0;
 }
 

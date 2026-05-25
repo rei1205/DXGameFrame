@@ -11,9 +11,13 @@ GameObject::GameObject():
 
 bool GameObject::IsActiveHierarchy() const
 {
-	// 親がないまたは非アクティブの場合再帰処理を終了
-	Transform* pParent = m_pTransform->GetParent();
-	if (pParent == nullptr || m_isActive == false || IsDestroyed())
+	// 非アクティブな場合再帰処理を終了
+	if (!m_isActive || IsDestroyed())
+		return false;
+
+	// 親がない場合再帰処理を終了
+	Transform* pParent = GetTransform()->GetParent();
+	if (pParent == nullptr)
 		return m_isActive;
 
 	// 再帰的に有効状態を求める
@@ -22,7 +26,8 @@ bool GameObject::IsActiveHierarchy() const
 
 void GameObject::OnDestroy()
 {
-	while (m_components.empty())
+	// 所持コンポーネントを全て削除
+	while (!m_components.empty())
 	{
 		Component* component = m_components.back();
 		m_components.pop_back();

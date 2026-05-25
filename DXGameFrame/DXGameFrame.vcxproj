@@ -34,6 +34,8 @@
     <ClInclude Include="Source\System\Debug.h" />
     <ClInclude Include="Source\System\GameTime.h" />
     <ClInclude Include="Source\System\GameWindow.h" />
+    <ClInclude Include="Source\TestComponent.h" />
+    <ClInclude Include="Source\TestScene.h" />
     <ClInclude Include="Source\Utility\IDManager.h" />
     <ClInclude Include="Source\Utility\Math.h" />
     <ClInclude Include="Source\Utility\Quaternion.h" />
@@ -53,6 +55,8 @@
     <ClCompile Include="Source\System\Debug.cpp" />
     <ClCompile Include="Source\System\GameTime.cpp" />
     <ClCompile Include="Source\System\GameWindow.cpp" />
+    <ClCompile Include="Source\TestComponent.cpp" />
+    <ClCompile Include="Source\TestScene.cpp" />
     <ClCompile Include="Source\Utility\IDManager.cpp" />
     <ClCompile Include="Source\Utility\Math.cpp" />
     <ClCompile Include="Source\Utility\Quaternion.cpp" />

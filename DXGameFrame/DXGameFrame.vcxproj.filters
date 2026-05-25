@@ -72,6 +72,12 @@
       <Filter>ソース ファイル\GameFrame</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameFrame\SceneManager.cpp">
+      <Filter>ソース ファイル\GameFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TestScene.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TestComponent.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -135,6 +141,12 @@
     </ClInclude>
     <ClInclude Include="Source\GameFrame\SceneManager.h">
       <Filter>ソース ファイル\GameFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TestScene.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TestComponent.h">
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
