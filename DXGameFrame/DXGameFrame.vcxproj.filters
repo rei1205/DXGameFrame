@@ -5,13 +5,124 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="リソース ファイル">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ソース ファイル\GameFrame">
+      <UniqueIdentifier>{f0fa241d-9062-430d-afca-0ec3e527de3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameFrame\Component">
+      <UniqueIdentifier>{31371d06-422a-4b15-ae8b-ea208aa02879}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Utility">
+      <UniqueIdentifier>{6569bc34-7bbe-4e55-8d06-11854442211e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\System">
+      <UniqueIdentifier>{82c4e214-4776-4b9f-bee5-a91dcbec973c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\main.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameFrame\Component.cpp">
+      <Filter>ソース ファイル\GameFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameFrame\ComponentManager.cpp">
+      <Filter>ソース ファイル\GameFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameFrame\GameObject.cpp">
+      <Filter>ソース ファイル\GameFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameFrame\GameObjectManager.cpp">
+      <Filter>ソース ファイル\GameFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameFrame\Object.cpp">
+      <Filter>ソース ファイル\GameFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameFrame\Component\Transform.cpp">
+      <Filter>ソース ファイル\GameFrame\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Debug.cpp">
+      <Filter>ソース ファイル\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\GameTime.cpp">
+      <Filter>ソース ファイル\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\GameWindow.cpp">
+      <Filter>ソース ファイル\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utility\IDManager.cpp">
+      <Filter>ソース ファイル\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utility\Math.cpp">
+      <Filter>ソース ファイル\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utility\Quaternion.cpp">
+      <Filter>ソース ファイル\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utility\Vector2.cpp">
+      <Filter>ソース ファイル\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utility\Vector3.cpp">
+      <Filter>ソース ファイル\Utility</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\GameFrame\Component.h">
+      <Filter>ソース ファイル\GameFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\ComponentArray.h">
+      <Filter>ソース ファイル\GameFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\ComponentManager.h">
+      <Filter>ソース ファイル\GameFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\GameObjectManager.h">
+      <Filter>ソース ファイル\GameFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\GameObject.h">
+      <Filter>ソース ファイル\GameFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\Object.h">
+      <Filter>ソース ファイル\GameFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\ObjPtr.h">
+      <Filter>ソース ファイル\GameFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\ClassID.h">
+      <Filter>ソース ファイル\GameFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\Component\Transform.h">
+      <Filter>ソース ファイル\GameFrame\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Debug.h">
+      <Filter>ソース ファイル\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\GameWindow.h">
+      <Filter>ソース ファイル\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\GameTime.h">
+      <Filter>ソース ファイル\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utility\IDManager.h">
+      <Filter>ソース ファイル\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utility\Math.h">
+      <Filter>ソース ファイル\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utility\Quaternion.h">
+      <Filter>ソース ファイル\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utility\Vector2.h">
+      <Filter>ソース ファイル\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utility\Vector3.h">
+      <Filter>ソース ファイル\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\main.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
