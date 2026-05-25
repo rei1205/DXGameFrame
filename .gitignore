@@ -367,6 +367,7 @@ FodyWeavers.xsd
 **/output/**
 **/Doxygen/**
 **/imgui.ini
+**/Document/**
 
 # 除外解除
 !ThirdParty/
