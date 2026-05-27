@@ -21,6 +21,9 @@
   <ItemGroup>
     <ClInclude Include="Source\DirectX\Direct3D.h" />
     <ClInclude Include="Source\DirectX\DirectXInclude.h" />
+    <ClInclude Include="Source\DirectX\RenderPass.h" />
+    <ClInclude Include="Source\DirectX\RenderUtility\Geometry.h" />
+    <ClInclude Include="Source\DirectX\RenderUtility\Mesh.h" />
     <ClInclude Include="Source\GameFrame\ClassID.h" />
     <ClInclude Include="Source\GameFrame\Component.h" />
     <ClInclude Include="Source\GameFrame\ComponentArray.h" />
@@ -47,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\DirectX\Direct3D.cpp" />
+    <ClCompile Include="Source\DirectX\RenderUtility\Geometry.cpp" />
+    <ClCompile Include="Source\DirectX\RenderUtility\Mesh.cpp" />
     <ClCompile Include="Source\GameFrame\Component.cpp" />
     <ClCompile Include="Source\GameFrame\ComponentManager.cpp" />
     <ClCompile Include="Source\GameFrame\Component\Transform.cpp" />

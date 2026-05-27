@@ -24,6 +24,12 @@
     <Filter Include="ソース ファイル\DirectX">
       <UniqueIdentifier>{3c941dce-b39a-4eb7-8ce6-eb96a4cfa9e7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\DirectX\RenderUtility">
+      <UniqueIdentifier>{60dd0275-bede-420c-b8b6-d41f8079f87b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\HLSL">
+      <UniqueIdentifier>{20ef7c64-774e-4fd5-9ac6-ded7780f6c47}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\main.cpp">
@@ -85,6 +91,12 @@
     </ClCompile>
     <ClCompile Include="Source\DirectX\Direct3D.cpp">
       <Filter>ソース ファイル\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX\RenderUtility\Mesh.cpp">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX\RenderUtility\Geometry.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +174,15 @@
     </ClInclude>
     <ClInclude Include="Source\DirectX\DirectXInclude.h">
       <Filter>ソース ファイル\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\RenderPass.h">
+      <Filter>ソース ファイル\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\RenderUtility\Geometry.h">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\RenderUtility\Mesh.h">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
