@@ -5,8 +5,6 @@
 
 void TestScene::Init()
 {
-	for (int i = 0; i < 10000; ++i)
-	{
-		auto obj = GameObject::Create(this);
-	}
+	auto obj = GameObject::Create(this);
+	obj->AddComponent<TestComponent>();
 }

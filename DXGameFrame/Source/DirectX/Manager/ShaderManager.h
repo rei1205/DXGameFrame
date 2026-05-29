@@ -27,16 +27,15 @@ public:
 
 	/**
 	 * @brief 頂点シェーダーをセットする
-	 * @param pVS 実際の頂点シェーダーへのポインタ
-	 * @param pInputLayout 入力レイアウトへのポインタ
+	 * @param pVertexShader 頂点シェーダーへのポインタ
 	 */
-	static void SetVertexShader(ID3D11VertexShader* pVS, ID3D11InputLayout* pInputLayout);
+	static void SetVertexShader(VertexShader* pVertexShader);
 
 	/**
 	 * @brief ピクセルシェーダーをセットする
-	 * @param pPixelShader 実際のピクセルシェーダーへのポインタ
+	 * @param pPixelShader ピクセルシェーダーへのポインタ
 	 */
-	static void SetPixelShader(ID3D11PixelShader* pPS);
+	static void SetPixelShader(PixelShader* pPixelShader);
 
 	/**
 	 * @brief 全てのシェーダーを解放する

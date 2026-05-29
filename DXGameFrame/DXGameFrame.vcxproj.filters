@@ -107,11 +107,11 @@
     <ClCompile Include="Source\DirectX\RenderUtility\VertexShader.cpp">
       <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
     </ClCompile>
-    <ClCompile Include="Source\DirectX\RenderUtility\PixelShader.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Source\DirectX\Manager\ShaderManager.cpp">
       <Filter>ソース ファイル\DirectX\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX\RenderUtility\PixelShader.cpp">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -216,5 +216,13 @@
     <None Include="Source\HLSL\Common.hlsli">
       <Filter>ソース ファイル\HLSL</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Source\HLSL\VS_Test.hlsl">
+      <Filter>ソース ファイル\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="Source\HLSL\PS_Test.hlsl">
+      <Filter>ソース ファイル\HLSL</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

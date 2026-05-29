@@ -24,7 +24,7 @@ public:
 	 * @brief 頂点入力レイアウトを取得する
 	 * @return 頂点入力レイアウトへのポインタ
 	 */
-	ID3D11InputLayout* GetID3D11InputLayout()
+	ID3D11InputLayout* GetInputLayout()
 	{
 		return m_pInputLayout.Get();
 	}

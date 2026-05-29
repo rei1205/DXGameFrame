@@ -41,19 +41,21 @@ std::shared_ptr<PixelShader> ShaderManager::LoadPixelShader(const std::string& f
 	return newPS;
 }
 
-void ShaderManager::SetVertexShader(ID3D11VertexShader* pVS, ID3D11InputLayout* pInputLayout)
+void ShaderManager::SetVertexShader(VertexShader* pVertexShader)
 {
-	if (pVS == nullptr || pInputLayout == nullptr || pVS == s_pCurrentVS)
+	ID3D11VertexShader* pVS = pVertexShader->GetVertexShader();
+	if (pVS == s_pCurrentVS)
 		return;
 
 	// シェーダーをセット
 	s_pCurrentVS = pVS;
 	Direct3D::GetContext()->VSSetShader(pVS, nullptr, 0);
-	Direct3D::GetContext()->IASetInputLayout(pInputLayout);
+	Direct3D::GetContext()->IASetInputLayout(pVertexShader->GetInputLayout());
 }
 
-void ShaderManager::SetPixelShader(ID3D11PixelShader* pPS)
+void ShaderManager::SetPixelShader(PixelShader* pPixelShader)
 {
+	ID3D11PixelShader* pPS = pPixelShader->GetPixelShader();
 	if (pPS == s_pCurrentPS)
 		return;
 
