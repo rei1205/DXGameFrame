@@ -22,6 +22,9 @@ HRESULT Direct3D::Init(HWND hWnd, UINT width, UINT height, bool fullScreen)
 	hr = CreateBackBufferRTV(width, height);
 	if (FAILED(hr)) { return hr; }
 
+	// ビューポート設定
+	SetViewportSize(width, height);
+
 	return hr;
 }
 
@@ -50,7 +53,7 @@ HRESULT Direct3D::Resize(UINT width, UINT height)
 	hr = CreateBackBufferRTV(width, height);
 	if (FAILED(hr)) { return hr; }
 
-	// ビューポート設定
+	// ビューポート再設定
 	SetViewportSize(width, height);
 	SetViewport(s_normalizedViewport);
 

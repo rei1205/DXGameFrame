@@ -19,7 +19,7 @@ void TestComponent::Start()
 	ShaderManager::SetPixelShader(ps.get());
 
 	DirectX::XMMATRIX wvp[3];
-	wvp[0] = DirectX::XMMatrixIdentity();
+	wvp[0] = DirectX::XMMatrixTranslation(3.0f, 3.0f, 0.0f);
 	wvp[1] = DirectX::XMMatrixLookAtLH(
 		DirectX::XMVectorSet(0.0f, 0.0f, -10.0f, 0.0f),
 		DirectX::XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f),
