@@ -1,6 +1,8 @@
 // Geometry.cpp
 #include "Geometry.h"
 
+std::array<std::shared_ptr<Mesh>, Geometry::Type::COUNT> Geometry::s_pMeshs;
+
 HRESULT Geometry::Init()
 {
 	HRESULT hr = S_OK;
@@ -22,13 +24,8 @@ void Geometry::Uninit()
 {
 	for (int i = 0; i < Type::COUNT; ++i)
 	{
-		m_pMeshs[i] = nullptr;
+		s_pMeshs[i] = nullptr;
 	}
-}
-
-std::shared_ptr<Mesh> Geometry::GetModel(Type geometryType)
-{
-	return m_pMeshs[geometryType];
 }
 
 HRESULT Geometry::CreateBox()
@@ -105,7 +102,7 @@ HRESULT Geometry::CreateBox()
 	hr = mesh->CreateMesh(meshVtx, desc);
 	if (FAILED(hr)) { return hr; }
 
-	m_pMeshs[Type::BOX] = mesh;
+	s_pMeshs[Type::BOX] = mesh;
 
 	return hr;
 }
@@ -169,7 +166,7 @@ HRESULT Geometry::CreatePlane()
 	hr = mesh->CreateMesh(meshVtx, desc);
 	if (FAILED(hr)) { return hr; }
 
-	m_pMeshs[Type::PLANE] = mesh;
+	s_pMeshs[Type::PLANE] = mesh;
 
 	return hr;
 }

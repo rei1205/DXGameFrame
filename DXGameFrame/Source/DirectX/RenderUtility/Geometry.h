@@ -21,48 +21,51 @@ public:
 	 * @brief ジオメトリの初期化
 	 * @return 成功したかを返す
 	 */
-	HRESULT Init();
+	static HRESULT Init();
 
 	/**
 	 * @brief 終了処理
 	 */
-	void Uninit();
+	static void Uninit();
 
 	/**
 	 * @brief ジオメトリメッシュを取得する
 	 */
-	std::shared_ptr<Mesh> GetModel(Type geometryType);
+	static std::shared_ptr<Mesh> GetModel(Type geometryType)
+	{
+		return s_pMeshs[geometryType];
+	}
 
 private:
-	Geometry() = default;
+	Geometry() = delete;
 
 	/// 円の頂点数
 	static constexpr int CircleVertex = 16;
 
 	/// ジオメトリモデル配列
-	std::array<std::shared_ptr<Mesh>, Type::COUNT> m_pMeshs;
+	static std::array<std::shared_ptr<Mesh>, Type::COUNT> s_pMeshs;
 
 	/**
 	 * @brief 箱のメッシュを生成する
 	 * @return 成功したかを返す
 	 */
-	HRESULT CreateBox();
+	static HRESULT CreateBox();
 
 	/**
 	 * @brief 円柱のメッシュを生成する
 	 * @return 成功したかを返す
 	 */
-	HRESULT CreateCylinder();
+	static HRESULT CreateCylinder();
 
 	/**
 	 * @brief 球のメッシュを生成する
 	 * @return 成功したかを返す
 	 */
-	HRESULT CreateSphere();
+	static HRESULT CreateSphere();
 
 	/**
 	 * @brief 板のメッシュを作成する
 	 * @return 成功したかを返す
 	 */
-	HRESULT CreatePlane();
+	static HRESULT CreatePlane();
 };

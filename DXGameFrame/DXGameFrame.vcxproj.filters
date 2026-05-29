@@ -30,6 +30,9 @@
     <Filter Include="ソース ファイル\HLSL">
       <UniqueIdentifier>{20ef7c64-774e-4fd5-9ac6-ded7780f6c47}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\DirectX\Manager">
+      <UniqueIdentifier>{7bccde3c-4bfb-4bed-87d6-f5e627ed1f50}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\main.cpp">
@@ -97,6 +100,18 @@
     </ClCompile>
     <ClCompile Include="Source\DirectX\RenderUtility\Geometry.cpp">
       <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX\RenderUtility\Shader.cpp">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX\RenderUtility\VertexShader.cpp">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX\RenderUtility\PixelShader.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX\Manager\ShaderManager.cpp">
+      <Filter>ソース ファイル\DirectX\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -183,6 +198,18 @@
     </ClInclude>
     <ClInclude Include="Source\DirectX\RenderUtility\Mesh.h">
       <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\RenderUtility\Shader.h">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\RenderUtility\VertexShader.h">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\RenderUtility\PixelShader.h">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\Manager\ShaderManager.h">
+      <Filter>ソース ファイル\DirectX\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
