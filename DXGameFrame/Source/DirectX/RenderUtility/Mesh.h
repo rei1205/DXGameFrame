@@ -12,8 +12,24 @@ public:
 	Mesh();
 	~Mesh() = default;
 
-	/// 頂点情報
-	struct Vertex
+	/// メッシュの種類
+	enum class MeshType
+	{
+		MESH,
+		SKIN_MESH
+	};
+
+	/// メッシュ頂点情報
+	struct MeshVertex
+	{
+		DirectX::XMFLOAT3 pos;			// 座標
+		DirectX::XMFLOAT3 normal;		// 法線
+		DirectX::XMFLOAT2 uv;			// UV座標
+		DirectX::XMFLOAT4 color;		// 頂点カラー
+	};
+
+	/// スキンメッシュ頂点情報
+	struct SkinMeshVertex
 	{
 		DirectX::XMFLOAT3 pos;			// 座標
 		DirectX::XMFLOAT3 normal;		// 法線
@@ -26,7 +42,6 @@ public:
 	/// メッシュ情報
 	struct Description
 	{
-		std::vector<Vertex> vtx;			// 頂点配列
 		std::vector<UINT> idx;				// インデックス配列
 		std::vector<UINT> boneIndexes;		// 対応ボーンインデックス配列
 		bool isWrite;						// 動的な頂点の書き換え可能フラグ
@@ -34,11 +49,20 @@ public:
 	};
 
 	/**
-	 * @brief メッシュ情報からメッシュを作成する
+	 * @brief メッシュを作成する
+	 * @param vtx 頂点配列
 	 * @param desc メッシュ情報
 	 * @return 成功したかを返す
 	 */
-	HRESULT Create(const Description& desc);
+	HRESULT CreateMesh(const std::vector<MeshVertex>& vtx, const Description& desc);
+
+	/**
+	 * @brief スキンメッシュを作成する
+	 * @param vtx 頂点配列
+	 * @param desc メッシュ情報
+	 * @return 成功したかを返す
+	 */
+	HRESULT CreateSkinMesh(const std::vector<SkinMeshVertex>& vtx, const Description& desc);
 
 	/**
 	 * @brief メッシュを描画する
@@ -46,6 +70,9 @@ public:
 	void Draw();
 
 private:
+	/// メッシュの種類
+	MeshType m_meshType;
+
 	/// 頂点バッファ
 	ComPtr<ID3D11Buffer> m_pVtxBuffer;
 
@@ -69,11 +96,12 @@ private:
 
 	/**
 	 * @brief 頂点バッファを作成する
-	 * @param vtx 頂点配列
+	 * @param vtx 頂点配列の先頭ポインタ
+	 * @param vtxSize 頂点配列のメモリサイズ
 	 * @param isWrite 書き込み可能フラグ
 	 * @return 成功したかを返す
 	 */
-	HRESULT CreateVertexBuffer(const std::vector<Vertex>& vtx, bool isWrite = false);
+	HRESULT CreateVertexBuffer(const void* vtx, UINT vtxSize, bool isWrite);
 
 	/**
 	 * @brief インデックスバッファを作成する

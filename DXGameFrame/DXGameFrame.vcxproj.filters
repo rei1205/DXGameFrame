@@ -96,7 +96,7 @@
       <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
     </ClCompile>
     <ClCompile Include="Source\DirectX\RenderUtility\Geometry.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -184,5 +184,10 @@
     <ClInclude Include="Source\DirectX\RenderUtility\Mesh.h">
       <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Source\HLSL\Common.hlsli">
+      <Filter>ソース ファイル\HLSL</Filter>
+    </None>
   </ItemGroup>
 </Project>

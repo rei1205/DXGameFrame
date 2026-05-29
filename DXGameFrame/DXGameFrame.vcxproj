@@ -72,6 +72,9 @@
     <ClCompile Include="Source\Utility\Vector2.cpp" />
     <ClCompile Include="Source\Utility\Vector3.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Source\HLSL\Common.hlsli" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

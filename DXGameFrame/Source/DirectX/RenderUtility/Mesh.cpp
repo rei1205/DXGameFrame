@@ -3,6 +3,7 @@
 #include "../Direct3D.h"
 
 Mesh::Mesh() :
+	m_meshType(MeshType::MESH),
 	m_pVtxBuffer(nullptr),
 	m_pIdxBuffer(nullptr),
 	m_vertexCount(0),
@@ -12,12 +13,12 @@ Mesh::Mesh() :
 {
 }
 
-HRESULT Mesh::Create(const Description& desc)
+HRESULT Mesh::CreateMesh(const std::vector<MeshVertex>& vtx, const Description& desc)
 {
-	HRESULT hr = S_OK;		// 関数の結果
+	HRESULT hr = S_OK;
 
 	// 頂点バッファ作成
-	hr = CreateVertexBuffer(desc.vtx, desc.isWrite);
+	hr = CreateVertexBuffer(vtx.data(), sizeof(MeshVertex) * vtx.size(), desc.isWrite);
 	if (FAILED(hr)) { return hr; }
 
 	// インデックスバッファ作成
@@ -28,10 +29,39 @@ HRESULT Mesh::Create(const Description& desc)
 	}
 
 	// 頂点・インデックス数を保持
-	m_vertexCount = (UINT)desc.vtx.size();
+	m_vertexCount = (UINT)vtx.size();
 	m_indexCount = (UINT)desc.idx.size();
 
-	// メッシュ情報のコピー
+	// メッシュ情報の設定
+	m_meshType = MeshType::MESH;
+	m_boneIndexes = desc.boneIndexes;
+	m_isWrite = desc.isWrite;
+	m_topology = desc.topology;
+
+	return hr;
+}
+
+HRESULT Mesh::CreateSkinMesh(const std::vector<SkinMeshVertex>& vtx, const Description& desc)
+{
+	HRESULT hr = S_OK;
+
+	// 頂点バッファ作成
+	hr = CreateVertexBuffer(vtx.data(), sizeof(SkinMeshVertex) * vtx.size(), desc.isWrite);
+	if (FAILED(hr)) { return hr; }
+
+	// インデックスバッファ作成
+	if (!desc.idx.empty())
+	{
+		hr = CreateIndexBuffer(desc.idx);
+		if (FAILED(hr)) { return hr; }
+	}
+
+	// 頂点・インデックス数を保持
+	m_vertexCount = (UINT)vtx.size();
+	m_indexCount = (UINT)desc.idx.size();
+
+	// メッシュ情報の設定
+	m_meshType = MeshType::SKIN_MESH;
 	m_boneIndexes = desc.boneIndexes;
 	m_isWrite = desc.isWrite;
 	m_topology = desc.topology;
@@ -42,8 +72,18 @@ HRESULT Mesh::Create(const Description& desc)
 void Mesh::Draw()
 {
 	ID3D11DeviceContext* pContext = Direct3D::GetContext();
-	UINT stride = sizeof(Vertex);
+	UINT stride = 0;
 	UINT offset = 0;
+	switch (m_meshType)
+	{
+	case Mesh::MeshType::MESH:
+		stride = sizeof(MeshVertex);
+		break;
+
+	case Mesh::MeshType::SKIN_MESH:
+		stride = sizeof(SkinMeshVertex);
+		break;
+	}
 
 	// 描画用情報をセット
 	pContext->IASetPrimitiveTopology(m_topology);
@@ -71,13 +111,13 @@ void Mesh::Draw()
 	}
 }
 
-HRESULT Mesh::CreateVertexBuffer(const std::vector<Vertex>& vtx, bool isWrite)
+HRESULT Mesh::CreateVertexBuffer(const void* vtx, UINT vtxSize, bool isWrite)
 {
-	HRESULT hr = S_OK;		// 関数の結果
+	HRESULT hr = S_OK;
 
 	// 頂点バッファの設定
 	D3D11_BUFFER_DESC bufDesc = {};		// 頂点バッファ設定情報
-	bufDesc.ByteWidth = (UINT)(sizeof(Vertex) * vtx.size());
+	bufDesc.ByteWidth = vtxSize;
 	bufDesc.Usage = D3D11_USAGE_DEFAULT;
 	bufDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 	if (isWrite)
@@ -88,7 +128,7 @@ HRESULT Mesh::CreateVertexBuffer(const std::vector<Vertex>& vtx, bool isWrite)
 
 	// 初期化用データ設定
 	D3D11_SUBRESOURCE_DATA subResource = {};
-	subResource.pSysMem = vtx.data();
+	subResource.pSysMem = vtx;
 
 	// 頂点バッファの作成
 	ID3D11Device* pDevice = Direct3D::GetDevice();
@@ -100,7 +140,7 @@ HRESULT Mesh::CreateVertexBuffer(const std::vector<Vertex>& vtx, bool isWrite)
 
 HRESULT Mesh::CreateIndexBuffer(const std::vector<UINT>& idx)
 {
-	HRESULT hr = S_OK;		// 関数の結果
+	HRESULT hr = S_OK;
 
 	// インデックスバッファの設定
 	D3D11_BUFFER_DESC bufDesc = {};

@@ -65,19 +65,20 @@ HRESULT Geometry::CreateBox()
 	};
 
 	// バッファの作成
+	std::vector<Mesh::MeshVertex> meshVtx;
 	Mesh::Description desc = {};
 	
 	//頂点データを作成
-	desc.vtx.resize(face_count * faceVtx_count);
+	meshVtx.resize(face_count * faceVtx_count);
 	for (UINT i = 0; i < face_count; i++)
 	{
 		for (UINT j = 0; j < faceVtx_count; j++)
 		{
 			UINT index = i * faceVtx_count + j;		//配列上の位置
-			desc.vtx[index].pos = face[i].vtxPos[j];
-			desc.vtx[index].normal = face[i].normal;
-			desc.vtx[index].uv = uv[j];
-			desc.vtx[index].color = { 1.0f, 1.0f, 1.0f, 1.0f };
+			meshVtx[index].pos = face[i].vtxPos[j];
+			meshVtx[index].normal = face[i].normal;
+			meshVtx[index].uv = uv[j];
+			meshVtx[index].color = { 1.0f, 1.0f, 1.0f, 1.0f };
 		}
 	}
 
@@ -101,7 +102,7 @@ HRESULT Geometry::CreateBox()
 
 	// メッシュを作成
 	auto mesh = std::make_shared<Mesh>();
-	hr = mesh->Create(desc);
+	hr = mesh->CreateMesh(meshVtx, desc);
 	if (FAILED(hr)) { return hr; }
 
 	m_pMeshs[Type::BOX] = mesh;
@@ -140,16 +141,17 @@ HRESULT Geometry::CreatePlane()
 	int idx[6] = { 0,1,2,1,3,2 };
 
 	// バッファの作成
+	std::vector<Mesh::MeshVertex> meshVtx;
 	Mesh::Description desc = {};
 
 	//頂点データを作成
-	desc.vtx.resize(4);
+	meshVtx.resize(4);
 	for (UINT i = 0; i < 4; i++)
 	{
-		desc.vtx[i].pos = vtx[i].pos;
-		desc.vtx[i].normal = { 0.0f, 1.0f, 0.0f };
-		desc.vtx[i].uv = vtx[i].uv;
-		desc.vtx[i].color = { 1.0f, 1.0f, 1.0f, 1.0f };
+		meshVtx[i].pos = vtx[i].pos;
+		meshVtx[i].normal = { 0.0f, 1.0f, 0.0f };
+		meshVtx[i].uv = vtx[i].uv;
+		meshVtx[i].color = { 1.0f, 1.0f, 1.0f, 1.0f };
 	}
 
 	//インデックスデータを作成
@@ -164,7 +166,7 @@ HRESULT Geometry::CreatePlane()
 
 	// メッシュを作成
 	auto mesh = std::make_shared<Mesh>();
-	hr = mesh->Create(desc);
+	hr = mesh->CreateMesh(meshVtx, desc);
 	if (FAILED(hr)) { return hr; }
 
 	m_pMeshs[Type::PLANE] = mesh;
