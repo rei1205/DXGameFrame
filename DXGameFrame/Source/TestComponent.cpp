@@ -2,12 +2,9 @@
 #include "TestComponent.h"
 #include "GameFrame/GameObject.h"
 #include "System/Debug.h"
-#include "DirectX/Manager/ShaderManager.h"
 #include "DirectX/Direct3D.h"
 #include "DirectX/RenderUtility/Geometry.h"
-#include "DirectX/Manager/ConstantBufferManager.h"
-#include "DirectX/Manager/TextureManager.h"
-#include "DirectX/Manager/PipelineStateManager.h"
+#include "DirectX/RenderUtility/Material.h"
 
 void TestComponent::Awake()
 {
@@ -16,21 +13,6 @@ void TestComponent::Awake()
 
 void TestComponent::Start()
 {
-	auto tex = TextureManager::LoadTexture("Assets/TestImage.png");
-	TextureManager::SetTexture(tex.get(), 0);
-	
-	PipelineStateManager::Init();
-	auto samplerState = PipelineStateManager::GetSamplerState(SamplerStateName::Default);
-	PipelineStateManager::SetSamplerState(samplerState);
-
-	auto blendState = PipelineStateManager::GetBlendState(BlendStateName::Default);
-	PipelineStateManager::SetBlendState(blendState);
-
-	auto vs = ShaderManager::LoadVertexShader("output/x64/Debug/VS_Test.cso");
-	auto ps = ShaderManager::LoadPixelShader("output/x64/Debug/PS_Test.cso");
-	ShaderManager::SetVertexShader(vs.get());
-	ShaderManager::SetPixelShader(ps.get());
-
 	ConstantBufferManager::Init();
 
 	DirectX::XMMATRIX world = DirectX::XMMatrixTranslation(3.0f, -3.0f, 0.0f);
@@ -59,6 +41,12 @@ void TestComponent::Start()
 	cbDesc.CPUAccessFlags = 0;
 	cbDesc.MiscFlags = 0;
 	cbDesc.StructureByteStride = 0;
+
+	Material material;
+	material.SetTexture("Assets/TestImage.png", TextureSlot::Main);
+	material.SetVertexShader("output/x64/Debug/VS_Test.cso");
+	material.SetPixelShader("output/x64/Debug/PS_Test.cso");
+	material.Bind();
 
 	auto rtv = Direct3D::GetBackBufferRTV();
 	Direct3D::GetContext()->OMSetRenderTargets(1, &rtv, nullptr);

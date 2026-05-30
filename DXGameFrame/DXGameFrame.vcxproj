@@ -29,6 +29,7 @@
     <ClInclude Include="Source\DirectX\RenderUtility\BlendState.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\DepthStencilState.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\Geometry.h" />
+    <ClInclude Include="Source\DirectX\RenderUtility\Material.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\Mesh.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\PixelShader.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\RasterizerState.h" />
@@ -69,6 +70,7 @@
     <ClCompile Include="Source\DirectX\RenderUtility\BlendState.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\DepthStencil.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\Geometry.cpp" />
+    <ClCompile Include="Source\DirectX\RenderUtility\Material.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\Mesh.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\PixelShader.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\RasterizerState.cpp" />

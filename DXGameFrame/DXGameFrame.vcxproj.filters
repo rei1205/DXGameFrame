@@ -137,6 +137,9 @@
     <ClCompile Include="Source\DirectX\Manager\PipelineStateManager.cpp">
       <Filter>ソース ファイル\DirectX\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="Source\DirectX\RenderUtility\Material.cpp">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameFrame\Component.h">
@@ -257,6 +260,9 @@
       <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
     </ClInclude>
     <ClInclude Include="Source\DirectX\RenderUtility\RasterizerState.h">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\RenderUtility\Material.h">
       <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
     </ClInclude>
   </ItemGroup>

@@ -80,14 +80,14 @@ void PipelineStateManager::SetRasterizerState(RasterizerState* pRasterizerState)
     s_pCurrentRasterizerState = pRasterizerState;
 }
 
-void PipelineStateManager::SetSamplerState(SamplerState* pSamplerState)
+void PipelineStateManager::SetSamplerState(SamplerState* pSamplerState, UINT slot)
 {
     if (pSamplerState == s_pCurrentSamplerState)
         return;
 
     ID3D11SamplerState* pState = pSamplerState->GetSamplerState();
-    Direct3D::GetContext()->VSSetSamplers(0, 1, &pState);
-    Direct3D::GetContext()->PSSetSamplers(0, 1, &pState);
+    Direct3D::GetContext()->VSSetSamplers(slot, 1, &pState);
+    Direct3D::GetContext()->PSSetSamplers(slot, 1, &pState);
     s_pCurrentSamplerState = pSamplerState;
 }
 

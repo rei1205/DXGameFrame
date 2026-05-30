@@ -94,8 +94,9 @@ public:
 	/**
 	 * @brief サンプラーステートをセットする
 	 * @param pSamplerState サンプラーステートへのポインタ
+	 * @param slot セットするスロット番号
 	 */
-	static void SetSamplerState(SamplerState* pSamplerState);
+	static void SetSamplerState(SamplerState* pSamplerState, UINT slot);
 
 	/**
 	 * @brief ブレンドステートを取得する
