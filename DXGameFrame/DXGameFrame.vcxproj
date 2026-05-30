@@ -22,12 +22,17 @@
     <ClInclude Include="Source\DirectX\Direct3D.h" />
     <ClInclude Include="Source\DirectX\DirectXInclude.h" />
     <ClInclude Include="Source\DirectX\Manager\ConstantBufferManager.h" />
+    <ClInclude Include="Source\DirectX\Manager\PipelineStateManager.h" />
     <ClInclude Include="Source\DirectX\Manager\ShaderManager.h" />
     <ClInclude Include="Source\DirectX\Manager\TextureManager.h" />
     <ClInclude Include="Source\DirectX\RenderPass.h" />
+    <ClInclude Include="Source\DirectX\RenderUtility\BlendState.h" />
+    <ClInclude Include="Source\DirectX\RenderUtility\DepthStencilState.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\Geometry.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\Mesh.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\PixelShader.h" />
+    <ClInclude Include="Source\DirectX\RenderUtility\RasterizerState.h" />
+    <ClInclude Include="Source\DirectX\RenderUtility\SamplerState.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\Shader.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\Texture.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\VertexShader.h" />
@@ -58,11 +63,16 @@
   <ItemGroup>
     <ClCompile Include="Source\DirectX\Direct3D.cpp" />
     <ClCompile Include="Source\DirectX\Manager\ConstantBufferManager.cpp" />
+    <ClCompile Include="Source\DirectX\Manager\PipelineStateManager.cpp" />
     <ClCompile Include="Source\DirectX\Manager\ShaderManager.cpp" />
     <ClCompile Include="Source\DirectX\Manager\TextureManager.cpp" />
+    <ClCompile Include="Source\DirectX\RenderUtility\BlendState.cpp" />
+    <ClCompile Include="Source\DirectX\RenderUtility\DepthStencil.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\Geometry.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\Mesh.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\PixelShader.cpp" />
+    <ClCompile Include="Source\DirectX\RenderUtility\RasterizerState.cpp" />
+    <ClCompile Include="Source\DirectX\RenderUtility\SamplerState.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\Shader.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\Texture.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\VertexShader.cpp" />

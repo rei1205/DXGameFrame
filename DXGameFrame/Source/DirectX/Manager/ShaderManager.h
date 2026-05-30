@@ -56,10 +56,10 @@ private:
 	ShaderManager() = delete;
 
 	/// 頂点シェーダーとファイルパスのマップ
-	static std::unordered_map<std::string, std::shared_ptr<VertexShader>> s_pVertexShaders;
+	static std::unordered_map<std::string, std::shared_ptr<VertexShader>> s_vertexShaders;
 
 	/// ピクセルシェーダーとファイルパスのマップ
-	static std::unordered_map<std::string, std::shared_ptr<PixelShader>> s_pPixelShaders;
+	static std::unordered_map<std::string, std::shared_ptr<PixelShader>> s_pixelShaders;
 
 	/// 現在セットされている頂点シェーダー
 	static ID3D11VertexShader* s_pCurrentVS;

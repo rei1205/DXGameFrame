@@ -122,6 +122,21 @@
     <ClCompile Include="Source\DirectX\Manager\TextureManager.cpp">
       <Filter>ソース ファイル\DirectX\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="Source\DirectX\RenderUtility\BlendState.cpp">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX\RenderUtility\DepthStencil.cpp">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX\RenderUtility\RasterizerState.cpp">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX\RenderUtility\SamplerState.cpp">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX\Manager\PipelineStateManager.cpp">
+      <Filter>ソース ファイル\DirectX\Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameFrame\Component.h">
@@ -228,6 +243,21 @@
     </ClInclude>
     <ClInclude Include="Source\DirectX\Manager\TextureManager.h">
       <Filter>ソース ファイル\DirectX\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\Manager\PipelineStateManager.h">
+      <Filter>ソース ファイル\DirectX\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\RenderUtility\BlendState.h">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\RenderUtility\DepthStencilState.h">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\RenderUtility\SamplerState.h">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\RenderUtility\RasterizerState.h">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
