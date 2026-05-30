@@ -10,7 +10,7 @@ VertexShader::VertexShader() :
 
 HRESULT VertexShader::LoadFromCSOFile(const std::string& filePath)
 {
-	HRESULT hr;			// 関数の結果
+	HRESULT hr = S_OK;
 	FILE* fp;			// ファイルポインタ
 	char* data;			// ファイル読み込み先
 	long dataSize;		// ファイルサイズ 
@@ -47,7 +47,7 @@ HRESULT VertexShader::LoadFromCSOFile(const std::string& filePath)
 
 HRESULT VertexShader::CreateVertexShader(const char* data, int dataSize)
 {
-	HRESULT hr;		// 関数の結果
+	HRESULT hr = S_OK;
 
 	// 頂点シェーダーを作成
 	hr = Direct3D::GetDevice()->CreateVertexShader(
@@ -62,7 +62,7 @@ HRESULT VertexShader::CreateVertexShader(const char* data, int dataSize)
 
 HRESULT VertexShader::CreateInputLayout(const char* data, int dataSize)
 {
-	HRESULT hr;		// 関数の結果
+	HRESULT hr = S_OK;
 
 	ComPtr<ID3D11ShaderReflection> reflection;	// シェーダーの反射インターフェース
 

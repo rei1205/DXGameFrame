@@ -40,7 +40,7 @@ void Direct3D::Uninit()
 
 HRESULT Direct3D::Resize(UINT width, UINT height)
 {
-	HRESULT hr = S_OK;		// 関数の結果
+	HRESULT hr = S_OK;
 
 	// 描画リソースのリセット
 	s_pBackBuffer.Reset();

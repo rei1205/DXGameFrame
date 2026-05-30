@@ -10,7 +10,7 @@ PixelShader::PixelShader() :
 
 HRESULT PixelShader::LoadFromCSOFile(const std::string& filePath)
 {
-	HRESULT hr;			// 関数の結果
+	HRESULT hr = S_OK;
 	FILE* fp;			// ファイルポインタ
 	char* data;			// ファイル読み込み先
 	long dataSize;		// ファイルサイズ
@@ -41,7 +41,7 @@ HRESULT PixelShader::LoadFromCSOFile(const std::string& filePath)
 
 HRESULT PixelShader::CreatePixelShader(const char* data, int dataSize)
 {
-	HRESULT hr;		// 関数の結果
+	HRESULT hr = S_OK;
 
 	// ピクセルシェーダーを作成
 	hr = Direct3D::GetDevice()->CreatePixelShader(
