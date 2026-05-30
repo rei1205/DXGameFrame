@@ -26,8 +26,8 @@ std::shared_ptr<Texture> TextureManager::LoadTexture(const std::string& filePath
 
 void TextureManager::SetTexture(Texture* pTexture, UINT slot)
 {
-	ID3D11ShaderResourceView* pSRV;
-	Direct3D::GetContext()->PSSetShaderResources(slot, 0, &pSRV);
+	ID3D11ShaderResourceView* pSRV = pTexture->GetSRV();
+	Direct3D::GetContext()->PSSetShaderResources(slot, 1, &pSRV);
 }
 
 void TextureManager::CollectGarbage()

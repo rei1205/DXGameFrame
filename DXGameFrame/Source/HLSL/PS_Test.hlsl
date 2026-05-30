@@ -9,14 +9,18 @@ struct PS_IN
     float4 wPos : POSITION0;
 };
 
+Texture2D tex : register(t0);
+SamplerState samp : register(s0);
+
 float4 main(PS_IN pin) : SV_TARGET
 {
     float3 N = normalize(pin.normal);
     float3 L = normalize(dLight.dir);
     float t = dot(N, L);
     t *= -1.0f;
+    t += 0.2f;
     t = saturate(t);
     float4 color = float4(1.0f, 1.0f, 1.0f, 1.0f);
-    color.rgb *= t;
-    return color;
+    color.rgb *= t;   
+    return color * tex.Sample(samp, pin.uv);
 }

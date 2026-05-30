@@ -1,5 +1,6 @@
 // PipelineStateManager.cpp
 #include "PipelineStateManager.h"
+#include "../Direct3D.h"
 #include "../../System/Debug.h"
 
 std::unordered_map<std::string, std::shared_ptr<BlendState>> PipelineStateManager::s_blendStates;
@@ -44,6 +45,50 @@ void PipelineStateManager::Uninit()
     s_pCurrentDepthStencilState = nullptr;
     s_pCurrentRasterizerState = nullptr;
     s_pCurrentSamplerState = nullptr;
+}
+
+void PipelineStateManager::SetBlendState(BlendState* pBlendState)
+{
+    if (pBlendState == s_pCurrentBlendState)
+        return;
+
+    ID3D11BlendState* pState = pBlendState->GetBlendState();
+    float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+    UINT sampleMask = 0xffffffff;
+    Direct3D::GetContext()->OMSetBlendState(pState, blendFactor, sampleMask);
+    s_pCurrentBlendState = pBlendState;
+}
+
+void PipelineStateManager::SetDepthStencilState(DepthStencilState* pDepthStencilState)
+{
+    if (pDepthStencilState == s_pCurrentDepthStencilState)
+        return;
+
+    ID3D11DepthStencilState* pState = pDepthStencilState->GetDepthStencilState();
+    Direct3D::GetContext()->OMSetDepthStencilState(pState, 0);
+    s_pCurrentDepthStencilState = pDepthStencilState;
+
+}
+
+void PipelineStateManager::SetRasterizerState(RasterizerState* pRasterizerState)
+{
+    if (pRasterizerState == s_pCurrentRasterizerState)
+        return;
+
+    ID3D11RasterizerState* pState = pRasterizerState->GetRasterizerState();
+    Direct3D::GetContext()->RSSetState(pState);
+    s_pCurrentRasterizerState = pRasterizerState;
+}
+
+void PipelineStateManager::SetSamplerState(SamplerState* pSamplerState)
+{
+    if (pSamplerState == s_pCurrentSamplerState)
+        return;
+
+    ID3D11SamplerState* pState = pSamplerState->GetSamplerState();
+    Direct3D::GetContext()->VSSetSamplers(0, 1, &pState);
+    Direct3D::GetContext()->PSSetSamplers(0, 1, &pState);
+    s_pCurrentSamplerState = pSamplerState;
 }
 
 BlendState* PipelineStateManager::GetBlendState(const std::string& name)

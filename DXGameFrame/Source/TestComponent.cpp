@@ -7,6 +7,7 @@
 #include "DirectX/RenderUtility/Geometry.h"
 #include "DirectX/Manager/ConstantBufferManager.h"
 #include "DirectX/Manager/TextureManager.h"
+#include "DirectX/Manager/PipelineStateManager.h"
 
 void TestComponent::Awake()
 {
@@ -16,6 +17,14 @@ void TestComponent::Awake()
 void TestComponent::Start()
 {
 	auto tex = TextureManager::LoadTexture("Assets/TestImage.png");
+	TextureManager::SetTexture(tex.get(), 0);
+	
+	PipelineStateManager::Init();
+	auto samplerState = PipelineStateManager::GetSamplerState(SamplerStateName::Default);
+	PipelineStateManager::SetSamplerState(samplerState);
+
+	auto blendState = PipelineStateManager::GetBlendState(BlendStateName::Default);
+	PipelineStateManager::SetBlendState(blendState);
 
 	auto vs = ShaderManager::LoadVertexShader("output/x64/Debug/VS_Test.cso");
 	auto ps = ShaderManager::LoadPixelShader("output/x64/Debug/PS_Test.cso");

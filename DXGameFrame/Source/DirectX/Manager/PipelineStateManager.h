@@ -74,6 +74,30 @@ public:
 	static void Uninit();
 
 	/**
+	 * @brief ブレンドステートをセットする
+	 * @param pBlendState ブレンドステートへのポインタ
+	 */
+	static void SetBlendState(BlendState* pBlendState);
+
+	/**
+	 * @brief 深度ステンシルステートをセットする
+	 * @param pDepthStencilState 深度ステンシルステートへのポインタ
+	 */
+	static void SetDepthStencilState(DepthStencilState* pDepthStencilState);
+
+	/**
+	 * @brief ラスタライザーステートをセットする
+	 * @param pRasterizerState ラスタライザーステートへのポインタ
+	 */
+	static void SetRasterizerState(RasterizerState* pRasterizerState);
+
+	/**
+	 * @brief サンプラーステートをセットする
+	 * @param pSamplerState サンプラーステートへのポインタ
+	 */
+	static void SetSamplerState(SamplerState* pSamplerState);
+
+	/**
 	 * @brief ブレンドステートを取得する
 	 * @param name ブレンドステート名
 	 * @return ブレンドステートへのポインタ
