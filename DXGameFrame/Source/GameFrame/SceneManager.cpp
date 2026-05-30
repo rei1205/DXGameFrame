@@ -1,10 +1,8 @@
 // SceneManager.cpp
 #include "SceneManager.h"
 
-
 std::unique_ptr<Scene> SceneManager::s_activeScene = nullptr;
 std::unique_ptr<Scene> SceneManager::s_nextScene = nullptr;
-
 
 void SceneManager::Init(std::unique_ptr<Scene> startScene)
 {

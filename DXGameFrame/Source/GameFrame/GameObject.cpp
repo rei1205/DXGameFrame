@@ -3,6 +3,7 @@
 #include "Component/Transform.h"
 
 GameObject::GameObject():
+	m_pScene(nullptr),
 	m_pTransform(nullptr),
 	m_isActive(true)
 {

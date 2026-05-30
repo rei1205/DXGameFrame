@@ -1,8 +1,8 @@
 // Geometry.h
 #pragma once
+#include "Mesh.h"
 #include <memory>
 #include <array>
-#include "Mesh.h"
 
 class Geometry
 {

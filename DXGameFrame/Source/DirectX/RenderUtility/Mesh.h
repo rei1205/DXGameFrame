@@ -1,7 +1,7 @@
 // Mesh.h
 #pragma once
-#include <vector>
 #include "../DirectXInclude.h"
+#include <vector>
 
 /**
  * @brief ƒƒbƒVƒ…î•ñ‚ğˆµ‚¤

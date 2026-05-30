@@ -18,7 +18,7 @@ HRESULT Mesh::CreateMesh(const std::vector<MeshVertex>& vtx, const Description& 
 	HRESULT hr = S_OK;
 
 	// 頂点バッファ作成
-	hr = CreateVertexBuffer(vtx.data(), sizeof(MeshVertex) * vtx.size(), desc.isWrite);
+	hr = CreateVertexBuffer(vtx.data(), sizeof(MeshVertex) * (UINT)vtx.size(), desc.isWrite);
 	if (FAILED(hr)) { return hr; }
 
 	// インデックスバッファ作成
@@ -46,7 +46,7 @@ HRESULT Mesh::CreateSkinMesh(const std::vector<SkinMeshVertex>& vtx, const Descr
 	HRESULT hr = S_OK;
 
 	// 頂点バッファ作成
-	hr = CreateVertexBuffer(vtx.data(), sizeof(SkinMeshVertex) * vtx.size(), desc.isWrite);
+	hr = CreateVertexBuffer(vtx.data(), sizeof(SkinMeshVertex) * (UINT)vtx.size(), desc.isWrite);
 	if (FAILED(hr)) { return hr; }
 
 	// インデックスバッファ作成
