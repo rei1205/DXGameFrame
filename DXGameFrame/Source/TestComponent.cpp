@@ -6,6 +6,7 @@
 #include "DirectX/Direct3D.h"
 #include "DirectX/RenderUtility/Geometry.h"
 #include "DirectX/Manager/ConstantBufferManager.h"
+#include "DirectX/RenderUtility/Texture.h"
 
 void TestComponent::Awake()
 {
@@ -14,6 +15,9 @@ void TestComponent::Awake()
 
 void TestComponent::Start()
 {
+	Texture tex;
+	tex.Load("Assets/TestImage.png");
+
 	auto vs = ShaderManager::LoadVertexShader("output/x64/Debug/VS_Test.cso");
 	auto ps = ShaderManager::LoadPixelShader("output/x64/Debug/PS_Test.cso");
 	ShaderManager::SetVertexShader(vs.get());

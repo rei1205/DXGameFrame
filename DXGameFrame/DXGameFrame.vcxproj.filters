@@ -116,6 +116,9 @@
     <ClCompile Include="Source\DirectX\Manager\ConstantBufferManager.cpp">
       <Filter>ソース ファイル\DirectX\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="Source\DirectX\RenderUtility\Texture.cpp">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameFrame\Component.h">
@@ -216,6 +219,9 @@
     </ClInclude>
     <ClInclude Include="Source\DirectX\Manager\ConstantBufferManager.h">
       <Filter>ソース ファイル\DirectX\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\RenderUtility\Texture.h">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
