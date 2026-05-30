@@ -135,19 +135,19 @@ private:
 	};
 
 	// フレーム更新定数バッファの情報
-	static FrameCB m_frameCB;
+	static FrameCB s_frameCB;
 
 	/// ワールド行列定数バッファ
-	static ComPtr<ID3D11Buffer> m_pWorldBuffer;
+	static ComPtr<ID3D11Buffer> s_pWorldBuffer;
 
 	/// フレーム更新定数バッファ
-	static ComPtr<ID3D11Buffer> m_pFrameBuffer;
+	static ComPtr<ID3D11Buffer> s_pFrameBuffer;
 
 	/// ボーン定数バッファ
-	static ComPtr<ID3D11Buffer> m_pBoneBuffer;
+	static ComPtr<ID3D11Buffer> s_pBoneBuffer;
 
 	/// カスタム定数バッファ
-	static ComPtr<ID3D11Buffer> m_pCustomBuffer;
+	static ComPtr<ID3D11Buffer> s_pCustomBuffer;
 
 	/**
 	 * @brief 全ての定数バッファを作成する

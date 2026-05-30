@@ -2,11 +2,11 @@
 #include "ConstantBufferManager.h"
 #include "../Direct3D.h"
 
-ConstantBufferManager::FrameCB ConstantBufferManager::m_frameCB;
-ComPtr<ID3D11Buffer> ConstantBufferManager::m_pWorldBuffer = nullptr;
-ComPtr<ID3D11Buffer> ConstantBufferManager::m_pFrameBuffer = nullptr;
-ComPtr<ID3D11Buffer> ConstantBufferManager::m_pBoneBuffer = nullptr;
-ComPtr<ID3D11Buffer> ConstantBufferManager::m_pCustomBuffer = nullptr;
+ConstantBufferManager::FrameCB ConstantBufferManager::s_frameCB;
+ComPtr<ID3D11Buffer> ConstantBufferManager::s_pWorldBuffer = nullptr;
+ComPtr<ID3D11Buffer> ConstantBufferManager::s_pFrameBuffer = nullptr;
+ComPtr<ID3D11Buffer> ConstantBufferManager::s_pBoneBuffer = nullptr;
+ComPtr<ID3D11Buffer> ConstantBufferManager::s_pCustomBuffer = nullptr;
 
 HRESULT ConstantBufferManager::Init()
 {
@@ -19,12 +19,12 @@ HRESULT ConstantBufferManager::Init()
 	);
 
 	// 行列の初期化
-	m_frameCB.view = identity;
-	m_frameCB.projection = identity;
+	s_frameCB.view = identity;
+	s_frameCB.projection = identity;
 
-	m_frameCB.time = 0.0f;
-	m_frameCB.cameraPos = { 0.0f, 0.0f, 0.0f };
-	m_frameCB.lightCB = {};
+	s_frameCB.time = 0.0f;
+	s_frameCB.cameraPos = { 0.0f, 0.0f, 0.0f };
+	s_frameCB.lightCB = {};
 
 	// 定数バッファを作成
 	hr = CreateAllBuffer();
@@ -35,22 +35,22 @@ HRESULT ConstantBufferManager::Init()
 
 void ConstantBufferManager::Uninit()
 {
-	m_pWorldBuffer.Reset();
-	m_pFrameBuffer.Reset();
-	m_pBoneBuffer.Reset();
-	m_pCustomBuffer.Reset();
+	s_pWorldBuffer.Reset();
+	s_pFrameBuffer.Reset();
+	s_pBoneBuffer.Reset();
+	s_pCustomBuffer.Reset();
 }
 
 void ConstantBufferManager::ShaderSetBuffer()
 {
-	Direct3D::GetContext()->VSSetConstantBuffers((UINT)SlotNum::WORLD, 1, m_pWorldBuffer.GetAddressOf());
-	Direct3D::GetContext()->PSSetConstantBuffers((UINT)SlotNum::WORLD, 1, m_pWorldBuffer.GetAddressOf());
-	Direct3D::GetContext()->VSSetConstantBuffers((UINT)SlotNum::FRAME, 1, m_pFrameBuffer.GetAddressOf());
-	Direct3D::GetContext()->PSSetConstantBuffers((UINT)SlotNum::FRAME, 1, m_pFrameBuffer.GetAddressOf());
-	Direct3D::GetContext()->VSSetConstantBuffers((UINT)SlotNum::BONE, 1, m_pBoneBuffer.GetAddressOf());
-	Direct3D::GetContext()->PSSetConstantBuffers((UINT)SlotNum::BONE, 1, m_pBoneBuffer.GetAddressOf());
-	Direct3D::GetContext()->VSSetConstantBuffers((UINT)SlotNum::CUSTOM, 1, m_pCustomBuffer.GetAddressOf());
-	Direct3D::GetContext()->PSSetConstantBuffers((UINT)SlotNum::CUSTOM, 1, m_pCustomBuffer.GetAddressOf());
+	Direct3D::GetContext()->VSSetConstantBuffers((UINT)SlotNum::WORLD, 1, s_pWorldBuffer.GetAddressOf());
+	Direct3D::GetContext()->PSSetConstantBuffers((UINT)SlotNum::WORLD, 1, s_pWorldBuffer.GetAddressOf());
+	Direct3D::GetContext()->VSSetConstantBuffers((UINT)SlotNum::FRAME, 1, s_pFrameBuffer.GetAddressOf());
+	Direct3D::GetContext()->PSSetConstantBuffers((UINT)SlotNum::FRAME, 1, s_pFrameBuffer.GetAddressOf());
+	Direct3D::GetContext()->VSSetConstantBuffers((UINT)SlotNum::BONE, 1, s_pBoneBuffer.GetAddressOf());
+	Direct3D::GetContext()->PSSetConstantBuffers((UINT)SlotNum::BONE, 1, s_pBoneBuffer.GetAddressOf());
+	Direct3D::GetContext()->VSSetConstantBuffers((UINT)SlotNum::CUSTOM, 1, s_pCustomBuffer.GetAddressOf());
+	Direct3D::GetContext()->PSSetConstantBuffers((UINT)SlotNum::CUSTOM, 1, s_pCustomBuffer.GetAddressOf());
 }
 
 void ConstantBufferManager::SetWorld(const DirectX::XMMATRIX& world)
@@ -69,7 +69,7 @@ void ConstantBufferManager::SetWorld(const DirectX::XMMATRIX& world)
 	DirectX::XMStoreFloat4x4(&worldCB.invWorld, invWorldMat);
 
 	// 定数バッファを更新
-	Direct3D::GetContext()->UpdateSubresource(m_pWorldBuffer.Get(), 0, nullptr, &worldCB, 0, 0);
+	Direct3D::GetContext()->UpdateSubresource(s_pWorldBuffer.Get(), 0, nullptr, &worldCB, 0, 0);
 }
 
 void ConstantBufferManager::SetView(const DirectX::XMMATRIX& view)
@@ -79,20 +79,20 @@ void ConstantBufferManager::SetView(const DirectX::XMMATRIX& view)
 
 	// ビュー行列をセット
 	viewMat = DirectX::XMMatrixTranspose(view);
-	DirectX::XMStoreFloat4x4(&m_frameCB.view, viewMat);
+	DirectX::XMStoreFloat4x4(&s_frameCB.view, viewMat);
 
 	// カメラ座標をセット
 	invViewMat = DirectX::XMMatrixInverse(nullptr, view);
-	m_frameCB.cameraPos.x = DirectX::XMVectorGetX(invViewMat.r[3]);
-	m_frameCB.cameraPos.y = DirectX::XMVectorGetY(invViewMat.r[3]);
-	m_frameCB.cameraPos.z = DirectX::XMVectorGetZ(invViewMat.r[3]);
+	s_frameCB.cameraPos.x = DirectX::XMVectorGetX(invViewMat.r[3]);
+	s_frameCB.cameraPos.y = DirectX::XMVectorGetY(invViewMat.r[3]);
+	s_frameCB.cameraPos.z = DirectX::XMVectorGetZ(invViewMat.r[3]);
 }
 
 void ConstantBufferManager::SetProjection(const DirectX::XMMATRIX& projection)
 {
 	// プロジェクション行列をセット
 	DirectX::XMStoreFloat4x4(
-		&m_frameCB.projection,
+		&s_frameCB.projection,
 		DirectX::XMMatrixTranspose(projection)
 	);
 }
@@ -100,18 +100,18 @@ void ConstantBufferManager::SetProjection(const DirectX::XMMATRIX& projection)
 void ConstantBufferManager::SetLight(const DirectionalLightCB& light)
 {
 	// ライト定数バッファをセット
-	m_frameCB.lightCB = light;
+	s_frameCB.lightCB = light;
 }
 
 void ConstantBufferManager::SetTime(float time)
 {
-	m_frameCB.time = time;
+	s_frameCB.time = time;
 }
 
 void ConstantBufferManager::SetBone(DirectX::XMFLOAT4X4 bones[MaxBone])
 {
 	// ボーン定数バッファの更新
-	Direct3D::GetContext()->UpdateSubresource(m_pBoneBuffer.Get(), 0, nullptr, bones, 0, 0);
+	Direct3D::GetContext()->UpdateSubresource(s_pBoneBuffer.Get(), 0, nullptr, bones, 0, 0);
 }
 
 void ConstantBufferManager::SetCustomData(const std::vector<BYTE>& data)
@@ -125,13 +125,13 @@ void ConstantBufferManager::SetCustomData(const std::vector<BYTE>& data)
 	memcpy(customData, data.data(), dataSize);
 
 	// カスタム定数バッファの更新
-	Direct3D::GetContext()->UpdateSubresource(m_pCustomBuffer.Get(), 0, nullptr, customData, 0, 0);
+	Direct3D::GetContext()->UpdateSubresource(s_pCustomBuffer.Get(), 0, nullptr, customData, 0, 0);
 }
 
 void ConstantBufferManager::UpdateFrameCB()
 {
 	// フレーム更新定数バッファの更新
-	Direct3D::GetContext()->UpdateSubresource(m_pFrameBuffer.Get(), 0, nullptr, &m_frameCB, 0, 0);
+	Direct3D::GetContext()->UpdateSubresource(s_pFrameBuffer.Get(), 0, nullptr, &s_frameCB, 0, 0);
 }
 
 HRESULT ConstantBufferManager::CreateAllBuffer()
@@ -154,25 +154,25 @@ HRESULT ConstantBufferManager::CreateAllBuffer()
 		case ConstantBufferManager::SlotNum::WORLD:
 			// WVP定数バッファの作成
 			cbDesc.ByteWidth = sizeof(WorldCB);
-			hr = Direct3D::GetDevice()->CreateBuffer(&cbDesc, nullptr, m_pWorldBuffer.GetAddressOf());
+			hr = Direct3D::GetDevice()->CreateBuffer(&cbDesc, nullptr, s_pWorldBuffer.GetAddressOf());
 			break;
 
 		case ConstantBufferManager::SlotNum::FRAME:
 			// フレーム更新定数バッファの作成
 			cbDesc.ByteWidth = sizeof(FrameCB);
-			hr = Direct3D::GetDevice()->CreateBuffer(&cbDesc, nullptr, m_pFrameBuffer.GetAddressOf());
+			hr = Direct3D::GetDevice()->CreateBuffer(&cbDesc, nullptr, s_pFrameBuffer.GetAddressOf());
 			break;
 
 		case ConstantBufferManager::SlotNum::BONE:
 			// ボーン定数バッファの作成
 			cbDesc.ByteWidth = sizeof(BoneCB);
-			hr = Direct3D::GetDevice()->CreateBuffer(&cbDesc, nullptr, m_pBoneBuffer.GetAddressOf());
+			hr = Direct3D::GetDevice()->CreateBuffer(&cbDesc, nullptr, s_pBoneBuffer.GetAddressOf());
 			break;
 
 		case ConstantBufferManager::SlotNum::CUSTOM:
 			// カスタム定数バッファの作成
 			cbDesc.ByteWidth = sizeof(CustomCB);
-			hr = Direct3D::GetDevice()->CreateBuffer(&cbDesc, nullptr, m_pCustomBuffer.GetAddressOf());
+			hr = Direct3D::GetDevice()->CreateBuffer(&cbDesc, nullptr, s_pCustomBuffer.GetAddressOf());
 			break;
 		}
 		if (FAILED(hr)) { return hr; }
