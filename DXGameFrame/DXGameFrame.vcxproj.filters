@@ -119,6 +119,9 @@
     <ClCompile Include="Source\DirectX\RenderUtility\Texture.cpp">
       <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
     </ClCompile>
+    <ClCompile Include="Source\DirectX\Manager\TextureManager.cpp">
+      <Filter>ソース ファイル\DirectX\Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameFrame\Component.h">
@@ -222,6 +225,9 @@
     </ClInclude>
     <ClInclude Include="Source\DirectX\RenderUtility\Texture.h">
       <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\Manager\TextureManager.h">
+      <Filter>ソース ファイル\DirectX\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

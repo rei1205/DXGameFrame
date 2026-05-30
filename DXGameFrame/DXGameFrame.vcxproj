@@ -23,6 +23,7 @@
     <ClInclude Include="Source\DirectX\DirectXInclude.h" />
     <ClInclude Include="Source\DirectX\Manager\ConstantBufferManager.h" />
     <ClInclude Include="Source\DirectX\Manager\ShaderManager.h" />
+    <ClInclude Include="Source\DirectX\Manager\TextureManager.h" />
     <ClInclude Include="Source\DirectX\RenderPass.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\Geometry.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\Mesh.h" />
@@ -58,6 +59,7 @@
     <ClCompile Include="Source\DirectX\Direct3D.cpp" />
     <ClCompile Include="Source\DirectX\Manager\ConstantBufferManager.cpp" />
     <ClCompile Include="Source\DirectX\Manager\ShaderManager.cpp" />
+    <ClCompile Include="Source\DirectX\Manager\TextureManager.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\Geometry.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\Mesh.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\PixelShader.cpp" />
