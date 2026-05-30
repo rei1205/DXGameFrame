@@ -9,13 +9,6 @@ struct VS_OUT
     float4 wPos : POSITION0;
 };
 
-cbuffer WVP : register(b0)
-{
-    float4x4 world;
-    float4x4 view;
-    float4x4 projection;
-}
-
 VS_OUT main(VS_IN_MESH vin)
 {
     VS_OUT vout;

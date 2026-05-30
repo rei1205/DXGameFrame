@@ -113,6 +113,9 @@
     <ClCompile Include="Source\DirectX\RenderUtility\PixelShader.cpp">
       <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
     </ClCompile>
+    <ClCompile Include="Source\DirectX\Manager\ConstantBufferManager.cpp">
+      <Filter>ソース ファイル\DirectX\Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameFrame\Component.h">
@@ -209,6 +212,9 @@
       <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
     </ClInclude>
     <ClInclude Include="Source\DirectX\Manager\ShaderManager.h">
+      <Filter>ソース ファイル\DirectX\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\Manager\ConstantBufferManager.h">
       <Filter>ソース ファイル\DirectX\Manager</Filter>
     </ClInclude>
   </ItemGroup>

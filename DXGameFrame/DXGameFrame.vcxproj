@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="Source\DirectX\Direct3D.h" />
     <ClInclude Include="Source\DirectX\DirectXInclude.h" />
+    <ClInclude Include="Source\DirectX\Manager\ConstantBufferManager.h" />
     <ClInclude Include="Source\DirectX\Manager\ShaderManager.h" />
     <ClInclude Include="Source\DirectX\RenderPass.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\Geometry.h" />
@@ -54,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\DirectX\Direct3D.cpp" />
+    <ClCompile Include="Source\DirectX\Manager\ConstantBufferManager.cpp" />
     <ClCompile Include="Source\DirectX\Manager\ShaderManager.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\Geometry.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\Mesh.cpp" />
