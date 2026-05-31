@@ -3,6 +3,7 @@
 
 Scene::~Scene()
 {
+	m_renderSystem.Uninit();
 	m_componentManager.ClearAll();
 	m_gameObjectManager.Clear();
 }
@@ -21,4 +22,5 @@ void Scene::Update()
 
 void Scene::Draw()
 {
+	m_renderSystem.DrawAll();
 }

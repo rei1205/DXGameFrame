@@ -2,6 +2,7 @@
 #pragma once
 #include "GameObjectManager.h"
 #include "ComponentManager.h"
+#include "RenderSystem.h"
 
 /**
  * @brief シーンの基底クラス
@@ -43,10 +44,22 @@ public:
 		return m_componentManager;
 	}
 
+	/**
+	 * @brief レンダーシステムを取得する
+	 * @return レンダーシステムへの参照
+	 */
+	RenderSystem& GetRenderSystem()
+	{
+		return m_renderSystem;
+	}
+
 private:
 	/// ゲームオブジェクト管理機能
 	GameObjectManager m_gameObjectManager;
 
 	/// コンポーネント管理機能
 	ComponentManager m_componentManager;
+
+	/// シーン描画機能
+	RenderSystem m_renderSystem;
 };

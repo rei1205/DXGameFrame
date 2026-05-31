@@ -1,0 +1,50 @@
+// RenderSystem.h
+#pragma once
+#include "RenderPass/RenderPass.h"
+#include <vector>
+#include <memory>
+
+/**
+ * @brief シーンの描画を行う
+ */
+class RenderSystem
+{
+public:
+	RenderSystem() = default;
+	~RenderSystem() = default;
+
+	/**
+	 * @brief 終了処理
+	 */
+	void Uninit();
+
+	/**
+	 * @brief 全ての描画パスの描画を行う
+	 */
+	void DrawAll();
+
+	/**
+	 * @brief 描画パスを登録する
+	 * @param pRenderPass 描画パスへのポインタ (shared_ptr)
+	 */
+	void AddRenderPass(std::shared_ptr<RenderPass> pRenderPass);
+
+	/**
+	 * @brief レンダラーコンポーネントを登録する
+	 * @param pRenderer レンダラーコンポーネントへのポインタ
+	 */
+	void RegisterRenderer(Renderer* pRenderer);
+
+	/**
+	 * @brief レンダラーコンポーネントの登録を削除
+	 * @param pRenderer レンダラーコンポーネントへのポインタ
+	 */
+	void UnregisterRenderer(Renderer* pRenderer);
+
+private:
+	/// レンダーパス配列
+	std::vector<std::shared_ptr<RenderPass>> m_renderPasses;
+
+	/// 描画対象コンポーネント配列
+	std::vector<Renderer*> m_pRenderers;
+};

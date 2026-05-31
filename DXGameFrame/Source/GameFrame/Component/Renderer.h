@@ -14,8 +14,9 @@ public:
 
 	/**
 	 * @brief 描画を行う
+	 * @param materialIndex 描画に使用するマテリアルのインデックス
 	 */
-	virtual void Draw();
+	virtual void Draw(UINT materialIndex) = 0;
 
 	virtual void Awake();
 	virtual void OnDestroy();
