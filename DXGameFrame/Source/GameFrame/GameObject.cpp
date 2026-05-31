@@ -1,6 +1,7 @@
 // GameObject.cpp
 #include "GameObject.h"
 #include "Component/Transform.h"
+#include "Scene.h"
 
 GameObject::GameObject():
 	m_pScene(nullptr),

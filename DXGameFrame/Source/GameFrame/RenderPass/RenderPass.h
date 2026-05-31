@@ -1,16 +1,19 @@
 // RenderPass.h
 #pragma once
-#include <Windows.h>
-#include <vector>
-#include <string>
-
-class Renderer;
+#include "../Component/Renderer.h"
+#include "../Component/Camera.h"
 
 /// 描画オブジェクト
 struct RenderObject
 {
 	Renderer* pRenderer;		// 描画コンポーネントへのポインタ
 	UINT materialIndex;			// 描画に使用するマテリアルのインデックス
+};
+
+/// 描画関連データ
+struct RenderContext
+{
+	Camera* pCamera;			// 描画に使用するカメラへのポインタ
 };
 
 /**
@@ -25,8 +28,10 @@ public:
 	/**
 	 * @brief 描画を行う
 	 * @param renderObjects 描画オブジェクト配列
+	 * @param renderContext 描画関連データ
 	 */
-	virtual void Render(const std::vector<RenderObject>& renderObjects) = 0;
+	virtual void Render(const std::vector<RenderObject>& renderObjects,
+		const RenderContext& renderContext) = 0;
 
 	/**
 	 * @brief レンダーパスの初期化

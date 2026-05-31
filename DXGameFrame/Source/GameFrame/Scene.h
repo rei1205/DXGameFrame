@@ -63,3 +63,6 @@ private:
 	/// シーン描画機能
 	RenderSystem m_renderSystem;
 };
+
+// Scene.hに依存するゲームオブジェクトのテンプレート関数の実装
+#include "GameObject_inl.h"

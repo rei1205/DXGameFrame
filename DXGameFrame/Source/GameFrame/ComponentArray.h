@@ -1,11 +1,9 @@
 // ComponentArray.h
 #pragma once
 #include "ClassID.h"
-#include <vector>
+#include "Component/Component.h"
+#include "GameObject.h"
 #include <memory>
-
-class Component;
-class GameObject;
 
 /**
  * @brief コンポーネント配列の基底クラス

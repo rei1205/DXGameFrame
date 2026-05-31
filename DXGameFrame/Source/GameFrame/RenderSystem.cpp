@@ -11,6 +11,7 @@ void RenderSystem::Uninit()
 	}
 	m_renderPasses.clear();
 	m_pRenderers.clear();
+	m_pCameras.clear();
 }
 
 void RenderSystem::DrawAll()
@@ -42,14 +43,21 @@ void RenderSystem::DrawAll()
 		}
 	}
 
-	// レンダーパスごとの描画を行う
-	for (auto& renderPass : m_renderPasses)
+	// カメラごとの描画を行う
+	for (Camera* camera : m_pCameras)
 	{
-		int targetLayerID = renderPass->GetTargetRenderLayerID();
-		if (targetLayerID == RenderLayer::LayerID_None)
-			continue;
+		RenderContext renderContext;
+		renderContext.pCamera = camera;
 
-		renderPass->Render(renderObjectsMap[targetLayerID]);
+		// レンダーパスごとの描画を行う
+		for (auto& renderPass : m_renderPasses)
+		{
+			int targetLayerID = renderPass->GetTargetRenderLayerID();
+			if (targetLayerID == RenderLayer::LayerID_None)
+				continue;
+
+			renderPass->Render(renderObjectsMap[targetLayerID], renderContext);
+		}
 	}
 }
 
@@ -69,4 +77,16 @@ void RenderSystem::UnregisterRenderer(Renderer* pRenderer)
 	auto it = std::find(m_pRenderers.begin(), m_pRenderers.end(), pRenderer);
 	if (it != m_pRenderers.end())
 		m_pRenderers.erase(it);
+}
+
+void RenderSystem::RegisterCamera(Camera* pCamera)
+{
+	m_pCameras.push_back(pCamera);
+}
+
+void RenderSystem::UnregisterCamera(Camera* pCamera)
+{
+	auto it = std::find(m_pCameras.begin(), m_pCameras.end(), pCamera);
+	if (it != m_pCameras.end())
+		m_pCameras.erase(it);
 }

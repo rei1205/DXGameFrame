@@ -1,10 +1,9 @@
 // GameObjectManager.h
 #pragma once
+#include "GameObject.h"
 #include <vector>
 #include <memory>
 #include <string>
-
-class GameObject;
 
 /**
  * @brief ゲームオブジェクトオブジェクトを管理するクラス
@@ -12,8 +11,8 @@ class GameObject;
 class GameObjectManager
 {
 public:
-	GameObjectManager();
-	~GameObjectManager();
+	GameObjectManager() = default;
+	~GameObjectManager() = default;
 
 	/**
 	 * @brief 空のゲームオブジェクトを生成する

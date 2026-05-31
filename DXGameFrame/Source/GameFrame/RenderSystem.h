@@ -41,10 +41,25 @@ public:
 	 */
 	void UnregisterRenderer(Renderer* pRenderer);
 
+	/**
+	 * @brief カメラコンポーネントを登録する
+	 * @param pCamera カメラコンポーネントへのポインタ
+	 */
+	void RegisterCamera(Camera* pCamera);
+
+	/**
+	 * @brief カメラコンポーネントの登録を削除
+	 * @param pCamera カメラコンポーネントへのポインタ
+	 */
+	void UnregisterCamera(Camera* pCamera);
+
 private:
 	/// レンダーパス配列
 	std::vector<std::shared_ptr<RenderPass>> m_renderPasses;
 
 	/// 描画対象コンポーネント配列
 	std::vector<Renderer*> m_pRenderers;
+
+	/// カメラコンポーネント配列
+	std::vector<Camera*> m_pCameras;
 };

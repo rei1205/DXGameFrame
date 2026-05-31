@@ -3,9 +3,6 @@
 #include "ComponentArray.h"
 #include <unordered_map>
 
-class GameObject;
-class Component;
-
 /**
  * @brief コンポーネントの管理を行う
  */

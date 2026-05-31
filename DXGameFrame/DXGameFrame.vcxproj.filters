@@ -155,6 +155,9 @@
     <ClCompile Include="Source\GameFrame\RenderPass\RenderPass.cpp">
       <Filter>ソース ファイル\GameFrame\RenderPass</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GameFrame\Component\Camera.cpp">
+      <Filter>ソース ファイル\GameFrame\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameFrame\ComponentArray.h">
@@ -287,6 +290,12 @@
       <Filter>ソース ファイル\GameFrame\RenderPass</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameFrame\RenderSystem.h">
+      <Filter>ソース ファイル\GameFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\Component\Camera.h">
+      <Filter>ソース ファイル\GameFrame\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\GameObject_inl.h">
       <Filter>ソース ファイル\GameFrame</Filter>
     </ClInclude>
   </ItemGroup>
