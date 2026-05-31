@@ -1,6 +1,6 @@
 // Transform.h
 #pragma once
-#include "../Component.h"
+#include "Component.h"
 #include "../../Utility/Vector3.h"
 #include "../../Utility/Quaternion.h"
 

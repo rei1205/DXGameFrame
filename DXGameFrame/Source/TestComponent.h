@@ -1,6 +1,6 @@
 // TestComponent.cpp
 #pragma once
-#include "GameFrame/Component.h"
+#include "GameFrame/Component/Component.h"
 
 class TestComponent : public Component
 {

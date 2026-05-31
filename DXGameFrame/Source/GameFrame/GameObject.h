@@ -1,6 +1,6 @@
 // GameObject.h
 #pragma once
-#include "Component.h"
+#include "Component/Component.h"
 #include "Scene.h"
 
 class Scene;
@@ -165,4 +165,4 @@ inline void GameObject::RemoveComponent()
 }
 
 // GameObject.hに依存するコンポーネントのテンプレート関数の実装
-#include "Component_inl.h"
+#include "Component/Component_inl.h"

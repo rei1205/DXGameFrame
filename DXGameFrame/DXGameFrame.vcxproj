@@ -38,11 +38,12 @@
     <ClInclude Include="Source\DirectX\RenderUtility\Texture.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\VertexShader.h" />
     <ClInclude Include="Source\GameFrame\ClassID.h" />
-    <ClInclude Include="Source\GameFrame\Component.h" />
     <ClInclude Include="Source\GameFrame\ComponentArray.h" />
     <ClInclude Include="Source\GameFrame\ComponentManager.h" />
+    <ClInclude Include="Source\GameFrame\Component\Component.h" />
+    <ClInclude Include="Source\GameFrame\Component\Component_inl.h" />
+    <ClInclude Include="Source\GameFrame\Component\Renderer.h" />
     <ClInclude Include="Source\GameFrame\Component\Transform.h" />
-    <ClInclude Include="Source\GameFrame\Component_inl.h" />
     <ClInclude Include="Source\GameFrame\GameObject.h" />
     <ClInclude Include="Source\GameFrame\GameObjectManager.h" />
     <ClInclude Include="Source\GameFrame\Object.h" />
@@ -79,8 +80,9 @@
     <ClCompile Include="Source\DirectX\RenderUtility\Shader.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\Texture.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\VertexShader.cpp" />
-    <ClCompile Include="Source\GameFrame\Component.cpp" />
     <ClCompile Include="Source\GameFrame\ComponentManager.cpp" />
+    <ClCompile Include="Source\GameFrame\Component\Component.cpp" />
+    <ClCompile Include="Source\GameFrame\Component\Renderer.cpp" />
     <ClCompile Include="Source\GameFrame\Component\Transform.cpp" />
     <ClCompile Include="Source\GameFrame\GameObject.cpp" />
     <ClCompile Include="Source\GameFrame\GameObjectManager.cpp" />

@@ -1,6 +1,6 @@
 // Component.cpp
 #include "Component.h"
-#include "GameObject.h"
+#include "../GameObject.h"
 
 Component::Component():
 	m_pGameObject(nullptr),

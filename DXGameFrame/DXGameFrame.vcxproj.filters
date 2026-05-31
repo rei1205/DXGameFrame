@@ -33,13 +33,13 @@
     <Filter Include="ソース ファイル\DirectX\Manager">
       <UniqueIdentifier>{7bccde3c-4bfb-4bed-87d6-f5e627ed1f50}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\GameFrame\RenderPass">
+      <UniqueIdentifier>{6dcc5da7-5f22-41b3-b8bd-98eeef2a49b2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\main.cpp">
       <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameFrame\Component.cpp">
-      <Filter>ソース ファイル\GameFrame</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameFrame\ComponentManager.cpp">
       <Filter>ソース ファイル\GameFrame</Filter>
@@ -143,11 +143,14 @@
     <ClCompile Include="Source\DirectX\RenderUtility\RenderLayer.cpp">
       <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GameFrame\Component\Renderer.cpp">
+      <Filter>ソース ファイル\GameFrame\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameFrame\Component\Component.cpp">
+      <Filter>ソース ファイル\GameFrame\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\GameFrame\Component.h">
-      <Filter>ソース ファイル\GameFrame</Filter>
-    </ClInclude>
     <ClInclude Include="Source\GameFrame\ComponentArray.h">
       <Filter>ソース ファイル\GameFrame</Filter>
     </ClInclude>
@@ -208,9 +211,6 @@
     <ClInclude Include="Source\TestComponent.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameFrame\Component_inl.h">
-      <Filter>ソース ファイル\GameFrame</Filter>
-    </ClInclude>
     <ClInclude Include="Source\DirectX\Direct3D.h">
       <Filter>ソース ファイル\DirectX</Filter>
     </ClInclude>
@@ -267,6 +267,15 @@
     </ClInclude>
     <ClInclude Include="Source\DirectX\RenderUtility\RenderLayer.h">
       <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\Component\Renderer.h">
+      <Filter>ソース ファイル\GameFrame\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\Component\Component_inl.h">
+      <Filter>ソース ファイル\GameFrame\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\Component\Component.h">
+      <Filter>ソース ファイル\GameFrame\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
