@@ -35,13 +35,6 @@ void TestComponent::Start()
 	ConstantBufferManager::SetProjection(projection);
 	ConstantBufferManager::UpdateFrameCB();
 
-	D3D11_BUFFER_DESC cbDesc = {};
-	cbDesc.Usage = D3D11_USAGE_DEFAULT;
-	cbDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-	cbDesc.CPUAccessFlags = 0;
-	cbDesc.MiscFlags = 0;
-	cbDesc.StructureByteStride = 0;
-
 	Material material;
 	material.SetTexture("Assets/TestImage.png", TextureSlot::Main);
 	material.SetVertexShader("output/x64/Debug/VS_Test.cso");
@@ -57,7 +50,7 @@ void TestComponent::Update()
 {
 	float clearColor[] = { 0.4f, 0.8f, 0.8f, 1.0f };
 	Direct3D::BeginDraw(clearColor);
-	Geometry::GetModel(Geometry::Type::BOX)->Draw();
+	Geometry::GetModel(Geometry::Type::PLANE)->Draw();
 	Direct3D::EndDraw();
 }
 

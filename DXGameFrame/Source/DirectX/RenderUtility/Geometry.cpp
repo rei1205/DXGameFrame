@@ -109,12 +109,12 @@ HRESULT Geometry::CreateBox()
 
 HRESULT Geometry::CreateCylinder()
 {
-	return E_NOTIMPL;
+	return S_OK;
 }
 
 HRESULT Geometry::CreateSphere()
 {
-	return E_NOTIMPL;
+	return S_OK;
 }
 
 HRESULT Geometry::CreatePlane()

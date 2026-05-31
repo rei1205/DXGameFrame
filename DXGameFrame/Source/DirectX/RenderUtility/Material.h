@@ -21,6 +21,21 @@ public:
 	void Bind() const;
 
 	/**
+	 * @brief 描画レイヤーを設定する
+	 * @param layerName レイヤー名
+	 */
+	void SetRenderLayer(const std::string& layerName);
+
+	/**
+	 * @brief 描画レイヤーIDを取得する
+	 * @return レイヤーID
+	 */
+	int GetRenderLayerID() const
+	{
+		return m_renderLayerID;
+	}
+
+	/**
 	 * @brief テクスチャ画像を設定する
 	 * @param filePath テクスチャ画像へのファイルパス
 	 * @param slot 設定するスロット番号
@@ -98,6 +113,8 @@ public:
 	void SetSamplerState(const std::string& samplerStateName, UINT slot);
 
 private:
+	int m_renderLayerID;
+
 	/// テクスチャ配列
 	std::array<std::shared_ptr<Texture>, TextureSlot::MaterialSlotCount> m_pTextures;
 

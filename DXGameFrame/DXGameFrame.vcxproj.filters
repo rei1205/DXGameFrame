@@ -65,9 +65,6 @@
     <ClCompile Include="Source\System\GameWindow.cpp">
       <Filter>ソース ファイル\System</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Utility\IDManager.cpp">
-      <Filter>ソース ファイル\Utility</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Utility\Math.cpp">
       <Filter>ソース ファイル\Utility</Filter>
     </ClCompile>
@@ -140,6 +137,12 @@
     <ClCompile Include="Source\DirectX\RenderUtility\Material.cpp">
       <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
     </ClCompile>
+    <ClCompile Include="Source\System\IDManager.cpp">
+      <Filter>ソース ファイル\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX\RenderUtility\RenderLayer.cpp">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameFrame\Component.h">
@@ -178,9 +181,6 @@
     <ClInclude Include="Source\System\GameTime.h">
       <Filter>ソース ファイル\System</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Utility\IDManager.h">
-      <Filter>ソース ファイル\Utility</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Utility\Math.h">
       <Filter>ソース ファイル\Utility</Filter>
     </ClInclude>
@@ -215,9 +215,6 @@
       <Filter>ソース ファイル\DirectX</Filter>
     </ClInclude>
     <ClInclude Include="Source\DirectX\DirectXInclude.h">
-      <Filter>ソース ファイル\DirectX</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DirectX\RenderPass.h">
       <Filter>ソース ファイル\DirectX</Filter>
     </ClInclude>
     <ClInclude Include="Source\DirectX\RenderUtility\Geometry.h">
@@ -263,6 +260,12 @@
       <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
     </ClInclude>
     <ClInclude Include="Source\DirectX\RenderUtility\Material.h">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\IDManager.h">
+      <Filter>ソース ファイル\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\RenderUtility\RenderLayer.h">
       <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
     </ClInclude>
   </ItemGroup>
