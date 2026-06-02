@@ -70,7 +70,7 @@ DirectX::XMMATRIX Camera::GetOrthographicProjectionMatrix()
 
 Camera* Camera::GetMain(Scene* pScnen)
 {
-	return nullptr;
+	return pScnen->GetRenderSystem().GetMainCamera();
 }
 
 DirectX::XMMATRIX Camera::GetDefaultViewMatrix()

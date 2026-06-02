@@ -158,6 +158,17 @@ public:
 	 */
 	static HRESULT CreateSamplerStates(const D3D11_SAMPLER_DESC* pDesc, const std::string& name);
 
+	/**
+	 * @brief パイプラインステートの設定状態をリセットする
+	 */
+	static void Refresh()
+	{
+		s_pCurrentBlendState = nullptr;
+		s_pCurrentDepthStencilState = nullptr;
+		s_pCurrentRasterizerState = nullptr;
+		s_pCurrentSamplerState = nullptr;
+	}
+
 private:
 	PipelineStateManager() = delete;
 

@@ -43,6 +43,8 @@
     <ClInclude Include="Source\GameFrame\Component\Camera.h" />
     <ClInclude Include="Source\GameFrame\Component\Component.h" />
     <ClInclude Include="Source\GameFrame\Component\Component_inl.h" />
+    <ClInclude Include="Source\GameFrame\Component\DirectionalLight.h" />
+    <ClInclude Include="Source\GameFrame\Component\MeshRenderer.h" />
     <ClInclude Include="Source\GameFrame\Component\Renderer.h" />
     <ClInclude Include="Source\GameFrame\Component\Transform.h" />
     <ClInclude Include="Source\GameFrame\GameObject.h" />
@@ -50,6 +52,7 @@
     <ClInclude Include="Source\GameFrame\GameObject_inl.h" />
     <ClInclude Include="Source\GameFrame\Object.h" />
     <ClInclude Include="Source\GameFrame\ObjPtr.h" />
+    <ClInclude Include="Source\GameFrame\RenderPass\DefaultRenderPass.h" />
     <ClInclude Include="Source\GameFrame\RenderPass\RenderPass.h" />
     <ClInclude Include="Source\GameFrame\RenderSystem.h" />
     <ClInclude Include="Source\GameFrame\Scene.h" />
@@ -61,6 +64,7 @@
     <ClInclude Include="Source\System\IDManager.h" />
     <ClInclude Include="Source\TestComponent.h" />
     <ClInclude Include="Source\TestScene.h" />
+    <ClInclude Include="Source\Utility\Color.h" />
     <ClInclude Include="Source\Utility\Math.h" />
     <ClInclude Include="Source\Utility\Quaternion.h" />
     <ClInclude Include="Source\Utility\Vector2.h" />
@@ -87,11 +91,14 @@
     <ClCompile Include="Source\GameFrame\ComponentManager.cpp" />
     <ClCompile Include="Source\GameFrame\Component\Camera.cpp" />
     <ClCompile Include="Source\GameFrame\Component\Component.cpp" />
+    <ClCompile Include="Source\GameFrame\Component\DirectionalLight.cpp" />
+    <ClCompile Include="Source\GameFrame\Component\MeshRenderer.cpp" />
     <ClCompile Include="Source\GameFrame\Component\Renderer.cpp" />
     <ClCompile Include="Source\GameFrame\Component\Transform.cpp" />
     <ClCompile Include="Source\GameFrame\GameObject.cpp" />
     <ClCompile Include="Source\GameFrame\GameObjectManager.cpp" />
     <ClCompile Include="Source\GameFrame\Object.cpp" />
+    <ClCompile Include="Source\GameFrame\RenderPass\DefaultRenderPass.cpp" />
     <ClCompile Include="Source\GameFrame\RenderPass\RenderPass.cpp" />
     <ClCompile Include="Source\GameFrame\RenderSystem.cpp" />
     <ClCompile Include="Source\GameFrame\Scene.cpp" />
@@ -103,6 +110,7 @@
     <ClCompile Include="Source\System\IDManager.cpp" />
     <ClCompile Include="Source\TestComponent.cpp" />
     <ClCompile Include="Source\TestScene.cpp" />
+    <ClCompile Include="Source\Utility\Color.cpp" />
     <ClCompile Include="Source\Utility\Math.cpp" />
     <ClCompile Include="Source\Utility\Quaternion.cpp" />
     <ClCompile Include="Source\Utility\Vector2.cpp" />

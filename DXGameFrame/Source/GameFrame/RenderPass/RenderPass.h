@@ -2,18 +2,20 @@
 #pragma once
 #include "../Component/Renderer.h"
 #include "../Component/Camera.h"
+#include "../Component/DirectionalLight.h"
 
 /// 描画オブジェクト
 struct RenderObject
 {
-	Renderer* pRenderer;		// 描画コンポーネントへのポインタ
-	UINT materialIndex;			// 描画に使用するマテリアルのインデックス
+	Renderer* pRenderer;			// 描画コンポーネントへのポインタ
+	UINT materialIndex;				// 描画に使用するマテリアルのインデックス
 };
 
 /// 描画関連データ
 struct RenderContext
 {
-	Camera* pCamera;			// 描画に使用するカメラへのポインタ
+	std::vector<Camera*> pSortedCameras;	// ソート済みの描画に使用するカメラへのポインタ
+	DirectionalLight* pMainLight;			// メインライトへのポインタ
 };
 
 /**

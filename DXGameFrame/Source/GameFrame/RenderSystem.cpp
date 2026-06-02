@@ -2,6 +2,7 @@
 #include "Component/Renderer.h"
 #include "../DirectX/RenderUtility/RenderLayer.h"
 #include <unordered_map>
+#include <algorithm>
 
 void RenderSystem::Uninit()
 {
@@ -20,8 +21,7 @@ void RenderSystem::DrawAll()
 	std::unordered_map<int, std::vector<RenderObject>> renderObjectsMap;
 	for (Renderer* renderer : m_pRenderers)
 	{
-		if (!renderer->IsActiveHierarchy() &&
-			!renderer->IsStarted())
+		if (!renderer->IsActiveHierarchy())
 			continue;
 
 		// マテリアルごとに描画オブジェクトを作成
@@ -43,21 +43,32 @@ void RenderSystem::DrawAll()
 		}
 	}
 
-	// カメラごとの描画を行う
-	for (Camera* camera : m_pCameras)
+	// カメラをソート
+	if (m_cateraSortDirty)
+		CameraSort();
+
+	// レンダーコンテキストを作成
+	RenderContext renderContext;
+	renderContext.pMainLight = m_pMainLight;
+
+	// アクティブなカメラ配列を作成
+	renderContext.pSortedCameras = m_pCameras;
+	std::erase_if(renderContext.pSortedCameras,
+		[](Camera* ptr) { return!ptr->IsActiveHierarchy(); }
+	);
+
+	// レンダーパスごとの描画を行う
+	for (auto& renderPass : m_renderPasses)
 	{
-		RenderContext renderContext;
-		renderContext.pCamera = camera;
+		int targetLayerID = renderPass->GetTargetRenderLayerID();
+		if (targetLayerID == RenderLayer::LayerID_None)
+			continue;
 
-		// レンダーパスごとの描画を行う
-		for (auto& renderPass : m_renderPasses)
-		{
-			int targetLayerID = renderPass->GetTargetRenderLayerID();
-			if (targetLayerID == RenderLayer::LayerID_None)
-				continue;
+		// 描画リソースのキャッシュを削除
+		ShaderManager::Refresh();
+		PipelineStateManager::Refresh();
 
-			renderPass->Render(renderObjectsMap[targetLayerID], renderContext);
-		}
+		renderPass->Render(renderObjectsMap[targetLayerID], renderContext);
 	}
 }
 
@@ -89,4 +100,30 @@ void RenderSystem::UnregisterCamera(Camera* pCamera)
 	auto it = std::find(m_pCameras.begin(), m_pCameras.end(), pCamera);
 	if (it != m_pCameras.end())
 		m_pCameras.erase(it);
+}
+
+Camera* RenderSystem::GetMainCamera()
+{
+	// カメラの描画順ソート
+	if (m_cateraSortDirty)
+	{
+		CameraSort();
+	}
+
+	for (int i = (int)m_pCameras.size() - 1; i >= 0; --i)
+	{
+		if (m_pCameras[i]->IsActiveHierarchy())
+			return m_pCameras[i];
+	}
+
+	return nullptr;
+}
+
+void RenderSystem::CameraSort()
+{
+	std::sort(m_pCameras.begin(), m_pCameras.end(),
+		[](Camera* a, Camera* b)
+		{return a->GetPriority() > b->GetPriority(); }
+	);
+	m_cateraSortDirty = false;
 }

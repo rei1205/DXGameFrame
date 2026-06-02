@@ -158,6 +158,18 @@
     <ClCompile Include="Source\GameFrame\Component\Camera.cpp">
       <Filter>ソース ファイル\GameFrame\Component</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Utility\Color.cpp">
+      <Filter>ソース ファイル\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameFrame\Component\DirectionalLight.cpp">
+      <Filter>ソース ファイル\GameFrame\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameFrame\Component\MeshRenderer.cpp">
+      <Filter>ソース ファイル\GameFrame\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameFrame\RenderPass\DefaultRenderPass.cpp">
+      <Filter>ソース ファイル\GameFrame\RenderPass</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameFrame\ComponentArray.h">
@@ -297,6 +309,18 @@
     </ClInclude>
     <ClInclude Include="Source\GameFrame\GameObject_inl.h">
       <Filter>ソース ファイル\GameFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\Component\DirectionalLight.h">
+      <Filter>ソース ファイル\GameFrame\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utility\Color.h">
+      <Filter>ソース ファイル\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\Component\MeshRenderer.h">
+      <Filter>ソース ファイル\GameFrame\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\RenderPass\DefaultRenderPass.h">
+      <Filter>ソース ファイル\GameFrame\RenderPass</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

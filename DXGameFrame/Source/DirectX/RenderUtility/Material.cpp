@@ -2,9 +2,10 @@
 #include "Material.h"
 #include "RenderLayer.h"
 
-Material::Material() :
-	m_renderLayerID(RenderLayer::LayerID_None)
+Material::Material()
 {
+	m_renderLayerID = RenderLayer::GetLayerID("Default");
+
 	SetBlendState(BlendStateName::Default);
 	SetDepthStencilState(DepthStencilStateName::Default);
 	SetRasterizerState(RasterizerStateName::Default);

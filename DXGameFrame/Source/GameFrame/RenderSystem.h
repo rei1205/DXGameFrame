@@ -53,6 +53,38 @@ public:
 	 */
 	void UnregisterCamera(Camera* pCamera);
 
+	/**
+	 * @brief カメラのソートフラグをセットする
+	 */
+	void SetCameraSortDirty()
+	{
+		m_cateraSortDirty = true;
+	}
+
+	/**
+	 * @brief アクティブかつ最も描画優先度が高いカメラを取得する
+	 * @return メインカメラへのポインタ
+	 */
+	Camera* GetMainCamera();
+
+	/**
+	 * @brief メインライトを設定する
+	 * @param pMainLight メインライトへのポインタ
+	 */
+	void SetMainLight(DirectionalLight* pMainLight)
+	{
+		m_pMainLight = pMainLight;
+	}
+
+	/**
+	 * @brief メインライトを取得する
+	 * @return メインライトへのポインタ
+	 */
+	DirectionalLight* GetMainLight()
+	{
+		return m_pMainLight;
+	}
+
 private:
 	/// レンダーパス配列
 	std::vector<std::shared_ptr<RenderPass>> m_renderPasses;
@@ -62,4 +94,15 @@ private:
 
 	/// カメラコンポーネント配列
 	std::vector<Camera*> m_pCameras;
+
+	/// メインライト
+	DirectionalLight* m_pMainLight;
+
+	/// カメラソートの必要フラグ
+	bool m_cateraSortDirty;
+
+	/**
+	 * @brief カメラを描画優先度でソートする
+	 */
+	void CameraSort();
 };

@@ -10,7 +10,7 @@ class Renderer : public Component
 {
 public:
 	Renderer() = default;
-	~Renderer() = default;
+	virtual ~Renderer() = default;
 
 	/**
 	 * @brief •`‰æ‚ğs‚¤
