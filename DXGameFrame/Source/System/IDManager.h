@@ -23,6 +23,10 @@ public:
 	 */
 	void ReleaseID(uint32_t id);
 
+	/**
+	 * @brief ‘S‚Ä‚ÌID‚ğ‰ğ•ú‚·‚é
+	 */
+	void Clear();
 
 private:
 	/// Ÿ‚ÉV‹K¶¬‚·‚éID

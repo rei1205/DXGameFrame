@@ -4,6 +4,18 @@
 std::unordered_map<std::string, int> RenderLayer::s_renderLayerMap;
 IDManager RenderLayer::s_idManager;
 
+void RenderLayer::Init()
+{
+	AddLayer(RenderLayerName::DefaultLayer);
+	AddLayer(RenderLayerName::ShadowLayer);
+}
+
+void RenderLayer::Uninit()
+{
+	s_renderLayerMap.clear();
+	s_idManager.Clear();
+}
+
 void RenderLayer::AddLayer(const std::string& layerName)
 {
 	auto it = s_renderLayerMap.find(layerName);

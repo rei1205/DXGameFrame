@@ -4,6 +4,13 @@
 #include <unordered_map>
 #include <string>
 
+/// デフォルトのレイヤー名
+namespace RenderLayerName
+{
+	constexpr const char* DefaultLayer = "Default";		// デフォルトレイヤー
+	constexpr const char* ShadowLayer = "Shadow";		// シャドウレイヤー
+}
+
 /**
  * @brief 描画レイヤーを扱うクラス
  */
@@ -12,6 +19,16 @@ class RenderLayer
 public:
 	/// 無効なレイヤーID
 	static constexpr int LayerID_None = -1;
+
+	/**
+	 * @brief 描画レイヤーの初期化
+	 */
+	static void Init();
+
+	/**
+	 * @brief 終了処理
+	 */
+	static void Uninit();
 
 	/**
 	 * @brief 描画レイヤーを追加する

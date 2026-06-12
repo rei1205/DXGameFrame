@@ -32,7 +32,6 @@
     <ClInclude Include="Source\DirectX\RenderUtility\Mesh.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\PixelShader.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\RasterizerState.h" />
-    <ClInclude Include="Source\DirectX\RenderUtility\RenderLayer.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\SamplerState.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\Shader.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\Texture.h" />
@@ -52,9 +51,10 @@
     <ClInclude Include="Source\GameFrame\GameObject_inl.h" />
     <ClInclude Include="Source\GameFrame\Object.h" />
     <ClInclude Include="Source\GameFrame\ObjPtr.h" />
-    <ClInclude Include="Source\GameFrame\RenderPass\DefaultRenderPass.h" />
-    <ClInclude Include="Source\GameFrame\RenderPass\RenderPass.h" />
-    <ClInclude Include="Source\GameFrame\RenderSystem.h" />
+    <ClInclude Include="Source\GameFrame\RenderSystem\DefaultRenderPass.h" />
+    <ClInclude Include="Source\GameFrame\RenderSystem\RenderLayer.h" />
+    <ClInclude Include="Source\GameFrame\RenderSystem\RenderPass.h" />
+    <ClInclude Include="Source\GameFrame\RenderSystem\RenderSystem.h" />
     <ClInclude Include="Source\GameFrame\Scene.h" />
     <ClInclude Include="Source\GameFrame\SceneManager.h" />
     <ClInclude Include="Source\main.h" />
@@ -83,7 +83,6 @@
     <ClCompile Include="Source\DirectX\RenderUtility\Mesh.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\PixelShader.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\RasterizerState.cpp" />
-    <ClCompile Include="Source\DirectX\RenderUtility\RenderLayer.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\SamplerState.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\Shader.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\Texture.cpp" />
@@ -98,9 +97,10 @@
     <ClCompile Include="Source\GameFrame\GameObject.cpp" />
     <ClCompile Include="Source\GameFrame\GameObjectManager.cpp" />
     <ClCompile Include="Source\GameFrame\Object.cpp" />
-    <ClCompile Include="Source\GameFrame\RenderPass\DefaultRenderPass.cpp" />
-    <ClCompile Include="Source\GameFrame\RenderPass\RenderPass.cpp" />
-    <ClCompile Include="Source\GameFrame\RenderSystem.cpp" />
+    <ClCompile Include="Source\GameFrame\RenderSystem\DefaultRenderPass.cpp" />
+    <ClCompile Include="Source\GameFrame\RenderSystem\RenderLayer.cpp" />
+    <ClCompile Include="Source\GameFrame\RenderSystem\RenderPass.cpp" />
+    <ClCompile Include="Source\GameFrame\RenderSystem\RenderSystem.cpp" />
     <ClCompile Include="Source\GameFrame\Scene.cpp" />
     <ClCompile Include="Source\GameFrame\SceneManager.cpp" />
     <ClCompile Include="Source\main.cpp" />

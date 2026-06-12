@@ -1,6 +1,6 @@
 // RenderPass.cpp
 #include "RenderPass.h"
-#include "../../DirectX/RenderUtility/RenderLayer.h"
+#include "RenderLayer.h"
 
 RenderPass::RenderPass() :
 	m_targetRenderLayerID(RenderLayer::LayerID_None)

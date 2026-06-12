@@ -33,8 +33,8 @@
     <Filter Include="ソース ファイル\DirectX\Manager">
       <UniqueIdentifier>{7bccde3c-4bfb-4bed-87d6-f5e627ed1f50}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\GameFrame\RenderPass">
-      <UniqueIdentifier>{6dcc5da7-5f22-41b3-b8bd-98eeef2a49b2}</UniqueIdentifier>
+    <Filter Include="ソース ファイル\GameFrame\RenderSystem">
+      <UniqueIdentifier>{a9c8cd59-cab4-4c9e-b0e8-42f92abfda77}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -140,20 +140,11 @@
     <ClCompile Include="Source\System\IDManager.cpp">
       <Filter>ソース ファイル\System</Filter>
     </ClCompile>
-    <ClCompile Include="Source\DirectX\RenderUtility\RenderLayer.cpp">
-      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
-    </ClCompile>
     <ClCompile Include="Source\GameFrame\Component\Renderer.cpp">
       <Filter>ソース ファイル\GameFrame\Component</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameFrame\Component\Component.cpp">
       <Filter>ソース ファイル\GameFrame\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameFrame\RenderSystem.cpp">
-      <Filter>ソース ファイル\GameFrame</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameFrame\RenderPass\RenderPass.cpp">
-      <Filter>ソース ファイル\GameFrame\RenderPass</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameFrame\Component\Camera.cpp">
       <Filter>ソース ファイル\GameFrame\Component</Filter>
@@ -167,8 +158,17 @@
     <ClCompile Include="Source\GameFrame\Component\MeshRenderer.cpp">
       <Filter>ソース ファイル\GameFrame\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameFrame\RenderPass\DefaultRenderPass.cpp">
-      <Filter>ソース ファイル\GameFrame\RenderPass</Filter>
+    <ClCompile Include="Source\GameFrame\RenderSystem\DefaultRenderPass.cpp">
+      <Filter>ソース ファイル\GameFrame\RenderSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameFrame\RenderSystem\RenderLayer.cpp">
+      <Filter>ソース ファイル\GameFrame\RenderSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameFrame\RenderSystem\RenderPass.cpp">
+      <Filter>ソース ファイル\GameFrame\RenderSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameFrame\RenderSystem\RenderSystem.cpp">
+      <Filter>ソース ファイル\GameFrame\RenderSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -286,9 +286,6 @@
     <ClInclude Include="Source\System\IDManager.h">
       <Filter>ソース ファイル\System</Filter>
     </ClInclude>
-    <ClInclude Include="Source\DirectX\RenderUtility\RenderLayer.h">
-      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
-    </ClInclude>
     <ClInclude Include="Source\GameFrame\Component\Renderer.h">
       <Filter>ソース ファイル\GameFrame\Component</Filter>
     </ClInclude>
@@ -297,12 +294,6 @@
     </ClInclude>
     <ClInclude Include="Source\GameFrame\Component\Component.h">
       <Filter>ソース ファイル\GameFrame\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameFrame\RenderPass\RenderPass.h">
-      <Filter>ソース ファイル\GameFrame\RenderPass</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameFrame\RenderSystem.h">
-      <Filter>ソース ファイル\GameFrame</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameFrame\Component\Camera.h">
       <Filter>ソース ファイル\GameFrame\Component</Filter>
@@ -319,8 +310,17 @@
     <ClInclude Include="Source\GameFrame\Component\MeshRenderer.h">
       <Filter>ソース ファイル\GameFrame\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameFrame\RenderPass\DefaultRenderPass.h">
-      <Filter>ソース ファイル\GameFrame\RenderPass</Filter>
+    <ClInclude Include="Source\GameFrame\RenderSystem\DefaultRenderPass.h">
+      <Filter>ソース ファイル\GameFrame\RenderSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\RenderSystem\RenderLayer.h">
+      <Filter>ソース ファイル\GameFrame\RenderSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\RenderSystem\RenderPass.h">
+      <Filter>ソース ファイル\GameFrame\RenderSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\RenderSystem\RenderSystem.h">
+      <Filter>ソース ファイル\GameFrame\RenderSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

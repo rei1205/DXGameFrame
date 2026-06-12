@@ -1,6 +1,6 @@
 // DefaultRenderPass.h
 #include "DefaultRenderPass.h"
-#include "../../DirectX/RenderUtility/RenderLayer.h"
+#include "RenderLayer.h"
 #include "../../DirectX/Direct3D.h"
 
 DefaultRenderPass::DefaultRenderPass()

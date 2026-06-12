@@ -20,10 +20,7 @@ public:
 	 * @brief カメラ優先度を設定する
 	 * @param priority カメラ優先度 (値が大きいほど優先されます)
 	 */
-	void SetPriority(int priority)
-	{
-		m_priority = priority;
-	}
+	void SetPriority(int priority);
 
 	/**
 	 * @brief カメラ優先度を取得する

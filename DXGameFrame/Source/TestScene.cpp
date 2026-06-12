@@ -2,8 +2,8 @@
 #include "TestScene.h"
 #include "GameFrame/GameObject.h"
 #include "TestComponent.h"
-#include "GameFrame/RenderPass/DefaultRenderPass.h"
-#include "DirectX/RenderUtility/RenderLayer.h"
+#include "GameFrame/RenderSystem/DefaultRenderPass.h"
+#include "GameFrame/RenderSystem/RenderLayer.h"
 #include "DirectX/RenderUtility/Geometry.h"
 #include "GameFrame/Component/MeshRenderer.h"
 #include "GameFrame/Component/Camera.h"
@@ -14,7 +14,7 @@ void TestScene::Init()
 {
 	Geometry::Init();
 	ConstantBufferManager::Init();
-	RenderLayer::AddLayer("Default");
+	RenderLayer::Init();
 	GetRenderSystem().AddRenderPass(std::make_shared<DefaultRenderPass>());
 
 	{

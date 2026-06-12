@@ -1,6 +1,7 @@
+// RenderSystem.cpp
 #include "RenderSystem.h"
-#include "Component/Renderer.h"
-#include "../DirectX/RenderUtility/RenderLayer.h"
+#include "../Component/Renderer.h"
+#include "RenderLayer.h"
 #include <unordered_map>
 #include <algorithm>
 
@@ -24,6 +25,10 @@ void RenderSystem::DrawAll()
 		if (!renderer->IsActiveHierarchy())
 			continue;
 
+		int renderLayerID = renderer->GetRenderLayerID();
+		if (renderLayerID == RenderLayer::LayerID_None)
+			continue;
+
 		// マテリアルごとに描画オブジェクトを作成
 		std::vector<Material>& materials = renderer->GetMaterials();
 		UINT materialCount = (UINT)materials.size();
@@ -32,10 +37,6 @@ void RenderSystem::DrawAll()
 			RenderObject renderObject;
 			renderObject.pRenderer = renderer;
 			renderObject.materialIndex = i;
-
-			int renderLayerID = materials[i].GetRenderLayerID();
-			if (renderLayerID == RenderLayer::LayerID_None)
-				continue;
 
 			// 描画オブジェクト登録
 			auto& vec = renderObjectsMap[renderLayerID];
@@ -93,6 +94,7 @@ void RenderSystem::UnregisterRenderer(Renderer* pRenderer)
 void RenderSystem::RegisterCamera(Camera* pCamera)
 {
 	m_pCameras.push_back(pCamera);
+	SetCameraSortDirty();
 }
 
 void RenderSystem::UnregisterCamera(Camera* pCamera)

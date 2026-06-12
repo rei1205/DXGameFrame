@@ -1,11 +1,8 @@
 // Material.cpp
 #include "Material.h"
-#include "RenderLayer.h"
 
 Material::Material()
 {
-	m_renderLayerID = RenderLayer::GetLayerID("Default");
-
 	SetBlendState(BlendStateName::Default);
 	SetDepthStencilState(DepthStencilStateName::Default);
 	SetRasterizerState(RasterizerStateName::Default);
@@ -41,11 +38,6 @@ void Material::Bind() const
 	{
 		PipelineStateManager::SetSamplerState(m_pSamplerState[i], i);
 	}
-}
-
-void Material::SetRenderLayer(const std::string& layerName)
-{
-	m_renderLayerID = RenderLayer::GetLayerID(layerName);
 }
 
 void Material::SetTexture(const std::string& filePath, UINT slot)

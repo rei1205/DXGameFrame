@@ -24,6 +24,12 @@ void Camera::OnDestroy()
 	GetScene()->GetRenderSystem().UnregisterCamera(this);
 }
 
+void Camera::SetPriority(int priority)
+{
+	m_priority = priority;
+	GetScene()->GetRenderSystem().SetCameraSortDirty();
+}
+
 DirectX::XMMATRIX Camera::GetViewMatrix()
 {
 	DirectX::XMMATRIX view;		// 計算用ビュー行列

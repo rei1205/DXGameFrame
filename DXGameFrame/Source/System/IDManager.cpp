@@ -38,3 +38,9 @@ void IDManager::ReleaseID(uint32_t id)
 	// ID‚ð‰ð•ú
 	m_freeIDs.push_back(id);
 }
+
+void IDManager::Clear()
+{
+	m_freeIDs.clear();
+	m_nextID = 0;
+}

@@ -1,6 +1,6 @@
 // RenderSystem.h
 #pragma once
-#include "RenderPass/RenderPass.h"
+#include "RenderPass.h"
 #include <vector>
 #include <memory>
 

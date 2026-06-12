@@ -2,6 +2,7 @@
 #pragma once
 #include "Component.h"
 #include "../../DirectX/RenderUtility/Material.h"
+#include "../RenderSystem/RenderLayer.h"
 
 /**
  * @brief 描画コンポーネントの基底クラス
@@ -9,7 +10,7 @@
 class Renderer : public Component
 {
 public:
-	Renderer() = default;
+	Renderer();
 	virtual ~Renderer() = default;
 
 	/**
@@ -30,7 +31,25 @@ public:
 		return m_materials;
 	}
 
+	/**
+	 * @brief 描画レイヤーを設定する
+	 * @param layerName 描画レイヤー名
+	 */
+	void SetRenderLayer(const std::string& layerName);
+
+	/**
+	 * @brief 描画レイヤーIDを取得する
+	 * @return 描画レイヤーID
+	 */
+	int GetRenderLayerID() const
+	{
+		return m_renderLayerID;
+	}
+
 private:
+	/// 描画レイヤーID
+	int m_renderLayerID;
+
 	/// マテリアル配列
 	std::vector<Material> m_materials;
 };
