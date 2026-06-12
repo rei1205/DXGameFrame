@@ -15,4 +15,10 @@ public:
 	 */
 	void Render(const std::vector<RenderObject>& renderObjects, 
 		const RenderContext& renderContext) override;
+
+private:
+	/**
+	 * @brief フレーム定数バッファを更新する
+	 */
+	void UpdateFrameCB(const RenderContext& renderContext);
 };

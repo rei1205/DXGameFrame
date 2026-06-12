@@ -170,6 +170,9 @@
     <ClCompile Include="Source\GameFrame\RenderSystem\RenderSystem.cpp">
       <Filter>ソース ファイル\GameFrame\RenderSystem</Filter>
     </ClCompile>
+    <ClCompile Include="Source\DirectX\RenderUtility\Model.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameFrame\ComponentArray.h">
@@ -321,6 +324,9 @@
     </ClInclude>
     <ClInclude Include="Source\GameFrame\RenderSystem\RenderSystem.h">
       <Filter>ソース ファイル\GameFrame\RenderSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\RenderUtility\Model.h">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -30,6 +30,7 @@
     <ClInclude Include="Source\DirectX\RenderUtility\Geometry.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\Material.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\Mesh.h" />
+    <ClInclude Include="Source\DirectX\RenderUtility\Model.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\PixelShader.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\RasterizerState.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\SamplerState.h" />
@@ -81,6 +82,7 @@
     <ClCompile Include="Source\DirectX\RenderUtility\Geometry.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\Material.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\Mesh.cpp" />
+    <ClCompile Include="Source\DirectX\RenderUtility\Model.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\PixelShader.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\RasterizerState.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\SamplerState.cpp" />
