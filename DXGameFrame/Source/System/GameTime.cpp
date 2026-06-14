@@ -1,11 +1,13 @@
 // GameTime.cpp
 #include "GameTime.h"
+#include "Debug.h"
 
 GameTime::TimePoint GameTime::s_startTimePoint;
 GameTime::TimePoint GameTime::s_lastTimePoint;
 unsigned int GameTime::s_targetFPS;
 float GameTime::s_processingTime;
 float GameTime::s_deltaTime;
+bool GameTime::s_showProssingTime = false;
 
 void GameTime::Init(unsigned int targetFPS)
 {
@@ -35,4 +37,27 @@ void GameTime::Update()
 
 	s_deltaTime = std::chrono::duration<float>(current - s_lastTimePoint).count();
 	s_lastTimePoint = current;
+
+	// ˆ—ŽžŠÔ•\Ž¦
+	if (s_showProssingTime)
+		ShowProssingTime();
+}
+
+void GameTime::ShowProssingTime()
+{
+	const int showIntervalFrame = 300;
+	static int frameCount = 0;
+	static float sumProssingTime = 0.0f;
+
+	frameCount++;
+	sumProssingTime += GameTime::GetProssingTime() * 1000.0f;
+
+	if (frameCount >= showIntervalFrame)
+	{
+		float avgTime = sumProssingTime / (float)showIntervalFrame;
+		Debug::ConsoleLog(std::to_string(avgTime) + "ms");
+
+		frameCount = 0;
+		sumProssingTime = 0.0f;
+	}
 }

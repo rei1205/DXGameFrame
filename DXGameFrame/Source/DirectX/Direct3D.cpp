@@ -1,5 +1,6 @@
 // Direct3D.cpp
 #include "Direct3D.h"
+#include "../System/Debug.h"
 
 ComPtr<ID3D11Device> Direct3D::s_pDevice = nullptr;
 ComPtr<ID3D11DeviceContext> Direct3D::s_pContext = nullptr;
@@ -25,6 +26,7 @@ HRESULT Direct3D::Init(HWND hWnd, UINT width, UINT height, bool fullScreen)
 	// ビューポート設定
 	SetViewportSize(width, height);
 
+	Debug::ConsoleLog("Direct3D : Initialized");
 	return hr;
 }
 

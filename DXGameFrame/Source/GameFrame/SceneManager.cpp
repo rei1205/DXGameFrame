@@ -1,6 +1,7 @@
 // SceneManager.cpp
 #include "SceneManager.h"
 #include "../DirectX/Direct3D.h"
+#include "../System/Debug.h"
 #include "../System/ImGuiManager.h"
 
 std::unique_ptr<Scene> SceneManager::s_activeScene = nullptr;
@@ -11,6 +12,8 @@ void SceneManager::Init(std::unique_ptr<Scene> startScene)
 	// ‰ŠúƒV[ƒ““o˜^
 	s_activeScene = std::move(startScene);
 	s_activeScene->Init();
+
+	Debug::ConsoleLog("SceneManager : Initialized");
 }
 
 void SceneManager::Uninit()

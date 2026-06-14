@@ -55,6 +55,15 @@ public:
 		return s_processingTime;
 	}
 
+	/**
+	 * @brief 処理時間表示設定を行う
+	 * @param showFPS 処理時間表示設定
+	 */
+	static void SetShowProssingTime(bool showProssingTime)
+	{
+		s_showProssingTime = showProssingTime;
+	}
+
 private:
 	using TimePoint = std::chrono::steady_clock::time_point;
 
@@ -72,4 +81,12 @@ private:
 
 	/// 前のフレームからの経過時間
 	static float s_deltaTime;
+	
+	/// 処理時間表示フラグ
+	static bool s_showProssingTime;
+
+	/**
+	 * @brief 平均処理時間を表示する
+	 */
+	static void ShowProssingTime();
 };

@@ -54,6 +54,7 @@ bool GameWindow::Create(HINSTANCE hInstance, WNDPROC wndProc, UINT windowStyle,
 		return 0;
 	}
 
+	Debug::ConsoleLog("Create Window");
 	return true;
 }
 

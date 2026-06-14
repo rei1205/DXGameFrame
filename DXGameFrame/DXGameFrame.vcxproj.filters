@@ -197,6 +197,9 @@
     <ClCompile Include="..\ThirdParty\ImGui\imgui_impl_win32.cpp">
       <Filter>ソース ファイル\ImGui</Filter>
     </ClCompile>
+    <ClCompile Include="Source\DXGameFrame.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameFrame\ComponentArray.h">
@@ -243,9 +246,6 @@
     </ClInclude>
     <ClInclude Include="Source\Utility\Vector3.h">
       <Filter>ソース ファイル\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\main.h">
-      <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameFrame\Scene.h">
       <Filter>ソース ファイル\GameFrame</Filter>
@@ -381,6 +381,9 @@
     </ClInclude>
     <ClInclude Include="..\ThirdParty\ImGui\imgui_impl_win32.h">
       <Filter>ソース ファイル\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DXGameFrame.h">
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
