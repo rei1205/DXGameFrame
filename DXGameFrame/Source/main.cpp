@@ -7,6 +7,7 @@
 #include "System/GameWindow.h"
 #include "System/Debug.h"
 #include "System/GameTime.h"
+#include "System/ImGuiManager.h"
 #include "GameFrame/SceneManager.h"
 #include "DirectX/Direct3D.h"
 
@@ -18,6 +19,13 @@ constexpr int DefaultClientHeight = 720;
 constexpr int DefaultFPS = 60;
 
 static bool g_isGameExit = false;
+
+
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(
+	HWND hWnd,
+	UINT msg,
+	WPARAM wParam,
+	LPARAM lParam);
 
 
 // ウィンドウプロシージャ
@@ -51,6 +59,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	// シーンマネージャーの初期化
 	SceneManager::Init(std::make_unique<TestScene>());
 
+	// ImGuiの初期化
+	ImGuiManager::Init(GameWindow::GetWindowHandle(), Direct3D::GetDevice(), Direct3D::GetContext());
+
 	// FPS設定
 	GameTime::Init(DefaultFPS);
 
@@ -78,6 +89,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 
 	// 終了処理
+	ImGuiManager::Uninit();
 	SceneManager::Uninit();
 	Direct3D::Uninit();
 	return 0;
@@ -86,6 +98,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+	if (ImGui_ImplWin32_WndProcHandler(hWnd, message, wParam, lParam))
+		return true;
+
 	switch (message)
 	{
 	case WM_CLOSE:

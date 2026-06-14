@@ -19,6 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\ThirdParty\ImGui\imconfig.h" />
+    <ClInclude Include="..\ThirdParty\ImGui\imgui.h" />
+    <ClInclude Include="..\ThirdParty\ImGui\imgui_impl_dx11.h" />
+    <ClInclude Include="..\ThirdParty\ImGui\imgui_impl_win32.h" />
+    <ClInclude Include="..\ThirdParty\ImGui\imgui_internal.h" />
+    <ClInclude Include="..\ThirdParty\ImGui\imstb_rectpack.h" />
+    <ClInclude Include="..\ThirdParty\ImGui\imstb_textedit.h" />
+    <ClInclude Include="..\ThirdParty\ImGui\imstb_truetype.h" />
     <ClInclude Include="Source\DirectX\Direct3D.h" />
     <ClInclude Include="Source\DirectX\DirectXInclude.h" />
     <ClInclude Include="Source\DirectX\Manager\ConstantBufferManager.h" />
@@ -64,6 +72,7 @@
     <ClInclude Include="Source\System\GameTime.h" />
     <ClInclude Include="Source\System\GameWindow.h" />
     <ClInclude Include="Source\System\IDManager.h" />
+    <ClInclude Include="Source\System\ImGuiManager.h" />
     <ClInclude Include="Source\TestComponent.h" />
     <ClInclude Include="Source\TestScene.h" />
     <ClInclude Include="Source\Utility\Color.h" />
@@ -73,6 +82,12 @@
     <ClInclude Include="Source\Utility\Vector3.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\ThirdParty\ImGui\imgui.cpp" />
+    <ClCompile Include="..\ThirdParty\ImGui\imgui_draw.cpp" />
+    <ClCompile Include="..\ThirdParty\ImGui\imgui_impl_dx11.cpp" />
+    <ClCompile Include="..\ThirdParty\ImGui\imgui_impl_win32.cpp" />
+    <ClCompile Include="..\ThirdParty\ImGui\imgui_tables.cpp" />
+    <ClCompile Include="..\ThirdParty\ImGui\imgui_widgets.cpp" />
     <ClCompile Include="Source\DirectX\Direct3D.cpp" />
     <ClCompile Include="Source\DirectX\Manager\ConstantBufferManager.cpp" />
     <ClCompile Include="Source\DirectX\Manager\PipelineStateManager.cpp" />
@@ -111,6 +126,7 @@
     <ClCompile Include="Source\System\GameTime.cpp" />
     <ClCompile Include="Source\System\GameWindow.cpp" />
     <ClCompile Include="Source\System\IDManager.cpp" />
+    <ClCompile Include="Source\System\ImGuiManager.cpp" />
     <ClCompile Include="Source\TestComponent.cpp" />
     <ClCompile Include="Source\TestScene.cpp" />
     <ClCompile Include="Source\Utility\Color.cpp" />

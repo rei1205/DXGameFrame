@@ -1,6 +1,7 @@
 // SceneManager.cpp
 #include "SceneManager.h"
 #include "../DirectX/Direct3D.h"
+#include "../System/ImGuiManager.h"
 
 std::unique_ptr<Scene> SceneManager::s_activeScene = nullptr;
 std::unique_ptr<Scene> SceneManager::s_nextScene = nullptr;
@@ -25,11 +26,14 @@ void SceneManager::Execute()
 		return;
 
 	// シーン更新
+	ImGuiManager::BeginFrame();
 	s_activeScene->Update();
 
 	float clearColor[] = { 0.4f, 0.8f, 0.8f, 1.0f };
 	Direct3D::BeginDraw(clearColor);
+
 	s_activeScene->Draw();
+	ImGuiManager::EndFrame();
 	Direct3D::EndDraw();
 
 	ApplyChangeScene();
