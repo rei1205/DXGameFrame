@@ -25,6 +25,7 @@ public:
 		DirectX::XMFLOAT3 pos;			// 座標
 		DirectX::XMFLOAT3 normal;		// 法線
 		DirectX::XMFLOAT2 uv;			// UV座標
+		DirectX::XMFLOAT3 tangent;		// タンジェント
 		DirectX::XMFLOAT4 color;		// 頂点カラー
 	};
 

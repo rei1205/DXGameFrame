@@ -22,6 +22,15 @@ public:
 	 */
 	void SetGeometry(Geometry::Type geometryType);
 
+	/**
+	 * @brief メッシュをセットする
+	 * @param pMesh メッシュへのポインタ (shared_ptr)
+	 */
+	void SetMesh(std::shared_ptr<Mesh> pMesh)
+	{
+		m_pMesh = pMesh;
+	}
+
 private:
 	std::shared_ptr<Mesh> m_pMesh;
 };

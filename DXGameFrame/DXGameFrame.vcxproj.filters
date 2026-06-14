@@ -171,7 +171,7 @@
       <Filter>ソース ファイル\GameFrame\RenderSystem</Filter>
     </ClCompile>
     <ClCompile Include="Source\DirectX\RenderUtility\Model.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -326,6 +326,9 @@
       <Filter>ソース ファイル\GameFrame\RenderSystem</Filter>
     </ClInclude>
     <ClInclude Include="Source\DirectX\RenderUtility\Model.h">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\RenderUtility\ModelData.h">
       <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
     </ClInclude>
   </ItemGroup>
