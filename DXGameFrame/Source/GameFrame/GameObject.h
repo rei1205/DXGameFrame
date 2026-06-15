@@ -1,6 +1,7 @@
 // GameObject.h
 #pragma once
 #include "Component/Component.h"
+#include <string>
 
 class Scene;
 
@@ -34,6 +35,16 @@ public:
 	 */
 	template <typename T>
 	void RemoveComponent();
+
+	std::string GetName()
+	{
+		return m_name;
+	}
+
+	void SetName(const std::string& name)
+	{
+		m_name = name;
+	}
 
 	/**
 	 * @brief 所属するシーンを取得する
@@ -83,6 +94,9 @@ public:
 	void OnDestroy();
 
 private:
+	/// ゲームオブジェクト名
+	std::string m_name;
+
 	/// このゲームオブジェクトが持つコンポーネントのリスト
 	std::vector<Component*> m_components;
 	
@@ -111,9 +125,10 @@ public:
 	/**
 	 * @brief ゲームオブジェクトを作成する
 	 * @param pScene 追加先シーンへのポインタ
+	 * @param name ゲームオブジェクト名
 	 * @return 作成したゲームオブジェクトへのポインタ
 	 */
-	static GameObject* Create(Scene* pScene);
+	static GameObject* Create(Scene* pScene, const std::string& name = "GameObject");
 };
 
 // GameObject.hに依存するコンポーネントのテンプレート関数の実装

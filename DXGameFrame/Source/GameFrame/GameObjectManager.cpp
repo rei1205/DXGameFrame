@@ -1,6 +1,5 @@
 // GameObjectManager.cpp
 #include "GameObjectManager.h"
-#include "GameObject.h"
 
 GameObject* GameObjectManager::CreateGameObject()
 {

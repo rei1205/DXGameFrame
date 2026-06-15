@@ -23,6 +23,12 @@ void ImGuiManager::Init(HWND hWnd, ID3D11Device* pDevice, ID3D11DeviceContext* p
     ImGui_ImplWin32_Init(hWnd);
     ImGui_ImplDX11_Init(pDevice, pContext);
 
+    // スタイル変更
+    ImGuiStyle& style = ImGui::GetStyle();
+    style.Colors[ImGuiCol_Header] = ImVec4(0.20f, 0.50f, 1.00f, 1.00f);
+    style.Colors[ImGuiCol_HeaderHovered] = ImVec4(0.35f, 0.35f, 0.35f, 0.40f);
+    style.Colors[ImGuiCol_HeaderActive] = ImVec4(0.45f, 0.45f, 0.45f, 0.60f);
+
     m_isInitialized = true;
 }
 

@@ -3,6 +3,7 @@
 #include "../DirectX/Direct3D.h"
 #include "../System/Debug.h"
 #include "../System/ImGuiManager.h"
+#include "../Editor/Editor.h"
 
 std::unique_ptr<Scene> SceneManager::s_activeScene = nullptr;
 std::unique_ptr<Scene> SceneManager::s_nextScene = nullptr;
@@ -36,6 +37,10 @@ void SceneManager::Execute()
 	Direct3D::BeginDraw(clearColor);
 
 	s_activeScene->Draw();
+
+	Editor::SetTargetScene(s_activeScene.get());
+	Editor::Draw();
+
 	ImGuiManager::EndFrame();
 	Direct3D::EndDraw();
 

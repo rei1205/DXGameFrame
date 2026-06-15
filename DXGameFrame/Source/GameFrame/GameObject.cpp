@@ -3,7 +3,7 @@
 #include "Component/Transform.h"
 #include "Scene.h"
 
-GameObject::GameObject():
+GameObject::GameObject() :
 	m_pScene(nullptr),
 	m_pTransform(nullptr),
 	m_isActive(true)
@@ -48,11 +48,12 @@ void GameObject::UnregisterComponent(Component* pComponent)
 		m_components.erase(it);
 }
 
-GameObject* GameObject::Create(Scene* pScene)
+GameObject* GameObject::Create(Scene* pScene, const std::string& name)
 {
 	// ゲームオブジェクトとTransformコンポーネントを生成
 	GameObject* gameobject = pScene->GetGameObjectManager().CreateGameObject();
 	Transform* transform = pScene->GetComponentManager().AddComponent<Transform>(gameobject);
+	gameobject->m_name = name;
 
 	// 各種ポインタをセット
 	gameobject->m_pScene = pScene;

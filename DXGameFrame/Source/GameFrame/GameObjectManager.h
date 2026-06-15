@@ -30,6 +30,15 @@ public:
 	 */
 	void Clear();
 
+	/**
+	 * @brief ゲームオブジェクト配列を取得する
+	 * @return ゲームオブジェクト配列へのポインタ
+	 */
+	std::vector<std::unique_ptr<GameObject>>& GetGameObjects()
+	{
+		return m_gameObjects;
+	}
+
 private:
 	/// ゲームオブジェクト配列
 	std::vector<std::unique_ptr<GameObject>> m_gameObjects;

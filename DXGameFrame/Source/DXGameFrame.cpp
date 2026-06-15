@@ -5,6 +5,7 @@
 #include "DirectX/Direct3D.h"
 #include "System/ImGuiManager.h"
 #include "GameFrame/SceneManager.h"
+#include "Editor/Editor.h"
 #include "System/GameTime.h"
 
 #include "TestScene.h"
@@ -60,11 +61,16 @@ bool DXGameFrame::Init(SetupConfig config, HINSTANCE hInstance, int nCmdShow)
 		return false;
 	}
 
-	// シーンマネージャーの初期化
-	SceneManager::Init(std::make_unique<TestScene>());
 
 	// ImGuiの初期化
 	ImGuiManager::Init(hWnd, Direct3D::GetDevice(), Direct3D::GetContext());
+
+	// シーンマネージャーの初期化
+	SceneManager::Init(std::make_unique<TestScene>());
+
+	// エディタの初期化
+	if (config.isEditorMode)
+		Editor::Init();
 
 	// FPS設定
 	GameTime::Init(config.fps);
@@ -101,7 +107,8 @@ void DXGameFrame::Run()
 
 void DXGameFrame::Exit()
 {
-	ImGuiManager::Uninit();
+	Editor::Uninit();
 	SceneManager::Uninit();
+	ImGuiManager::Uninit();
 	Direct3D::Uninit();
 }

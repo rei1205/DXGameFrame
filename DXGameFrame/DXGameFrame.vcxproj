@@ -47,6 +47,9 @@
     <ClInclude Include="Source\DirectX\RenderUtility\Texture.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\VertexShader.h" />
     <ClInclude Include="Source\DXGameFrame.h" />
+    <ClInclude Include="Source\Editor\Editor.h" />
+    <ClInclude Include="Source\Editor\EditorWindow.h" />
+    <ClInclude Include="Source\Editor\HierarchyGUI.h" />
     <ClInclude Include="Source\GameFrame\ClassID.h" />
     <ClInclude Include="Source\GameFrame\ComponentArray.h" />
     <ClInclude Include="Source\GameFrame\ComponentManager.h" />
@@ -106,6 +109,9 @@
     <ClCompile Include="Source\DirectX\RenderUtility\Texture.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\VertexShader.cpp" />
     <ClCompile Include="Source\DXGameFrame.cpp" />
+    <ClCompile Include="Source\Editor\Editor.cpp" />
+    <ClCompile Include="Source\Editor\EditorWindow.cpp" />
+    <ClCompile Include="Source\Editor\HierarchyGUI.cpp" />
     <ClCompile Include="Source\GameFrame\ComponentManager.cpp" />
     <ClCompile Include="Source\GameFrame\Component\Camera.cpp" />
     <ClCompile Include="Source\GameFrame\Component\Component.cpp" />

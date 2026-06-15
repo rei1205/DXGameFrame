@@ -39,6 +39,9 @@
     <Filter Include="ソース ファイル\ImGui">
       <UniqueIdentifier>{83571be8-ec79-4d9b-b6a8-0ea2f97452d2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Editor">
+      <UniqueIdentifier>{3d2d12ad-785f-4f06-82e5-c6b2291e93bf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\main.cpp">
@@ -199,6 +202,15 @@
     </ClCompile>
     <ClCompile Include="Source\DXGameFrame.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Editor\HierarchyGUI.cpp">
+      <Filter>ソース ファイル\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Editor\EditorWindow.cpp">
+      <Filter>ソース ファイル\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Editor\Editor.cpp">
+      <Filter>ソース ファイル\Editor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -384,6 +396,15 @@
     </ClInclude>
     <ClInclude Include="Source\DXGameFrame.h">
       <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Editor\HierarchyGUI.h">
+      <Filter>ソース ファイル\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Editor\Editor.h">
+      <Filter>ソース ファイル\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Editor\EditorWindow.h">
+      <Filter>ソース ファイル\Editor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
