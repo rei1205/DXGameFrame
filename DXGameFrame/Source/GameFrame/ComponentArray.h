@@ -1,8 +1,6 @@
 // ComponentArray.h
 #pragma once
-#include "ClassID.h"
 #include "Component/Component.h"
-#include "GameObject.h"
 #include <memory>
 
 /**
@@ -13,6 +11,11 @@ class IComponentArray
 public:
     IComponentArray() = default;
     virtual ~IComponentArray() = default;
+    
+    /**
+     * @brief 保留中のAwake処理を呼び出す
+     */
+    virtual void InvokePendingAwake() = 0;
 
     /**
      * @brief 全てのコンポーネントの呼び出し可能な開始処理を呼び出す
@@ -28,6 +31,18 @@ public:
      * @brief 全てのコンポーネントの呼び出し可能な遅延更新処理を呼び出す
      */
     virtual void LateUpdateAll() = 0;
+
+    /**
+     * @brief 生成時処理を即座に呼び出す
+     * @param pComponent コンポーネントへのポインタ
+     */
+    virtual void CallAwake(Component* pComponent) = 0;
+
+    /**
+     * @brief 削除時処理を即座に呼び出す
+     * @param pComponent コンポーネントへのポインタ
+     */
+    virtual void CallOnDestroy(Component* pComponent) = 0;
 
     /**
      * @brief コンポーネントを削除する
@@ -55,6 +70,11 @@ public:
     virtual ~ComponentArray() = default;
 
     /**
+     * @brief 保留中のAwake処理を呼び出す
+     */
+    void InvokePendingAwake() override;
+
+    /**
      * @brief 全てのコンポーネントの呼び出し可能な開始処理を呼び出す
      */
     void StartAll() override;
@@ -70,11 +90,24 @@ public:
     void LateUpdateAll() override;
 
     /**
-     * @brief コンポーネントを生成する
-     * @param pGameObject 親となるゲームオブジェクトへのポインタ
+     * @brief 生成時処理を即座に呼び出す
+     * @param pComponent コンポーネントへのポインタ
+     */
+    void CallAwake(Component* pComponent) override;
+
+    /**
+     * @brief 削除時処理を即座に呼び出す
+     * @param pComponent コンポーネントへのポインタ
+     */
+    void CallOnDestroy(Component* pComponent) override;
+
+    /**
+     * @brief コンポーネントを追加する
+     * @param pComponent 追加するコンポーネントへのポインタ (unique_ptr)
+     * @param pendingAwake Awake呼び出し保留フラグ
      * @return 生成したコンポーネントへのポインタ
      */
-    T* Add(GameObject* pGameObject);
+    void Add(std::unique_ptr<T> pComponent, bool pendingAwake);
 
     /**
      * @brief コンポーネントを削除する
@@ -90,6 +123,9 @@ public:
 private:
     /// コンポーネント配列
     std::vector<std::unique_ptr<T>> m_components;
+
+    /// Awake呼び出し保留リスト
+    std::vector<T*> m_pendingAwakeList;
 
 private:
     /// Awake関数所持判定
@@ -128,6 +164,20 @@ private:
     };
 };
 
+
+template<typename T>
+inline void ComponentArray<T>::InvokePendingAwake()
+{
+    if constexpr (HasAwake)
+    {
+        // 呼ばれていないAwake処理呼び出し
+        while (!m_pendingAwakeList.empty())
+        {
+            m_pendingAwakeList.back()->Awake();
+            m_pendingAwakeList.pop_back();
+        }
+    }
+}
 
 template<typename T>
 inline void ComponentArray<T>::StartAll()
@@ -201,21 +251,32 @@ inline void ComponentArray<T>::LateUpdateAll()
 }
 
 template<typename T>
-inline T* ComponentArray<T>::Add(GameObject* pGameObject)
+inline void ComponentArray<T>::CallAwake(Component* pComponent)
+{
+    if constexpr (HasAwake)
+        static_cast<T*>(pComponent)->Awake();
+}
+
+template<typename T>
+inline void ComponentArray<T>::CallOnDestroy(Component* pComponent)
+{
+    if constexpr (HasOnDestroy)
+        static_cast<T*>(pComponent)->OnDestroy();
+}
+
+template<typename T>
+inline void ComponentArray<T>::Add(std::unique_ptr<T> pComponent, bool pendingAwake)
 {
     // コンポーネントを追加
-    auto component = std::make_unique<T>();
-    T* ptr = component.get();
-    m_components.push_back(std::move(component));
+    T* ptr = pComponent.get();
+    m_components.push_back(std::move(pComponent));
 
-    // コンポーネントの初期化
-    ptr->Init(pGameObject, ClassID<T>::GetID());
+    // Awake処理を登録
     if constexpr (HasAwake)
     {
-        ptr->Awake();
+        if (pendingAwake)
+            m_pendingAwakeList.push_back(ptr);
     }
-
-    return ptr;
 }
 
 template<typename T>
@@ -230,12 +291,14 @@ inline void ComponentArray<T>::Remove(Component* pComponent)
     if (it == m_components.end())
         return;
 
-    // コンポーネントを削除
-    if constexpr (HasOnDestroy)
+    // Awake処理登録を削除
+    if constexpr (HasAwake)
     {
-        (*it)->OnDestroy();
+        T* ptr = static_cast<T*>(pComponent);
+        auto awakeIt = std::find(m_pendingAwakeList.begin(), m_pendingAwakeList.end(), ptr);
+        if (awakeIt != m_pendingAwakeList.end())
+            m_pendingAwakeList.erase(awakeIt);
     }
-    (*it)->Uninit();
     m_components.erase(it);
 }
 
@@ -256,7 +319,6 @@ inline void ComponentArray<T>::ApplyDestroy()
         {
             component->OnDestroy();
         }
-        component->Uninit();
 
         // コンポーネントを削除し、インデックスを補正する
         m_components.erase(m_components.begin() + i);

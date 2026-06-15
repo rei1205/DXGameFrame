@@ -2,6 +2,7 @@
 #include "Object.h"
 
 Object::Object() :
+	m_instanceID(0),
 	m_isDestroyed(false)
 {
 }

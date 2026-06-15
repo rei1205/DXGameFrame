@@ -2,9 +2,6 @@
 #pragma once
 #include <vector>
 
-template<typename ObjectType>
-class ObjPtr;
-
 /**
  * @brief ゲーム内オブジェクトの基底クラス
  */
@@ -12,6 +9,8 @@ class Object
 {
 	template<typename ObjectType>
 	friend class ObjPtr;
+
+	friend class ObjectSerializer;
 
 public:
 	Object();
@@ -24,7 +23,7 @@ public:
 	/**
 	 * @brief このオブジェクトを削除する
 	 */
-	virtual void Destroy()
+	void Destroy()
 	{
 		m_isDestroyed = true;
 	}
@@ -39,6 +38,24 @@ public:
 	}
 
 private:
+	/**
+	 * @brief インスタンスIDを設定する
+	 * @param instanceID インスタンスID
+	 */
+	void SetInstanceID(uint32_t instanceID)
+	{
+		m_instanceID = instanceID;
+	}
+
+	/**
+	 * @brief インスタンスIDを取得する
+	 * @return インスタンスID
+	 */
+	uint32_t GetInstanceID() const
+	{
+		return m_instanceID;
+	}
+
 	/**
 	 * @brief 自身を指すポインタを登録する
 	 * @param ppObject 登録するポインタへのポインタ
@@ -56,9 +73,12 @@ private:
 	 */
 	void InvalidateThisPtr();
 
-	/// 自身を指すポインタへのポインタを格納するコンテナ
-	std::vector<Object**> m_thisPtrs;
+	/// オブジェクトが持つ一意なID
+	uint32_t m_instanceID;
 
 	/// 削除フラグ
 	bool m_isDestroyed;
+
+	/// 自身を指すポインタへのポインタを格納するコンテナ
+	std::vector<Object**> m_thisPtrs;
 };

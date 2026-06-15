@@ -6,7 +6,19 @@ void ComponentManager::RemoveComponent(Component* pComponent)
 {
 	auto it = m_componentArrayMap.find(pComponent->GetClassID());
 	if (it != m_componentArrayMap.end())
+	{
+		it->second->CallOnDestroy(pComponent);
+		pComponent->Uninit();
 		it->second->Remove(pComponent);
+	}
+}
+
+void ComponentManager::InvokePendingAwakeAll()
+{
+	for (auto& componentArray : m_componentArrayMap)
+	{
+		componentArray.second->InvokePendingAwake();
+	}
 }
 
 void ComponentManager::StartAll()

@@ -11,7 +11,7 @@ protected:
 	// IDŠÇ—‹@”\æ“¾
 	static IDManager& GetIDManager()
 	{
-		static IDManager s_idManager;
+		static IDManager s_idManager(false);
 		return s_idManager;
 	}
 

@@ -406,6 +406,9 @@
     <ClInclude Include="Source\Editor\EditorWindow.h">
       <Filter>ソース ファイル\Editor</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameFrame\ObjectSerializer.h">
+      <Filter>ソース ファイル\GameFrame</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\HLSL\Common.hlsli">

@@ -11,10 +11,8 @@ class Transform;
  */
 class Component : public Object
 {
-	template<typename T>
-	friend class ComponentArray;
-
 	friend class GameObject;
+	friend class ComponentManager;
 
 public:
 	Component();

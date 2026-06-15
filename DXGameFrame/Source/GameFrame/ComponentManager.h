@@ -1,6 +1,8 @@
 // ComponentManager.h
 #pragma once
 #include "ComponentArray.h"
+#include "GameObject.h"
+#include "ClassID.h"
 #include <unordered_map>
 
 /**
@@ -25,6 +27,11 @@ public:
      * @param pComponent 削除するコンポーネントへのポインタ
      */
 	void RemoveComponent(Component* pComponent);
+
+    /**
+     * @brief 全てのコンポーネントの保留中のAwake処理を呼び出す
+     */
+    void InvokePendingAwakeAll();
 
 	/**
      * @brief 全てのコンポーネントの呼び出し可能な開始処理を呼び出す
@@ -51,26 +58,35 @@ public:
      */
     void ClearAll();
 
-private:
-	using ComponentArrayMap = std::unordered_map<uint32_t, std::unique_ptr<IComponentArray>>;
-
-	/// コンポーネント配列のマップ
-	ComponentArrayMap m_componentArrayMap;
-
     /**
      * @brief 指定した型のコンポーネント配列を取得
      * @return コンポーネント配列へのポインタ
      */
     template <typename T>
     ComponentArray<T>* GetComponentArray();
+
+private:
+	using ComponentArrayMap = std::unordered_map<uint32_t, std::unique_ptr<IComponentArray>>;
+
+	/// コンポーネント配列のマップ
+	ComponentArrayMap m_componentArrayMap;
 };
 
 
 template<typename T>
 inline T* ComponentManager::AddComponent(GameObject* pGameObject)
 {
+    // コンポーネントを生成
+    auto component = std::make_unique<T>();
+    T* ptr = component.get();
+    ptr->Init(pGameObject, ClassID<T>::GetID());
+
+    // コンポーネント配列に追加
     ComponentArray<T>* componentArray = GetComponentArray<T>();
-    return componentArray->Add(pGameObject);
+    componentArray->Add(std::move(component), true);
+    componentArray->CallAwake((Component*)ptr);
+
+    return ptr;
 }
 
 template<typename T>
