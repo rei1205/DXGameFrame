@@ -1,6 +1,7 @@
 // Transform.cpp
 #include "Transform.h"
 #include "../GameObject.h"
+#include "../../Utility/VectorUtility.h"
 
 Transform::Transform() :
 	m_localPosition(0.0f, 0.0f, 0.0f),
@@ -268,4 +269,27 @@ DirectX::XMMATRIX Transform::GetWorldMatrix() const
 		// 親がなければ終了
 		return localMatrix;
 	}
+}
+
+bool Transform::GetChildIndex(Transform* pChild, size_t* pIndex)
+{
+	// 対象の子要素を検索
+	auto it = std::find(m_pChildren.begin(), m_pChildren.end(), pChild);
+	if (it == m_pChildren.end())
+		return false;
+
+	*pIndex = std::distance(m_pChildren.begin(), it);
+	return true;
+}
+
+bool Transform::MoveChildIndex(Transform* pChild, size_t index)
+{
+	// 対象の子要素を検索
+	auto it = std::find(m_pChildren.begin(), m_pChildren.end(), pChild);
+	if (it == m_pChildren.end())
+		return false;
+	size_t currentIndex = std::distance(m_pChildren.begin(), it);
+
+	VectorUtility::MoveElement<Transform*>(m_pChildren, currentIndex, index);
+	return true;
 }

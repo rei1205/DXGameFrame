@@ -21,6 +21,12 @@ public:
 	GameObject* CreateGameObject();
 
 	/**
+	 * @brief ゲームオブジェクトを削除する
+	 * @param pGameObject 削除するゲームオブジェクトへのポインタ
+	 */
+	void RemoveGameObject(GameObject* pGameObject);
+
+	/**
 	 * @brief 削除予定ゲームオブジェクトを実際に削除する
 	 */
 	void ApplyDestroy();
@@ -31,10 +37,26 @@ public:
 	void Clear();
 
 	/**
-	 * @brief ゲームオブジェクト配列を取得する
-	 * @return ゲームオブジェクト配列へのポインタ
+	 * @brief ゲームオブジェクトのインデックスを取得する
+	 * @param pGameObject ゲームオブジェクトへのポインタ
+	 * @param pIndex インデックス格納先のポインタ
+	 * @return 指定したゲームオブジェクトが存在しない場合falseを返す
 	 */
-	std::vector<std::unique_ptr<GameObject>>& GetGameObjects()
+	bool GetElementIndex(GameObject* pGameObject, size_t* pIndex);
+
+	/**
+	 * @brief ゲームオブジェクトを配列上で移動させる
+	 * @param pGameObject 移動させるゲームオブジェクトへのポインタ
+	 * @param index 移動先インデックス
+	 * @return 指定したゲームオブジェクトが存在しない場合falseを返す
+	 */
+	bool MoveElementIndex(GameObject* pGameObject, size_t index);
+
+	/**
+	 * @brief ゲームオブジェクト配列を取得する
+	 * @return ゲームオブジェクト配列への参照
+	 */
+	const std::vector<std::unique_ptr<GameObject>>& GetGameObjects()
 	{
 		return m_gameObjects;
 	}

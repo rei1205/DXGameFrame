@@ -36,11 +36,19 @@ public:
 	template <typename T>
 	void RemoveComponent();
 
+	/**
+	 * @brief ゲームオブジェクト名を取得する
+	 * @return ゲームオブジェクト名
+	 */
 	std::string GetName()
 	{
 		return m_name;
 	}
 
+	/**
+	 * @brief ゲームオブジェクト名を設定する
+	 * @param name ゲームオブジェクト名
+	 */
 	void SetName(const std::string& name)
 	{
 		m_name = name;

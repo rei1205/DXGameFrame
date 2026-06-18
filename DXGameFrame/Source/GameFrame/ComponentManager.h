@@ -23,15 +23,29 @@ public:
 	T* AddComponent(GameObject* pGameObject);
 
     /**
+     * @brief 内部処理用のコンポーネント追加
+     * @param pGameObject 親ゲームオブジェクトへのポインタ
+     * @return 追加したコンポーネントへのポインタ
+     */
+    template <typename T>
+	T* AddComponentInternal(GameObject* pGameObject);
+
+    /**
      * @brief コンポーネントを削除する
      * @param pComponent 削除するコンポーネントへのポインタ
      */
 	void RemoveComponent(Component* pComponent);
 
     /**
-     * @brief 全てのコンポーネントの保留中のAwake処理を呼び出す
+     * @brief 内部処理用のコンポーネント削除
+     * @param pComponent 削除するコンポーネントへのポインタ
      */
-    void InvokePendingAwakeAll();
+	void RemoveComponentInternal(Component* pComponent);
+
+    /**
+     * @brief 保留中のAwake処理を呼び出す
+     */
+    void InvokePendingAwake();
 
 	/**
      * @brief 全てのコンポーネントの呼び出し可能な開始処理を呼び出す
@@ -54,9 +68,15 @@ public:
     void ApplyDestroy();
 
     /**
-     * @brief 全てのコンポーネント配列を削除する
+     * @brief 全てのコンポーネントを削除する
      */
     void ClearAll();
+
+private:
+	using ComponentArrayMap = std::unordered_map<uint32_t, std::unique_ptr<IComponentArray>>;
+
+	/// コンポーネント配列のマップ
+	ComponentArrayMap m_componentArrayMap;
 
     /**
      * @brief 指定した型のコンポーネント配列を取得
@@ -65,11 +85,12 @@ public:
     template <typename T>
     ComponentArray<T>* GetComponentArray();
 
-private:
-	using ComponentArrayMap = std::unordered_map<uint32_t, std::unique_ptr<IComponentArray>>;
-
-	/// コンポーネント配列のマップ
-	ComponentArrayMap m_componentArrayMap;
+    /**
+     * @brief クラスIDからコンポーネント配列を取得する
+     * @param classID クラスID
+     * @return コンポーネント配列へのポインタ
+     */
+    IComponentArray* GetComponentArrayByClassID(uint32_t classID);
 };
 
 
@@ -77,16 +98,16 @@ template<typename T>
 inline T* ComponentManager::AddComponent(GameObject* pGameObject)
 {
     // コンポーネントを生成
-    auto component = std::make_unique<T>();
-    T* ptr = component.get();
-    ptr->Init(pGameObject, ClassID<T>::GetID());
-
-    // コンポーネント配列に追加
     ComponentArray<T>* componentArray = GetComponentArray<T>();
-    componentArray->Add(std::move(component), true);
-    componentArray->CallAwake((Component*)ptr);
+    return componentArray->Add(pGameObject);
+}
 
-    return ptr;
+template<typename T>
+inline T* ComponentManager::AddComponentInternal(GameObject* pGameObject)
+{
+    // コンポーネントを生成
+    ComponentArray<T>* componentArray = GetComponentArray<T>();
+    return componentArray->AddInternal(pGameObject);
 }
 
 template<typename T>

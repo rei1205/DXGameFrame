@@ -16,39 +16,19 @@ void HierarchyGUI::OnGUI()
 
     auto& gameObjects = pScene->GetGameObjectManager().GetGameObjects();
 
-    // 動作設定
-    ImGuiTreeNodeFlags flags =
-        ImGuiTreeNodeFlags_OpenOnArrow |
-        ImGuiTreeNodeFlags_OpenOnDoubleClick |
-        ImGuiTreeNodeFlags_SpanAvailWidth;
-
-    // オブジェクトがない場合の設定
-    if (gameObjects.empty())
-        flags |= ImGuiTreeNodeFlags_Leaf;
-
-    bool open = ImGui::TreeNodeEx(pScene, flags, "Scene");
-
-    // 選択時の処理
-    if (ImGui::IsItemClicked())
+    // ウィンドウ上の右クリックメニュー
+    if (ImGui::BeginPopupContextWindow())
     {
-        Editor::SetTargetGameObject(nullptr);
-    }
-
-    // ドロップ先
-    if (ImGui::BeginDragDropTarget())
-    {
-        const ImGuiPayload* payload = ImGui::AcceptDragDropPayload(
-            "HIERARCHY_NODE", ImGuiDragDropFlags_AcceptNoDrawDefaultRect);
-        if (payload != nullptr)
+        if (ImGui::MenuItem("Create Empty"))
         {
-            Transform* drag = *(Transform**)payload->Data;
-            drag->SetParent((GameObject*)nullptr);
+            GameObject::Create(pScene);
         }
 
-        ImGui::EndDragDropTarget();
+        ImGui::EndPopup();
     }
 
     // メイン描画
+    bool open = DrawRootNode();
     if (open)
     {
         for (auto& obj : gameObjects)
@@ -64,11 +44,11 @@ void HierarchyGUI::OnGUI()
     }
 }
 
-void HierarchyGUI::DrawRootNode()
+bool HierarchyGUI::DrawRootNode()
 {
     Scene* pScene = Editor::GetTargetScene();
     if (pScene == nullptr)
-        return;
+        return false;
     auto& gameObjects = pScene->GetGameObjectManager().GetGameObjects();
 
     // 動作設定
@@ -102,6 +82,8 @@ void HierarchyGUI::DrawRootNode()
 
         ImGui::EndDragDropTarget();
     }
+
+    return open;
 }
 
 void HierarchyGUI::DrawNode(Transform* pTransform)
@@ -114,15 +96,16 @@ void HierarchyGUI::DrawNode(Transform* pTransform)
         ImGuiTreeNodeFlags_OpenOnDoubleClick |
         ImGuiTreeNodeFlags_SpanAvailWidth;
 
+    if (children.empty())
+        flags |= ImGuiTreeNodeFlags_Leaf;
+
     bool selected = pTransform->GetGameObject() == Editor::GetTargetGameObject();
     if (selected)
     {
+        // 選択中スタイル
         flags |= ImGuiTreeNodeFlags_Selected;
         ImGui::PushStyleColor(ImGuiCol_HeaderHovered, ImGui::GetStyle().Colors[ImGuiCol_Header]);
     }
-
-    if (children.empty())
-        flags |= ImGuiTreeNodeFlags_Leaf;
 
     // ノード作成
     bool open = ImGui::TreeNodeEx(pTransform, flags, pTransform->GetGameObject()->GetName().c_str());
@@ -150,6 +133,23 @@ void HierarchyGUI::NodeInteraction(Transform* pTransform)
         Editor::SetTargetGameObject(pTransform->GetGameObject());
     }
 
+    // 右クリックメニュー
+    if (ImGui::BeginPopupContextItem())
+    {
+        Editor::SetTargetGameObject(pTransform->GetGameObject());
+
+        if (ImGui::MenuItem("Create Empty"))
+        {
+        }
+
+        if (ImGui::MenuItem("Delete"))
+        {
+
+        }
+
+        ImGui::EndPopup();
+    }
+
     // 色を取得
     ImGuiStyle& style = ImGui::GetStyle();
     ImU32 targetColor = ImGui::ColorConvertFloat4ToU32(style.Colors[ImGuiCol_Header]);
@@ -158,18 +158,10 @@ void HierarchyGUI::NodeInteraction(Transform* pTransform)
     // カーソルの位置を取得
     ImVec2 min = ImGui::GetItemRectMin();
     ImVec2 max = ImGui::GetItemRectMax();
-
     float mouseY = ImGui::GetMousePos().y;
     float height = max.y - min.y;
     float ratio = (mouseY - min.y) / height;
 
-    // ドロップ挙動
-    enum class DropType
-    {
-        BEFORE,     // 上
-        AFTER,      // 下
-        CHILD       // 子要素
-    };
 
     // ドロップ挙動を取得
     DropType dropType;
@@ -206,22 +198,7 @@ void HierarchyGUI::NodeInteraction(Transform* pTransform)
         {
             Transform* drag = *(Transform**)payload->Data;
             if (!IsAncestorOf(drag, pTransform))
-            {
-                switch (dropType)
-                {
-                case DropType::BEFORE:
-                    drag->SetParent(pTransform->GetParent());
-                    break;
-
-                case DropType::AFTER:
-                    drag->SetParent(pTransform->GetParent());
-                    break;
-
-                case DropType::CHILD:
-                    drag->SetParent(pTransform);
-                    break;
-                }
-            }
+                DropObject(drag, pTransform, dropType);
         }
         ImGui::EndDragDropTarget();
 
@@ -240,6 +217,65 @@ void HierarchyGUI::NodeInteraction(Transform* pTransform)
         case DropType::CHILD:
             drawList->AddRectFilled(min, max, hoveredColor);
             break;
+        }
+    }
+}
+
+void HierarchyGUI::DropObject(Transform* drag, Transform* target, DropType dropType)
+{
+    Scene* pScene = Editor::GetTargetScene();
+    if (pScene == nullptr)
+        return;
+
+    // 操作先インデックスを取得
+    size_t index = 0;
+    if (!pScene->GetGameObjectManager().GetElementIndex(target->GetGameObject(), &index))
+        return;
+
+    // オブジェクト移動
+    switch (dropType)
+    {
+    case DropType::BEFORE:
+        pScene->GetGameObjectManager().MoveElementIndex(drag->GetGameObject(), index);
+        drag->SetParent(target->GetParent());
+        break;
+
+    case DropType::AFTER:
+        pScene->GetGameObjectManager().MoveElementIndex(drag->GetGameObject(), index + 1);
+        drag->SetParent(target->GetParent());
+        break;
+
+    case DropType::CHILD:
+        pScene->GetGameObjectManager().MoveElementIndex(drag->GetGameObject(), index + 1);
+        drag->SetParent(target);
+        break;
+    }
+
+    // 子要素の並び替え
+    Transform* parent = drag->GetParent();
+    if (parent != nullptr)
+    {
+        auto children = parent->GetChildren();
+
+        if (dropType == DropType::CHILD)
+        {
+            parent->MoveChildIndex(drag, parent->GetChildren().size() - 1);
+        }
+        else
+        {
+            // 移動先インデックスを取得
+            size_t childIndex = 0;
+            if (!parent->GetChildIndex(target, &childIndex))
+                return;
+
+            if (dropType == DropType::BEFORE)
+            {
+                parent->MoveChildIndex(drag, childIndex);
+            }
+            else if (dropType == DropType::AFTER)
+            {
+                parent->MoveChildIndex(drag, childIndex + 1);
+            }
         }
     }
 }

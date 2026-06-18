@@ -13,6 +13,14 @@ public:
 	~HierarchyGUI() = default;
 
 private:
+	/// ドロップ挙動
+	enum class DropType
+	{
+		BEFORE,     // 上
+		AFTER,      // 下
+		CHILD       // 子要素
+	};
+
 	/**
 	 * @brief GUIの描画を行う
 	 */
@@ -20,8 +28,9 @@ private:
 
 	/**
 	 * @brief 最上位のノードを描画する
+	 * @return 開閉フラグ
 	 */
-	void DrawRootNode();
+	bool DrawRootNode();
 
 	/**
 	 * @brief 再帰的にツリー構造を描画する
@@ -33,6 +42,14 @@ private:
 	 * @brief ノードに対する操作
 	 */
 	void NodeInteraction(Transform* pTransform);
+
+	/**
+	 * @brief ノードドロップ時の処理
+	 * @param drag ドラッグ中ノードのTransformへのポインタ
+	 * @param target ターゲットノードのTransformへのポインタ
+	 * @param dropType ドロップ挙動
+	 */
+	void DropObject(Transform* drag, Transform* target, DropType dropType);
 
 	/**
 	 * @brief 親以上に指定したTransformがあるか判定する

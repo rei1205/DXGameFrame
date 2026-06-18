@@ -11,9 +11,11 @@ class Transform;
  */
 class Component : public Object
 {
-	friend class GameObject;
-	friend class ComponentManager;
+	template<typename T>
+	friend class ComponentArray;
 
+	friend class GameObject;
+	
 public:
 	Component();
 	virtual ~Component() = default;

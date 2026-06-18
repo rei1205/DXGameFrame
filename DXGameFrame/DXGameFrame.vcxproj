@@ -84,6 +84,7 @@
     <ClInclude Include="Source\Utility\Quaternion.h" />
     <ClInclude Include="Source\Utility\Vector2.h" />
     <ClInclude Include="Source\Utility\Vector3.h" />
+    <ClInclude Include="Source\Utility\VectorUtility.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\ThirdParty\ImGui\imgui.cpp" />

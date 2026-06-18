@@ -1,6 +1,7 @@
 // ComponentArray.h
 #pragma once
 #include "Component/Component.h"
+#include "ClassID.h"
 #include <memory>
 
 /**
@@ -33,16 +34,9 @@ public:
     virtual void LateUpdateAll() = 0;
 
     /**
-     * @brief 生成時処理を即座に呼び出す
-     * @param pComponent コンポーネントへのポインタ
+     * @brief 削除予定コンポーネントを実際に削除する
      */
-    virtual void CallAwake(Component* pComponent) = 0;
-
-    /**
-     * @brief 削除時処理を即座に呼び出す
-     * @param pComponent コンポーネントへのポインタ
-     */
-    virtual void CallOnDestroy(Component* pComponent) = 0;
+    virtual void ApplyDestroy() = 0;
 
     /**
      * @brief コンポーネントを削除する
@@ -51,9 +45,10 @@ public:
     virtual void Remove(Component* pComponent) = 0;
 
     /**
-     * @brief 削除予定コンポーネントを実際に削除する
+     * @brief 内部処理用の削除時処理を呼ばないコンポーネント削除
+     * @param pComponent コンポーネントへのポインタ
      */
-    virtual void ApplyDestroy() = 0;
+    virtual void RemoveInternal(Component* pComponent) = 0;
 };
 
 /**
@@ -90,24 +85,23 @@ public:
     void LateUpdateAll() override;
 
     /**
-     * @brief 生成時処理を即座に呼び出す
-     * @param pComponent コンポーネントへのポインタ
+     * @brief 削除予定コンポーネントを実際に削除する
      */
-    void CallAwake(Component* pComponent) override;
+    void ApplyDestroy() override;
 
     /**
-     * @brief 削除時処理を即座に呼び出す
-     * @param pComponent コンポーネントへのポインタ
-     */
-    void CallOnDestroy(Component* pComponent) override;
-
-    /**
-     * @brief コンポーネントを追加する
-     * @param pComponent 追加するコンポーネントへのポインタ (unique_ptr)
-     * @param pendingAwake Awake呼び出し保留フラグ
+     * @brief コンポーネントを生成する
+     * @param pGameObject 親となるゲームオブジェクトへのポインタ
      * @return 生成したコンポーネントへのポインタ
      */
-    void Add(std::unique_ptr<T> pComponent, bool pendingAwake);
+    T* Add(GameObject* pGameObject);
+
+    /**
+     * @brief 内部処理用の生成時処理を呼ばないコンポーネント生成
+     * @param pGameObject 親となるゲームオブジェクトへのポインタ
+     * @return 生成したコンポーネントへのポインタ
+     */
+    T* AddInternal(GameObject* pGameObject);
 
     /**
      * @brief コンポーネントを削除する
@@ -116,9 +110,10 @@ public:
     void Remove(Component* pComponent) override;
 
     /**
-     * @brief 削除予定コンポーネントを実際に削除する
+     * @brief コンポーネントを削除する
+     * @param pComponent 削除するコンポーネントへのポインタ
      */
-    void ApplyDestroy() override;
+    void RemoveInternal(Component* pComponent) override;
 
 private:
     /// コンポーネント配列
@@ -204,7 +199,8 @@ inline void ComponentArray<T>::StartAll()
         for (int i = 0; i < count; ++i)
         {
             T* component = m_components[i].get();
-            if (component->IsActiveHierarchy())
+            if (component->IsActiveHierarchy() &&
+                !component->IsStarted())
             {
                 component->MarkStartedFlag();
             }
@@ -251,61 +247,9 @@ inline void ComponentArray<T>::LateUpdateAll()
 }
 
 template<typename T>
-inline void ComponentArray<T>::CallAwake(Component* pComponent)
-{
-    if constexpr (HasAwake)
-        static_cast<T*>(pComponent)->Awake();
-}
-
-template<typename T>
-inline void ComponentArray<T>::CallOnDestroy(Component* pComponent)
-{
-    if constexpr (HasOnDestroy)
-        static_cast<T*>(pComponent)->OnDestroy();
-}
-
-template<typename T>
-inline void ComponentArray<T>::Add(std::unique_ptr<T> pComponent, bool pendingAwake)
-{
-    // コンポーネントを追加
-    T* ptr = pComponent.get();
-    m_components.push_back(std::move(pComponent));
-
-    // Awake処理を登録
-    if constexpr (HasAwake)
-    {
-        if (pendingAwake)
-            m_pendingAwakeList.push_back(ptr);
-    }
-}
-
-template<typename T>
-inline void ComponentArray<T>::Remove(Component* pComponent)
-{
-    // 削除対象を検索
-    auto it = std::find_if(m_components.begin(), m_components.end(),
-        [pComponent](std::unique_ptr<T>& ptr)
-        { return  pComponent == ptr.get(); }
-    );
-
-    if (it == m_components.end())
-        return;
-
-    // Awake処理登録を削除
-    if constexpr (HasAwake)
-    {
-        T* ptr = static_cast<T*>(pComponent);
-        auto awakeIt = std::find(m_pendingAwakeList.begin(), m_pendingAwakeList.end(), ptr);
-        if (awakeIt != m_pendingAwakeList.end())
-            m_pendingAwakeList.erase(awakeIt);
-    }
-    m_components.erase(it);
-}
-
-template<typename T>
 inline void ComponentArray<T>::ApplyDestroy()
 {
-    // 新規追加コンポーネントは処理対象外にする
+    // この時点で存在するコンポーネントのみ処理対象にする
     int count = (int)m_components.size();
 
     for (int i = 0; i < count; ++i)
@@ -319,10 +263,110 @@ inline void ComponentArray<T>::ApplyDestroy()
         {
             component->OnDestroy();
         }
+        component->Uninit();
+
+        // Awake処理登録を削除
+        if constexpr (HasAwake)
+        {
+            auto awakeIt = std::find(m_pendingAwakeList.begin(), m_pendingAwakeList.end(), component);
+            if (awakeIt != m_pendingAwakeList.end())
+                m_pendingAwakeList.erase(awakeIt);
+        }
 
         // コンポーネントを削除し、インデックスを補正する
         m_components.erase(m_components.begin() + i);
         i--;
         count--;
     }
+}
+
+template<typename T>
+inline T* ComponentArray<T>::Add(GameObject* pGameObject)
+{
+    // コンポーネントを追加
+    auto component = std::make_unique<T>();
+    T* ptr = component.get();
+    m_components.push_back(std::move(component));
+
+    // コンポーネント生成時の処理
+    ptr->Init(pGameObject, ClassID<T>::GetID());
+    if constexpr (HasAwake)
+    {
+        ptr->Awake();
+    }
+
+    return ptr;
+}
+
+template<typename T>
+inline T* ComponentArray<T>::AddInternal(GameObject* pGameObject)
+{
+    // コンポーネントを追加
+    auto component = std::make_unique<T>();
+    T* ptr = component.get();
+    m_components.push_back(std::move(component));
+
+    // コンポーネント生成時の処理
+    ptr->Init(pGameObject, ClassID<T>::GetID());
+    if constexpr (HasAwake)
+    {
+        // Awake呼び出しを保留
+        m_pendingAwakeList.push_back(ptr);
+    }
+
+    return ptr;
+}
+
+template<typename T>
+inline void ComponentArray<T>::Remove(Component* pComponent)
+{
+    // 削除対象を検索
+    auto it = std::find_if(m_components.begin(), m_components.end(),
+        [pComponent](std::unique_ptr<T>& ptr)
+        { return  pComponent == ptr.get(); }
+    );
+    if (it == m_components.end())
+        return;
+
+    // コンポーネント削除時の処理
+    T* ptr = static_cast<T*>(pComponent);
+    if constexpr (HasOnDestroy)
+    {
+        ptr->OnDestroy();
+    }
+    ptr->Uninit();
+
+    // Awake処理登録を削除
+    if constexpr (HasAwake)
+    {
+        auto awakeIt = std::find(m_pendingAwakeList.begin(), m_pendingAwakeList.end(), ptr);
+        if (awakeIt != m_pendingAwakeList.end())
+            m_pendingAwakeList.erase(awakeIt);
+    }
+    m_components.erase(it);
+}
+
+template<typename T>
+inline void ComponentArray<T>::RemoveInternal(Component* pComponent)
+{
+    // 削除対象を検索
+    auto it = std::find_if(m_components.begin(), m_components.end(),
+        [pComponent](std::unique_ptr<T>& ptr)
+        { return  pComponent == ptr.get(); }
+    );
+    if (it == m_components.end())
+        return;
+
+    // コンポーネント削除時の処理
+    T* ptr = static_cast<T*>(pComponent);
+    ptr->Uninit();
+
+    // Awake処理登録を削除
+    if constexpr (HasAwake)
+    {
+        auto awakeIt = std::find(m_pendingAwakeList.begin(), m_pendingAwakeList.end(), ptr);
+        if (awakeIt != m_pendingAwakeList.end())
+            m_pendingAwakeList.erase(awakeIt);
+    }
+    m_components.erase(it);
 }

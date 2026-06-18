@@ -168,6 +168,22 @@ public:
 	 */
 	DirectX::XMMATRIX GetWorldMatrix() const;
 
+	/**
+	 * @brief 子要素のインデックスを取得する
+	 * @param pChild 子要素へのポインタ
+	 * @param pIndex インデックス格納先のポインタ
+	 * @return 指定した子要素が存在しない場合falseを返す
+	 */
+	bool GetChildIndex(Transform* pChild, size_t* pIndex);
+
+	/**
+	 * @brief 子要素を配列上で移動させる
+	 * @param pChild 移動させる子要素へのポインタ
+	 * @param index 移動先インデックス
+	 * @return 指定した子要素が存在しない場合falseを返す
+	 */
+	bool MoveChildIndex(Transform* pChild, size_t index);
+
 private:
 	// Transformクラスでは隠す
 	using Component::SetEnabled;

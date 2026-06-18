@@ -4,16 +4,17 @@
 
 void ComponentManager::RemoveComponent(Component* pComponent)
 {
-	auto it = m_componentArrayMap.find(pComponent->GetClassID());
-	if (it != m_componentArrayMap.end())
-	{
-		it->second->CallOnDestroy(pComponent);
-		pComponent->Uninit();
-		it->second->Remove(pComponent);
-	}
+	IComponentArray* componentArray = GetComponentArrayByClassID(pComponent->GetClassID());
+	componentArray->Remove(pComponent);
 }
 
-void ComponentManager::InvokePendingAwakeAll()
+void ComponentManager::RemoveComponentInternal(Component* pComponent)
+{
+	IComponentArray* componentArray = GetComponentArrayByClassID(pComponent->GetClassID());
+	componentArray->RemoveInternal(pComponent);
+}
+
+void ComponentManager::InvokePendingAwake()
 {
 	for (auto& componentArray : m_componentArrayMap)
 	{
@@ -56,4 +57,15 @@ void ComponentManager::ApplyDestroy()
 void ComponentManager::ClearAll()
 {
 	m_componentArrayMap.clear();
+}
+
+IComponentArray* ComponentManager::GetComponentArrayByClassID(uint32_t classID)
+{
+	auto it = m_componentArrayMap.find(classID);
+	if (it == m_componentArrayMap.end())
+	{
+		return nullptr;
+	}
+
+	return m_componentArrayMap[classID].get();
 }
