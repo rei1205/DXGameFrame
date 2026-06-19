@@ -51,14 +51,7 @@ void GameObject::UnregisterComponent(Component* pComponent)
 GameObject* GameObject::Create(Scene* pScene, const std::string& name)
 {
 	// ゲームオブジェクトとTransformコンポーネントを生成
-	GameObject* gameobject = pScene->GetGameObjectManager().CreateGameObject();
-	Transform* transform = pScene->GetComponentManager().AddComponent<Transform>(gameobject);
-	gameobject->m_name = name;
-
-	// 各種ポインタをセット
-	gameobject->m_pScene = pScene;
-	gameobject->m_pTransform = transform;
-	static_cast<Component*>(transform)->m_pTransform = transform;
+	GameObject* gameobject = pScene->GetGameObjectManager().CreateGameObject(name);
 
 	return gameobject;
 }

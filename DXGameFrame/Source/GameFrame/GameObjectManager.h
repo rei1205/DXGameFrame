@@ -1,7 +1,6 @@
 // GameObjectManager.h
 #pragma once
 #include "GameObject.h"
-#include <vector>
 #include <memory>
 #include <string>
 
@@ -11,14 +10,15 @@
 class GameObjectManager
 {
 public:
-	GameObjectManager() = default;
+	GameObjectManager(Scene* pScene);
 	~GameObjectManager() = default;
 
 	/**
 	 * @brief 空のゲームオブジェクトを生成する
+	 * @param name ゲームオブジェクト名
 	 * @return 生成したゲームオブジェクトへのポインタ
 	 */
-	GameObject* CreateGameObject();
+	GameObject* CreateGameObject(const std::string& name);
 
 	/**
 	 * @brief ゲームオブジェクトを削除する
@@ -64,4 +64,7 @@ public:
 private:
 	/// ゲームオブジェクト配列
 	std::vector<std::unique_ptr<GameObject>> m_gameObjects;
+
+	/// 親シーンへのポインタ
+	Scene* m_pScene;
 };

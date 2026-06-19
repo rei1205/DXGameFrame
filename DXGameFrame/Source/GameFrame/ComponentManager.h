@@ -23,24 +23,18 @@ public:
 	T* AddComponent(GameObject* pGameObject);
 
     /**
-     * @brief 内部処理用のコンポーネント追加
+	 * @brief Awake呼び出しを保留するコンポーネント追加
      * @param pGameObject 親ゲームオブジェクトへのポインタ
      * @return 追加したコンポーネントへのポインタ
      */
     template <typename T>
-	T* AddComponentInternal(GameObject* pGameObject);
+	T* AddComponentPendingAwake(GameObject* pGameObject);
 
     /**
      * @brief コンポーネントを削除する
      * @param pComponent 削除するコンポーネントへのポインタ
      */
 	void RemoveComponent(Component* pComponent);
-
-    /**
-     * @brief 内部処理用のコンポーネント削除
-     * @param pComponent 削除するコンポーネントへのポインタ
-     */
-	void RemoveComponentInternal(Component* pComponent);
 
     /**
      * @brief 保留中のAwake処理を呼び出す
@@ -91,6 +85,12 @@ private:
      * @return コンポーネント配列へのポインタ
      */
     IComponentArray* GetComponentArrayByClassID(uint32_t classID);
+
+	/**
+	 * @brief 走査処理用のコンポーネント配列のリストを取得する
+	 * @return コンポーネント配列へのポインタのリスト
+	 */
+	std::vector<IComponentArray*> GetAllComponentArrays();
 };
 
 
@@ -103,11 +103,11 @@ inline T* ComponentManager::AddComponent(GameObject* pGameObject)
 }
 
 template<typename T>
-inline T* ComponentManager::AddComponentInternal(GameObject* pGameObject)
+inline T* ComponentManager::AddComponentPendingAwake(GameObject* pGameObject)
 {
     // コンポーネントを生成
     ComponentArray<T>* componentArray = GetComponentArray<T>();
-    return componentArray->AddInternal(pGameObject);
+    return componentArray->AddPendingAwake(pGameObject);
 }
 
 template<typename T>

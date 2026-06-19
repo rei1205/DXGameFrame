@@ -10,6 +10,7 @@ class Scene;
  */
 class GameObject : public Object
 {
+	friend class GameObjectManager;
 	friend class Component;
 
 public:
@@ -97,6 +98,23 @@ public:
 	}
 
 	/**
+	 * @brief このゲームオブジェクトを削除する
+	 */
+	void Destroy()
+	{
+		m_isDestroyed = true;
+	}
+
+	/**
+	 * @brief このゲームオブジェクトの削除フラグを取得する
+	 * @return 削除フラグ
+	 */
+	bool IsDestroyed() const
+	{
+		return m_isDestroyed;
+	}
+
+	/**
 	 * @brief ゲームオブジェクト削除時の処理
 	 */
 	void OnDestroy();
@@ -116,6 +134,9 @@ private:
 
 	/// このゲームオブジェクトの有効状態
 	bool m_isActive;
+
+	/// 削除フラグ
+	bool m_isDestroyed;
 
 	/**
 	 * @brief コンポーネントを登録する

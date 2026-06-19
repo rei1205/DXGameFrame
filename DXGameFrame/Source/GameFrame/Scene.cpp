@@ -1,6 +1,11 @@
 // Scene.cpp
 #include "Scene.h"
 
+Scene::Scene():
+	m_gameObjectManager(this)
+{
+}
+
 Scene::~Scene()
 {
 	m_renderSystem.Uninit();

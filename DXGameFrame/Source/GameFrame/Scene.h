@@ -10,7 +10,7 @@
 class Scene
 {
 public:
-	Scene() = default;
+	Scene();
 	virtual ~Scene();
 
 	virtual void Init() {}

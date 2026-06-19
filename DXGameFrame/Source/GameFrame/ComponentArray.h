@@ -43,12 +43,6 @@ public:
      * @param pComponent 削除するコンポーネントへのポインタ
      */
     virtual void Remove(Component* pComponent) = 0;
-
-    /**
-     * @brief 内部処理用の削除時処理を呼ばないコンポーネント削除
-     * @param pComponent コンポーネントへのポインタ
-     */
-    virtual void RemoveInternal(Component* pComponent) = 0;
 };
 
 /**
@@ -97,23 +91,17 @@ public:
     T* Add(GameObject* pGameObject);
 
     /**
-     * @brief 内部処理用の生成時処理を呼ばないコンポーネント生成
+     * @brief Awake呼び出しを保留するコンポーネント生成
      * @param pGameObject 親となるゲームオブジェクトへのポインタ
      * @return 生成したコンポーネントへのポインタ
      */
-    T* AddInternal(GameObject* pGameObject);
+    T* AddPendingAwake(GameObject* pGameObject);
 
     /**
      * @brief コンポーネントを削除する
      * @param pComponent 削除するコンポーネントへのポインタ
      */
     void Remove(Component* pComponent) override;
-
-    /**
-     * @brief コンポーネントを削除する
-     * @param pComponent 削除するコンポーネントへのポインタ
-     */
-    void RemoveInternal(Component* pComponent) override;
 
 private:
     /// コンポーネント配列
@@ -163,47 +151,34 @@ private:
 template<typename T>
 inline void ComponentArray<T>::InvokePendingAwake()
 {
-    if constexpr (HasAwake)
+    // 呼ばれていないAwake処理呼び出し
+    while (!m_pendingAwakeList.empty())
     {
-        // 呼ばれていないAwake処理呼び出し
-        while (!m_pendingAwakeList.empty())
+        if constexpr (HasAwake)
         {
             m_pendingAwakeList.back()->Awake();
-            m_pendingAwakeList.pop_back();
         }
+		static_cast<Component*>(m_pendingAwakeList.back())->m_awakeCalled = true;
+        m_pendingAwakeList.pop_back();
     }
 }
 
 template<typename T>
 inline void ComponentArray<T>::StartAll()
 {
-    if constexpr (HasStart)
+    int count = (int)m_components.size();
+    for (int i = 0; i < count; ++i)
     {
-        // Start関数を呼び出す
-        int count = (int)m_components.size();
-        for (int i = 0; i < count; ++i)
+        T* component = m_components[i].get();
+        if (component->IsActiveHierarchy() &&
+            !component->IsStartCalled())
         {
-            T* component = m_components[i].get();
-            if (component->IsActiveHierarchy() &&
-                !component->IsStarted())
+            // Start関数を呼び出す
+            if constexpr (HasStart)
             {
                 component->Start();
-                component->MarkStartedFlag();
             }
-        }
-    }
-    else
-    {
-        // Start呼び出し済みフラグの更新のみ行う
-        int count = (int)m_components.size();
-        for (int i = 0; i < count; ++i)
-        {
-            T* component = m_components[i].get();
-            if (component->IsActiveHierarchy() &&
-                !component->IsStarted())
-            {
-                component->MarkStartedFlag();
-            }
+            static_cast<Component*>(component)->m_startCalled = true;
         }
     }
 }
@@ -219,7 +194,7 @@ inline void ComponentArray<T>::UpdateAll()
         {
             T* component = m_components[i].get();
             if (component->IsActiveHierarchy() &&
-                component->IsStarted())
+                component->IsStartCalled())
             {
                 component->Update();
             }
@@ -238,7 +213,7 @@ inline void ComponentArray<T>::LateUpdateAll()
         {
             T* component = m_components[i].get();
             if (component->IsActiveHierarchy() &&
-                component->IsStarted())
+                component->IsStartCalled())
             {
                 component->LateUpdate();
             }
@@ -261,17 +236,15 @@ inline void ComponentArray<T>::ApplyDestroy()
         // コンポーネント削除時の処理
         if constexpr (HasOnDestroy)
         {
-            component->OnDestroy();
+            if (component->IsAwakeCalled())
+                component->OnDestroy();
         }
         component->Uninit();
 
         // Awake処理登録を削除
-        if constexpr (HasAwake)
-        {
-            auto awakeIt = std::find(m_pendingAwakeList.begin(), m_pendingAwakeList.end(), component);
-            if (awakeIt != m_pendingAwakeList.end())
-                m_pendingAwakeList.erase(awakeIt);
-        }
+        auto awakeIt = std::find(m_pendingAwakeList.begin(), m_pendingAwakeList.end(), component);
+        if (awakeIt != m_pendingAwakeList.end())
+            m_pendingAwakeList.erase(awakeIt);
 
         // コンポーネントを削除し、インデックスを補正する
         m_components.erase(m_components.begin() + i);
@@ -294,12 +267,13 @@ inline T* ComponentArray<T>::Add(GameObject* pGameObject)
     {
         ptr->Awake();
     }
+	static_cast<Component*>(ptr)->m_awakeCalled = true;
 
     return ptr;
 }
 
 template<typename T>
-inline T* ComponentArray<T>::AddInternal(GameObject* pGameObject)
+inline T* ComponentArray<T>::AddPendingAwake(GameObject* pGameObject)
 {
     // コンポーネントを追加
     auto component = std::make_unique<T>();
@@ -308,11 +282,9 @@ inline T* ComponentArray<T>::AddInternal(GameObject* pGameObject)
 
     // コンポーネント生成時の処理
     ptr->Init(pGameObject, ClassID<T>::GetID());
-    if constexpr (HasAwake)
-    {
-        // Awake呼び出しを保留
-        m_pendingAwakeList.push_back(ptr);
-    }
+
+    // Awake呼び出しを保留
+    m_pendingAwakeList.push_back(ptr);
 
     return ptr;
 }
@@ -329,44 +301,18 @@ inline void ComponentArray<T>::Remove(Component* pComponent)
         return;
 
     // コンポーネント削除時の処理
-    T* ptr = static_cast<T*>(pComponent);
+    T* component = static_cast<T*>(pComponent);
     if constexpr (HasOnDestroy)
     {
-        ptr->OnDestroy();
+        if (component->IsAwakeCalled())
+            component->OnDestroy();
     }
-    ptr->Uninit();
+    component->Uninit();
 
     // Awake処理登録を削除
-    if constexpr (HasAwake)
-    {
-        auto awakeIt = std::find(m_pendingAwakeList.begin(), m_pendingAwakeList.end(), ptr);
-        if (awakeIt != m_pendingAwakeList.end())
-            m_pendingAwakeList.erase(awakeIt);
-    }
-    m_components.erase(it);
-}
+    auto awakeIt = std::find(m_pendingAwakeList.begin(), m_pendingAwakeList.end(), component);
+    if (awakeIt != m_pendingAwakeList.end())
+        m_pendingAwakeList.erase(awakeIt);
 
-template<typename T>
-inline void ComponentArray<T>::RemoveInternal(Component* pComponent)
-{
-    // 削除対象を検索
-    auto it = std::find_if(m_components.begin(), m_components.end(),
-        [pComponent](std::unique_ptr<T>& ptr)
-        { return  pComponent == ptr.get(); }
-    );
-    if (it == m_components.end())
-        return;
-
-    // コンポーネント削除時の処理
-    T* ptr = static_cast<T*>(pComponent);
-    ptr->Uninit();
-
-    // Awake処理登録を削除
-    if constexpr (HasAwake)
-    {
-        auto awakeIt = std::find(m_pendingAwakeList.begin(), m_pendingAwakeList.end(), ptr);
-        if (awakeIt != m_pendingAwakeList.end())
-            m_pendingAwakeList.erase(awakeIt);
-    }
     m_components.erase(it);
 }

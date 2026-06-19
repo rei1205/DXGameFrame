@@ -8,49 +8,48 @@ void ComponentManager::RemoveComponent(Component* pComponent)
 	componentArray->Remove(pComponent);
 }
 
-void ComponentManager::RemoveComponentInternal(Component* pComponent)
-{
-	IComponentArray* componentArray = GetComponentArrayByClassID(pComponent->GetClassID());
-	componentArray->RemoveInternal(pComponent);
-}
-
 void ComponentManager::InvokePendingAwake()
 {
-	for (auto& componentArray : m_componentArrayMap)
+	auto componentArrays = GetAllComponentArrays();
+	for (auto& array : componentArrays)
 	{
-		componentArray.second->InvokePendingAwake();
+		array->InvokePendingAwake();
 	}
 }
 
 void ComponentManager::StartAll()
 {
-	for (auto& componentArray : m_componentArrayMap)
+	auto componentArrays = GetAllComponentArrays();
+	for (auto& array : componentArrays)
 	{
-		componentArray.second->StartAll();
+		array->StartAll();
 	}
 }
 
 void ComponentManager::UpdateAll()
 {
-	for (auto& componentArray : m_componentArrayMap)
+	auto componentArrays = GetAllComponentArrays();
+	for (auto& array : componentArrays)
 	{
-		componentArray.second->UpdateAll();
+		array->UpdateAll();
 	}
 }
 
 void ComponentManager::LateUpdateAll()
 {
-	for (auto& componentArray : m_componentArrayMap)
+	auto componentArrays = GetAllComponentArrays();
+	for (auto& array : componentArrays)
 	{
-		componentArray.second->LateUpdateAll();
+		array->LateUpdateAll();
 	}
 }
 
 void ComponentManager::ApplyDestroy()
 {
-	for (auto& componentArray : m_componentArrayMap)
+	auto componentArrays = GetAllComponentArrays();
+	for (auto& array : componentArrays)
 	{
-		componentArray.second->ApplyDestroy();
+		array->ApplyDestroy();
 	}
 }
 
@@ -68,4 +67,14 @@ IComponentArray* ComponentManager::GetComponentArrayByClassID(uint32_t classID)
 	}
 
 	return m_componentArrayMap[classID].get();
+}
+
+std::vector<IComponentArray*> ComponentManager::GetAllComponentArrays()
+{
+	std::vector<IComponentArray*> componentArrays;
+	for (auto& pair : m_componentArrayMap)
+	{
+		componentArrays.push_back(pair.second.get());
+	}
+	return componentArrays;
 }

@@ -6,7 +6,9 @@ Component::Component():
 	m_pGameObject(nullptr),
 	m_pTransform(nullptr),
 	m_isEnabled(true),
-	m_isStarted(false),
+	m_awakeCalled(false),
+	m_startCalled(false),
+	m_isDestroyed(false),
 	m_classID(0)
 {
 }

@@ -4,7 +4,6 @@
 
 class Scene;
 class GameObject;
-class Transform;
 
 /**
  * @brief コンポーネントの基底クラス
@@ -14,7 +13,7 @@ class Component : public Object
 	template<typename T>
 	friend class ComponentArray;
 
-	friend class GameObject;
+	friend class Transform;
 	
 public:
 	Component();
@@ -69,20 +68,38 @@ public:
 	}
 
 	/**
-	 * @brief 開始処理の呼び出し状態を取得する
-	 * @return 開始処理呼び出し済みフラグ
+	 * @brief Awake処理の呼び出し状態を取得する
+	 * @return Awake処理呼び出し済みフラグ
 	 */
-	bool IsStarted() const
+	bool IsAwakeCalled() const
 	{
-		return m_isStarted;
+		return m_awakeCalled;
 	}
 
 	/**
-	 * @brief 開始処理呼び出し済みフラグをオンにする
+	 * @brief 開始処理の呼び出し状態を取得する
+	 * @return 開始処理呼び出し済みフラグ
 	 */
-	void MarkStartedFlag()
+	bool IsStartCalled() const
 	{
-		m_isStarted = true;
+		return m_startCalled;
+	}
+
+	/**
+	 * @brief このコンポーネントを削除する
+	 */
+	void Destroy()
+	{
+		m_isDestroyed = true;
+	}
+
+	/**
+	 * @brief このコンポーネントの削除フラグを取得する
+	 * @return 削除フラグ
+	 */
+	bool IsDestroyed() const
+	{
+		return m_isDestroyed;
 	}
 
 	/**
@@ -124,8 +141,14 @@ private:
 	/// このコンポーネントの有効状態
 	bool m_isEnabled;
 
-	/// 開始処理呼び出し済みフラグ
-	bool m_isStarted;
+	/// Awake呼び出し済みフラグ
+	bool m_awakeCalled;
+
+	/// Start呼び出し済みフラグ
+	bool m_startCalled;
+
+	/// 削除フラグ
+	bool m_isDestroyed;
 
 	/// クラス識別用ID
 	uint32_t m_classID;

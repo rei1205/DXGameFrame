@@ -1,13 +1,28 @@
 // GameObjectManager.cpp
 #include "GameObjectManager.h"
+#include "Scene.h"
+#include "Component/Transform.h"
 #include "../Utility/VectorUtility.h"
 
-GameObject* GameObjectManager::CreateGameObject()
+GameObjectManager::GameObjectManager(Scene* pScene) :
+    m_pScene(pScene)
+{
+}
+
+GameObject* GameObjectManager::CreateGameObject(const std::string& name)
 {
     // ゲームオブジェクトを生成
     auto gameObject = std::make_unique<GameObject>();
     GameObject* ptr = gameObject.get();
     m_gameObjects.push_back(std::move(gameObject));
+    ptr->m_name = name;
+
+    // Transformコンポーネントを生成
+    Transform* transform = m_pScene->GetComponentManager().AddComponent<Transform>(ptr);
+   
+    // 各種ポインタをセット
+    ptr->m_pScene = m_pScene;
+    ptr->m_pTransform = transform;
 
     return ptr;
 }
