@@ -1,8 +1,8 @@
 // GameObjectManager.cpp
 #include "GameObjectManager.h"
 #include "Scene.h"
-#include "Component/Transform.h"
-#include "../Utility/VectorUtility.h"
+#include "../Component/Transform.h"
+#include "../../Utility/VectorUtility.h"
 
 GameObjectManager::GameObjectManager(Scene* pScene) :
     m_pScene(pScene)
@@ -37,12 +37,13 @@ void GameObjectManager::RemoveGameObject(GameObject* pGameObject)
     if (it == m_gameObjects.end())
         return;
 
+    (*it)->OnDestroy();
     m_gameObjects.erase(it);
 }
 
 void GameObjectManager::ApplyDestroy()
 {
-    // 新規追加ゲームオブジェクトは処理対象外にする
+    // 現在存在しているゲームオブジェクトのみ処理対象にする
     int count = (int)m_gameObjects.size();
 
     for (int i = 0; i < count; ++i)
@@ -63,30 +64,33 @@ void GameObjectManager::ApplyDestroy()
 
 void GameObjectManager::Clear()
 {
+    int count = (int)m_gameObjects.size();
+    for (int i = 0; i < count; ++i)
+    {
+        m_gameObjects[i]->OnDestroy();
+    }
     m_gameObjects.clear();
 }
 
-bool GameObjectManager::GetElementIndex(GameObject* pGameObject, size_t* pIndex)
+size_t GameObjectManager::GetElementIndex(GameObject* pGameObject)
 {
     // 対象のゲームオブジェクトを検索
     auto it = std::find_if(m_gameObjects.begin(), m_gameObjects.end(),
         [pGameObject](auto& ptr) {return pGameObject == ptr.get(); });
     if (it == m_gameObjects.end())
-        return false;
+        return m_gameObjects.size() - 1;
 
-    *pIndex = std::distance(m_gameObjects.begin(), it);
-    return true;
+    return std::distance(m_gameObjects.begin(), it);
 }
 
-bool GameObjectManager::MoveElementIndex(GameObject* pGameObject, size_t index)
+void GameObjectManager::MoveElementIndex(GameObject* pGameObject, size_t index)
 {
     // 対象のゲームオブジェクトを検索
     auto it = std::find_if(m_gameObjects.begin(), m_gameObjects.end(),
         [pGameObject](auto& ptr) {return pGameObject == ptr.get(); });
     if (it == m_gameObjects.end())
-        return false;
+        return;
     size_t currentIndex = std::distance(m_gameObjects.begin(), it);
 
     VectorUtility::MoveElement<std::unique_ptr<GameObject>>(m_gameObjects, currentIndex, index);
-    return true;
 }

@@ -1,6 +1,5 @@
 // ComponentManager.cpp
 #include "ComponentManager.h"
-#include "Component/Component.h"
 
 void ComponentManager::RemoveComponent(Component* pComponent)
 {
@@ -51,11 +50,6 @@ void ComponentManager::ApplyDestroy()
 	{
 		array->ApplyDestroy();
 	}
-}
-
-void ComponentManager::ClearAll()
-{
-	m_componentArrayMap.clear();
 }
 
 IComponentArray* ComponentManager::GetComponentArrayByClassID(uint32_t classID)

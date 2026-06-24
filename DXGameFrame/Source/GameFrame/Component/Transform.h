@@ -1,6 +1,6 @@
 // Transform.h
 #pragma once
-#include "Component.h"
+#include "../Core/Component.h"
 #include "../../Utility/Vector3.h"
 #include "../../Utility/Quaternion.h"
 
@@ -170,19 +170,17 @@ public:
 
 	/**
 	 * @brief 子要素のインデックスを取得する
-	 * @param pChild 子要素へのポインタ
-	 * @param pIndex インデックス格納先のポインタ
-	 * @return 指定した子要素が存在しない場合falseを返す
+	 * @param pChild インデックスを取得する子要素へのポインタ
+	 * @return 子要素のインデックス (子要素が存在しない場合最後尾インデックスを返す)
 	 */
-	bool GetChildIndex(Transform* pChild, size_t* pIndex);
+	size_t GetChildIndex(Transform* pChild);
 
 	/**
 	 * @brief 子要素を配列上で移動させる
 	 * @param pChild 移動させる子要素へのポインタ
 	 * @param index 移動先インデックス
-	 * @return 指定した子要素が存在しない場合falseを返す
 	 */
-	bool MoveChildIndex(Transform* pChild, size_t index);
+	void MoveChildIndex(Transform* pChild, size_t index);
 
 private:
 	// Transformクラスでは隠す

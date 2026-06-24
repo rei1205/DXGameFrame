@@ -1,6 +1,6 @@
 // ComponentArray.h
 #pragma once
-#include "Component/Component.h"
+#include "Component.h"
 #include "ClassID.h"
 #include <memory>
 

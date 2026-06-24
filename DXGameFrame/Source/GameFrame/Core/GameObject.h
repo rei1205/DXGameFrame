@@ -1,6 +1,6 @@
 // GameObject.h
 #pragma once
-#include "Component/Component.h"
+#include "Component.h"
 #include <string>
 
 class Scene;
@@ -149,16 +149,7 @@ private:
 	 * @param pComponent 登録解除するコンポーネントへのポインタ
 	 */
 	void UnregisterComponent(Component* pComponent);
-
-public:
-	/**
-	 * @brief ゲームオブジェクトを作成する
-	 * @param pScene 追加先シーンへのポインタ
-	 * @param name ゲームオブジェクト名
-	 * @return 作成したゲームオブジェクトへのポインタ
-	 */
-	static GameObject* Create(Scene* pScene, const std::string& name = "GameObject");
 };
 
 // GameObject.hに依存するコンポーネントのテンプレート関数の実装
-#include "Component/Component_inl.h"
+#include "Component_inl.h"

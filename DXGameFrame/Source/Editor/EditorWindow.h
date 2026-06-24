@@ -12,9 +12,9 @@ public:
 	~EditorWindow() = default;
 
 	/**
-	 * @brief エディタウィンドウの描画処理
+	 * @brief 更新処理
 	 */
-	void DrawWindow();
+	void Update();
 
 	/**
 	 * @brief ウィンドウを開く

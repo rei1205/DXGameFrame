@@ -1,6 +1,6 @@
 // DirectionalLight.h
 #pragma once
-#include "Component.h"
+#include "../Core/Component.h"
 #include "../../Utility/Color.h"
 #include "../../DirectX/Manager/ConstantBufferManager.h"
 

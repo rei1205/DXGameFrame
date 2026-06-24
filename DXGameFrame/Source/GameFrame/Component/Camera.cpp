@@ -1,7 +1,7 @@
 // Camera.cpp
 #include "Camera.h"
 #include "Transform.h"
-#include "../Scene.h"
+#include "../Core/Scene.h"
 #include "../../System/GameWindow.h"
 
 Camera::Camera():

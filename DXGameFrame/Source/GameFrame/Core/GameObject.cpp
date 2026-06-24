@@ -1,6 +1,6 @@
 // GameObject.cpp
 #include "GameObject.h"
-#include "Component/Transform.h"
+#include "../Component/Transform.h"
 #include "Scene.h"
 
 GameObject::GameObject() :
@@ -31,7 +31,6 @@ void GameObject::OnDestroy()
 	while (!m_components.empty())
 	{
 		Component* component = m_components.back();
-		m_components.pop_back();
 		m_pScene->GetComponentManager().RemoveComponent(component);
 	}
 }
@@ -46,12 +45,4 @@ void GameObject::UnregisterComponent(Component* pComponent)
 	auto it = std::find(m_components.begin(), m_components.end(), pComponent);
 	if (it != m_components.end())
 		m_components.erase(it);
-}
-
-GameObject* GameObject::Create(Scene* pScene, const std::string& name)
-{
-	// ゲームオブジェクトとTransformコンポーネントを生成
-	GameObject* gameobject = pScene->GetGameObjectManager().CreateGameObject(name);
-
-	return gameobject;
 }

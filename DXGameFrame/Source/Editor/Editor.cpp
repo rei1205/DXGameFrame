@@ -25,13 +25,13 @@ void Editor::Uninit()
 	s_initialized = false;
 }
 
-void Editor::Draw()
+void Editor::Update()
 {
 	if (!s_initialized)
 		return;
 
 	for (auto& window : s_editorWindows)
 	{
-		window->DrawWindow();
+		window->Update();
 	}
 }

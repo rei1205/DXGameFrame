@@ -4,36 +4,40 @@
 #include <ImGui/imgui.h>
 
 HierarchyGUI::HierarchyGUI() :
-    EditorWindow("Hierarchy")
+    EditorWindow("Hierarchy"),
+    m_pScene(nullptr),
+    m_operationEvent(nullptr)
 {
 }
 
 void HierarchyGUI::OnGUI()
 {
-    Scene* pScene = Editor::GetTargetScene();
-	if (pScene == nullptr)
+    m_pScene = Editor::GetTargetScene();
+	if (m_pScene == nullptr)
 		return;
-
-    auto& gameObjects = pScene->GetGameObjectManager().GetGameObjects();
+    auto& objManager = m_pScene->GetGameObjectManager();
+    auto& gameObjects = objManager.GetGameObjects();
 
     // ウィンドウ上の右クリックメニュー
     if (ImGui::BeginPopupContextWindow())
     {
         if (ImGui::MenuItem("Create Empty"))
         {
-            GameObject::Create(pScene);
+            m_operationEvent = [&objManager]()
+                {
+                    objManager.CreateGameObject();
+                };
         }
 
         ImGui::EndPopup();
     }
 
     // メイン描画
-    bool open = DrawRootNode();
-    if (open)
+    if (DrawRootNode())
     {
         for (auto& obj : gameObjects)
         {
-            // 親が存在する場合処理スキップ
+            // シーン直下のみ対象
             if (obj->GetTransform()->GetParent() != nullptr)
                 continue;
 
@@ -42,17 +46,23 @@ void HierarchyGUI::OnGUI()
 
         ImGui::TreePop();
     }
+
+    // オブジェクト操作イベントの処理
+    if (m_operationEvent != nullptr)
+    {
+        m_operationEvent();
+        m_operationEvent = nullptr;
+    }
 }
 
 bool HierarchyGUI::DrawRootNode()
 {
-    Scene* pScene = Editor::GetTargetScene();
-    if (pScene == nullptr)
-        return false;
-    auto& gameObjects = pScene->GetGameObjectManager().GetGameObjects();
+    auto& objManager = m_pScene->GetGameObjectManager();
+    auto& gameObjects = objManager.GetGameObjects();
 
     // 動作設定
     ImGuiTreeNodeFlags flags =
+        ImGuiTreeNodeFlags_DefaultOpen |
         ImGuiTreeNodeFlags_OpenOnArrow |
         ImGuiTreeNodeFlags_OpenOnDoubleClick |
         ImGuiTreeNodeFlags_SpanAvailWidth;
@@ -61,7 +71,7 @@ bool HierarchyGUI::DrawRootNode()
     if (gameObjects.empty())
         flags |= ImGuiTreeNodeFlags_Leaf;
 
-    bool open = ImGui::TreeNodeEx(pScene, flags, "Scene");
+    bool open = ImGui::TreeNodeEx(m_pScene, flags, "Scene");
 
     // 選択時の処理
     if (ImGui::IsItemClicked())
@@ -77,7 +87,12 @@ bool HierarchyGUI::DrawRootNode()
         if (payload != nullptr)
         {
             Transform* drag = *(Transform**)payload->Data;
-            drag->SetParent((GameObject*)nullptr);
+            m_operationEvent = [drag, &objManager, &gameObjects]()
+                {
+                    drag->SetParent((GameObject*)nullptr);
+                    size_t index = gameObjects.size() - 1;
+                    objManager.MoveElementIndex(drag->GetGameObject(), index);
+                };
         }
 
         ImGui::EndDragDropTarget();
@@ -140,11 +155,19 @@ void HierarchyGUI::NodeInteraction(Transform* pTransform)
 
         if (ImGui::MenuItem("Create Empty"))
         {
+            m_operationEvent = [pTransform]()
+                {
+                    Scene* pScene = pTransform->GetGameObject()->GetScene();
+                    GameObject* newObj = pScene->GetGameObjectManager().CreateGameObject();
+                    newObj->GetTransform()->SetParent(pTransform);
+				};
         }
-
         if (ImGui::MenuItem("Delete"))
         {
-
+            m_operationEvent = [pTransform]()
+                {
+					pTransform->GetGameObject()->Destroy();
+                };
         }
 
         ImGui::EndPopup();
@@ -161,7 +184,6 @@ void HierarchyGUI::NodeInteraction(Transform* pTransform)
     float mouseY = ImGui::GetMousePos().y;
     float height = max.y - min.y;
     float ratio = (mouseY - min.y) / height;
-
 
     // ドロップ挙動を取得
     DropType dropType;
@@ -198,11 +220,16 @@ void HierarchyGUI::NodeInteraction(Transform* pTransform)
         {
             Transform* drag = *(Transform**)payload->Data;
             if (!IsAncestorOf(drag, pTransform))
-                DropObject(drag, pTransform, dropType);
+            {
+                m_operationEvent = [this, drag, pTransform, dropType]()
+                    {
+                        DropObject(drag, pTransform, dropType);
+                    };
+            }
         }
         ImGui::EndDragDropTarget();
 
-        // 上下線描画
+        // 移動対象描画
         ImDrawList* drawList = ImGui::GetWindowDrawList();
         switch (dropType)
         {
@@ -228,9 +255,7 @@ void HierarchyGUI::DropObject(Transform* drag, Transform* target, DropType dropT
         return;
 
     // 操作先インデックスを取得
-    size_t index = 0;
-    if (!pScene->GetGameObjectManager().GetElementIndex(target->GetGameObject(), &index))
-        return;
+    size_t index = pScene->GetGameObjectManager().GetElementIndex(target->GetGameObject());
 
     // オブジェクト移動
     switch (dropType)
@@ -264,9 +289,7 @@ void HierarchyGUI::DropObject(Transform* drag, Transform* target, DropType dropT
         else
         {
             // 移動先インデックスを取得
-            size_t childIndex = 0;
-            if (!parent->GetChildIndex(target, &childIndex))
-                return;
+            size_t childIndex = parent->GetChildIndex(target);
 
             if (dropType == DropType::BEFORE)
             {

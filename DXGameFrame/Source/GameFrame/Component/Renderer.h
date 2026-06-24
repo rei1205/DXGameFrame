@@ -1,6 +1,6 @@
 // Renderer.h
 #pragma once
-#include "Component.h"
+#include "../Core/Component.h"
 #include "../../DirectX/RenderUtility/Material.h"
 #include "../RenderSystem/RenderLayer.h"
 

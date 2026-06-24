@@ -4,11 +4,9 @@
 #include "System/GameWindow.h"
 #include "DirectX/Direct3D.h"
 #include "System/ImGuiManager.h"
-#include "GameFrame/SceneManager.h"
+#include "GameFrame/Core/SceneManager.h"
 #include "Editor/Editor.h"
 #include "System/GameTime.h"
-
-#include "TestScene.h"
 
 bool DXGameFrame::s_isExit = false;
 
@@ -66,7 +64,7 @@ bool DXGameFrame::Init(SetupConfig config, HINSTANCE hInstance, int nCmdShow)
 	ImGuiManager::Init(hWnd, Direct3D::GetDevice(), Direct3D::GetContext());
 
 	// シーンマネージャーの初期化
-	SceneManager::Init(std::make_unique<TestScene>());
+	SceneManager::Init();
 
 	// エディタの初期化
 	if (config.isEditorMode)

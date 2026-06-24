@@ -2,7 +2,6 @@
 #pragma once
 #include "GameObject.h"
 #include <memory>
-#include <string>
 
 /**
  * @brief ゲームオブジェクトオブジェクトを管理するクラス
@@ -18,7 +17,7 @@ public:
 	 * @param name ゲームオブジェクト名
 	 * @return 生成したゲームオブジェクトへのポインタ
 	 */
-	GameObject* CreateGameObject(const std::string& name);
+	GameObject* CreateGameObject(const std::string& name = "GameObject");
 
 	/**
 	 * @brief ゲームオブジェクトを削除する
@@ -39,18 +38,16 @@ public:
 	/**
 	 * @brief ゲームオブジェクトのインデックスを取得する
 	 * @param pGameObject ゲームオブジェクトへのポインタ
-	 * @param pIndex インデックス格納先のポインタ
-	 * @return 指定したゲームオブジェクトが存在しない場合falseを返す
+	 * @return 指定したゲームオブジェクトのインデックス (存在しない場合最後尾インデックスを返す)
 	 */
-	bool GetElementIndex(GameObject* pGameObject, size_t* pIndex);
+	size_t GetElementIndex(GameObject* pGameObject);
 
 	/**
 	 * @brief ゲームオブジェクトを配列上で移動させる
 	 * @param pGameObject 移動させるゲームオブジェクトへのポインタ
 	 * @param index 移動先インデックス
-	 * @return 指定したゲームオブジェクトが存在しない場合falseを返す
 	 */
-	bool MoveElementIndex(GameObject* pGameObject, size_t index);
+	void MoveElementIndex(GameObject* pGameObject, size_t index);
 
 	/**
 	 * @brief ゲームオブジェクト配列を取得する

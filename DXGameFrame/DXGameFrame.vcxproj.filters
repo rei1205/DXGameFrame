@@ -42,22 +42,13 @@
     <Filter Include="ソース ファイル\Editor">
       <UniqueIdentifier>{3d2d12ad-785f-4f06-82e5-c6b2291e93bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\GameFrame\Core">
+      <UniqueIdentifier>{64f2fa55-7a0c-415a-9cfc-878c708a41bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\main.cpp">
       <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameFrame\ComponentManager.cpp">
-      <Filter>ソース ファイル\GameFrame</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameFrame\GameObject.cpp">
-      <Filter>ソース ファイル\GameFrame</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameFrame\GameObjectManager.cpp">
-      <Filter>ソース ファイル\GameFrame</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameFrame\Object.cpp">
-      <Filter>ソース ファイル\GameFrame</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameFrame\Component\Transform.cpp">
       <Filter>ソース ファイル\GameFrame\Component</Filter>
@@ -82,18 +73,6 @@
     </ClCompile>
     <ClCompile Include="Source\Utility\Vector3.cpp">
       <Filter>ソース ファイル\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameFrame\Scene.cpp">
-      <Filter>ソース ファイル\GameFrame</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameFrame\SceneManager.cpp">
-      <Filter>ソース ファイル\GameFrame</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\TestScene.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\TestComponent.cpp">
-      <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Source\DirectX\Direct3D.cpp">
       <Filter>ソース ファイル\DirectX</Filter>
@@ -147,9 +126,6 @@
       <Filter>ソース ファイル\System</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameFrame\Component\Renderer.cpp">
-      <Filter>ソース ファイル\GameFrame\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameFrame\Component\Component.cpp">
       <Filter>ソース ファイル\GameFrame\Component</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameFrame\Component\Camera.cpp">
@@ -212,29 +188,29 @@
     <ClCompile Include="Source\Editor\Editor.cpp">
       <Filter>ソース ファイル\Editor</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GameFrame\Core\Object.cpp">
+      <Filter>ソース ファイル\GameFrame\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameFrame\Core\Component.cpp">
+      <Filter>ソース ファイル\GameFrame\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameFrame\Core\ComponentManager.cpp">
+      <Filter>ソース ファイル\GameFrame\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameFrame\Core\GameObject.cpp">
+      <Filter>ソース ファイル\GameFrame\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameFrame\Core\GameObjectManager.cpp">
+      <Filter>ソース ファイル\GameFrame\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameFrame\Core\Scene.cpp">
+      <Filter>ソース ファイル\GameFrame\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameFrame\Core\SceneManager.cpp">
+      <Filter>ソース ファイル\GameFrame\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\GameFrame\ComponentArray.h">
-      <Filter>ソース ファイル\GameFrame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameFrame\ComponentManager.h">
-      <Filter>ソース ファイル\GameFrame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameFrame\GameObjectManager.h">
-      <Filter>ソース ファイル\GameFrame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameFrame\GameObject.h">
-      <Filter>ソース ファイル\GameFrame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameFrame\Object.h">
-      <Filter>ソース ファイル\GameFrame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameFrame\ObjPtr.h">
-      <Filter>ソース ファイル\GameFrame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameFrame\ClassID.h">
-      <Filter>ソース ファイル\GameFrame</Filter>
-    </ClInclude>
     <ClInclude Include="Source\GameFrame\Component\Transform.h">
       <Filter>ソース ファイル\GameFrame\Component</Filter>
     </ClInclude>
@@ -258,18 +234,6 @@
     </ClInclude>
     <ClInclude Include="Source\Utility\Vector3.h">
       <Filter>ソース ファイル\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameFrame\Scene.h">
-      <Filter>ソース ファイル\GameFrame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameFrame\SceneManager.h">
-      <Filter>ソース ファイル\GameFrame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\TestScene.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\TestComponent.h">
-      <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Source\DirectX\Direct3D.h">
       <Filter>ソース ファイル\DirectX</Filter>
@@ -328,17 +292,8 @@
     <ClInclude Include="Source\GameFrame\Component\Renderer.h">
       <Filter>ソース ファイル\GameFrame\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameFrame\Component\Component_inl.h">
-      <Filter>ソース ファイル\GameFrame\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameFrame\Component\Component.h">
-      <Filter>ソース ファイル\GameFrame\Component</Filter>
-    </ClInclude>
     <ClInclude Include="Source\GameFrame\Component\Camera.h">
       <Filter>ソース ファイル\GameFrame\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameFrame\GameObject_inl.h">
-      <Filter>ソース ファイル\GameFrame</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameFrame\Component\DirectionalLight.h">
       <Filter>ソース ファイル\GameFrame\Component</Filter>
@@ -408,6 +363,42 @@
     </ClInclude>
     <ClInclude Include="Source\Utility\VectorUtility.h">
       <Filter>ソース ファイル\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\Core\Object.h">
+      <Filter>ソース ファイル\GameFrame\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\Core\ObjPtr.h">
+      <Filter>ソース ファイル\GameFrame\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\Core\Component.h">
+      <Filter>ソース ファイル\GameFrame\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\Core\Component_inl.h">
+      <Filter>ソース ファイル\GameFrame\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\Core\ComponentManager.h">
+      <Filter>ソース ファイル\GameFrame\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\Core\ComponentArray.h">
+      <Filter>ソース ファイル\GameFrame\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\Core\ClassID.h">
+      <Filter>ソース ファイル\GameFrame\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\Core\GameObject.h">
+      <Filter>ソース ファイル\GameFrame\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\Core\GameObject_inl.h">
+      <Filter>ソース ファイル\GameFrame\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\Core\GameObjectManager.h">
+      <Filter>ソース ファイル\GameFrame\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\Core\Scene.h">
+      <Filter>ソース ファイル\GameFrame\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\Core\SceneManager.h">
+      <Filter>ソース ファイル\GameFrame\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

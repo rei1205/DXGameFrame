@@ -10,9 +10,8 @@ class SceneManager
 public:
 	/**
 	 * @brief 初期化処理
-	 * @param startScene 最初のシーン
 	 */
-	static void Init(std::unique_ptr<Scene> startScene);
+	static void Init();
 
 	/**
 	 * @brief 終了処理
@@ -27,9 +26,9 @@ public:
 	/**
 	 * @brief シーンを変更する
 	 * @details 同じフレームで複数回呼ばれた場合は最初に呼ばれたものが有効になります
-	 * @param nextScene 次のシーン
+	 * @param pNextScene 次のシーン
 	 */
-	static void ChangeScene(std::unique_ptr<Scene> nextScene);
+	static void ChangeScene(Scene* pNextScene);
 
 	/**
 	 * @brief 現在のアクティブなシーンを取得する
@@ -39,10 +38,13 @@ public:
 
 private:
 	/// 現在のシーン
-	static std::unique_ptr<Scene> s_activeScene;
+	static Scene* s_pActiveScene;
 
-	/// 次のシーン
-	static std::unique_ptr<Scene> s_nextScene;
+	/// 変更先シーン
+	static Scene* s_pNextScene;
+
+	/// シーン配列
+	static std::vector<std::unique_ptr<Scene>> s_sceneList;
 
 	/**
 	 * @brief シーンの変更を適用する

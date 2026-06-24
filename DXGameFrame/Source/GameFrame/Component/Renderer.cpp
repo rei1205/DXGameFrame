@@ -1,6 +1,6 @@
 // Renderer.cpp
 #include "Renderer.h"
-#include "../Scene.h"
+#include "../Core/Scene.h"
 
 Renderer::Renderer()
 {

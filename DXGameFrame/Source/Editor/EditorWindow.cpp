@@ -8,7 +8,7 @@ EditorWindow::EditorWindow(const std::string& windowName) :
 {
 }
 
-void EditorWindow::DrawWindow()
+void EditorWindow::Update()
 {
 	if (!m_openFlag)
 		return;

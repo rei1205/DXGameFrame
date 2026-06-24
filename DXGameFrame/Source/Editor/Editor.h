@@ -1,9 +1,8 @@
 // Editor.h
 #pragma once
 #include "EditorWindow.h"
-#include "../GameFrame/Scene.h"
-#include "../GameFrame/Component/Transform.h"
-#include "../GameFrame/ObjPtr.h"
+#include "../GameFrame/Core/Scene.h"
+#include "../GameFrame/Core/ObjPtr.h"
 
 /**
  * @brief エディタGUIを扱う
@@ -22,9 +21,9 @@ public:
 	static void Uninit();
 
 	/**
-	 * @brief 描画処理
+	 * @brief 更新処理
 	 */
-	static void Draw();
+	static void Update();
 
 	/**
 	 * @brief 操作対象シーンを設定する

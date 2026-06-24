@@ -26,9 +26,7 @@ inline T* GameObject::AddComponent()
 		"AddComponentに無効なクラスが指定されました");
 
 	// コンポーネント追加
-	auto& a = m_pScene->GetComponentManager();
-	T* ptr = a.AddComponent<T>(this);
-	m_components.push_back(ptr);
+	T* ptr = m_pScene->GetComponentManager().AddComponent<T>(this);
 	return ptr;
 }
 

@@ -1,6 +1,6 @@
 // Camera.h
 #pragma once
-#include "Component.h"
+#include "../Core/Component.h"
 #include "../../DirectX/DirectXInclude.h"
 #include "../../Utility/Vector2.h"
 

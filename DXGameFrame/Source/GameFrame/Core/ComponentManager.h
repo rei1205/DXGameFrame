@@ -1,8 +1,6 @@
 // ComponentManager.h
 #pragma once
 #include "ComponentArray.h"
-#include "GameObject.h"
-#include "ClassID.h"
 #include <unordered_map>
 
 /**
@@ -60,11 +58,6 @@ public:
      * @brief 削除予定コンポーネントを実際に削除する
      */
     void ApplyDestroy();
-
-    /**
-     * @brief 全てのコンポーネントを削除する
-     */
-    void ClearAll();
 
 private:
 	using ComponentArrayMap = std::unordered_map<uint32_t, std::unique_ptr<IComponentArray>>;

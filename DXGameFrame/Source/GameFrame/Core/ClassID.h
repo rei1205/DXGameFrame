@@ -1,6 +1,6 @@
 // ClassID.h
 #pragma once
-#include "../System/IDManager.h"
+#include "../../System/IDManager.h"
 
 /**
  * @brief クラス固有ID管理の基底クラス

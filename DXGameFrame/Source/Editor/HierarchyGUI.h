@@ -2,6 +2,7 @@
 #pragma once
 #include "EditorWindow.h"
 #include "../GameFrame/Component/Transform.h"
+#include <functional>
 
 /**
  * @brief オブジェクト階層のGUI
@@ -20,6 +21,12 @@ private:
 		AFTER,      // 下
 		CHILD       // 子要素
 	};
+
+	/// 操作対象シーン
+	Scene* m_pScene;
+
+	/// ゲームオブジェクト操作イベント
+	std::function<void()> m_operationEvent;
 
 	/**
 	 * @brief GUIの描画を行う

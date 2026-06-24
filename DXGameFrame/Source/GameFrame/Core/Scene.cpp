@@ -9,7 +9,6 @@ Scene::Scene():
 Scene::~Scene()
 {
 	m_renderSystem.Uninit();
-	m_componentManager.ClearAll();
 	m_gameObjectManager.Clear();
 }
 

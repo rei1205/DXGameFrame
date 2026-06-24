@@ -1,6 +1,6 @@
 // Transform.cpp
 #include "Transform.h"
-#include "../GameObject.h"
+#include "../Core/GameObject.h"
 #include "../../Utility/VectorUtility.h"
 
 Transform::Transform() :
@@ -271,25 +271,23 @@ DirectX::XMMATRIX Transform::GetWorldMatrix() const
 	}
 }
 
-bool Transform::GetChildIndex(Transform* pChild, size_t* pIndex)
+size_t Transform::GetChildIndex(Transform* pChild)
 {
 	// 対象の子要素を検索
 	auto it = std::find(m_pChildren.begin(), m_pChildren.end(), pChild);
 	if (it == m_pChildren.end())
-		return false;
+		return m_pChildren.size() - 1;
 
-	*pIndex = std::distance(m_pChildren.begin(), it);
-	return true;
+	return std::distance(m_pChildren.begin(), it);
 }
 
-bool Transform::MoveChildIndex(Transform* pChild, size_t index)
+void Transform::MoveChildIndex(Transform* pChild, size_t index)
 {
 	// 対象の子要素を検索
 	auto it = std::find(m_pChildren.begin(), m_pChildren.end(), pChild);
 	if (it == m_pChildren.end())
-		return false;
+		return;
 	size_t currentIndex = std::distance(m_pChildren.begin(), it);
 
 	VectorUtility::MoveElement<Transform*>(m_pChildren, currentIndex, index);
-	return true;
 }

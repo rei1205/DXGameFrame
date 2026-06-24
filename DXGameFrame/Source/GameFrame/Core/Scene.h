@@ -2,19 +2,16 @@
 #pragma once
 #include "GameObjectManager.h"
 #include "ComponentManager.h"
-#include "RenderSystem/RenderSystem.h"
+#include "../RenderSystem/RenderSystem.h"
 
 /**
- * @brief シーンの基底クラス
+ * @brief シーン情報を持つクラス
  */
 class Scene
 {
 public:
 	Scene();
-	virtual ~Scene();
-
-	virtual void Init() {}
-	virtual void Uninit() {}
+	~Scene();
 
 	/**
 	 * @brief シーンの更新を行う

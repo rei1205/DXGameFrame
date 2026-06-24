@@ -1,7 +1,7 @@
 // DirectionalLight.cpp
 #include "DirectionalLight.h"
 #include "Transform.h"
-#include "../Scene.h"
+#include "../Core/Scene.h"
 
 DirectionalLight::DirectionalLight() :
 	m_lightColor(1.0f, 1.0f, 1.0f, 1.0f),
