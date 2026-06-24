@@ -2,6 +2,7 @@
 #include "Transform.h"
 #include "../Core/GameObject.h"
 #include "../../Utility/VectorUtility.h"
+#include "../../Utility/InspectorUtility.h"
 
 Transform::Transform() :
 	m_localPosition(0.0f, 0.0f, 0.0f),
@@ -290,4 +291,11 @@ void Transform::MoveChildIndex(Transform* pChild, size_t index)
 	size_t currentIndex = std::distance(m_pChildren.begin(), it);
 
 	VectorUtility::MoveElement<Transform*>(m_pChildren, currentIndex, index);
+}
+
+void Transform::OnInspectorGUI()
+{
+	ImGui::DragVector3("Position", &m_localPosition, 0.01f);
+	ImGui::DragVector3("Scale", &m_localPosition, 0.01f);
+	ImGui::DragRotation("Rotation", &m_localQuaternion, 0.01f);
 }

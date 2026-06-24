@@ -2,6 +2,7 @@
 #pragma once
 #include "Component.h"
 #include <string>
+#include <vector>
 
 class Scene;
 
@@ -118,6 +119,15 @@ public:
 	 * @brief ゲームオブジェクト削除時の処理
 	 */
 	void OnDestroy();
+
+	/**
+	 * @brief コンポーネント配列を取得する
+	 * @return コンポーネント配列
+	 */
+	std::vector<Component*> GetComponents()
+	{
+		return m_components;
+	}
 
 private:
 	/// ゲームオブジェクト名

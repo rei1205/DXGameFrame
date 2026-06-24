@@ -40,7 +40,7 @@ void SceneManager::Execute()
 	Editor::SetTargetScene(s_pActiveScene);
 	Editor::Update();
 
-	//s_pActiveScene->Draw();
+	s_pActiveScene->Draw();
 
 	// •`‰æ‘ÎÛRTV‚ğİ’è
 	auto rtv = Direct3D::GetBackBufferRTV();

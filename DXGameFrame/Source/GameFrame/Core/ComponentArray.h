@@ -2,6 +2,7 @@
 #pragma once
 #include "Component.h"
 #include "ClassID.h"
+#include <vector>
 #include <memory>
 
 /**

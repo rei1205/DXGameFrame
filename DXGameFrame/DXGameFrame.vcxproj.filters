@@ -209,6 +209,15 @@
     <ClCompile Include="Source\GameFrame\Core\SceneManager.cpp">
       <Filter>ソース ファイル\GameFrame\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Editor\InspectorGUI.cpp">
+      <Filter>ソース ファイル\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utility\InspectorUtility.cpp">
+      <Filter>ソース ファイル\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameFrame\Core\ComponentRegister.cpp">
+      <Filter>ソース ファイル\GameFrame\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameFrame\Component\Transform.h">
@@ -398,6 +407,18 @@
       <Filter>ソース ファイル\GameFrame\Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameFrame\Core\SceneManager.h">
+      <Filter>ソース ファイル\GameFrame\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Editor\InspectorGUI.h">
+      <Filter>ソース ファイル\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utility\InspectorUtility.h">
+      <Filter>ソース ファイル\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\Core\ComponentRegister.h">
+      <Filter>ソース ファイル\GameFrame\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\Core\ComponentRegisterMeta.h">
       <Filter>ソース ファイル\GameFrame\Core</Filter>
     </ClInclude>
   </ItemGroup>

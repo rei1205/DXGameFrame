@@ -3,6 +3,7 @@
 #include "../Core/Component.h"
 #include "../../Utility/Vector3.h"
 #include "../../Utility/Quaternion.h"
+#include "../Core/ComponentRegisterMeta.h"
 
 // 座標空間
 enum class Space
@@ -10,6 +11,8 @@ enum class Space
 	WORLD,		// ワールド座標空間
 	LOCAL		// ローカル座標空間
 };
+
+REGISTER_COMPONENT(Transform);
 
 /**
  * @brief オブジェクトの座標・スケール・回転を表す
@@ -181,6 +184,11 @@ public:
 	 * @param index 移動先インデックス
 	 */
 	void MoveChildIndex(Transform* pChild, size_t index);
+
+	/**
+	 * @brief インスペクターでの表示
+	 */
+	virtual void OnInspectorGUI() override;
 
 private:
 	// Transformクラスでは隠す

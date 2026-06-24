@@ -50,6 +50,7 @@
     <ClInclude Include="Source\Editor\Editor.h" />
     <ClInclude Include="Source\Editor\EditorWindow.h" />
     <ClInclude Include="Source\Editor\HierarchyGUI.h" />
+    <ClInclude Include="Source\Editor\InspectorGUI.h" />
     <ClInclude Include="Source\GameFrame\Component\Camera.h" />
     <ClInclude Include="Source\GameFrame\Component\DirectionalLight.h" />
     <ClInclude Include="Source\GameFrame\Component\MeshRenderer.h" />
@@ -59,6 +60,8 @@
     <ClInclude Include="Source\GameFrame\Core\Component.h" />
     <ClInclude Include="Source\GameFrame\Core\ComponentArray.h" />
     <ClInclude Include="Source\GameFrame\Core\ComponentManager.h" />
+    <ClInclude Include="Source\GameFrame\Core\ComponentRegister.h" />
+    <ClInclude Include="Source\GameFrame\Core\ComponentRegisterMeta.h" />
     <ClInclude Include="Source\GameFrame\Core\Component_inl.h" />
     <ClInclude Include="Source\GameFrame\Core\GameObject.h" />
     <ClInclude Include="Source\GameFrame\Core\GameObjectManager.h" />
@@ -77,6 +80,7 @@
     <ClInclude Include="Source\System\IDManager.h" />
     <ClInclude Include="Source\System\ImGuiManager.h" />
     <ClInclude Include="Source\Utility\Color.h" />
+    <ClInclude Include="Source\Utility\InspectorUtility.h" />
     <ClInclude Include="Source\Utility\Math.h" />
     <ClInclude Include="Source\Utility\Quaternion.h" />
     <ClInclude Include="Source\Utility\Vector2.h" />
@@ -111,6 +115,7 @@
     <ClCompile Include="Source\Editor\Editor.cpp" />
     <ClCompile Include="Source\Editor\EditorWindow.cpp" />
     <ClCompile Include="Source\Editor\HierarchyGUI.cpp" />
+    <ClCompile Include="Source\Editor\InspectorGUI.cpp" />
     <ClCompile Include="Source\GameFrame\Component\Camera.cpp" />
     <ClCompile Include="Source\GameFrame\Component\DirectionalLight.cpp" />
     <ClCompile Include="Source\GameFrame\Component\MeshRenderer.cpp" />
@@ -118,6 +123,7 @@
     <ClCompile Include="Source\GameFrame\Component\Transform.cpp" />
     <ClCompile Include="Source\GameFrame\Core\Component.cpp" />
     <ClCompile Include="Source\GameFrame\Core\ComponentManager.cpp" />
+    <ClCompile Include="Source\GameFrame\Core\ComponentRegister.cpp" />
     <ClCompile Include="Source\GameFrame\Core\GameObject.cpp" />
     <ClCompile Include="Source\GameFrame\Core\GameObjectManager.cpp" />
     <ClCompile Include="Source\GameFrame\Core\Object.cpp" />
@@ -134,6 +140,7 @@
     <ClCompile Include="Source\System\IDManager.cpp" />
     <ClCompile Include="Source\System\ImGuiManager.cpp" />
     <ClCompile Include="Source\Utility\Color.cpp" />
+    <ClCompile Include="Source\Utility\InspectorUtility.cpp" />
     <ClCompile Include="Source\Utility\Math.cpp" />
     <ClCompile Include="Source\Utility\Quaternion.cpp" />
     <ClCompile Include="Source\Utility\Vector2.cpp" />

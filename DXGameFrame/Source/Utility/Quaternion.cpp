@@ -74,8 +74,8 @@ Vector3 Quaternion::ToEuler() const
 
     // pitch(X)
     float sinp = 2.0f * (w * x - y * z);
-    float pitch;
-    pitch = asinf(sinp);
+    sinp = Math::Clamp(-1.0f, 1.0f, sinp);
+    float pitch = asinf(sinp);
 
     // yaw(Y)
     float yaw;

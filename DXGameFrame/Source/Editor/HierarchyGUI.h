@@ -22,9 +22,6 @@ private:
 		CHILD       // 子要素
 	};
 
-	/// 操作対象シーン
-	Scene* m_pScene;
-
 	/// ゲームオブジェクト操作イベント
 	std::function<void()> m_operationEvent;
 

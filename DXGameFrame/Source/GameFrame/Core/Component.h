@@ -1,6 +1,7 @@
 // Component.h
 #pragma once
 #include "Object.h"
+#include "ClassID.h"
 
 class Scene;
 class GameObject;
@@ -130,6 +131,11 @@ public:
 	 */
 	template <typename T>
 	void RemoveComponent();
+
+	/**
+	 * @brief インスペクターでの表示
+	 */
+	virtual void OnInspectorGUI() {}
 
 private:
 	/// 親ゲームオブジェクトへのポインタ

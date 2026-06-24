@@ -3,6 +3,10 @@
 #include "../Core/Component.h"
 #include "../../DirectX/DirectXInclude.h"
 #include "../../Utility/Vector2.h"
+#include "../Core/ComponentManager.h"
+#include "../Core/ComponentRegisterMeta.h"
+
+REGISTER_COMPONENT(Camera);
 
 /**
  * @brief ƒJƒƒ‰î•ñ‚ğˆµ‚¤

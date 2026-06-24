@@ -1,6 +1,7 @@
 // Editor.cpp
 #include "Editor.h"
 #include "HierarchyGUI.h"
+#include "InspectorGUI.h"
 
 Scene* Editor::s_pTargetScene = nullptr;
 ObjPtr<GameObject> Editor::s_pTargetGameObject = nullptr;
@@ -13,6 +14,7 @@ void Editor::Init()
 		return;
 
 	s_editorWindows.push_back(std::make_unique<HierarchyGUI>());
+	s_editorWindows.push_back(std::make_unique<InspectorGUI>());
 	s_initialized = true;
 }
 

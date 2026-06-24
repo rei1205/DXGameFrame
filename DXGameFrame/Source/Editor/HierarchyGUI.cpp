@@ -5,17 +5,16 @@
 
 HierarchyGUI::HierarchyGUI() :
     EditorWindow("Hierarchy"),
-    m_pScene(nullptr),
     m_operationEvent(nullptr)
 {
 }
 
 void HierarchyGUI::OnGUI()
 {
-    m_pScene = Editor::GetTargetScene();
-	if (m_pScene == nullptr)
+    Scene* pScene = Editor::GetTargetScene();
+	if (pScene == nullptr)
 		return;
-    auto& objManager = m_pScene->GetGameObjectManager();
+    auto& objManager = pScene->GetGameObjectManager();
     auto& gameObjects = objManager.GetGameObjects();
 
     // ウィンドウ上の右クリックメニュー
@@ -57,7 +56,8 @@ void HierarchyGUI::OnGUI()
 
 bool HierarchyGUI::DrawRootNode()
 {
-    auto& objManager = m_pScene->GetGameObjectManager();
+    Scene* pScene = Editor::GetTargetScene();
+    auto& objManager = pScene->GetGameObjectManager();
     auto& gameObjects = objManager.GetGameObjects();
 
     // 動作設定
@@ -71,7 +71,7 @@ bool HierarchyGUI::DrawRootNode()
     if (gameObjects.empty())
         flags |= ImGuiTreeNodeFlags_Leaf;
 
-    bool open = ImGui::TreeNodeEx(m_pScene, flags, "Scene");
+    bool open = ImGui::TreeNodeEx(pScene, flags, "Scene");
 
     // 選択時の処理
     if (ImGui::IsItemClicked())

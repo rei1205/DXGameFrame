@@ -1,6 +1,8 @@
 // ComponentManager.h
 #pragma once
 #include "ComponentArray.h"
+#include <memory>
+#include <vector>
 #include <unordered_map>
 
 /**
