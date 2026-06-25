@@ -75,4 +75,9 @@ private:
 
 	/// 初期化済みフラグ
 	static bool s_initialized;
+
+	/**
+	 * @brief ルートウィンドウのGUIを作成する
+	 */
+	static void RootWindowGUI();
 };

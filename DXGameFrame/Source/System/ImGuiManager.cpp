@@ -18,6 +18,8 @@ void ImGuiManager::Init(HWND hWnd, ID3D11Device* pDevice, ID3D11DeviceContext* p
     ImGuiIO& io = ImGui::GetIO();
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+
+    // フォント追加
     io.Fonts->AddFontFromFileTTF(
         "Assets/keinanmaru_pop.ttf",
         14.0f,
@@ -56,8 +58,6 @@ void ImGuiManager::BeginFrame()
     ImGui_ImplDX11_NewFrame();
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
-
-    DrawDockSpace();
 }
 
 void ImGuiManager::EndFrame()
@@ -66,55 +66,4 @@ void ImGuiManager::EndFrame()
         return;
     ImGui::Render();
     ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
-}
-
-//void ImGuiManager::SetStyle()
-//{
-//    
-//
-//    // 角丸め
-//    style.WindowRounding = 0.0f;
-//    style.FrameRounding = 4.0f;
-//    style.GrabRounding = 4.0f;
-//    style.PopupRounding = 4.0f;
-//    style.ScrollbarRounding = 4.0f;
-//    style.ChildRounding = 4.0f;
-//
-//    style.WindowBorderSize = 0.0f;
-//    style.FrameBorderSize = 0.0f;
-//}
-
-void ImGuiManager::DrawDockSpace()
-{
-    ImGuiViewport* viewport = ImGui::GetMainViewport();
-    ImGuiStyle& style = ImGui::GetStyle();
-
-    ImGui::PushStyleColor(ImGuiCol_WindowBg, style.Colors[ImGuiCol_DockingEmptyBg]);
-
-    ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
-    ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
-    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(4, 4));
-
-    ImGui::SetNextWindowPos(viewport->WorkPos);
-    ImGui::SetNextWindowSize(viewport->WorkSize);
-    ImGui::SetNextWindowViewport(viewport->ID);
-
-    ImGuiWindowFlags windowFlags =
-        ImGuiWindowFlags_NoDocking |
-        ImGuiWindowFlags_NoTitleBar |
-        ImGuiWindowFlags_NoCollapse |
-        ImGuiWindowFlags_NoResize |
-        ImGuiWindowFlags_NoMove |
-        ImGuiWindowFlags_NoBringToFrontOnFocus |
-        ImGuiWindowFlags_NoNavFocus;
-
-    ImGui::Begin("DockSpaceRoot", nullptr, windowFlags);
-
-    ImGuiID dockspaceID = ImGui::GetID("MainDockSpace");
-    ImGui::DockSpace(dockspaceID);
-
-    ImGui::End();
-
-    ImGui::PopStyleVar(3);
-    ImGui::PopStyleColor();
 }

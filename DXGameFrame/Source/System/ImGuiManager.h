@@ -35,9 +35,4 @@ public:
 private:
 	/// 初期化済みフラグ
 	static bool m_isInitialized;
-
-	/**
-	 * @brief ドッキングスペースを描画
-	 */
-	static void DrawDockSpace();
 };

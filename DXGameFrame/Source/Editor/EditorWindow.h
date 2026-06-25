@@ -17,6 +17,15 @@ public:
 	void Update();
 
 	/**
+	 * @brief ウィンドウの開閉状態を取得する
+	 * @return ウィンドウが開いている場合trueを返す
+	 */
+	bool IsOpen()
+	{
+		return m_openFlag;
+	}
+
+	/**
 	 * @brief ウィンドウを開く
 	 */
 	void OpenWindow()
@@ -30,6 +39,15 @@ public:
 	void CloseWindow()
 	{
 		m_openFlag = false;
+	}
+
+	/**
+	 * @brief ウィンドウ名を取得する
+	 * @return ウィンドウ名
+	 */
+	std::string GetWindowName()
+	{
+		return m_windowName;
 	}
 
 private:

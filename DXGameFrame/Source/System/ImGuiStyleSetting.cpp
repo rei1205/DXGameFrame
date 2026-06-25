@@ -60,7 +60,7 @@ void ImGuiColorSetting()
     style.Colors[ImGuiCol_TitleBgCollapsed] = IMGUI_BLACK;
 
     // メニューバー
-    style.Colors[ImGuiCol_MenuBarBg] = IMGUI_DARKGRAY;
+    style.Colors[ImGuiCol_MenuBarBg] = IMGUI_MAINAREA;
 
     // スクロールバー
     style.Colors[ImGuiCol_ScrollbarBg] = ImLerp(IMGUI_BLACK, IMGUI_DARKGRAY, 0.5f);

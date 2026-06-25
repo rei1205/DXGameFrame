@@ -46,8 +46,7 @@ void Editor::Execute()
 	Direct3D::BeginDraw(clearColor);
 
 	// エディタウィンドウ更新
-	auto rtv = Direct3D::GetBackBufferRTV();
-	Direct3D::GetContext()->OMSetRenderTargets(1, &rtv, nullptr);
+	RootWindowGUI();
 	for (auto& window : s_editorWindows)
 	{
 		window->Update();
@@ -57,6 +56,64 @@ void Editor::Execute()
 	pScene->ApplyDestroy();
 	pScene->Draw();
 
+	auto rtv = Direct3D::GetBackBufferRTV();
+	Direct3D::GetContext()->OMSetRenderTargets(1, &rtv, nullptr);
 	ImGuiManager::EndFrame();
 	Direct3D::EndDraw();
+}
+
+void Editor::RootWindowGUI()
+{
+	ImGuiViewport* viewport = ImGui::GetMainViewport();
+	ImGuiStyle& style = ImGui::GetStyle();
+
+	// スタイル設定
+	ImGui::PushStyleColor(ImGuiCol_WindowBg, style.Colors[ImGuiCol_DockingEmptyBg]);
+	ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+	ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
+	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(4, 4));
+
+	ImGui::SetNextWindowPos(viewport->WorkPos);
+	ImGui::SetNextWindowSize(viewport->WorkSize);
+	ImGui::SetNextWindowViewport(viewport->ID);
+
+	ImGuiWindowFlags windowFlags =
+		ImGuiWindowFlags_NoDocking |
+		ImGuiWindowFlags_NoTitleBar |
+		ImGuiWindowFlags_NoCollapse |
+		ImGuiWindowFlags_NoResize |
+		ImGuiWindowFlags_NoMove |
+		ImGuiWindowFlags_NoBringToFrontOnFocus |
+		ImGuiWindowFlags_NoNavFocus |
+		ImGuiWindowFlags_MenuBar;
+
+	// ルートウィンドウ作成
+	ImGui::Begin("DockSpaceRoot", nullptr, windowFlags);
+
+	// メニューバー
+	if (ImGui::BeginMenuBar())
+	{
+		if (ImGui::BeginMenu("ウィンドウ"))
+		{
+			for (auto& window : s_editorWindows)
+			{
+				bool isOpen = window->IsOpen();
+				if (ImGui::MenuItem(window->GetWindowName().c_str(), nullptr, isOpen))
+				{
+					isOpen ? window->CloseWindow() : window->OpenWindow();
+				}
+			}
+			ImGui::EndMenu();
+		}
+
+		ImGui::EndMenuBar();
+	}
+
+	ImGuiID dockspaceID = ImGui::GetID("MainDockSpace");
+	ImGui::DockSpace(dockspaceID);
+
+	ImGui::End();
+
+	ImGui::PopStyleVar(3);
+	ImGui::PopStyleColor();
 }
