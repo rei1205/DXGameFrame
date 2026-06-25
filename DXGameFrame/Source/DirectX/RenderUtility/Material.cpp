@@ -14,7 +14,7 @@ Material::Material()
 
 void Material::Bind() const
 {
-	// ƒeƒNƒXƒ`ƒƒ‚ðƒZƒbƒg
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ã‚»ãƒƒãƒˆ
 	for (int i = 0; i < TextureSlot::MaterialSlotCount; ++i)
 	{
 		if (m_pTextures[i] == nullptr)
@@ -23,14 +23,14 @@ void Material::Bind() const
 		TextureManager::SetTexture(m_pTextures[i].get(), i);
 	}
 
-	// ƒVƒF[ƒ_[‚ðƒZƒbƒg
+	// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ã‚»ãƒƒãƒˆ
 	ShaderManager::SetVertexShader(m_pVertexShader.get());
 	ShaderManager::SetPixelShader(m_pPixelShader.get());
 
-	// ’è”ƒoƒbƒtƒ@‚ðƒZƒbƒg
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡ã‚’ã‚»ãƒƒãƒˆ
 	ConstantBufferManager::SetCustomData(m_customParameter);
 
-	// ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚ðƒZƒbƒg
+	// ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ã‚»ãƒƒãƒˆ
 	PipelineStateManager::SetBlendState(m_pBlendState);
 	PipelineStateManager::SetDepthStencilState(m_pDepthStencilState);
 	PipelineStateManager::SetRasterizerState(m_pRasterizerState);
@@ -83,7 +83,7 @@ void Material::SetParameter(const void* pData, UINT size)
 	if (pData == nullptr || size > CustomCBSize)
 		return;
 
-	// ƒf[ƒ^ƒRƒs[
+	// ãƒ‡ãƒ¼ã‚¿ã‚³ãƒ”ãƒ¼
 	m_customParameter.clear();
 	m_customParameter.resize(size);
 	memcpy(m_customParameter.data(), pData, size);

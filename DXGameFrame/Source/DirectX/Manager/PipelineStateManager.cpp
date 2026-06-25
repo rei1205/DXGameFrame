@@ -16,19 +16,19 @@ HRESULT PipelineStateManager::Init()
 {
     HRESULT hr = S_OK;
 
-    // ‰ŠúƒuƒŒƒ“ƒhƒXƒe[ƒg‚ğì¬
+    // åˆæœŸãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆ
     hr = CreateDefaultBlendStates();
     if (FAILED(hr)) { return hr; }
 
-    // ‰Šú[“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg‚ğì¬
+    // åˆæœŸæ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆ
     hr = CreateDefaultDepthStencilStates();
     if (FAILED(hr)) { return hr; }
 
-    // ‰Šúƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒg‚ğì¬
+    // åˆæœŸãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆ
     hr = CreateDefaultRasterizerStates();
     if (FAILED(hr)) { return hr; }
     
-    // ‰ŠúƒTƒ“ƒvƒ‰[ƒXƒe[ƒg‚ğì¬
+    // åˆæœŸã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆ
     hr = CreateDefaultSamplerStates();
     if (FAILED(hr)) { return hr; }
 
@@ -132,11 +132,11 @@ HRESULT PipelineStateManager::CreateBlendStates(const D3D11_BLEND_DESC* pDesc, c
     auto it = s_blendStates.find(name);
     if (it == s_blendStates.end())
     {
-        // ƒuƒŒƒ“ƒhƒXƒe[ƒg‚ğì¬
+        // ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆ
         auto state = std::make_shared<BlendState>();
         HRESULT hr = state->Create(pDesc, name);
 
-        // ¬Œ÷‚µ‚½‚çI—¹
+        // æˆåŠŸã—ãŸã‚‰çµ‚äº†
         if (SUCCEEDED(hr))
         {
             s_blendStates[name] = state;
@@ -144,7 +144,7 @@ HRESULT PipelineStateManager::CreateBlendStates(const D3D11_BLEND_DESC* pDesc, c
         }
     }
 
-    Debug::ErrorMessage("ƒuƒŒƒ“ƒhƒXƒe[ƒg[" + name + "]‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½B");
+    Debug::ErrorMessage("ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆ[" + name + "]ã®ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
     return S_FALSE;
 }
 
@@ -153,11 +153,11 @@ HRESULT PipelineStateManager::CreateDepthStencilStates(const D3D11_DEPTH_STENCIL
     auto it = s_depthStencilStates.find(name);
     if (it == s_depthStencilStates.end())
     {
-        // [“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg‚ğì¬
+        // æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆ
         auto state = std::make_shared<DepthStencilState>();
         HRESULT hr = state->Create(pDesc, name);
 
-        // ¬Œ÷‚µ‚½‚çI—¹
+        // æˆåŠŸã—ãŸã‚‰çµ‚äº†
         if (SUCCEEDED(hr))
         {
             s_depthStencilStates[name] = state;
@@ -165,7 +165,7 @@ HRESULT PipelineStateManager::CreateDepthStencilStates(const D3D11_DEPTH_STENCIL
         }
     }
 
-    Debug::ErrorMessage("[“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg[" + name + "]‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½B");
+    Debug::ErrorMessage("æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆ[" + name + "]ã®ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
     return S_FALSE;
 }
 
@@ -174,11 +174,11 @@ HRESULT PipelineStateManager::CreateRasterizerStates(const D3D11_RASTERIZER_DESC
     auto it = s_rasterizerStates.find(name);
     if (it == s_rasterizerStates.end())
     {
-        // ƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒg‚ğì¬
+        // ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆ
         auto state = std::make_shared<RasterizerState>();
         HRESULT hr = state->Create(pDesc, name);
 
-        // ¬Œ÷‚µ‚½‚çI—¹
+        // æˆåŠŸã—ãŸã‚‰çµ‚äº†
         if (SUCCEEDED(hr))
         {
             s_rasterizerStates[name] = state;
@@ -186,7 +186,7 @@ HRESULT PipelineStateManager::CreateRasterizerStates(const D3D11_RASTERIZER_DESC
         }
     }
 
-    Debug::ErrorMessage("ƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒg[" + name + "]‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½B");
+    Debug::ErrorMessage("ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆ[" + name + "]ã®ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
     return S_FALSE;
 }
 
@@ -195,11 +195,11 @@ HRESULT PipelineStateManager::CreateSamplerStates(const D3D11_SAMPLER_DESC* pDes
     auto it = s_samplerStates.find(name);
     if (it == s_samplerStates.end())
     {
-        // ƒTƒ“ƒvƒ‰[ƒXƒe[ƒg‚ğì¬
+        // ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆ
         auto state = std::make_shared<SamplerState>();
         HRESULT hr = state->Create(pDesc, name);
 
-        // ¬Œ÷‚µ‚½‚çI—¹
+        // æˆåŠŸã—ãŸã‚‰çµ‚äº†
         if (SUCCEEDED(hr))
         {
             s_samplerStates[name] = state;
@@ -207,17 +207,17 @@ HRESULT PipelineStateManager::CreateSamplerStates(const D3D11_SAMPLER_DESC* pDes
         }
     }
 
-    Debug::ErrorMessage("ƒTƒ“ƒvƒ‰[ƒXƒe[ƒg[" + name + "]‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½B");
+    Debug::ErrorMessage("ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆ[" + name + "]ã®ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
     return S_FALSE;
 }
 
 HRESULT PipelineStateManager::CreateDefaultBlendStates()
 {
     HRESULT hr = S_OK;
-    D3D11_BLEND_DESC blendDesc;		// ƒuƒŒƒ“ƒhƒXƒe[ƒgİ’èî•ñ
+    D3D11_BLEND_DESC blendDesc;		// ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆè¨­å®šæƒ…å ±
     D3D11_RENDER_TARGET_BLEND_DESC* rt;
 
-    // ƒuƒŒƒ“ƒh–³‚µ
+    // ãƒ–ãƒ¬ãƒ³ãƒ‰ç„¡ã—
     ZeroMemory(&blendDesc, sizeof(blendDesc));
     rt = &blendDesc.RenderTarget[0];
     rt->BlendEnable = FALSE;
@@ -231,7 +231,7 @@ HRESULT PipelineStateManager::CreateDefaultBlendStates()
     hr = CreateBlendStates(&blendDesc, BlendStateName::None);
     if (FAILED(hr)) { return hr; }
 
-    // ƒAƒ‹ƒtƒ@ƒuƒŒƒ“ƒh
+    // ã‚¢ãƒ«ãƒ•ã‚¡ãƒ–ãƒ¬ãƒ³ãƒ‰
     ZeroMemory(&blendDesc, sizeof(blendDesc));
     rt = &blendDesc.RenderTarget[0];
     rt->BlendEnable = TRUE;
@@ -245,7 +245,7 @@ HRESULT PipelineStateManager::CreateDefaultBlendStates()
     hr = CreateBlendStates(&blendDesc, BlendStateName::Alpha);
     if (FAILED(hr)) { return hr; }
 
-    // ‰ÁZ
+    // åŠ ç®—
     ZeroMemory(&blendDesc, sizeof(blendDesc));
     rt = &blendDesc.RenderTarget[0];
     rt->BlendEnable = TRUE;
@@ -259,7 +259,7 @@ HRESULT PipelineStateManager::CreateDefaultBlendStates()
     hr = CreateBlendStates(&blendDesc, BlendStateName::Add);
     if (FAILED(hr)) { return hr; }
 
-    // Œ¸Z
+    // æ¸›ç®—
     ZeroMemory(&blendDesc, sizeof(blendDesc));
     rt = &blendDesc.RenderTarget[0];
     rt->BlendEnable = TRUE;
@@ -273,7 +273,7 @@ HRESULT PipelineStateManager::CreateDefaultBlendStates()
     hr = CreateBlendStates(&blendDesc, BlendStateName::Subtract);
     if (FAILED(hr)) { return hr; }
 
-    // æZ
+    // ä¹—ç®—
     ZeroMemory(&blendDesc, sizeof(blendDesc));
     rt = &blendDesc.RenderTarget[0];
     rt->BlendEnable = TRUE;
@@ -287,7 +287,7 @@ HRESULT PipelineStateManager::CreateDefaultBlendStates()
     hr = CreateBlendStates(&blendDesc, BlendStateName::Multiply);
     if (FAILED(hr)) { return hr; }
 
-    // ƒJƒ‰[•`‰æ–³‚µ
+    // ã‚«ãƒ©ãƒ¼æç”»ç„¡ã—
     ZeroMemory(&blendDesc, sizeof(blendDesc));
     rt = &blendDesc.RenderTarget[0];
     rt->BlendEnable = FALSE;
@@ -301,9 +301,9 @@ HRESULT PipelineStateManager::CreateDefaultBlendStates()
 HRESULT PipelineStateManager::CreateDefaultDepthStencilStates()
 {
     HRESULT hr = S_OK;
-    D3D11_DEPTH_STENCIL_DESC dsDesc;	// [“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒgİ’èî•ñ
+    D3D11_DEPTH_STENCIL_DESC dsDesc;	// æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆè¨­å®šæƒ…å ±
 
-    // [“xƒeƒXƒgON [“x‘‚«‚İON (’Êí)
+    // æ·±åº¦ãƒ†ã‚¹ãƒˆON æ·±åº¦æ›¸ãè¾¼ã¿ON (é€šå¸¸)
     ZeroMemory(&dsDesc, sizeof(dsDesc));
     dsDesc.DepthEnable = TRUE;
     dsDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
@@ -312,7 +312,7 @@ HRESULT PipelineStateManager::CreateDefaultDepthStencilStates()
     hr = CreateDepthStencilStates(&dsDesc, DepthStencilStateName::Write);
     if (FAILED(hr)) { return hr; }
 
-    // [“xƒeƒXƒgON [“x‘‚«‚İOFF (”¼“§–¾—p)
+    // æ·±åº¦ãƒ†ã‚¹ãƒˆON æ·±åº¦æ›¸ãè¾¼ã¿OFF (åŠé€æ˜ç”¨)
     ZeroMemory(&dsDesc, sizeof(dsDesc));
     dsDesc.DepthEnable = TRUE;
     dsDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ZERO;
@@ -321,7 +321,7 @@ HRESULT PipelineStateManager::CreateDefaultDepthStencilStates()
     hr = CreateDepthStencilStates(&dsDesc, DepthStencilStateName::ReadOnly);
     if (FAILED(hr)) { return hr; }
 
-    // [“xƒeƒXƒgOFF (UIE2D—p)
+    // æ·±åº¦ãƒ†ã‚¹ãƒˆOFF (UIãƒ»2Dç”¨)
     ZeroMemory(&dsDesc, sizeof(dsDesc));
     dsDesc.DepthEnable = FALSE;
     dsDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ZERO;
@@ -335,9 +335,9 @@ HRESULT PipelineStateManager::CreateDefaultDepthStencilStates()
 HRESULT PipelineStateManager::CreateDefaultRasterizerStates()
 {
     HRESULT hr = S_OK;
-    D3D11_RASTERIZER_DESC rasterizerDesc;		// ƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒgİ’èî•ñ
+    D3D11_RASTERIZER_DESC rasterizerDesc;		// ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆè¨­å®šæƒ…å ±
 
-    // ‘O–Ê•`‰æ
+    // å‰é¢æç”»
     ZeroMemory(&rasterizerDesc, sizeof(rasterizerDesc));
     rasterizerDesc.FillMode = D3D11_FILL_SOLID;
     rasterizerDesc.CullMode = D3D11_CULL_BACK;
@@ -347,7 +347,7 @@ HRESULT PipelineStateManager::CreateDefaultRasterizerStates()
     hr = CreateRasterizerStates(&rasterizerDesc, RasterizerStateName::Front);
     if (FAILED(hr)) { return hr; }
 
-    // ”w–Ê•`‰æ
+    // èƒŒé¢æç”»
     ZeroMemory(&rasterizerDesc, sizeof(rasterizerDesc));
     rasterizerDesc.FillMode = D3D11_FILL_SOLID;
     rasterizerDesc.CullMode = D3D11_CULL_FRONT;
@@ -357,7 +357,7 @@ HRESULT PipelineStateManager::CreateDefaultRasterizerStates()
     hr = CreateRasterizerStates(&rasterizerDesc, RasterizerStateName::Back);
     if (FAILED(hr)) { return hr; }
 
-    // —¼–Ê•`‰æ
+    // ä¸¡é¢æç”»
     ZeroMemory(&rasterizerDesc, sizeof(rasterizerDesc));
     rasterizerDesc.FillMode = D3D11_FILL_SOLID;
     rasterizerDesc.CullMode = D3D11_CULL_NONE;
@@ -366,7 +366,7 @@ HRESULT PipelineStateManager::CreateDefaultRasterizerStates()
     hr = CreateRasterizerStates(&rasterizerDesc, RasterizerStateName::None);
     if (FAILED(hr)) { return hr; }
 
-    // ƒƒCƒ„[ƒtƒŒ[ƒ€•`‰æ
+    // ãƒ¯ã‚¤ãƒ¤ãƒ¼ãƒ•ãƒ¬ãƒ¼ãƒ æç”»
     ZeroMemory(&rasterizerDesc, sizeof(rasterizerDesc));
     rasterizerDesc.FillMode = D3D11_FILL_WIREFRAME;
     rasterizerDesc.CullMode = D3D11_CULL_NONE;
@@ -382,9 +382,9 @@ HRESULT PipelineStateManager::CreateDefaultRasterizerStates()
 HRESULT PipelineStateManager::CreateDefaultSamplerStates()
 {
     HRESULT hr = S_OK;
-    D3D11_SAMPLER_DESC samplerDesc;		// ƒTƒ“ƒvƒ‰[ƒXƒe[ƒgİ’èî•ñ
+    D3D11_SAMPLER_DESC samplerDesc;		// ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆè¨­å®šæƒ…å ±
 
-    // üŒ`•âŠÔ + ŒJ‚è•Ô‚µ
+    // ç·šå½¢è£œé–“ + ç¹°ã‚Šè¿”ã—
     ZeroMemory(&samplerDesc, sizeof(samplerDesc));
     samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
     samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -395,7 +395,7 @@ HRESULT PipelineStateManager::CreateDefaultSamplerStates()
     hr = CreateSamplerStates(&samplerDesc, SamplerStateName::Linear_Wrap);
     if (FAILED(hr)) { return hr; }
 
-    // üŒ`•âŠÔ + ’[ŒÅ’è
+    // ç·šå½¢è£œé–“ + ç«¯å›ºå®š
     ZeroMemory(&samplerDesc, sizeof(samplerDesc));
     samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
     samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
@@ -406,7 +406,7 @@ HRESULT PipelineStateManager::CreateDefaultSamplerStates()
     hr = CreateSamplerStates(&samplerDesc, SamplerStateName::Linear_Clamp);
     if (FAILED(hr)) { return hr; }
 
-    // üŒ`•âŠÔ + ˜gŠO•
+    // ç·šå½¢è£œé–“ + æ å¤–é»’
     ZeroMemory(&samplerDesc, sizeof(samplerDesc));
     samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
     samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_BORDER;
@@ -421,7 +421,7 @@ HRESULT PipelineStateManager::CreateDefaultSamplerStates()
     hr = CreateSamplerStates(&samplerDesc, SamplerStateName::Linear_Border_Black);
     if (FAILED(hr)) { return hr; }
 
-    // üŒ`•âŠÔ + ˜gŠO”’
+    // ç·šå½¢è£œé–“ + æ å¤–ç™½
     ZeroMemory(&samplerDesc, sizeof(samplerDesc));
     samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
     samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_BORDER;
@@ -436,7 +436,7 @@ HRESULT PipelineStateManager::CreateDefaultSamplerStates()
     hr = CreateSamplerStates(&samplerDesc, SamplerStateName::Linear_Border_White);
     if (FAILED(hr)) { return hr; }
 
-    // Å‹ß–T + ŒJ‚è•Ô‚µ
+    // æœ€è¿‘å‚ + ç¹°ã‚Šè¿”ã—
     ZeroMemory(&samplerDesc, sizeof(samplerDesc));
     samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
     samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -447,7 +447,7 @@ HRESULT PipelineStateManager::CreateDefaultSamplerStates()
     hr = CreateSamplerStates(&samplerDesc, SamplerStateName::Point_Wrap);
     if (FAILED(hr)) { return hr; }
 
-    // Å‹ß–T + ’[ŒÅ’è
+    // æœ€è¿‘å‚ + ç«¯å›ºå®š
     ZeroMemory(&samplerDesc, sizeof(samplerDesc));
     samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
     samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
@@ -458,7 +458,7 @@ HRESULT PipelineStateManager::CreateDefaultSamplerStates()
     hr = CreateSamplerStates(&samplerDesc, SamplerStateName::Point_Clamp);
     if (FAILED(hr)) { return hr; }
 
-    // Å‹ß–T + ˜gŠO•
+    // æœ€è¿‘å‚ + æ å¤–é»’
     ZeroMemory(&samplerDesc, sizeof(samplerDesc));
     samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
     samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_BORDER;
@@ -473,7 +473,7 @@ HRESULT PipelineStateManager::CreateDefaultSamplerStates()
     hr = CreateSamplerStates(&samplerDesc, SamplerStateName::Point_Border_Black);
     if (FAILED(hr)) { return hr; }
 
-    // Å‹ß–T + ˜gŠO”’
+    // æœ€è¿‘å‚ + æ å¤–ç™½
     ZeroMemory(&samplerDesc, sizeof(samplerDesc));
     samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
     samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_BORDER;

@@ -5,29 +5,29 @@
 #include "../GameFrame/Core/ObjPtr.h"
 
 /**
- * @brief ƒGƒfƒBƒ^GUI‚ğˆµ‚¤
+ * @brief ã‚¨ãƒ‡ã‚£ã‚¿GUIã‚’æ‰±ã†
  */
 class Editor
 {
 public:
 	/**
-	 * @brief ƒGƒfƒBƒ^‚Ì‰Šú‰»ˆ—
+	 * @brief ã‚¨ãƒ‡ã‚£ã‚¿ã®åˆæœŸåŒ–å‡¦ç†
 	 */
 	static void Init();
-
+	
 	/**
-	 * @brief I—¹ˆ—
+	 * @brief çµ‚äº†å‡¦ç†
 	 */
 	static void Uninit();
 
 	/**
-	 * @brief XVˆ—
+	 * @brief æ›´æ–°å‡¦ç†
 	 */
-	static void Update();
+	static void Execute();
 
 	/**
-	 * @brief ‘€ì‘ÎÛƒV[ƒ“‚ğİ’è‚·‚é
-	 * @param pScene ‘€ì‘ÎÛƒV[ƒ“‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	 * @brief æ“ä½œå¯¾è±¡ã‚·ãƒ¼ãƒ³ã‚’è¨­å®šã™ã‚‹
+	 * @param pScene æ“ä½œå¯¾è±¡ã‚·ãƒ¼ãƒ³ã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	 */
 	static void SetTargetScene(Scene* pScene)
 	{
@@ -35,8 +35,8 @@ public:
 	}
 
 	/**
-	 * @brief ‘€ì‘ÎÛƒV[ƒ“‚ğæ“¾‚·‚é
-	 * @return ‘€ì‘ÎÛƒV[ƒ“‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	 * @brief æ“ä½œå¯¾è±¡ã‚·ãƒ¼ãƒ³ã‚’å–å¾—ã™ã‚‹
+	 * @return æ“ä½œå¯¾è±¡ã‚·ãƒ¼ãƒ³ã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	 */
 	static Scene* GetTargetScene()
 	{
@@ -44,8 +44,8 @@ public:
 	}
 
 	/**
-	 * @brief ‘€ì‘ÎÛƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğİ’è‚·‚é
-	 * @param pGameObject ‘€ì‘ÎÛƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	 * @brief æ“ä½œå¯¾è±¡ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’è¨­å®šã™ã‚‹
+	 * @param pGameObject æ“ä½œå¯¾è±¡ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	 */
 	static void SetTargetGameObject(GameObject* pGameObject)
 	{
@@ -53,8 +53,8 @@ public:
 	}
 
 	/**
-	 * @brief ‘€ì‘ÎÛƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğæ“¾‚·‚é
-	 * @return ‘€ì‘ÎÛƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	 * @brief æ“ä½œå¯¾è±¡ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å–å¾—ã™ã‚‹
+	 * @return æ“ä½œå¯¾è±¡ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	 */
 	static GameObject* GetTargetGameObject()
 	{
@@ -64,15 +64,15 @@ public:
 private:
 	Editor() = delete;
 
-	/// ‘€ì‘ÎÛƒV[ƒ“
+	/// æ“ä½œå¯¾è±¡ã‚·ãƒ¼ãƒ³
 	static Scene* s_pTargetScene;
 
-	/// ‘€ì‘ÎÛƒQ[ƒ€ƒIƒuƒWƒFƒNƒg
+	/// æ“ä½œå¯¾è±¡ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	static ObjPtr<GameObject> s_pTargetGameObject;
 
-	/// ƒGƒfƒBƒ^ƒEƒBƒ“ƒhƒE”z—ñ
+	/// ã‚¨ãƒ‡ã‚£ã‚¿ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦é…åˆ—
 	static std::vector<std::unique_ptr<EditorWindow>> s_editorWindows;
 
-	/// ‰Šú‰»Ï‚İƒtƒ‰ƒO
+	/// åˆæœŸåŒ–æ¸ˆã¿ãƒ•ãƒ©ã‚°
 	static bool s_initialized;
 };

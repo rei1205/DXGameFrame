@@ -7,7 +7,7 @@
 #include <array>
 
 /**
- * @brief •`‰æî•ñ‚ğ‚Ü‚Æ‚ß‚½ƒNƒ‰ƒX
+ * @brief æç”»æƒ…å ±ã‚’ã¾ã¨ã‚ãŸã‚¯ãƒ©ã‚¹
  */
 class Material
 {
@@ -16,109 +16,109 @@ public:
 	virtual ~Material() = default;
 
 	/**
-	 * @brief ƒ}ƒeƒŠƒAƒ‹‚ğƒZƒbƒg‚·‚é
+	 * @brief ãƒãƒ†ãƒªã‚¢ãƒ«ã‚’ã‚»ãƒƒãƒˆã™ã‚‹
 	 */
 	void Bind() const;
 
 	/**
-	 * @brief ƒeƒNƒXƒ`ƒƒ‰æ‘œ‚ğİ’è‚·‚é
-	 * @param filePath ƒeƒNƒXƒ`ƒƒ‰æ‘œ‚Ö‚Ìƒtƒ@ƒCƒ‹ƒpƒX
-	 * @param slot İ’è‚·‚éƒXƒƒbƒg”Ô†
+	 * @brief ãƒ†ã‚¯ã‚¹ãƒãƒ£ç”»åƒã‚’è¨­å®šã™ã‚‹
+	 * @param filePath ãƒ†ã‚¯ã‚¹ãƒãƒ£ç”»åƒã¸ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹
+	 * @param slot è¨­å®šã™ã‚‹ã‚¹ãƒ­ãƒƒãƒˆç•ªå·
 	 */
 	void SetTexture(const std::string& filePath, UINT slot = TextureSlot::Main);
 
 	/**
-	 * @brief ƒeƒNƒXƒ`ƒƒ‰æ‘œ‚ğİ’è‚·‚é
-	 * @param pTexture ƒeƒNƒXƒ`ƒƒ‚Ö‚Ìƒ|ƒCƒ“ƒ^ (shared_ptr)
-	 * @param slot İ’è‚·‚éƒXƒƒbƒg”Ô†
+	 * @brief ãƒ†ã‚¯ã‚¹ãƒãƒ£ç”»åƒã‚’è¨­å®šã™ã‚‹
+	 * @param pTexture ãƒ†ã‚¯ã‚¹ãƒãƒ£ã¸ã®ãƒã‚¤ãƒ³ã‚¿ (shared_ptr)
+	 * @param slot è¨­å®šã™ã‚‹ã‚¹ãƒ­ãƒƒãƒˆç•ªå·
 	 */
 	void SetTexture(std::shared_ptr<Texture> pTexture, UINT slot = TextureSlot::Main);
 
 	/**
-	 * @brief ƒeƒNƒXƒ`ƒƒ‚ğæ“¾‚·‚é
-	 * @param slot ƒeƒNƒXƒ`ƒƒƒXƒƒbƒg”Ô†
-	 * @return ƒeƒNƒXƒ`ƒƒ‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	 * @brief ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’å–å¾—ã™ã‚‹
+	 * @param slot ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚¹ãƒ­ãƒƒãƒˆç•ªå·
+	 * @return ãƒ†ã‚¯ã‚¹ãƒãƒ£ã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	 */
 	Texture* GetTexture(UINT slot = TextureSlot::Main);
 
 	/**
-	 * @brief ’¸“_ƒVƒF[ƒ_[‚ğİ’è‚·‚é
-	 * @param filePath ’¸“_ƒVƒF[ƒ_[(.cso)‚Ö‚Ìƒtƒ@ƒCƒ‹ƒpƒX
+	 * @brief é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’è¨­å®šã™ã‚‹
+	 * @param filePath é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼(.cso)ã¸ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹
 	 */
 	void SetVertexShader(const std::string& filePath);
 
 	/**
-	 * @brief ’¸“_ƒVƒF[ƒ_[‚ğİ’è‚·‚é
-	 * @param pVertexShader ’¸“_ƒVƒF[ƒ_[‚Ö‚Ìƒ|ƒCƒ“ƒ^ (shared_ptr)
+	 * @brief é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’è¨­å®šã™ã‚‹
+	 * @param pVertexShader é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã¸ã®ãƒã‚¤ãƒ³ã‚¿ (shared_ptr)
 	 */
 	void SetVertexShader(std::shared_ptr<VertexShader> pVertexShader);
 
 	/**
-	 * @brief ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚ğİ’è‚·‚é
-	 * @param filePath ƒsƒNƒZƒ‹ƒVƒF[ƒ_[(.cso)‚Ö‚Ìƒtƒ@ƒCƒ‹ƒpƒX
+	 * @brief ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’è¨­å®šã™ã‚‹
+	 * @param filePath ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼(.cso)ã¸ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹
 	 */
 	void SetPixelShader(const std::string& filePath);
 
 	/**
-	 * @brief ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚ğİ’è‚·‚é
-	 * @param pPixelShader ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚Ö‚Ìƒ|ƒCƒ“ƒ^ (shared_ptr)
+	 * @brief ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’è¨­å®šã™ã‚‹
+	 * @param pPixelShader ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã¸ã®ãƒã‚¤ãƒ³ã‚¿ (shared_ptr)
 	 */
 	void SetPixelShader(std::shared_ptr<PixelShader> pPixelShader);
 
 	/**
-	 * @brief ƒ}ƒeƒŠƒAƒ‹‚Ìƒpƒ‰ƒ[ƒ^‚ğİ’è‚·‚é
-	 * @param data İ’è‚·‚éƒf[ƒ^‚Ö‚Ìƒ|ƒCƒ“ƒ^ (256ƒoƒCƒgˆÈ‰º)
-	 * @param size İ’è‚·‚éƒf[ƒ^‚Ìƒƒ‚ƒŠƒTƒCƒY
+	 * @brief ãƒãƒ†ãƒªã‚¢ãƒ«ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’è¨­å®šã™ã‚‹
+	 * @param data è¨­å®šã™ã‚‹ãƒ‡ãƒ¼ã‚¿ã¸ã®ãƒã‚¤ãƒ³ã‚¿ (256ãƒã‚¤ãƒˆä»¥ä¸‹)
+	 * @param size è¨­å®šã™ã‚‹ãƒ‡ãƒ¼ã‚¿ã®ãƒ¡ãƒ¢ãƒªã‚µã‚¤ã‚º
 	 */
 	void SetParameter(const void* pData, UINT size);
 
 	/**
-	 * @brief ƒuƒŒƒ“ƒhƒXƒe[ƒg‚ğİ’è‚·‚é
-	 * @param blendStateName ƒuƒŒƒ“ƒhƒXƒe[ƒg–¼
+	 * @brief ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆã‚’è¨­å®šã™ã‚‹
+	 * @param blendStateName ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆå
 	 */
 	void SetBlendState(const std::string& blendStateName);
 
 	/**
-	 * @brief [“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg‚ğİ’è‚·‚é
-	 * @param depthStencilStateName [“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg–¼
+	 * @brief æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆã‚’è¨­å®šã™ã‚‹
+	 * @param depthStencilStateName æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆå
 	 */
 	void SetDepthStencilState(const std::string& depthStencilStateName);
 
 	/**
-	 * @brief ƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒg‚ğİ’è‚·‚é
-	 * @param rasterizerStateName ƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒg–¼
+	 * @brief ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã‚’è¨­å®šã™ã‚‹
+	 * @param rasterizerStateName ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆå
 	 */
 	void SetRasterizerState(const std::string& rasterizerStateName);
 
 	/**
-	 * @brief ƒTƒ“ƒvƒ‰[ƒXƒe[ƒg‚ğİ’è‚·‚é
-	 * @param samplerStateName ƒTƒ“ƒvƒ‰[ƒXƒe[ƒg–¼
-	 * @param slot İ’è‚·‚éƒXƒƒbƒg”Ô†
+	 * @brief ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã‚’è¨­å®šã™ã‚‹
+	 * @param samplerStateName ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆå
+	 * @param slot è¨­å®šã™ã‚‹ã‚¹ãƒ­ãƒƒãƒˆç•ªå·
 	 */
 	void SetSamplerState(const std::string& samplerStateName, UINT slot);
 
 private:
-	/// ƒeƒNƒXƒ`ƒƒ”z—ñ
+	/// ãƒ†ã‚¯ã‚¹ãƒãƒ£é…åˆ—
 	std::array<std::shared_ptr<Texture>, TextureSlot::MaterialSlotCount> m_pTextures;
 
-	/// ’¸“_ƒVƒF[ƒ_[‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	/// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	std::shared_ptr<VertexShader> m_pVertexShader;
 
-	/// ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	/// ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	std::shared_ptr<PixelShader> m_pPixelShader;
 
-	/// ƒ}ƒeƒŠƒAƒ‹‚²‚Æ‚Ìƒpƒ‰ƒ[ƒ^
+	/// ãƒãƒ†ãƒªã‚¢ãƒ«ã”ã¨ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 	std::vector<BYTE> m_customParameter;
 
-	/// ƒuƒŒƒ“ƒhƒXƒe[ƒg
+	/// ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆ
 	BlendState* m_pBlendState;
 
-	/// [“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg
+	/// æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆ
 	DepthStencilState* m_pDepthStencilState;
 
-	/// ƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒg
+	/// ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆ
 	RasterizerState* m_pRasterizerState;
 
-	/// ƒTƒ“ƒvƒ‰[ƒXƒe[ƒg
+	/// ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆ
 	std::array<SamplerState*, TextureSlot::MaterialSlotCount> m_pSamplerState;
 };

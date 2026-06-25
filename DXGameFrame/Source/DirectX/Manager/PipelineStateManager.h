@@ -7,159 +7,159 @@
 #include <memory>
 #include <unordered_map>
 
-/// ‰ŠúƒuƒŒƒ“ƒhƒXƒe[ƒg–¼
+/// åˆæœŸãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆå
 namespace BlendStateName
 {
-	constexpr const char* None = "None";			// ƒuƒŒƒ“ƒh–³‚µ
-	constexpr const char* Alpha = "Alpha";			// ’Êí‚ÌƒAƒ‹ƒtƒ@ƒuƒŒƒ“ƒh
-	constexpr const char* Add = "Add";				// ‰ÁZ
-	constexpr const char* Subtract = "Subtract";	// Œ¸Z
-	constexpr const char* Multiply = "Multiply";	// æZ
-	constexpr const char* Disable = "Disable";		// ƒJƒ‰[•`‰æ–³‚µ
+	constexpr const char* None = "None";			// ãƒ–ãƒ¬ãƒ³ãƒ‰ç„¡ã—
+	constexpr const char* Alpha = "Alpha";			// é€šå¸¸ã®ã‚¢ãƒ«ãƒ•ã‚¡ãƒ–ãƒ¬ãƒ³ãƒ‰
+	constexpr const char* Add = "Add";				// åŠ ç®—
+	constexpr const char* Subtract = "Subtract";	// æ¸›ç®—
+	constexpr const char* Multiply = "Multiply";	// ä¹—ç®—
+	constexpr const char* Disable = "Disable";		// ã‚«ãƒ©ãƒ¼æç”»ç„¡ã—
 
-	constexpr const char* Default = None;			// ƒfƒtƒHƒ‹ƒgƒuƒŒƒ“ƒhƒXƒe[ƒg
+	constexpr const char* Default = None;			// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆ
 }
 
-/// ‰Šú[“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg–¼
+/// åˆæœŸæ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆå
 namespace DepthStencilStateName
 {
-	constexpr const char* Write = "Write";			// [“xƒeƒXƒgON [“x‘‚«‚İON (’Êí)
-	constexpr const char* ReadOnly = "ReadOnly";	// [“xƒeƒXƒgON [“x‘‚«‚İOFF (”¼“§–¾—p)
-	constexpr const char* Disable = "Disable";		// [“xƒeƒXƒgOFF (UIE2D—p)
+	constexpr const char* Write = "Write";			// æ·±åº¦ãƒ†ã‚¹ãƒˆON æ·±åº¦æ›¸ãè¾¼ã¿ON (é€šå¸¸)
+	constexpr const char* ReadOnly = "ReadOnly";	// æ·±åº¦ãƒ†ã‚¹ãƒˆON æ·±åº¦æ›¸ãè¾¼ã¿OFF (åŠé€æ˜ç”¨)
+	constexpr const char* Disable = "Disable";		// æ·±åº¦ãƒ†ã‚¹ãƒˆOFF (UIãƒ»2Dç”¨)
 
-	constexpr const char* Default = Write;			// ƒfƒtƒHƒ‹ƒg[“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg
+	constexpr const char* Default = Write;			// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆæ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆ
 }
 
-/// ‰Šúƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒg–¼
+/// åˆæœŸãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆå
 namespace RasterizerStateName
 {
-	constexpr const char* Front = "Front";				// ‘O–Ê•`‰æ
-	constexpr const char* Back = "Back";				// ”w–Ê•`‰æ
-	constexpr const char* None = "None";				// —¼–Ê•`‰æ
-	constexpr const char* Wireframe = "Wireframe";		// ƒƒCƒ„[ƒtƒŒ[ƒ€•`‰æ
+	constexpr const char* Front = "Front";				// å‰é¢æç”»
+	constexpr const char* Back = "Back";				// èƒŒé¢æç”»
+	constexpr const char* None = "None";				// ä¸¡é¢æç”»
+	constexpr const char* Wireframe = "Wireframe";		// ãƒ¯ã‚¤ãƒ¤ãƒ¼ãƒ•ãƒ¬ãƒ¼ãƒ æç”»
 
-	constexpr const char* Default = Front;				// ƒfƒtƒHƒ‹ƒgƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒg
+	constexpr const char* Default = Front;				// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆ
 }
 
-/// ‰ŠúƒTƒ“ƒvƒ‰[ƒXƒe[ƒg–¼
+/// åˆæœŸã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆå
 namespace SamplerStateName
 {
-	constexpr const char* Linear_Wrap = "Linear_Wrap";					// üŒ`•âŠÔ + ŒJ‚è•Ô‚µ
-	constexpr const char* Linear_Clamp = "Linear_Clamp";				// üŒ`•âŠÔ + ’[ŒÅ’è
-	constexpr const char* Linear_Border_Black = "Linear_Border_Black";	// üŒ`•âŠÔ + ˜gŠO•
-	constexpr const char* Linear_Border_White = "Linear_Border_White";	// üŒ`•âŠÔ + ˜gŠO”’
-	constexpr const char* Point_Wrap = "Point_Wrap";					// Å‹ß–T + ŒJ‚è•Ô‚µ
-	constexpr const char* Point_Clamp = "Point_Clamp";					// Å‹ß–T + ’[ŒÅ’è
-	constexpr const char* Point_Border_Black = "Point_Border_Black";	// Å‹ß–T + ˜gŠO•
-	constexpr const char* Point_Border_White = "Point_Border_White";	// Å‹ß–T + ˜gŠO”’
+	constexpr const char* Linear_Wrap = "Linear_Wrap";					// ç·šå½¢è£œé–“ + ç¹°ã‚Šè¿”ã—
+	constexpr const char* Linear_Clamp = "Linear_Clamp";				// ç·šå½¢è£œé–“ + ç«¯å›ºå®š
+	constexpr const char* Linear_Border_Black = "Linear_Border_Black";	// ç·šå½¢è£œé–“ + æ å¤–é»’
+	constexpr const char* Linear_Border_White = "Linear_Border_White";	// ç·šå½¢è£œé–“ + æ å¤–ç™½
+	constexpr const char* Point_Wrap = "Point_Wrap";					// æœ€è¿‘å‚ + ç¹°ã‚Šè¿”ã—
+	constexpr const char* Point_Clamp = "Point_Clamp";					// æœ€è¿‘å‚ + ç«¯å›ºå®š
+	constexpr const char* Point_Border_Black = "Point_Border_Black";	// æœ€è¿‘å‚ + æ å¤–é»’
+	constexpr const char* Point_Border_White = "Point_Border_White";	// æœ€è¿‘å‚ + æ å¤–ç™½
 
-	constexpr const char* Default = Linear_Wrap;						// ƒfƒtƒHƒ‹ƒgƒTƒ“ƒvƒ‰[ƒXƒe[ƒg
+	constexpr const char* Default = Linear_Wrap;						// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆ
 }
 
 /**
- * @brief ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚ğˆµ‚¤
+ * @brief ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚’æ‰±ã†
  */
 class PipelineStateManager
 {
 public:
 	/**
-	 * @brief ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚Ì‰Šú‰»‚ğs‚¤
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã®åˆæœŸåŒ–ã‚’è¡Œã†
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	static HRESULT Init();
 
 	/**
-	 * @brief I—¹ˆ—
+	 * @brief çµ‚äº†å‡¦ç†
 	 */
 	static void Uninit();
 
 	/**
-	 * @brief ƒuƒŒƒ“ƒhƒXƒe[ƒg‚ğƒZƒbƒg‚·‚é
-	 * @param pBlendState ƒuƒŒƒ“ƒhƒXƒe[ƒg‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	 * @brief ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ã‚»ãƒƒãƒˆã™ã‚‹
+	 * @param pBlendState ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	 */
 	static void SetBlendState(BlendState* pBlendState);
 
 	/**
-	 * @brief [“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg‚ğƒZƒbƒg‚·‚é
-	 * @param pDepthStencilState [“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	 * @brief æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ã‚»ãƒƒãƒˆã™ã‚‹
+	 * @param pDepthStencilState æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	 */
 	static void SetDepthStencilState(DepthStencilState* pDepthStencilState);
 
 	/**
-	 * @brief ƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒg‚ğƒZƒbƒg‚·‚é
-	 * @param pRasterizerState ƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒg‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	 * @brief ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ã‚»ãƒƒãƒˆã™ã‚‹
+	 * @param pRasterizerState ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	 */
 	static void SetRasterizerState(RasterizerState* pRasterizerState);
 
 	/**
-	 * @brief ƒTƒ“ƒvƒ‰[ƒXƒe[ƒg‚ğƒZƒbƒg‚·‚é
-	 * @param pSamplerState ƒTƒ“ƒvƒ‰[ƒXƒe[ƒg‚Ö‚Ìƒ|ƒCƒ“ƒ^
-	 * @param slot ƒZƒbƒg‚·‚éƒXƒƒbƒg”Ô†
+	 * @brief ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ã‚»ãƒƒãƒˆã™ã‚‹
+	 * @param pSamplerState ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã¸ã®ãƒã‚¤ãƒ³ã‚¿
+	 * @param slot ã‚»ãƒƒãƒˆã™ã‚‹ã‚¹ãƒ­ãƒƒãƒˆç•ªå·
 	 */
 	static void SetSamplerState(SamplerState* pSamplerState, UINT slot);
 
 	/**
-	 * @brief ƒuƒŒƒ“ƒhƒXƒe[ƒg‚ğæ“¾‚·‚é
-	 * @param name ƒuƒŒƒ“ƒhƒXƒe[ƒg–¼
-	 * @return ƒuƒŒƒ“ƒhƒXƒe[ƒg‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	 * @brief ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆã‚’å–å¾—ã™ã‚‹
+	 * @param name ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆå
+	 * @return ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	 */
 	static BlendState* GetBlendState(const std::string& name);
 
 	/**
-	 * @brief [“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg‚ğæ“¾‚·‚é
-	 * @param name [“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg–¼
-	 * @return [“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	 * @brief æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆã‚’å–å¾—ã™ã‚‹
+	 * @param name æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆå
+	 * @return æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	 */
 	static DepthStencilState* GetDepthStencilState(const std::string& name);
 
 	/**
-	 * @brief ƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒg‚ğæ“¾‚·‚é
-	 * @param name ƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒg–¼
-	 * @return ƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒg‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	 * @brief ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã‚’å–å¾—ã™ã‚‹
+	 * @param name ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆå
+	 * @return ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	 */
 	static RasterizerState* GetRasterizerState(const std::string& name);
 
 	/**
-	 * @brief ƒTƒ“ƒvƒ‰[ƒXƒe[ƒg‚ğæ“¾‚·‚é
-	 * @param name ƒTƒ“ƒvƒ‰[ƒXƒe[ƒg–¼
-	 * @return ƒTƒ“ƒvƒ‰[ƒXƒe[ƒg‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	 * @brief ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã‚’å–å¾—ã™ã‚‹
+	 * @param name ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆå
+	 * @return ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	 */
 	static SamplerState* GetSamplerState(const std::string& name);
 
 	/**
-	 * @brief ƒuƒŒƒ“ƒhƒXƒe[ƒg‚ğì¬‚·‚é
-	 * @param pDesc ƒuƒŒƒ“ƒhƒXƒe[ƒgİ’èî•ñ‚Ö‚Ìƒ|ƒCƒ“ƒ^
-	 * @param name ƒuƒŒƒ“ƒhƒXƒe[ƒg–¼
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆã™ã‚‹
+	 * @param pDesc ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆè¨­å®šæƒ…å ±ã¸ã®ãƒã‚¤ãƒ³ã‚¿
+	 * @param name ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆå
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	static HRESULT CreateBlendStates(const D3D11_BLEND_DESC* pDesc, const std::string& name);
 
 	/**
-	 * @brief [“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg‚ğì¬‚·‚é
-	 * @param pDesc [“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒgİ’èî•ñ‚Ö‚Ìƒ|ƒCƒ“ƒ^
-	 * @param name [“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg–¼
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆã™ã‚‹
+	 * @param pDesc æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆè¨­å®šæƒ…å ±ã¸ã®ãƒã‚¤ãƒ³ã‚¿
+	 * @param name æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆå
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	static HRESULT CreateDepthStencilStates(const D3D11_DEPTH_STENCIL_DESC* pDesc, const std::string& name);
 
 	/**
-	 * @brief ƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒg‚ğì¬‚·‚é
-	 * @param pDesc ƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒgİ’èî•ñ‚Ö‚Ìƒ|ƒCƒ“ƒ^
-	 * @param name ƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒg–¼
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆã™ã‚‹
+	 * @param pDesc ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆè¨­å®šæƒ…å ±ã¸ã®ãƒã‚¤ãƒ³ã‚¿
+	 * @param name ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆå
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	static HRESULT CreateRasterizerStates(const D3D11_RASTERIZER_DESC* pDesc, const std::string& name);
 
 	/**
-	 * @brief ƒTƒ“ƒvƒ‰[ƒXƒe[ƒg‚ğì¬‚·‚é
-	 * @param pDesc ƒTƒ“ƒvƒ‰[ƒXƒe[ƒgİ’èî•ñ‚Ö‚Ìƒ|ƒCƒ“ƒ^
-	 * @param name ƒTƒ“ƒvƒ‰[ƒXƒe[ƒg–¼
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆã™ã‚‹
+	 * @param pDesc ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆè¨­å®šæƒ…å ±ã¸ã®ãƒã‚¤ãƒ³ã‚¿
+	 * @param name ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆå
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	static HRESULT CreateSamplerStates(const D3D11_SAMPLER_DESC* pDesc, const std::string& name);
 
 	/**
-	 * @brief ƒpƒCƒvƒ‰ƒCƒ“ƒXƒe[ƒg‚Ìİ’èó‘Ô‚ğƒŠƒZƒbƒg‚·‚é
+	 * @brief ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã®è¨­å®šçŠ¶æ…‹ã‚’ãƒªã‚»ãƒƒãƒˆã™ã‚‹
 	 */
 	static void Refresh()
 	{
@@ -172,51 +172,51 @@ public:
 private:
 	PipelineStateManager() = delete;
 
-	/// ƒuƒŒƒ“ƒhƒXƒe[ƒg‚Ì–¼‘Oƒ}ƒbƒv
+	/// ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆã®åå‰ãƒãƒƒãƒ—
 	static std::unordered_map<std::string, std::shared_ptr<BlendState>> s_blendStates;
 
-	/// [“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg‚Ì–¼‘Oƒ}ƒbƒv
+	/// æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆã®åå‰ãƒãƒƒãƒ—
 	static std::unordered_map<std::string, std::shared_ptr<DepthStencilState>> s_depthStencilStates;
 
-	/// ƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒg‚Ì–¼‘Oƒ}ƒbƒv
+	/// ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã®åå‰ãƒãƒƒãƒ—
 	static std::unordered_map<std::string, std::shared_ptr<RasterizerState>> s_rasterizerStates;
 
-	/// ƒTƒ“ƒvƒ‰[ƒXƒe[ƒg‚Ì–¼‘Oƒ}ƒbƒv
+	/// ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã®åå‰ãƒãƒƒãƒ—
 	static std::unordered_map<std::string, std::shared_ptr<SamplerState>> s_samplerStates;
 
-	/// Œ»İƒZƒbƒg‚³‚ê‚Ä‚¢‚éƒuƒŒƒ“ƒhƒXƒe[ƒg
+	/// ç¾åœ¨ã‚»ãƒƒãƒˆã•ã‚Œã¦ã„ã‚‹ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆ
 	static BlendState* s_pCurrentBlendState;
 
-	/// Œ»İƒZƒbƒg‚³‚ê‚Ä‚¢‚éƒuƒŒƒ“ƒhƒXƒe[ƒg
+	/// ç¾åœ¨ã‚»ãƒƒãƒˆã•ã‚Œã¦ã„ã‚‹ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆ
 	static DepthStencilState* s_pCurrentDepthStencilState;
 
-	/// Œ»İƒZƒbƒg‚³‚ê‚Ä‚¢‚éƒuƒŒƒ“ƒhƒXƒe[ƒg
+	/// ç¾åœ¨ã‚»ãƒƒãƒˆã•ã‚Œã¦ã„ã‚‹ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆ
 	static RasterizerState* s_pCurrentRasterizerState;
 
-	/// Œ»İƒZƒbƒg‚³‚ê‚Ä‚¢‚éƒuƒŒƒ“ƒhƒXƒe[ƒg
+	/// ç¾åœ¨ã‚»ãƒƒãƒˆã•ã‚Œã¦ã„ã‚‹ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆ
 	static SamplerState* s_pCurrentSamplerState;
 
 	/**
-	 * @brief ‰ŠúƒuƒŒƒ“ƒhƒXƒe[ƒg‚ğì¬‚·‚é
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief åˆæœŸãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆã™ã‚‹
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	static HRESULT CreateDefaultBlendStates();
 
 	/**
-	 * @brief ‰Šú[“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg‚ğì¬‚·‚é
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief åˆæœŸæ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆã™ã‚‹
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	static HRESULT CreateDefaultDepthStencilStates();
 
 	/**
-	 * @brief ‰Šúƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒg‚ğì¬‚·‚é
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief åˆæœŸãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆã™ã‚‹
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	static HRESULT CreateDefaultRasterizerStates();
 
 	/**
-	 * @brief ‰ŠúƒTƒ“ƒvƒ‰[ƒXƒe[ƒg‚ğì¬‚·‚é
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief åˆæœŸã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆã™ã‚‹
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	static HRESULT CreateDefaultSamplerStates();
 };

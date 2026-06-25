@@ -10,24 +10,27 @@ void ImGuiManager::Init(HWND hWnd, ID3D11Device* pDevice, ID3D11DeviceContext* p
     if (m_isInitialized)
         return;
 
-    // ImGuiƒRƒ“ƒeƒLƒXƒgì¬
+    // ImGuiã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆä½œæˆ
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
 
     ImGuiIO& io = ImGui::GetIO();
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+    io.Fonts->AddFontFromFileTTF(
+        "Assets/keinanmaru_pop.ttf",
+        14.0f,
+        nullptr,
+        io.Fonts->GetGlyphRangesJapanese()
+    );
     ImGui::StyleColorsDark();
 
-    // ƒoƒbƒNƒGƒ“ƒh‰Šú‰»
+    // ãƒãƒƒã‚¯ã‚¨ãƒ³ãƒ‰åˆæœŸåŒ–
     ImGui_ImplWin32_Init(hWnd);
     ImGui_ImplDX11_Init(pDevice, pContext);
 
-    // ƒXƒ^ƒCƒ‹•ÏX
-    ImGuiStyle& style = ImGui::GetStyle();
-    style.Colors[ImGuiCol_Header] = ImVec4(0.20f, 0.50f, 1.00f, 1.00f);
-    style.Colors[ImGuiCol_HeaderHovered] = ImVec4(0.35f, 0.35f, 0.35f, 0.40f);
-    style.Colors[ImGuiCol_HeaderActive] = ImVec4(0.45f, 0.45f, 0.45f, 0.60f);
+
+
     m_isInitialized = true;
 }
 
@@ -61,6 +64,23 @@ void ImGuiManager::EndFrame()
         return;
     ImGui::Render();
     ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+}
+
+void ImGuiManager::SetStyle()
+{
+    ImGuiStyle& style = ImGui::GetStyle();
+
+    // åŸºæœ¬ã‚«ãƒ©ãƒ¼
+    style.Colors[ImGuiCol_Header] = ImVec4(0.20f, 0.50f, 1.00f, 1.00f);
+    style.Colors[ImGuiCol_HeaderHovered] = ImVec4(0.35f, 0.35f, 0.35f, 0.40f);
+    style.Colors[ImGuiCol_HeaderActive] = ImVec4(0.45f, 0.45f, 0.45f, 0.60f);
+
+    // è§’ä¸¸ã‚
+    style.FrameRounding = 6.0f;
+    style.GrabRounding = 6.0f;
+    style.PopupRounding = 6.0f;
+    style.ScrollbarRounding = 6.0f;
+    style.ChildRounding = 6.0f;
 }
 
 void ImGuiManager::DrawDockSpace()

@@ -32,9 +32,9 @@ void Camera::SetPriority(int priority)
 
 DirectX::XMMATRIX Camera::GetViewMatrix()
 {
-	DirectX::XMMATRIX view;		// ŒvZ—pƒrƒ…[s—ñ
+	DirectX::XMMATRIX view;		// è¨ˆç®—ç”¨ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—
 
-	// ƒrƒ…[s—ñ‚ğ‹‚ß‚é
+	// ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã‚’æ±‚ã‚ã‚‹
 	view = GetTransform()->GetWorldMatrix();
 	view = DirectX::XMMatrixInverse(nullptr, view);
 	return view;
@@ -42,12 +42,12 @@ DirectX::XMMATRIX Camera::GetViewMatrix()
 
 DirectX::XMMATRIX Camera::GetPerspectiveProjectionMatrix()
 {
-	DirectX::XMMATRIX projection;		// ŒvZ—pƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ
+	DirectX::XMMATRIX projection;		// è¨ˆç®—ç”¨ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—
 
 	GameWindow::Size screenSize = GameWindow::GetClientSize();
 	float aspect = (float)screenSize.width / (float)screenSize.height;
 
-	// ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ‚ğ‹‚ß‚é
+	// ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—ã‚’æ±‚ã‚ã‚‹
 	projection = DirectX::XMMatrixPerspectiveFovLH(
 		DirectX::XMConvertToRadians(m_fovAngle),
 		aspect, m_nearZ, m_farZ
@@ -57,16 +57,16 @@ DirectX::XMMATRIX Camera::GetPerspectiveProjectionMatrix()
 
 DirectX::XMMATRIX Camera::GetOrthographicProjectionMatrix()
 {
-	DirectX::XMMATRIX projection;		// ŒvZ—pƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ
+	DirectX::XMMATRIX projection;		// è¨ˆç®—ç”¨ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—
 
 	GameWindow::Size screenSize = GameWindow::GetClientSize();
 	float aspect = (float)screenSize.width / (float)screenSize.height;
 
-	// “Š‰eƒTƒCƒY‚ğ‹‚ß‚é
+	// æŠ•å½±ã‚µã‚¤ã‚ºã‚’æ±‚ã‚ã‚‹
 	float halfWidth = m_cameraSize;
 	float halfHeight = m_cameraSize / aspect;
 
-	// ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ‚ğ‹‚ß‚é
+	// ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—ã‚’æ±‚ã‚ã‚‹
 	projection = DirectX::XMMatrixOrthographicOffCenterLH(
 		-halfWidth, halfWidth, -halfHeight, halfHeight,
 		m_nearZ, m_farZ
@@ -81,9 +81,9 @@ Camera* Camera::GetMain(Scene* pScnen)
 
 DirectX::XMMATRIX Camera::GetDefaultViewMatrix()
 {
-	DirectX::XMMATRIX view;		// ŒvZ—pƒrƒ…[s—ñ
+	DirectX::XMMATRIX view;		// è¨ˆç®—ç”¨ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—
 
-	// ƒrƒ…[s—ñ‚ğ‹‚ß‚é
+	// ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã‚’æ±‚ã‚ã‚‹
 	view = DirectX::XMMatrixTranslation(0.0f, 0.0f, -10.0f);
 	view = DirectX::XMMatrixInverse(nullptr, view);
 	return view;

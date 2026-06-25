@@ -3,20 +3,20 @@
 
 struct VS_IN_MESH
 {
-    float3 pos : POSITION;          // ’¸“_À•W
-    float3 normal : NORMAL0;        // –@ü
-    float2 uv : TEXCOORD0;          // UVÀ•W
-    float4 color : COLOR0;          // ’¸“_ƒJƒ‰[
+    float3 pos : POSITION; // é ‚ç‚¹åº§æ¨™
+    float3 normal : NORMAL0; // æ³•ç·š
+    float2 uv : TEXCOORD0; // UVåº§æ¨™
+    float4 color : COLOR0; // é ‚ç‚¹ã‚«ãƒ©ãƒ¼
 };
 
 struct VS_IN_SKINMESH
 {
-    float3 pos : POSITION;          // ’¸“_À•W
-    float3 normal : NORMAL0;        // –@ü
-    float2 uv : TEXCOORD0;          // UVÀ•W
-    float4 color : COLOR0;          // ’¸“_ƒJƒ‰[
-    float4 weight : BLENDWEIGHT0;   // ’¸“_ƒXƒLƒ“ƒEƒGƒCƒg
-    uint4 index : BLENDINDICES0;    // ‘Î‰ƒ{[ƒ“ƒCƒ“ƒfƒbƒNƒX
+    float3 pos : POSITION; // é ‚ç‚¹åº§æ¨™
+    float3 normal : NORMAL0; // æ³•ç·š
+    float2 uv : TEXCOORD0; // UVåº§æ¨™
+    float4 color : COLOR0; // é ‚ç‚¹ã‚«ãƒ©ãƒ¼
+    float4 weight : BLENDWEIGHT0; // é ‚ç‚¹ã‚¹ã‚­ãƒ³ã‚¦ã‚¨ã‚¤ãƒˆ
+    uint4 index : BLENDINDICES0; // å¯¾å¿œãƒœãƒ¼ãƒ³ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
 };
 
 struct VS_IN_SPRITE
@@ -24,38 +24,37 @@ struct VS_IN_SPRITE
     
 };
 
-
 cbuffer World : register(b0)
 {
-    float4x4 world;             // ƒ[ƒ‹ƒhs—ñ
-    float4x4 invWorld;          // ƒ[ƒ‹ƒh‹ts—ñ
-}
+    float4x4 world; // ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—
+    float4x4 invWorld; // ãƒ¯ãƒ¼ãƒ«ãƒ‰é€†è¡Œåˆ—
+};
 
 struct DirectionalLight
 {
-    float3 dir;                 // ƒ‰ƒCƒg•ûŒü
-    float intensity;            // ƒ‰ƒCƒg‚Ì‹­‚³
-    float3 lightColor;          // ƒ‰ƒCƒg‚ÌF
-    float lightSize;            // ƒ‰ƒCƒgƒTƒCƒY (ƒ\ƒtƒgƒVƒƒƒhƒE—p)
-    float3 ambientColor;        // ŠÂ‹«Œõ
+    float3 dir; // ãƒ©ã‚¤ãƒˆæ–¹å‘
+    float intensity; // ãƒ©ã‚¤ãƒˆã®å¼·ã•
+    float3 lightColor; // ãƒ©ã‚¤ãƒˆã®è‰²
+    float lightSize; // ãƒ©ã‚¤ãƒˆã‚µã‚¤ã‚º (ã‚½ãƒ•ãƒˆã‚·ãƒ£ãƒ‰ã‚¦ç”¨)
+    float3 ambientColor; // ç’°å¢ƒå…‰
     float pad;
-    float viewProj;             // ƒ‰ƒCƒgƒrƒ…[ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ
+    float4x4 viewProj; // ãƒ©ã‚¤ãƒˆãƒ“ãƒ¥ãƒ¼ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—
 };
 
 cbuffer PerFrame : register(b1)
 {
-    float4x4 view;              // ƒrƒ…[s—ñ
-    float4x4 projection;        // ƒvƒƒWƒFƒNƒVƒ‡ƒ“‹ts—ñ
-    
-    float3 cameraPos;           // ƒJƒƒ‰À•W
-    float time;                 // Œo‰ßŠÔ
-    
-    DirectionalLight dLight;    // ƒfƒBƒŒƒNƒVƒ‡ƒiƒ‹ƒ‰ƒCƒgî•ñ
-}
+    float4x4 view; // ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—
+    float4x4 projection; // ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—
+
+    float3 cameraPos; // ã‚«ãƒ¡ãƒ©åº§æ¨™
+    float time; // çµŒéæ™‚é–“
+
+    DirectionalLight dLight; // ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒŠãƒ«ãƒ©ã‚¤ãƒˆæƒ…å ±
+};
 
 cbuffer Bone : register(b2)
 {
-    float4x4 bone[64];          // ƒ{[ƒ“s—ñ
-}
+    float4x4 bone[64]; // ãƒœãƒ¼ãƒ³è¡Œåˆ—
+};
 
 #endif

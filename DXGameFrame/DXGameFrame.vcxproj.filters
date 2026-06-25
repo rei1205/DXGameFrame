@@ -9,58 +9,151 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="ソース ファイル\GameFrame">
-      <UniqueIdentifier>{f0fa241d-9062-430d-afca-0ec3e527de3a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\GameFrame\Component">
-      <UniqueIdentifier>{31371d06-422a-4b15-ae8b-ea208aa02879}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Utility">
-      <UniqueIdentifier>{6569bc34-7bbe-4e55-8d06-11854442211e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\System">
-      <UniqueIdentifier>{82c4e214-4776-4b9f-bee5-a91dcbec973c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\DirectX">
       <UniqueIdentifier>{3c941dce-b39a-4eb7-8ce6-eb96a4cfa9e7}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\DirectX\RenderUtility">
       <UniqueIdentifier>{60dd0275-bede-420c-b8b6-d41f8079f87b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\HLSL">
-      <UniqueIdentifier>{20ef7c64-774e-4fd5-9ac6-ded7780f6c47}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\DirectX\Manager">
       <UniqueIdentifier>{7bccde3c-4bfb-4bed-87d6-f5e627ed1f50}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\GameFrame\RenderSystem">
-      <UniqueIdentifier>{a9c8cd59-cab4-4c9e-b0e8-42f92abfda77}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\ImGui">
-      <UniqueIdentifier>{83571be8-ec79-4d9b-b6a8-0ea2f97452d2}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\Editor">
       <UniqueIdentifier>{3d2d12ad-785f-4f06-82e5-c6b2291e93bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\GameFrame">
+      <UniqueIdentifier>{f0fa241d-9062-430d-afca-0ec3e527de3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\HLSL">
+      <UniqueIdentifier>{20ef7c64-774e-4fd5-9ac6-ded7780f6c47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\ImGui">
+      <UniqueIdentifier>{83571be8-ec79-4d9b-b6a8-0ea2f97452d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\System">
+      <UniqueIdentifier>{82c4e214-4776-4b9f-bee5-a91dcbec973c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Utility">
+      <UniqueIdentifier>{6569bc34-7bbe-4e55-8d06-11854442211e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameFrame\RenderSystem">
+      <UniqueIdentifier>{a9c8cd59-cab4-4c9e-b0e8-42f92abfda77}</UniqueIdentifier>
+    </Filter>
     <Filter Include="ソース ファイル\GameFrame\Core">
       <UniqueIdentifier>{64f2fa55-7a0c-415a-9cfc-878c708a41bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\GameFrame\Component">
+      <UniqueIdentifier>{31371d06-422a-4b15-ae8b-ea208aa02879}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\main.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="..\ThirdParty\ImGui\imgui.cpp">
+      <Filter>ソース ファイル\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\ImGui\imgui_draw.cpp">
+      <Filter>ソース ファイル\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\ImGui\imgui_impl_dx11.cpp">
+      <Filter>ソース ファイル\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\ImGui\imgui_impl_win32.cpp">
+      <Filter>ソース ファイル\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\ImGui\imgui_tables.cpp">
+      <Filter>ソース ファイル\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\ImGui\imgui_widgets.cpp">
+      <Filter>ソース ファイル\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX\Manager\ConstantBufferManager.cpp">
+      <Filter>ソース ファイル\DirectX\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX\Manager\PipelineStateManager.cpp">
+      <Filter>ソース ファイル\DirectX\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX\Manager\ShaderManager.cpp">
+      <Filter>ソース ファイル\DirectX\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX\Manager\TextureManager.cpp">
+      <Filter>ソース ファイル\DirectX\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameFrame\Component\Camera.cpp">
+      <Filter>ソース ファイル\GameFrame\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameFrame\Component\DirectionalLight.cpp">
+      <Filter>ソース ファイル\GameFrame\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameFrame\Component\MeshRenderer.cpp">
+      <Filter>ソース ファイル\GameFrame\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameFrame\Component\Renderer.cpp">
+      <Filter>ソース ファイル\GameFrame\Component</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameFrame\Component\Transform.cpp">
       <Filter>ソース ファイル\GameFrame\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Source\System\Debug.cpp">
-      <Filter>ソース ファイル\System</Filter>
+    <ClCompile Include="Source\DirectX\RenderUtility\BlendState.cpp">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
     </ClCompile>
-    <ClCompile Include="Source\System\GameTime.cpp">
-      <Filter>ソース ファイル\System</Filter>
+    <ClCompile Include="Source\DirectX\RenderUtility\DepthStencil.cpp">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
     </ClCompile>
-    <ClCompile Include="Source\System\GameWindow.cpp">
-      <Filter>ソース ファイル\System</Filter>
+    <ClCompile Include="Source\DirectX\RenderUtility\Geometry.cpp">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX\RenderUtility\Material.cpp">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX\RenderUtility\Mesh.cpp">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX\RenderUtility\Model.cpp">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX\RenderUtility\PixelShader.cpp">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX\RenderUtility\RasterizerState.cpp">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX\RenderUtility\SamplerState.cpp">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX\RenderUtility\Shader.cpp">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX\RenderUtility\Texture.cpp">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX\RenderUtility\VertexShader.cpp">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX\Direct3D.cpp">
+      <Filter>ソース ファイル\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Editor\Editor.cpp">
+      <Filter>ソース ファイル\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Editor\EditorWindow.cpp">
+      <Filter>ソース ファイル\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Editor\HierarchyGUI.cpp">
+      <Filter>ソース ファイル\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Editor\InspectorGUI.cpp">
+      <Filter>ソース ファイル\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DXGameFrame.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\main.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utility\Color.cpp">
+      <Filter>ソース ファイル\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utility\InspectorUtility.cpp">
+      <Filter>ソース ファイル\Utility</Filter>
     </ClCompile>
     <ClCompile Include="Source\Utility\Math.cpp">
       <Filter>ソース ファイル\Utility</Filter>
@@ -74,71 +167,17 @@
     <ClCompile Include="Source\Utility\Vector3.cpp">
       <Filter>ソース ファイル\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="Source\DirectX\Direct3D.cpp">
-      <Filter>ソース ファイル\DirectX</Filter>
+    <ClCompile Include="Source\System\Debug.cpp">
+      <Filter>ソース ファイル\System</Filter>
     </ClCompile>
-    <ClCompile Include="Source\DirectX\RenderUtility\Mesh.cpp">
-      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    <ClCompile Include="Source\System\GameTime.cpp">
+      <Filter>ソース ファイル\System</Filter>
     </ClCompile>
-    <ClCompile Include="Source\DirectX\RenderUtility\Geometry.cpp">
-      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\DirectX\RenderUtility\Shader.cpp">
-      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\DirectX\RenderUtility\VertexShader.cpp">
-      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\DirectX\Manager\ShaderManager.cpp">
-      <Filter>ソース ファイル\DirectX\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\DirectX\RenderUtility\PixelShader.cpp">
-      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\DirectX\Manager\ConstantBufferManager.cpp">
-      <Filter>ソース ファイル\DirectX\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\DirectX\RenderUtility\Texture.cpp">
-      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\DirectX\Manager\TextureManager.cpp">
-      <Filter>ソース ファイル\DirectX\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\DirectX\RenderUtility\BlendState.cpp">
-      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\DirectX\RenderUtility\DepthStencil.cpp">
-      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\DirectX\RenderUtility\RasterizerState.cpp">
-      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\DirectX\RenderUtility\SamplerState.cpp">
-      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\DirectX\Manager\PipelineStateManager.cpp">
-      <Filter>ソース ファイル\DirectX\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\DirectX\RenderUtility\Material.cpp">
-      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    <ClCompile Include="Source\System\GameWindow.cpp">
+      <Filter>ソース ファイル\System</Filter>
     </ClCompile>
     <ClCompile Include="Source\System\IDManager.cpp">
       <Filter>ソース ファイル\System</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameFrame\Component\Renderer.cpp">
-      <Filter>ソース ファイル\GameFrame\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameFrame\Component\Camera.cpp">
-      <Filter>ソース ファイル\GameFrame\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Utility\Color.cpp">
-      <Filter>ソース ファイル\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameFrame\Component\DirectionalLight.cpp">
-      <Filter>ソース ファイル\GameFrame\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameFrame\Component\MeshRenderer.cpp">
-      <Filter>ソース ファイル\GameFrame\Component</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameFrame\RenderSystem\DefaultRenderPass.cpp">
       <Filter>ソース ファイル\GameFrame\RenderSystem</Filter>
@@ -152,49 +191,13 @@
     <ClCompile Include="Source\GameFrame\RenderSystem\RenderSystem.cpp">
       <Filter>ソース ファイル\GameFrame\RenderSystem</Filter>
     </ClCompile>
-    <ClCompile Include="Source\DirectX\RenderUtility\Model.cpp">
-      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ThirdParty\ImGui\imgui_impl_dx11.cpp">
-      <Filter>ソース ファイル\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ThirdParty\ImGui\imgui.cpp">
-      <Filter>ソース ファイル\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ThirdParty\ImGui\imgui_draw.cpp">
-      <Filter>ソース ファイル\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ThirdParty\ImGui\imgui_tables.cpp">
-      <Filter>ソース ファイル\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ThirdParty\ImGui\imgui_widgets.cpp">
-      <Filter>ソース ファイル\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\ImGuiManager.cpp">
-      <Filter>ソース ファイル\System</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ThirdParty\ImGui\imgui_impl_win32.cpp">
-      <Filter>ソース ファイル\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\DXGameFrame.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Editor\HierarchyGUI.cpp">
-      <Filter>ソース ファイル\Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Editor\EditorWindow.cpp">
-      <Filter>ソース ファイル\Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Editor\Editor.cpp">
-      <Filter>ソース ファイル\Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameFrame\Core\Object.cpp">
-      <Filter>ソース ファイル\GameFrame\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Source\GameFrame\Core\Component.cpp">
       <Filter>ソース ファイル\GameFrame\Core</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameFrame\Core\ComponentManager.cpp">
+      <Filter>ソース ファイル\GameFrame\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameFrame\Core\ComponentRegister.cpp">
       <Filter>ソース ファイル\GameFrame\Core</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameFrame\Core\GameObject.cpp">
@@ -203,34 +206,133 @@
     <ClCompile Include="Source\GameFrame\Core\GameObjectManager.cpp">
       <Filter>ソース ファイル\GameFrame\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GameFrame\Core\Object.cpp">
+      <Filter>ソース ファイル\GameFrame\Core</Filter>
+    </ClCompile>
     <ClCompile Include="Source\GameFrame\Core\Scene.cpp">
       <Filter>ソース ファイル\GameFrame\Core</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameFrame\Core\SceneManager.cpp">
       <Filter>ソース ファイル\GameFrame\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Editor\InspectorGUI.cpp">
-      <Filter>ソース ファイル\Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Utility\InspectorUtility.cpp">
-      <Filter>ソース ファイル\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameFrame\Core\ComponentRegister.cpp">
-      <Filter>ソース ファイル\GameFrame\Core</Filter>
+    <ClCompile Include="Source\System\ImGuiManager.cpp">
+      <Filter>ソース ファイル\System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\ThirdParty\ImGui\imconfig.h">
+      <Filter>ソース ファイル\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParty\ImGui\imgui.h">
+      <Filter>ソース ファイル\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParty\ImGui\imgui_impl_dx11.h">
+      <Filter>ソース ファイル\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParty\ImGui\imgui_impl_win32.h">
+      <Filter>ソース ファイル\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParty\ImGui\imgui_internal.h">
+      <Filter>ソース ファイル\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParty\ImGui\imstb_rectpack.h">
+      <Filter>ソース ファイル\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParty\ImGui\imstb_textedit.h">
+      <Filter>ソース ファイル\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParty\ImGui\imstb_truetype.h">
+      <Filter>ソース ファイル\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\Manager\ConstantBufferManager.h">
+      <Filter>ソース ファイル\DirectX\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\Manager\PipelineStateManager.h">
+      <Filter>ソース ファイル\DirectX\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\Manager\ShaderManager.h">
+      <Filter>ソース ファイル\DirectX\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\Manager\TextureManager.h">
+      <Filter>ソース ファイル\DirectX\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\Component\Camera.h">
+      <Filter>ソース ファイル\GameFrame\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\Component\DirectionalLight.h">
+      <Filter>ソース ファイル\GameFrame\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\Component\MeshRenderer.h">
+      <Filter>ソース ファイル\GameFrame\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\Component\Renderer.h">
+      <Filter>ソース ファイル\GameFrame\Component</Filter>
+    </ClInclude>
     <ClInclude Include="Source\GameFrame\Component\Transform.h">
       <Filter>ソース ファイル\GameFrame\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Source\System\Debug.h">
-      <Filter>ソース ファイル\System</Filter>
+    <ClInclude Include="Source\DirectX\RenderUtility\BlendState.h">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
     </ClInclude>
-    <ClInclude Include="Source\System\GameWindow.h">
-      <Filter>ソース ファイル\System</Filter>
+    <ClInclude Include="Source\DirectX\RenderUtility\DepthStencilState.h">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
     </ClInclude>
-    <ClInclude Include="Source\System\GameTime.h">
-      <Filter>ソース ファイル\System</Filter>
+    <ClInclude Include="Source\DirectX\RenderUtility\Geometry.h">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\RenderUtility\Material.h">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\RenderUtility\Mesh.h">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\RenderUtility\Model.h">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\RenderUtility\PixelShader.h">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\RenderUtility\RasterizerState.h">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\RenderUtility\SamplerState.h">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\RenderUtility\Shader.h">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\RenderUtility\Texture.h">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\RenderUtility\VertexShader.h">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\Direct3D.h">
+      <Filter>ソース ファイル\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\DirectXInclude.h">
+      <Filter>ソース ファイル\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Editor\Editor.h">
+      <Filter>ソース ファイル\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Editor\EditorWindow.h">
+      <Filter>ソース ファイル\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Editor\HierarchyGUI.h">
+      <Filter>ソース ファイル\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Editor\InspectorGUI.h">
+      <Filter>ソース ファイル\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DXGameFrame.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utility\Color.h">
+      <Filter>ソース ファイル\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utility\InspectorUtility.h">
+      <Filter>ソース ファイル\Utility</Filter>
     </ClInclude>
     <ClInclude Include="Source\Utility\Math.h">
       <Filter>ソース ファイル\Utility</Filter>
@@ -244,74 +346,20 @@
     <ClInclude Include="Source\Utility\Vector3.h">
       <Filter>ソース ファイル\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Source\DirectX\Direct3D.h">
-      <Filter>ソース ファイル\DirectX</Filter>
+    <ClInclude Include="Source\Utility\VectorUtility.h">
+      <Filter>ソース ファイル\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Source\DirectX\DirectXInclude.h">
-      <Filter>ソース ファイル\DirectX</Filter>
+    <ClInclude Include="Source\System\Debug.h">
+      <Filter>ソース ファイル\System</Filter>
     </ClInclude>
-    <ClInclude Include="Source\DirectX\RenderUtility\Geometry.h">
-      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    <ClInclude Include="Source\System\GameTime.h">
+      <Filter>ソース ファイル\System</Filter>
     </ClInclude>
-    <ClInclude Include="Source\DirectX\RenderUtility\Mesh.h">
-      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DirectX\RenderUtility\Shader.h">
-      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DirectX\RenderUtility\VertexShader.h">
-      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DirectX\RenderUtility\PixelShader.h">
-      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DirectX\Manager\ShaderManager.h">
-      <Filter>ソース ファイル\DirectX\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DirectX\Manager\ConstantBufferManager.h">
-      <Filter>ソース ファイル\DirectX\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DirectX\RenderUtility\Texture.h">
-      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DirectX\Manager\TextureManager.h">
-      <Filter>ソース ファイル\DirectX\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DirectX\Manager\PipelineStateManager.h">
-      <Filter>ソース ファイル\DirectX\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DirectX\RenderUtility\BlendState.h">
-      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DirectX\RenderUtility\DepthStencilState.h">
-      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DirectX\RenderUtility\SamplerState.h">
-      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DirectX\RenderUtility\RasterizerState.h">
-      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DirectX\RenderUtility\Material.h">
-      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    <ClInclude Include="Source\System\GameWindow.h">
+      <Filter>ソース ファイル\System</Filter>
     </ClInclude>
     <ClInclude Include="Source\System\IDManager.h">
       <Filter>ソース ファイル\System</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameFrame\Component\Renderer.h">
-      <Filter>ソース ファイル\GameFrame\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameFrame\Component\Camera.h">
-      <Filter>ソース ファイル\GameFrame\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameFrame\Component\DirectionalLight.h">
-      <Filter>ソース ファイル\GameFrame\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Utility\Color.h">
-      <Filter>ソース ファイル\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameFrame\Component\MeshRenderer.h">
-      <Filter>ソース ファイル\GameFrame\Component</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameFrame\RenderSystem\DefaultRenderPass.h">
       <Filter>ソース ファイル\GameFrame\RenderSystem</Filter>
@@ -325,82 +373,40 @@
     <ClInclude Include="Source\GameFrame\RenderSystem\RenderSystem.h">
       <Filter>ソース ファイル\GameFrame\RenderSystem</Filter>
     </ClInclude>
-    <ClInclude Include="Source\DirectX\RenderUtility\Model.h">
-      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DirectX\RenderUtility\ModelData.h">
-      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ThirdParty\ImGui\imstb_textedit.h">
-      <Filter>ソース ファイル\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ThirdParty\ImGui\imstb_truetype.h">
-      <Filter>ソース ファイル\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ThirdParty\ImGui\imgui_impl_dx11.h">
-      <Filter>ソース ファイル\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ThirdParty\ImGui\imconfig.h">
-      <Filter>ソース ファイル\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ThirdParty\ImGui\imgui.h">
-      <Filter>ソース ファイル\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ThirdParty\ImGui\imgui_internal.h">
-      <Filter>ソース ファイル\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ThirdParty\ImGui\imstb_rectpack.h">
-      <Filter>ソース ファイル\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\System\ImGuiManager.h">
-      <Filter>ソース ファイル\System</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ThirdParty\ImGui\imgui_impl_win32.h">
-      <Filter>ソース ファイル\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DXGameFrame.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Editor\HierarchyGUI.h">
-      <Filter>ソース ファイル\Editor</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Editor\Editor.h">
-      <Filter>ソース ファイル\Editor</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Editor\EditorWindow.h">
-      <Filter>ソース ファイル\Editor</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Utility\VectorUtility.h">
-      <Filter>ソース ファイル\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameFrame\Core\Object.h">
-      <Filter>ソース ファイル\GameFrame\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameFrame\Core\ObjPtr.h">
+    <ClInclude Include="Source\GameFrame\Core\ClassID.h">
       <Filter>ソース ファイル\GameFrame\Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameFrame\Core\Component.h">
       <Filter>ソース ファイル\GameFrame\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameFrame\Core\Component_inl.h">
+    <ClInclude Include="Source\GameFrame\Core\ComponentArray.h">
       <Filter>ソース ファイル\GameFrame\Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameFrame\Core\ComponentManager.h">
       <Filter>ソース ファイル\GameFrame\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameFrame\Core\ComponentArray.h">
+    <ClInclude Include="Source\GameFrame\Core\ComponentRegister.h">
       <Filter>ソース ファイル\GameFrame\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameFrame\Core\ClassID.h">
+    <ClInclude Include="Source\GameFrame\Core\ComponentRegisterMeta.h">
+      <Filter>ソース ファイル\GameFrame\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\Core\Component_inl.h">
       <Filter>ソース ファイル\GameFrame\Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameFrame\Core\GameObject.h">
       <Filter>ソース ファイル\GameFrame\Core</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameFrame\Core\GameObjectManager.h">
+      <Filter>ソース ファイル\GameFrame\Core</Filter>
+    </ClInclude>
     <ClInclude Include="Source\GameFrame\Core\GameObject_inl.h">
       <Filter>ソース ファイル\GameFrame\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameFrame\Core\GameObjectManager.h">
+    <ClInclude Include="Source\GameFrame\Core\Object.h">
+      <Filter>ソース ファイル\GameFrame\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameFrame\Core\ObjPtr.h">
       <Filter>ソース ファイル\GameFrame\Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameFrame\Core\Scene.h">
@@ -409,17 +415,8 @@
     <ClInclude Include="Source\GameFrame\Core\SceneManager.h">
       <Filter>ソース ファイル\GameFrame\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Editor\InspectorGUI.h">
-      <Filter>ソース ファイル\Editor</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Utility\InspectorUtility.h">
-      <Filter>ソース ファイル\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameFrame\Core\ComponentRegister.h">
-      <Filter>ソース ファイル\GameFrame\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameFrame\Core\ComponentRegisterMeta.h">
-      <Filter>ソース ファイル\GameFrame\Core</Filter>
+    <ClInclude Include="Source\System\ImGuiManager.h">
+      <Filter>ソース ファイル\System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -428,10 +425,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Source\HLSL\VS_Test.hlsl">
+    <FxCompile Include="Source\HLSL\PS_Test.hlsl">
       <Filter>ソース ファイル\HLSL</Filter>
     </FxCompile>
-    <FxCompile Include="Source\HLSL\PS_Test.hlsl">
+    <FxCompile Include="Source\HLSL\VS_Test.hlsl">
       <Filter>ソース ファイル\HLSL</Filter>
     </FxCompile>
   </ItemGroup>

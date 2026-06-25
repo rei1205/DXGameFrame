@@ -12,7 +12,7 @@ HRESULT DepthStencilState::Create(const D3D11_DEPTH_STENCIL_DESC* pDesc, const s
 {
 	HRESULT hr = S_OK;
 
-	// �[�x�X�e���V���X�e�[�g�̍쐬
+	// 深度ステンシルステートの作成
 	hr = Direct3D::GetDevice()->CreateDepthStencilState(pDesc, m_pDepthStencilState.GetAddressOf());
 	if (FAILED(hr)) { return hr; }
 

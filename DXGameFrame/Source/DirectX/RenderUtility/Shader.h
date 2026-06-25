@@ -4,7 +4,7 @@
 #include <string>
 
 /**
- * @brief ƒVƒF[ƒ_[‚ÌŠî’êƒNƒ‰ƒX
+ * @brief ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®åŸºåº•ã‚¯ãƒ©ã‚¹
  */
 class Shader
 {
@@ -13,17 +13,17 @@ public:
 	virtual ~Shader() = default;
 
 	/**
-	 * @brief ƒVƒF[ƒ_[‚ğ“Ç‚İ‚Ş
-	 * @details ¸”s‚µ‚½ê‡AƒvƒƒOƒ‰ƒ€‚ğI—¹‚µ‚Ü‚·
-	 * @param filePath ƒVƒF[ƒ_[(.cso)‚Ö‚Ìƒtƒ@ƒCƒ‹ƒpƒX
+	 * @brief ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’èª­ã¿è¾¼ã‚€
+	 * @details å¤±æ•—ã—ãŸå ´åˆã€ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã‚’çµ‚äº†ã—ã¾ã™
+	 * @param filePath ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼(.cso)ã¸ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹
 	 */
 	void Load(const std::string& filePath);
 
 private:
 	/**
-	 * @brief csoƒtƒ@ƒCƒ‹‚©‚çƒVƒF[ƒ_[ƒf[ƒ^‚ğì¬
-	 * @param filePath ƒVƒF[ƒ_[(.cso)‚Ö‚Ìƒtƒ@ƒCƒ‹ƒpƒX
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief csoãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ‡ãƒ¼ã‚¿ã‚’ä½œæˆ
+	 * @param filePath ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼(.cso)ã¸ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	virtual HRESULT LoadFromCSOFile(const std::string& filePath) = 0;
 };

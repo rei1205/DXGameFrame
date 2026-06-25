@@ -3,17 +3,17 @@
 #include "Shader.h"
 
 /**
- * @brief ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚ğˆµ‚¤
+ * @brief ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’æ‰±ã†
  */
 class PixelShader : public Shader
 {
 public:
 	PixelShader();
 	~PixelShader() = default;
-
+	
 	/**
-	 * @brief Direct3D‚ÌƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚ğæ“¾‚·‚é
-	 * @return ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	 * @brief Direct3Dã®ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’å–å¾—ã™ã‚‹
+	 * @return ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	 */
 	ID3D11PixelShader* GetPixelShader()
 	{
@@ -21,21 +21,21 @@ public:
 	}
 
 private:
-	/// ƒsƒNƒZƒ‹ƒVƒF[ƒ_[
+	/// ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼
 	ComPtr<ID3D11PixelShader> m_pPS;
 
 	/**
-	 * @brief csoƒtƒ@ƒCƒ‹‚©‚çƒVƒF[ƒ_[ƒf[ƒ^‚ğì¬
-	 * @param filePath ƒsƒNƒZƒ‹ƒVƒF[ƒ_[(.cso)‚Ö‚Ìƒtƒ@ƒCƒ‹ƒpƒX
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief csoãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ‡ãƒ¼ã‚¿ã‚’ä½œæˆ
+	 * @param filePath ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼(.cso)ã¸ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	HRESULT LoadFromCSOFile(const std::string& filePath) override;
 
 	/**
-	 * @brief ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚ğì¬‚·‚é
-	 * @param data ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚ÌƒRƒ“ƒpƒCƒ‹Ï‚İƒf[ƒ^
-	 * @param dataSize ƒsƒNƒZƒ‹ƒVƒF[ƒ_[ƒf[ƒ^‚ÌƒTƒCƒY
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ä½œæˆã™ã‚‹
+	 * @param data ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«æ¸ˆã¿ãƒ‡ãƒ¼ã‚¿
+	 * @param dataSize ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ‡ãƒ¼ã‚¿ã®ã‚µã‚¤ã‚º
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	HRESULT CreatePixelShader(const char* data, int dataSize);
 };

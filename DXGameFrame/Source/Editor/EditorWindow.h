@@ -3,21 +3,21 @@
 #include <string>
 
 /**
- * @brief ƒGƒfƒBƒ^ƒEƒBƒ“ƒhƒE‚ÌŠî’êƒNƒ‰ƒX
+ * @brief ã‚¨ãƒ‡ã‚£ã‚¿ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®åŸºåº•ã‚¯ãƒ©ã‚¹
  */
 class EditorWindow
 {
 public:
 	EditorWindow(const std::string& windowName);
 	~EditorWindow() = default;
-
+	
 	/**
-	 * @brief XVˆ—
+	 * @brief æ›´æ–°å‡¦ç†
 	 */
 	void Update();
 
 	/**
-	 * @brief ƒEƒBƒ“ƒhƒE‚ğŠJ‚­
+	 * @brief ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’é–‹ã
 	 */
 	void OpenWindow()
 	{
@@ -25,7 +25,7 @@ public:
 	}
 
 	/**
-	 * @brief ƒEƒBƒ“ƒhƒE•Â‚¶‚é
+	 * @brief ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦é–‰ã˜ã‚‹
 	 */
 	void CloseWindow()
 	{
@@ -33,14 +33,14 @@ public:
 	}
 
 private:
-	/// ƒEƒBƒ“ƒhƒE–¼
+	/// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦å
 	std::string m_windowName;
 
-	/// ƒEƒBƒ“ƒhƒEƒI[ƒvƒ“ƒtƒ‰ƒO
+	/// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚ªãƒ¼ãƒ—ãƒ³ãƒ•ãƒ©ã‚°
 	bool m_openFlag;
 
 	/**
-	 * @brief GUI‚Ì•`‰æ‚ğs‚¤
+	 * @brief GUIã®æç”»ã‚’è¡Œã†
 	 */
 	virtual void OnGUI() = 0;
 };

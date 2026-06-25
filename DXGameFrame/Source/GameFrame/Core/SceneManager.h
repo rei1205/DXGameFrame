@@ -3,51 +3,51 @@
 #include "Scene.h"
 
 /**
- * @brief ƒV[ƒ“‚ÌŠÇ—‚ğs‚¤
+ * @brief ã‚·ãƒ¼ãƒ³ã®ç®¡ç†ã‚’è¡Œã†
  */
 class SceneManager
 {
 public:
 	/**
-	 * @brief ‰Šú‰»ˆ—
+	 * @brief åˆæœŸåŒ–å‡¦ç†
 	 */
 	static void Init();
 
 	/**
-	 * @brief I—¹ˆ—
+	 * @brief çµ‚äº†å‡¦ç†
 	 */
 	static void Uninit();
 
 	/**
-	 * @brief ƒAƒNƒeƒBƒu‚ÈƒV[ƒ“‚ÌŠÔ‚ği‚ß‚é
+	 * @brief ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ãªã‚·ãƒ¼ãƒ³ã®æ™‚é–“ã‚’é€²ã‚ã‚‹
 	 */
 	static void Execute();
 
 	/**
-	 * @brief ƒV[ƒ“‚ğ•ÏX‚·‚é
-	 * @details “¯‚¶ƒtƒŒ[ƒ€‚Å•¡”‰ñŒÄ‚Î‚ê‚½ê‡‚ÍÅ‰‚ÉŒÄ‚Î‚ê‚½‚à‚Ì‚ª—LŒø‚É‚È‚è‚Ü‚·
-	 * @param pNextScene Ÿ‚ÌƒV[ƒ“
+	 * @brief ã‚·ãƒ¼ãƒ³ã‚’å¤‰æ›´ã™ã‚‹
+	 * @details åŒã˜ãƒ•ãƒ¬ãƒ¼ãƒ ã§è¤‡æ•°å›å‘¼ã°ã‚ŒãŸå ´åˆã¯æœ€åˆã«å‘¼ã°ã‚ŒãŸã‚‚ã®ãŒæœ‰åŠ¹ã«ãªã‚Šã¾ã™
+	 * @param pNextScene æ¬¡ã®ã‚·ãƒ¼ãƒ³
 	 */
 	static void ChangeScene(Scene* pNextScene);
 
 	/**
-	 * @brief Œ»İ‚ÌƒAƒNƒeƒBƒu‚ÈƒV[ƒ“‚ğæ“¾‚·‚é
-	 * @return ƒAƒNƒeƒBƒu‚ÈƒV[ƒ“‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	 * @brief ç¾åœ¨ã®ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ãªã‚·ãƒ¼ãƒ³ã‚’å–å¾—ã™ã‚‹
+	 * @return ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ãªã‚·ãƒ¼ãƒ³ã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	 */
 	static Scene* GetActiveScene();
 
 private:
-	/// Œ»İ‚ÌƒV[ƒ“
+	/// ç¾åœ¨ã®ã‚·ãƒ¼ãƒ³
 	static Scene* s_pActiveScene;
 
-	/// •ÏXæƒV[ƒ“
+	/// å¤‰æ›´å…ˆã‚·ãƒ¼ãƒ³
 	static Scene* s_pNextScene;
 
-	/// ƒV[ƒ“”z—ñ
+	/// ã‚·ãƒ¼ãƒ³é…åˆ—
 	static std::vector<std::unique_ptr<Scene>> s_sceneList;
 
 	/**
-	 * @brief ƒV[ƒ“‚Ì•ÏX‚ğ“K—p‚·‚é
+	 * @brief ã‚·ãƒ¼ãƒ³ã®å¤‰æ›´ã‚’é©ç”¨ã™ã‚‹
 	 */
 	static void ApplyChangeScene();
 };

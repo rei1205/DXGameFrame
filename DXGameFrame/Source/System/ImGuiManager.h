@@ -4,40 +4,45 @@
 #include <ImGui/imgui.h>
 
 /**
- * @brief ImGui‚Ì‹@”\‚ğˆµ‚¤
+ * @brief ImGuiã®æ©Ÿèƒ½ã‚’æ‰±ã†
  */
 class ImGuiManager
 {
 public:
 	/**
-	 * @brief ImGui‚Ì‰Šú‰»‚ğs‚¤
-	 * @param hWnd ƒEƒBƒ“ƒhƒEƒnƒ“ƒhƒ‹
-	 * @param pDevice D3DƒfƒoƒCƒX‚Ö‚Ìƒ|ƒCƒ“ƒ^
-	 * @param pContext D3DƒfƒoƒCƒXƒRƒ“ƒeƒLƒXƒg‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	 * @brief ImGuiã®åˆæœŸåŒ–ã‚’è¡Œã†
+	 * @param hWnd ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
+	 * @param pDevice D3Dãƒ‡ãƒã‚¤ã‚¹ã¸ã®ãƒã‚¤ãƒ³ã‚¿
+	 * @param pContext D3Dãƒ‡ãƒã‚¤ã‚¹ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	 */
 	static void Init(HWND hWnd, ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
 
 	/**
-	 * @brief I—¹ˆ—
+	 * @brief çµ‚äº†å‡¦ç†
 	 */
 	static void Uninit();
 
 	/**
-	 * @brief ƒtƒŒ[ƒ€ŠJnˆ—
+	 * @brief ãƒ•ãƒ¬ãƒ¼ãƒ é–‹å§‹å‡¦ç†
 	 */
 	static void BeginFrame();
 	
 	/**
-	 * @brief ƒtƒŒ[ƒ€I—¹ˆ—
+	 * @brief ãƒ•ãƒ¬ãƒ¼ãƒ çµ‚äº†å‡¦ç†
 	 */
 	static void EndFrame();
 
 private:
-	/// ‰Šú‰»Ï‚İƒtƒ‰ƒO
+	/// åˆæœŸåŒ–æ¸ˆã¿ãƒ•ãƒ©ã‚°
 	static bool m_isInitialized;
 
 	/**
-	 * @brief ƒhƒbƒLƒ“ƒOƒXƒy[ƒX‚ğ•`‰æ
+	 * @brief ImGuiã®ã‚¹ã‚¿ã‚¤ãƒ«è¨­å®š
+	 */
+	static void SetStyle();
+
+	/**
+	 * @brief ãƒ‰ãƒƒã‚­ãƒ³ã‚°ã‚¹ãƒšãƒ¼ã‚¹ã‚’æç”»
 	 */
 	static void DrawDockSpace();
 };

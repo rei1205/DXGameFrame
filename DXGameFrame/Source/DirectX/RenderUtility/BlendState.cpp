@@ -12,7 +12,7 @@ HRESULT BlendState::Create(const D3D11_BLEND_DESC* pDesc, const std::string& nam
 {
 	HRESULT hr = S_OK;
 
-	// �u�����h�X�e�[�g�̍쐬
+	// ブレンドステートの作成
 	hr = Direct3D::GetDevice()->CreateBlendState(pDesc, m_pBlendState.GetAddressOf());
 	if (FAILED(hr)) { return hr; }
 

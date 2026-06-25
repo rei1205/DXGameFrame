@@ -12,7 +12,7 @@ HRESULT RasterizerState::Create(const D3D11_RASTERIZER_DESC* pDesc, const std::s
 {
 	HRESULT hr = S_OK;
 
-	// ���X�^���C�U�[�X�e�[�g�̍쐬
+	// ラスタライザーステートの作成
 	hr = Direct3D::GetDevice()->CreateRasterizerState(pDesc, m_pRasterizerState.GetAddressOf());
 	if (FAILED(hr)) { return hr; }
 

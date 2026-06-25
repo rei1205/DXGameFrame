@@ -7,29 +7,29 @@
 class Geometry
 {
 public:
-	/// ƒWƒIƒƒgƒŠƒ^ƒCƒv
+	/// ã‚¸ã‚ªãƒ¡ãƒˆãƒªã‚¿ã‚¤ãƒ—
 	enum Type
 	{
-		BOX,		// ” 
-		CYLINDER,	// ‰~’Œ
-		SHPERE,		// ‹…
-		PLANE,		// ”Â
+		BOX,		// ç®±
+		CYLINDER,	// å††æŸ±
+		SHPERE,		// çƒ
+		PLANE,		// æ¿
 		COUNT
 	};
 
 	/**
-	 * @brief ƒWƒIƒƒgƒŠ‚Ì‰Šú‰»
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief ã‚¸ã‚ªãƒ¡ãƒˆãƒªã®åˆæœŸåŒ–
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	static HRESULT Init();
 
 	/**
-	 * @brief I—¹ˆ—
+	 * @brief çµ‚äº†å‡¦ç†
 	 */
 	static void Uninit();
 
 	/**
-	 * @brief ƒWƒIƒƒgƒŠƒƒbƒVƒ…‚ğæ“¾‚·‚é
+	 * @brief ã‚¸ã‚ªãƒ¡ãƒˆãƒªãƒ¡ãƒƒã‚·ãƒ¥ã‚’å–å¾—ã™ã‚‹
 	 */
 	static std::shared_ptr<Mesh> GetModel(Type geometryType)
 	{
@@ -39,33 +39,33 @@ public:
 private:
 	Geometry() = delete;
 
-	/// ‰~‚Ì’¸“_”
+	/// å††ã®é ‚ç‚¹æ•°
 	static constexpr int CircleVertex = 16;
 
-	/// ƒWƒIƒƒgƒŠƒ‚ƒfƒ‹”z—ñ
+	/// ã‚¸ã‚ªãƒ¡ãƒˆãƒªãƒ¢ãƒ‡ãƒ«é…åˆ—
 	static std::array<std::shared_ptr<Mesh>, Type::COUNT> s_pMeshs;
 
 	/**
-	 * @brief ” ‚ÌƒƒbƒVƒ…‚ğ¶¬‚·‚é
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief ç®±ã®ãƒ¡ãƒƒã‚·ãƒ¥ã‚’ç”Ÿæˆã™ã‚‹
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	static HRESULT CreateBox();
 
 	/**
-	 * @brief ‰~’Œ‚ÌƒƒbƒVƒ…‚ğ¶¬‚·‚é
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief å††æŸ±ã®ãƒ¡ãƒƒã‚·ãƒ¥ã‚’ç”Ÿæˆã™ã‚‹
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	static HRESULT CreateCylinder();
 
 	/**
-	 * @brief ‹…‚ÌƒƒbƒVƒ…‚ğ¶¬‚·‚é
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief çƒã®ãƒ¡ãƒƒã‚·ãƒ¥ã‚’ç”Ÿæˆã™ã‚‹
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	static HRESULT CreateSphere();
 
 	/**
-	 * @brief ”Â‚ÌƒƒbƒVƒ…‚ğì¬‚·‚é
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief æ¿ã®ãƒ¡ãƒƒã‚·ãƒ¥ã‚’ä½œæˆã™ã‚‹
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	static HRESULT CreatePlane();
 };

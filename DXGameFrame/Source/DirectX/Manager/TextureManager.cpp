@@ -6,15 +6,15 @@ std::unordered_map<std::string, std::shared_ptr<Texture>> TextureManager::s_text
 
 std::shared_ptr<Texture> TextureManager::LoadTexture(const std::string& filePath)
 {
-	// �e�N�X�`������
+	// テクスチャ検索
 	auto it = s_textures.find(filePath);
 	if (it != s_textures.end())
 	{
-		// �����̃e�N�X�`����Ԃ�
+		// 既存のテクスチャを返す
 		return it->second;
 	}
 
-	// �V�K�e�N�X�`���ǂݍ��݁E�ǉ�
+	// 新規テクスチャ読み込み・追加
 	auto newTex = std::make_shared<Texture>();
 	if (FAILED(newTex->Load(filePath)))
 	{
@@ -34,7 +34,7 @@ void TextureManager::CollectGarbage()
 {
 	for (auto it = s_textures.begin(); it != s_textures.end();)
 	{
-		// �g�p���`�F�b�N
+		// 使用中チェック
 		if (it->second.use_count() > 1)
 		{
 			++it;

@@ -15,15 +15,15 @@ HRESULT Direct3D::Init(HWND hWnd, UINT width, UINT height, bool fullScreen)
 {
 	HRESULT hr = S_OK;
 
-	// ƒfƒoƒCƒXEƒXƒƒbƒvƒ`ƒFƒCƒ“‚ğì¬
+	// ãƒ‡ãƒã‚¤ã‚¹ãƒ»ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³ã‚’ä½œæˆ
 	hr = CreateDeviceAndSwapChain(hWnd, width, height, fullScreen);
 	if (FAILED(hr)) { return hr; }
 
-	// ƒoƒbƒNƒoƒbƒtƒ@‚ÌƒŒƒ“ƒ_[ƒ^[ƒQƒbƒgƒrƒ…[‚ğì¬
+	// ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ“ãƒ¥ãƒ¼ã‚’ä½œæˆ
 	hr = CreateBackBufferRTV(width, height);
 	if (FAILED(hr)) { return hr; }
 
-	// ƒrƒ…[ƒ|[ƒgİ’è
+	// ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆè¨­å®š
 	SetViewportSize(width, height);
 
 	Debug::ConsoleLog("Direct3D : Initialized");
@@ -32,7 +32,7 @@ HRESULT Direct3D::Init(HWND hWnd, UINT width, UINT height, bool fullScreen)
 
 void Direct3D::Uninit()
 {
-	// ƒŠƒ\[ƒX‚Ì‰ğ•ú
+	// ãƒªã‚½ãƒ¼ã‚¹ã®è§£æ”¾
 	s_pBackBufferRTV.Reset();
 	s_pBackBuffer.Reset();
 	s_pSwapChain.Reset();
@@ -44,18 +44,18 @@ HRESULT Direct3D::Resize(UINT width, UINT height)
 {
 	HRESULT hr = S_OK;
 
-	// •`‰æƒŠƒ\[ƒX‚ÌƒŠƒZƒbƒg
+	// æç”»ãƒªã‚½ãƒ¼ã‚¹ã®ãƒªã‚»ãƒƒãƒˆ
 	s_pBackBuffer.Reset();
 
-	// ƒXƒƒbƒvƒ`ƒFƒCƒ“‚ÌƒTƒCƒY‚ğ•ÏX
+	// ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³ã®ã‚µã‚¤ã‚ºã‚’å¤‰æ›´
 	hr = ResizeSwapChain(width, height);
 	if (FAILED(hr)) { return hr; }
 
-	// ƒoƒbƒNƒoƒbƒtƒ@‚ÌƒŒƒ“ƒ_[ƒ^[ƒQƒbƒgƒrƒ…[‚ğì¬
+	// ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ“ãƒ¥ãƒ¼ã‚’ä½œæˆ
 	hr = CreateBackBufferRTV(width, height);
 	if (FAILED(hr)) { return hr; }
 
-	// ƒrƒ…[ƒ|[ƒgÄİ’è
+	// ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆå†è¨­å®š
 	SetViewportSize(width, height);
 	SetViewport(s_normalizedViewport);
 
@@ -72,14 +72,14 @@ void Direct3D::SetViewport(NormalizedViewport viewport)
 	vp.MinDepth = 0.0f;
 	vp.MaxDepth = 1.0f;
 
-	// ƒrƒ…[ƒ|[ƒg‚ğİ’è
+	// ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆã‚’è¨­å®š
 	s_pContext->RSSetViewports(1, &vp);
 	s_normalizedViewport = viewport;
 }
 
 void Direct3D::BeginDraw(const float clearColor[4])
 {
-	// ‰æ–ÊƒNƒŠƒA
+	// ç”»é¢ã‚¯ãƒªã‚¢
 	s_pContext->ClearRenderTargetView(s_pBackBufferRTV.Get(), clearColor);
 }
 
@@ -92,7 +92,7 @@ HRESULT Direct3D::CreateDeviceAndSwapChain(HWND hWnd, UINT width, UINT height, b
 {
 	HRESULT hr = S_OK;
 
-	// ƒXƒƒbƒvƒ`ƒFƒCƒ“‚Ìİ’è
+	// ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³ã®è¨­å®š
 	DXGI_SWAP_CHAIN_DESC sd = {};
 	sd.BufferDesc.Width = width;
 	sd.BufferDesc.Height = height;
@@ -106,7 +106,7 @@ HRESULT Direct3D::CreateDeviceAndSwapChain(HWND hWnd, UINT width, UINT height, b
 	sd.Windowed = fullScreen ? FALSE : TRUE;
 	sd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 
-	// ƒhƒ‰ƒCƒo‚Ìí—Ş‚ğİ’è
+	// ãƒ‰ãƒ©ã‚¤ãƒã®ç¨®é¡ã‚’è¨­å®š
 	D3D_DRIVER_TYPE driverType;
 	D3D_DRIVER_TYPE driverTypes[] = {
 		D3D_DRIVER_TYPE_HARDWARE,
@@ -115,7 +115,7 @@ HRESULT Direct3D::CreateDeviceAndSwapChain(HWND hWnd, UINT width, UINT height, b
 	};
 	UINT numDriverTypes = ARRAYSIZE(driverTypes);
 
-	// ‹@”\ƒŒƒxƒ‹‚ğİ’è
+	// æ©Ÿèƒ½ãƒ¬ãƒ™ãƒ«ã‚’è¨­å®š
 	D3D_FEATURE_LEVEL featureLevel;
 	D3D_FEATURE_LEVEL featureLevels[] = {
 		D3D_FEATURE_LEVEL_11_1,
@@ -128,19 +128,19 @@ HRESULT Direct3D::CreateDeviceAndSwapChain(HWND hWnd, UINT width, UINT height, b
 	};
 	UINT numFeatureLevels = ARRAYSIZE(featureLevels);
 
-	// ƒfƒoƒCƒXì¬‚Ì“®ìƒtƒ‰ƒO‚ğİ’è
-	UINT createDeviceFlag = 0;		// ƒfƒoƒCƒXì¬‚Ì“®ìƒtƒ‰ƒO (ƒfƒtƒHƒ‹ƒg)
+	// ãƒ‡ãƒã‚¤ã‚¹ä½œæˆæ™‚ã®å‹•ä½œãƒ•ãƒ©ã‚°ã‚’è¨­å®š
+	UINT createDeviceFlag = 0;		// ãƒ‡ãƒã‚¤ã‚¹ä½œæˆæ™‚ã®å‹•ä½œãƒ•ãƒ©ã‚° (ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ)
 #ifdef _DEBUG
-	createDeviceFlag |= D3D11_CREATE_DEVICE_DEBUG;		// ƒfƒoƒbƒOƒŒƒCƒ„[‚ğƒTƒ|[ƒg
+	createDeviceFlag |= D3D11_CREATE_DEVICE_DEBUG;		// ãƒ‡ãƒãƒƒã‚°ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ã‚µãƒãƒ¼ãƒˆ
 #endif
 
-	// ì¬‰Â”\‚Èİ’è‚ÅDirectX‚Ì‹@”\‚ğ—LŒø‰» 
+	// ä½œæˆå¯èƒ½ãªè¨­å®šã§DirectXã®æ©Ÿèƒ½ã‚’æœ‰åŠ¹åŒ– 
 	for (UINT i = 0; i < numDriverTypes; ++i)
 	{
-		// ƒhƒ‰ƒCƒo‚Ìí—Ş‚ğˆê‚Â‚¸‚Â‚·
+		// ãƒ‰ãƒ©ã‚¤ãƒã®ç¨®é¡ã‚’ä¸€ã¤ãšã¤è©¦ã™
 		driverType = driverTypes[i];
 
-		// ƒhƒ‰ƒCƒo‚ÆƒXƒƒbƒvƒ`ƒFƒCƒ“‚Ìì¬ (ì¬‰Â”\‚È”ÍˆÍ‚ÅÅ‚à«”\‚ª—Ç‚¢‚à‚Ì‚ğì¬)
+		// ãƒ‰ãƒ©ã‚¤ãƒã¨ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³ã®ä½œæˆ (ä½œæˆå¯èƒ½ãªç¯„å›²ã§æœ€ã‚‚æ€§èƒ½ãŒè‰¯ã„ã‚‚ã®ã‚’ä½œæˆ)
 		hr = D3D11CreateDeviceAndSwapChain(
 			NULL,
 			driverType,
@@ -156,7 +156,7 @@ HRESULT Direct3D::CreateDeviceAndSwapChain(HWND hWnd, UINT width, UINT height, b
 			s_pContext.GetAddressOf()
 		);
 
-		// ì¬‚É¬Œ÷‚µ‚½‚çI—¹
+		// ä½œæˆã«æˆåŠŸã—ãŸã‚‰çµ‚äº†
 		if (SUCCEEDED(hr)) { break; }
 	}
 
@@ -167,11 +167,11 @@ HRESULT Direct3D::CreateBackBufferRTV(UINT width, UINT height)
 {
 	HRESULT hr = S_OK;
 
-	// ƒtƒŒ[ƒ€ƒoƒbƒtƒ@‚Ö‚Ìƒ|ƒCƒ“ƒ^‚ğæ“¾ (IID_PPV_ARGS‚ÍGetAddressOf()•s—v)
+	// ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ã¸ã®ãƒã‚¤ãƒ³ã‚¿ã‚’å–å¾— (IID_PPV_ARGSã¯GetAddressOf()ä¸è¦)
 	hr = s_pSwapChain->GetBuffer(0, IID_PPV_ARGS(&s_pBackBuffer));
 	if (FAILED(hr)) { return hr; }
 
-	// ƒtƒŒ[ƒ€ƒoƒbƒtƒ@‚Ö‚Ìƒ|ƒCƒ“ƒ^‚Å•R‚Ã‚¯‚ÄAƒŒƒ“ƒ_[ƒ^[ƒQƒbƒgƒrƒ…[‚ğì¬
+	// ãƒ•ãƒ¬ãƒ¼ãƒ ãƒãƒƒãƒ•ã‚¡ã¸ã®ãƒã‚¤ãƒ³ã‚¿ã§ç´ã¥ã‘ã¦ã€ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ“ãƒ¥ãƒ¼ã‚’ä½œæˆ
 	hr = s_pDevice->CreateRenderTargetView(s_pBackBuffer.Get(), NULL, s_pBackBufferRTV.GetAddressOf());
 
 	return hr;
@@ -204,10 +204,10 @@ void Direct3D::SetViewportSize(UINT width, UINT height)
 	vp.MinDepth = 0.0f;
 	vp.MaxDepth = 1.0f;
 
-	// ƒrƒ…[ƒ|[ƒg‚ğİ’è
+	// ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆã‚’è¨­å®š
 	s_pContext->RSSetViewports(1, &vp);
 
-	// ‰æ–ÊƒTƒCƒY‚ğ•Û
+	// ç”»é¢ã‚µã‚¤ã‚ºã‚’ä¿æŒ
 	s_width = width;
 	s_height = height;
 }

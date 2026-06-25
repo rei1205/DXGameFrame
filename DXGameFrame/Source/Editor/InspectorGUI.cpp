@@ -6,7 +6,7 @@
 #include <ImGui/imgui.h>
 
 InspectorGUI::InspectorGUI() :
-	EditorWindow("Inspector")
+	EditorWindow("ã‚¤ãƒ³ã‚¹ãƒšã‚¯ã‚¿ãƒ¼")
 {
 }
 
@@ -16,17 +16,17 @@ void InspectorGUI::OnGUI()
 	if (pGameObject == nullptr)
 		return;
 	auto components = pGameObject->GetComponents();
-
-	// ƒRƒ“ƒ|[ƒlƒ“ƒg•`‰æ
+	
+	// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆæç”»
 	for (auto& component : components)
 	{
 		DrawComponent(component);
 	}
 
-	// ƒRƒ“ƒ|[ƒlƒ“ƒg’Ç‰Áƒ{ƒ^ƒ“
+	// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆè¿½åŠ ãƒœã‚¿ãƒ³
 	AddComponentButton();
 
-	// ƒRƒ“ƒ|[ƒlƒ“ƒg‘€ìƒCƒxƒ“ƒg‚Ìˆ—
+	// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆæ“ä½œã‚¤ãƒ™ãƒ³ãƒˆã®å‡¦ç†
 	if (m_operationEvent != nullptr)
 	{
 		m_operationEvent();
@@ -36,18 +36,18 @@ void InspectorGUI::OnGUI()
 
 void InspectorGUI::DrawComponent(Component* pComponent)
 {
-	// “®ìİ’è
+	// å‹•ä½œè¨­å®š
 	ImGuiTreeNodeFlags flags =
 		ImGuiTreeNodeFlags_DefaultOpen |
 		ImGuiTreeNodeFlags_OpenOnArrow |
 		ImGuiTreeNodeFlags_OpenOnDoubleClick |
 		ImGuiTreeNodeFlags_SpanAvailWidth;
 
-	// ƒRƒ“ƒ|[ƒlƒ“ƒg•`‰æ
+	// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆæç”»
 	std::string name = ComponentRegister::GetComponentNameByClassID(pComponent->GetClassID());
 	bool open = ImGui::TreeNodeEx(pComponent, flags, name.c_str());
 
-	// ‰EƒNƒŠƒbƒNƒƒjƒ…[
+	// å³ã‚¯ãƒªãƒƒã‚¯ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 	if (pComponent->GetClassID() != ClassID<Transform>::GetID() &&
 		ImGui::BeginPopupContextItem())
 	{
@@ -78,25 +78,25 @@ void InspectorGUI::AddComponentButton()
 		ImGui::OpenPopup("AddComponentPopup");
 	}
 
-	// ƒRƒ“ƒ|[ƒlƒ“ƒg’Ç‰Áƒ|ƒbƒvƒAƒbƒv
+	// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆè¿½åŠ ãƒãƒƒãƒ—ã‚¢ãƒƒãƒ—
 	if (ImGui::BeginPopup("AddComponentPopup"))
 	{
-		// ŒŸõ—“
+		// æ¤œç´¢æ¬„
 		static char filter[64] = "";
 		ImGui::InputTextWithHint("##Filter", "Search...", filter, sizeof(filter));
 		ImGui::Separator();
 
 		for (auto& name : componentNames)
 		{
-			// Transform‚ÍœŠO
+			// Transformã¯é™¤å¤–
 			if (name == "Transform")
 				continue;
 
-			// –¼‘OŒŸõ
+			// åå‰æ¤œç´¢
 			if (filter[0] != '\0' && name.find(filter) == std::string::npos)
 				continue;
 
-			// ƒRƒ“ƒ|[ƒlƒ“ƒgƒŠƒXƒg
+			// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãƒªã‚¹ãƒˆ
 			if (ImGui::MenuItem(name.c_str()))
 			{
 				m_operationEvent = [name, pGameObject]()

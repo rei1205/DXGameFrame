@@ -4,7 +4,7 @@
 #include <string>
 
 /**
- * @brief ƒTƒ“ƒvƒ‰[ƒXƒe[ƒg‚ğˆµ‚¤
+ * @brief ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã‚’æ‰±ã†
  */
 class SamplerState
 {
@@ -13,16 +13,16 @@ public:
 	~SamplerState() = default;
 
 	/**
-	 * @brief ƒTƒ“ƒvƒ‰[ƒXƒe[ƒg‚ğì¬‚·‚é
-	 * @param pDesc ƒTƒ“ƒvƒ‰[ƒXƒe[ƒgİ’èî•ñ‚Ö‚Ìƒ|ƒCƒ“ƒ^
-	 * @param name ƒTƒ“ƒvƒ‰[ƒXƒe[ƒg–¼
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆã™ã‚‹
+	 * @param pDesc ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆè¨­å®šæƒ…å ±ã¸ã®ãƒã‚¤ãƒ³ã‚¿
+	 * @param name ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆå
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	HRESULT Create(const D3D11_SAMPLER_DESC* pDesc, const std::string& name);
 
 	/**
-	 * @brief Direct3D‚ÌƒTƒ“ƒvƒ‰[ƒXƒe[ƒg‚ğæ“¾‚·‚é
-	 * @return ƒTƒ“ƒvƒ‰[ƒXƒe[ƒg‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	 * @brief Direct3Dã®ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã‚’å–å¾—ã™ã‚‹
+	 * @return ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	 */
 	ID3D11SamplerState* GetSamplerState()
 	{
@@ -30,8 +30,8 @@ public:
 	}
 
 	/**
-	 * @brief ƒTƒ“ƒvƒ‰[ƒXƒe[ƒg–¼‚ğæ“¾‚·‚é
-	 * @return ƒTƒ“ƒvƒ‰[ƒXƒe[ƒg–¼
+	 * @brief ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆåã‚’å–å¾—ã™ã‚‹
+	 * @return ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆå
 	 */
 	std::string GetName()
 	{
@@ -39,9 +39,9 @@ public:
 	}
 
 private:
-	/// ƒTƒ“ƒvƒ‰[ƒXƒe[ƒg
+	/// ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆ
 	ComPtr<ID3D11SamplerState> m_pSamplerState;
 
-	/// ƒTƒ“ƒvƒ‰[ƒXƒe[ƒg–¼
+	/// ã‚µãƒ³ãƒ—ãƒ©ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆå
 	std::string m_name;
 };

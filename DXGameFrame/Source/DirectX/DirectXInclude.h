@@ -1,11 +1,11 @@
 // DirectXInclude.h
 #pragma once
 
-#include <d3d11.h>								// Direct3D‚Ì‹@”\‚ğg—p
-#pragma comment(lib, "d3d11.lib")				// Direct3D‚Ì‹@”\‚ğg—p
-#pragma comment(lib, "dxgi.lib")				// ƒOƒ‰ƒtƒBƒbƒNƒXƒfƒoƒCƒX‚âƒXƒƒbƒvƒ`ƒFƒCƒ“‚ğg—p
-#include <DirectXMath.h>						// DirectXMath(”Šwƒ‰ƒCƒuƒ‰ƒŠ)‚ğg—p
-#include <d3dcompiler.h>						// ƒVƒF[ƒ_[‚ÌƒRƒ“ƒpƒCƒ‹‚É•K—v
-#pragma comment(lib, "d3dcompiler.lib")			// ƒVƒF[ƒ_[‚ÌƒRƒ“ƒpƒCƒ‹‚É•K—v
-#include <wrl/client.h>							// ComPtr‚ğg—p‚Å‚«‚é‚æ‚¤‚É‚·‚é
-using Microsoft::WRL::ComPtr;					// ComPtr‚ğg—p‚Å‚«‚é‚æ‚¤‚É‚·‚é
+#include <d3d11.h>								// Direct3Dã®æ©Ÿèƒ½ã‚’ä½¿ç”¨
+#pragma comment(lib, "d3d11.lib")				// Direct3Dã®æ©Ÿèƒ½ã‚’ä½¿ç”¨
+#pragma comment(lib, "dxgi.lib")				// ã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ã‚¹ãƒ‡ãƒã‚¤ã‚¹ã‚„ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³ã‚’ä½¿ç”¨
+#include <DirectXMath.h>						// DirectXMath(æ•°å­¦ãƒ©ã‚¤ãƒ–ãƒ©ãƒª)ã‚’ä½¿ç”¨
+#include <d3dcompiler.h>						// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã«å¿…è¦
+#pragma comment(lib, "d3dcompiler.lib")			// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã«å¿…è¦
+#include <wrl/client.h>							// ComPtrã‚’ä½¿ç”¨ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
+using Microsoft::WRL::ComPtr;					// ComPtrã‚’ä½¿ç”¨ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹

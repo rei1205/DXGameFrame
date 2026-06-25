@@ -5,61 +5,61 @@
 #include <functional>
 
 /**
- * @brief ƒIƒuƒWƒFƒNƒgŠK‘w‚ÌGUI
+ * @brief ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆéšå±¤ã®GUI
  */
 class HierarchyGUI : public EditorWindow
 {
 public:
 	HierarchyGUI();
 	~HierarchyGUI() = default;
-
+	
 private:
-	/// ƒhƒƒbƒv‹““®
+	/// ãƒ‰ãƒ­ãƒƒãƒ—æŒ™å‹•
 	enum class DropType
 	{
-		BEFORE,     // ã
-		AFTER,      // ‰º
-		CHILD       // q—v‘f
+		BEFORE,     // ä¸Š
+		AFTER,      // ä¸‹
+		CHILD       // å­è¦ç´ 
 	};
 
-	/// ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‘€ìƒCƒxƒ“ƒg
+	/// ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆæ“ä½œã‚¤ãƒ™ãƒ³ãƒˆ
 	std::function<void()> m_operationEvent;
 
 	/**
-	 * @brief GUI‚Ì•`‰æ‚ğs‚¤
+	 * @brief GUIã®æç”»ã‚’è¡Œã†
 	 */
 	void OnGUI() override;
 
 	/**
-	 * @brief ÅãˆÊ‚Ìƒm[ƒh‚ğ•`‰æ‚·‚é
-	 * @return ŠJ•Âƒtƒ‰ƒO
+	 * @brief æœ€ä¸Šä½ã®ãƒãƒ¼ãƒ‰ã‚’æç”»ã™ã‚‹
+	 * @return é–‹é–‰ãƒ•ãƒ©ã‚°
 	 */
 	bool DrawRootNode();
 
 	/**
-	 * @brief Ä‹A“I‚ÉƒcƒŠ[\‘¢‚ğ•`‰æ‚·‚é
-	 * @param pTransform Šî“_‚Æ‚È‚éTransform‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	 * @brief å†å¸°çš„ã«ãƒ„ãƒªãƒ¼æ§‹é€ ã‚’æç”»ã™ã‚‹
+	 * @param pTransform åŸºç‚¹ã¨ãªã‚‹Transformã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	 */
 	void DrawNode(Transform* pTransform);
 
 	/**
-	 * @brief ƒm[ƒh‚É‘Î‚·‚é‘€ì
+	 * @brief ãƒãƒ¼ãƒ‰ã«å¯¾ã™ã‚‹æ“ä½œ
 	 */
 	void NodeInteraction(Transform* pTransform);
 
 	/**
-	 * @brief ƒm[ƒhƒhƒƒbƒv‚Ìˆ—
-	 * @param drag ƒhƒ‰ƒbƒO’†ƒm[ƒh‚ÌTransform‚Ö‚Ìƒ|ƒCƒ“ƒ^
-	 * @param target ƒ^[ƒQƒbƒgƒm[ƒh‚ÌTransform‚Ö‚Ìƒ|ƒCƒ“ƒ^
-	 * @param dropType ƒhƒƒbƒv‹““®
+	 * @brief ãƒãƒ¼ãƒ‰ãƒ‰ãƒ­ãƒƒãƒ—æ™‚ã®å‡¦ç†
+	 * @param drag ãƒ‰ãƒ©ãƒƒã‚°ä¸­ãƒãƒ¼ãƒ‰ã®Transformã¸ã®ãƒã‚¤ãƒ³ã‚¿
+	 * @param target ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒãƒ¼ãƒ‰ã®Transformã¸ã®ãƒã‚¤ãƒ³ã‚¿
+	 * @param dropType ãƒ‰ãƒ­ãƒƒãƒ—æŒ™å‹•
 	 */
 	void DropObject(Transform* drag, Transform* target, DropType dropType);
 
 	/**
-	 * @brief eˆÈã‚Éw’è‚µ‚½Transform‚ª‚ ‚é‚©”»’è‚·‚é
-	 * @param ancestor ŒŸõ‘ÎÛ‚ÌTransform‚Ö‚Ìƒ|ƒCƒ“ƒ^
-	 * @param target Œ³‚ÌTransform‚Ö‚Ìƒ|ƒCƒ“ƒ^
-	 * @return eˆÈã‚É‘¶İ‚·‚ê‚Îtrue‚ğ•Ô‚·
+	 * @brief è¦ªä»¥ä¸Šã«æŒ‡å®šã—ãŸTransformãŒã‚ã‚‹ã‹åˆ¤å®šã™ã‚‹
+	 * @param ancestor æ¤œç´¢å¯¾è±¡ã®Transformã¸ã®ãƒã‚¤ãƒ³ã‚¿
+	 * @param target å…ƒã®Transformã¸ã®ãƒã‚¤ãƒ³ã‚¿
+	 * @return è¦ªä»¥ä¸Šã«å­˜åœ¨ã™ã‚Œã°trueã‚’è¿”ã™
 	 */
 	bool IsAncestorOf(Transform* ancestor, Transform* target);
 };

@@ -3,17 +3,17 @@
 #include "Shader.h"
 
 /**
- * @brief ’¸“_ƒVƒF[ƒ_[‚ğˆµ‚¤
+ * @brief é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’æ‰±ã†
  */
 class VertexShader : public Shader
 {
 public:
 	VertexShader();
 	~VertexShader() = default;
-
+	
 	/**
-	 * @brief Direct3D‚Ì’¸“_ƒVƒF[ƒ_[‚ğæ“¾‚·‚é
-	 * @return ’¸“_ƒVƒF[ƒ_[‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	 * @brief Direct3Dã®é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’å–å¾—ã™ã‚‹
+	 * @return é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	 */
 	ID3D11VertexShader* GetVertexShader()
 	{
@@ -21,8 +21,8 @@ public:
 	}
 
 	/**
-	 * @brief ’¸“_“ü—ÍƒŒƒCƒAƒEƒg‚ğæ“¾‚·‚é
-	 * @return ’¸“_“ü—ÍƒŒƒCƒAƒEƒg‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	 * @brief é ‚ç‚¹å…¥åŠ›ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚’å–å¾—ã™ã‚‹
+	 * @return é ‚ç‚¹å…¥åŠ›ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	 */
 	ID3D11InputLayout* GetInputLayout()
 	{
@@ -30,32 +30,32 @@ public:
 	}
 
 private:
-	/// ’¸“_ƒVƒF[ƒ_[
+	/// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼
 	ComPtr<ID3D11VertexShader> m_pVS;
 
-	/// ’¸“_“ü—ÍƒŒƒCƒAƒEƒg
+	/// é ‚ç‚¹å…¥åŠ›ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆ
 	ComPtr<ID3D11InputLayout> m_pInputLayout;
 
 	/**
-	 * @brief csoƒtƒ@ƒCƒ‹‚©‚çƒVƒF[ƒ_[ƒf[ƒ^‚ğì¬
-	 * @param filePath ’¸“_ƒVƒF[ƒ_[(.cso)‚Ö‚Ìƒtƒ@ƒCƒ‹ƒpƒX
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief csoãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ‡ãƒ¼ã‚¿ã‚’ä½œæˆ
+	 * @param filePath é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼(.cso)ã¸ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	HRESULT LoadFromCSOFile(const std::string& filePath) override;
 
 	/**
-	 * @brief ’¸“_ƒVƒF[ƒ_[‚ğì¬‚·‚é
-	 * @param data ’¸“_ƒVƒF[ƒ_[‚ÌƒRƒ“ƒpƒCƒ‹Ï‚İƒf[ƒ^
-	 * @param dataSize ’¸“_ƒVƒF[ƒ_[ƒf[ƒ^‚ÌƒTƒCƒY
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ä½œæˆã™ã‚‹
+	 * @param data é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«æ¸ˆã¿ãƒ‡ãƒ¼ã‚¿
+	 * @param dataSize é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ‡ãƒ¼ã‚¿ã®ã‚µã‚¤ã‚º
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	HRESULT CreateVertexShader(const char* data, int dataSize);
 
 	/**
-	 * @brief ’¸“_“ü—ÍƒŒƒCƒAƒEƒg‚ğì¬‚·‚é
-	 * @param data ’¸“_ƒVƒF[ƒ_[‚ÌƒRƒ“ƒpƒCƒ‹Ï‚İƒf[ƒ^
-	 * @param dataSize ’¸“_ƒVƒF[ƒ_[ƒf[ƒ^‚ÌƒTƒCƒY
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief é ‚ç‚¹å…¥åŠ›ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚’ä½œæˆã™ã‚‹
+	 * @param data é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«æ¸ˆã¿ãƒ‡ãƒ¼ã‚¿
+	 * @param dataSize é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ‡ãƒ¼ã‚¿ã®ã‚µã‚¤ã‚º
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	HRESULT CreateInputLayout(const char* data, int dataSize);
 };

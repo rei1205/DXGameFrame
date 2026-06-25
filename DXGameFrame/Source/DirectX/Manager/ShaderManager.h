@@ -6,45 +6,45 @@
 #include <memory>
 
 /**
- * @brief ƒVƒF[ƒ_[‚ğŠÇ—‚·‚é
+ * @brief ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ç®¡ç†ã™ã‚‹
  */
 class ShaderManager
 {
 public:
 	/**
-	 * @brief ‘½d“Ç‚İ‚İ‚ğ–h‚¬‚Â‚Â’¸“_ƒVƒF[ƒ_[‚ğ“Ç‚İ‚Ş
-	 * @param filePath ’¸“_ƒVƒF[ƒ_[(.cso)‚Ö‚Ìƒtƒ@ƒCƒ‹ƒpƒX
-	 * @return ’¸“_ƒVƒF[ƒ_[‚Ö‚Ìƒ|ƒCƒ“ƒ^(shared_ptr)
+	 * @brief å¤šé‡èª­ã¿è¾¼ã¿ã‚’é˜²ãã¤ã¤é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’èª­ã¿è¾¼ã‚€
+	 * @param filePath é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼(.cso)ã¸ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹
+	 * @return é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã¸ã®ãƒã‚¤ãƒ³ã‚¿(shared_ptr)
 	 */
 	static std::shared_ptr<VertexShader> LoadVertexShader(const std::string& filePath);
 
 	/**
-	 * @brief ‘½d“Ç‚İ‚İ‚ğ–h‚¬‚Â‚ÂƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚ğ“Ç‚İ‚Ş
-	 * @param filePath ƒsƒNƒZƒ‹ƒVƒF[ƒ_[(.cso)‚Ö‚Ìƒtƒ@ƒCƒ‹ƒpƒX
-	 * @return ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚Ö‚Ìƒ|ƒCƒ“ƒ^(shared_ptr)
+	 * @brief å¤šé‡èª­ã¿è¾¼ã¿ã‚’é˜²ãã¤ã¤ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’èª­ã¿è¾¼ã‚€
+	 * @param filePath ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼(.cso)ã¸ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹
+	 * @return ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã¸ã®ãƒã‚¤ãƒ³ã‚¿(shared_ptr)
 	*/
 	static std::shared_ptr<PixelShader> LoadPixelShader(const std::string& filePath);
 
 	/**
-	 * @brief ’¸“_ƒVƒF[ƒ_[‚ğƒZƒbƒg‚·‚é
-	 * @param pVertexShader ’¸“_ƒVƒF[ƒ_[‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	 * @brief é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ã‚»ãƒƒãƒˆã™ã‚‹
+	 * @param pVertexShader é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	 */
 	static void SetVertexShader(VertexShader* pVertexShader);
 
 	/**
-	 * @brief ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚ğƒZƒbƒg‚·‚é
-	 * @param pPixelShader ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	 * @brief ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ã‚»ãƒƒãƒˆã™ã‚‹
+	 * @param pPixelShader ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	 */
 	static void SetPixelShader(PixelShader* pPixelShader);
 
 	/**
-	 * @brief ‘S‚Ä‚ÌƒVƒF[ƒ_[‚ğ‰ğ•ú‚·‚é
+	 * @brief å…¨ã¦ã®ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’è§£æ”¾ã™ã‚‹
 	 */
 	static void Clear();
 
 	/**
-	 * @brief ƒVƒF[ƒ_[‚Ìİ’èó‘Ô‚ğƒŠƒZƒbƒg‚·‚é
-	 * @note ‚±‚ÌƒNƒ‰ƒXˆÈŠO‚©‚çƒVƒF[ƒ_[‚ª•ÏX‚³‚ê‚½ê‡‚ÉŒÄ‚Ño‚µ‚Ä‚­‚¾‚³‚¢
+	 * @brief ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®è¨­å®šçŠ¶æ…‹ã‚’ãƒªã‚»ãƒƒãƒˆã™ã‚‹
+	 * @note ã“ã®ã‚¯ãƒ©ã‚¹ä»¥å¤–ã‹ã‚‰ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãŒå¤‰æ›´ã•ã‚ŒãŸå ´åˆã«å‘¼ã³å‡ºã—ã¦ãã ã•ã„
 	 */
 	static void Refresh()
 	{
@@ -55,15 +55,15 @@ public:
 private:
 	ShaderManager() = delete;
 
-	/// ’¸“_ƒVƒF[ƒ_[‚Æƒtƒ@ƒCƒ‹ƒpƒX‚Ìƒ}ƒbƒv
+	/// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã¨ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã®ãƒãƒƒãƒ—
 	static std::unordered_map<std::string, std::shared_ptr<VertexShader>> s_vertexShaders;
 
-	/// ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚Æƒtƒ@ƒCƒ‹ƒpƒX‚Ìƒ}ƒbƒv
+	/// ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã¨ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã®ãƒãƒƒãƒ—
 	static std::unordered_map<std::string, std::shared_ptr<PixelShader>> s_pixelShaders;
 
-	/// Œ»İƒZƒbƒg‚³‚ê‚Ä‚¢‚é’¸“_ƒVƒF[ƒ_[
+	/// ç¾åœ¨ã‚»ãƒƒãƒˆã•ã‚Œã¦ã„ã‚‹é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼
 	static ID3D11VertexShader* s_pCurrentVS;
 
-	/// Œ»İƒZƒbƒg‚³‚ê‚Ä‚¢‚éƒsƒNƒZƒ‹ƒVƒF[ƒ_[
+	/// ç¾åœ¨ã‚»ãƒƒãƒˆã•ã‚Œã¦ã„ã‚‹ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼
 	static ID3D11PixelShader* s_pCurrentPS;
 };

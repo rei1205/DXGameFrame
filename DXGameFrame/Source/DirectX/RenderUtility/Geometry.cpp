@@ -7,7 +7,7 @@ HRESULT Geometry::Init()
 {
 	HRESULT hr = S_OK;
 
-	// ƒWƒIƒƒgƒŠ}Œ`‚ğì¬
+	// ã‚¸ã‚ªãƒ¡ãƒˆãƒªå›³å½¢ã‚’ä½œæˆ
 	hr = CreateBox();
 	if (FAILED(hr)) { return hr; }
 	hr = CreateCylinder();
@@ -16,7 +16,7 @@ HRESULT Geometry::Init()
 	if (FAILED(hr)) { return hr; }
 	hr = CreatePlane();
 	if (FAILED(hr)) { return hr; }
-
+	
 	return hr;
 }
 
@@ -32,28 +32,28 @@ HRESULT Geometry::CreateBox()
 {
 	HRESULT hr = S_OK;
 
-	const UINT face_count = 6;		// –Ê‚Ì”
-	const UINT faceVtx_count = 4;	// –Ê‚Ì’¸“_”
-	const UINT faceIdx_count = 6;	// –Ê‚ÌƒCƒ“ƒfƒbƒNƒX”
-	const float h = 0.5f;			// ”¼•ª‚ÌƒTƒCƒY
+	const UINT face_count = 6;		// é¢ã®æ•°
+	const UINT faceVtx_count = 4;	// é¢ã®é ‚ç‚¹æ•°
+	const UINT faceIdx_count = 6;	// é¢ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹æ•°
+	const float h = 0.5f;			// åŠåˆ†ã®ã‚µã‚¤ã‚º
 
 	struct Face
 	{
-		DirectX::XMFLOAT3 vtxPos[faceVtx_count];	// ’¸“_À•W
-		DirectX::XMFLOAT3 normal;					// –@ü•ûŒü
+		DirectX::XMFLOAT3 vtxPos[faceVtx_count];	// é ‚ç‚¹åº§æ¨™
+		DirectX::XMFLOAT3 normal;					// æ³•ç·šæ–¹å‘
 	};
 
-	//–Êƒf[ƒ^‚Ìì¬
+	//é¢ãƒ‡ãƒ¼ã‚¿ã®ä½œæˆ
 	Face face[face_count] = {
-		{{{-h, h,-h},{ h, h,-h},{-h,-h,-h},{ h,-h,-h}},{ 0.0f, 0.0f,-1.0f}},		//-Z–Ê
-		{{{ h, h, h},{-h, h, h},{ h,-h, h},{-h,-h, h}},{ 0.0f, 0.0f, 1.0f}},		// Z–Ê
-		{{{-h, h, h},{-h, h,-h},{-h,-h, h},{-h,-h,-h}},{-1.0f, 0.0f, 0.0f}},		//-X–Ê
-		{{{ h, h,-h},{ h, h, h},{ h,-h,-h},{ h,-h, h}},{ 1.0f, 0.0f, 0.0f}},		// X–Ê
-		{{{ h,-h, h},{-h,-h, h},{ h,-h,-h},{-h,-h,-h}},{ 0.0f,-1.0f, 0.0f}},		//-Y–Ê
-		{{{-h, h, h},{ h, h, h},{-h, h,-h},{ h, h,-h}},{ 0.0f, 1.0f, 0.0f}}			// Y–Ê
+		{{{-h, h,-h},{ h, h,-h},{-h,-h,-h},{ h,-h,-h}},{ 0.0f, 0.0f,-1.0f}},		//-Zé¢
+		{{{ h, h, h},{-h, h, h},{ h,-h, h},{-h,-h, h}},{ 0.0f, 0.0f, 1.0f}},		// Zé¢
+		{{{-h, h, h},{-h, h,-h},{-h,-h, h},{-h,-h,-h}},{-1.0f, 0.0f, 0.0f}},		//-Xé¢
+		{{{ h, h,-h},{ h, h, h},{ h,-h,-h},{ h,-h, h}},{ 1.0f, 0.0f, 0.0f}},		// Xé¢
+		{{{ h,-h, h},{-h,-h, h},{ h,-h,-h},{-h,-h,-h}},{ 0.0f,-1.0f, 0.0f}},		//-Yé¢
+		{{{-h, h, h},{ h, h, h},{-h, h,-h},{ h, h,-h}},{ 0.0f, 1.0f, 0.0f}}			// Yé¢
 	};
 
-	//–Ê‹¤’Ê‚ÌUVÀ•W
+	//é¢å…±é€šã®UVåº§æ¨™
 	DirectX::XMFLOAT2 uv[4] = {
 		{0.0f, 0.0f},
 		{1.0f, 0.0f},
@@ -61,17 +61,17 @@ HRESULT Geometry::CreateBox()
 		{1.0f, 1.0f},
 	};
 
-	// ƒoƒbƒtƒ@‚Ìì¬
+	// ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 	std::vector<Mesh::MeshVertex> meshVtx;
 	Mesh::Description desc = {};
 	
-	//’¸“_ƒf[ƒ^‚ğì¬
+	//é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿ã‚’ä½œæˆ
 	meshVtx.resize(face_count * faceVtx_count);
 	for (UINT i = 0; i < face_count; i++)
 	{
 		for (UINT j = 0; j < faceVtx_count; j++)
 		{
-			UINT index = i * faceVtx_count + j;		//”z—ñã‚ÌˆÊ’u
+			UINT index = i * faceVtx_count + j;		//é…åˆ—ä¸Šã®ä½ç½®
 			meshVtx[index].pos = face[i].vtxPos[j];
 			meshVtx[index].normal = face[i].normal;
 			meshVtx[index].uv = uv[j];
@@ -79,12 +79,12 @@ HRESULT Geometry::CreateBox()
 		}
 	}
 
-	//ƒCƒ“ƒfƒbƒNƒXƒf[ƒ^‚ğì¬
+	//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒ‡ãƒ¼ã‚¿ã‚’ä½œæˆ
 	desc.idx.resize(face_count * faceIdx_count);
 	for (UINT i = 0; i < face_count; i++)
 	{
-		UINT index = i * faceIdx_count;		//”z—ñã‚ÌˆÊ’u
-		UINT offset = i * faceVtx_count;	//–Ê‚²‚Æ‚ÌƒCƒ“ƒfƒbƒNƒX”Ô†‚Ì‚¸‚ê
+		UINT index = i * faceIdx_count;		//é…åˆ—ä¸Šã®ä½ç½®
+		UINT offset = i * faceVtx_count;	//é¢ã”ã¨ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ç•ªå·ã®ãšã‚Œ
 
 		desc.idx[index++] = offset;
 		desc.idx[index++] = offset + 1;
@@ -94,10 +94,10 @@ HRESULT Geometry::CreateBox()
 		desc.idx[index++] = offset + 2;
 	}
 
-	//‚»‚Ì‘¼‚Ìƒf[ƒ^‚ğİ’è
+	//ãã®ä»–ã®ãƒ‡ãƒ¼ã‚¿ã‚’è¨­å®š
 	desc.topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 
-	// ƒƒbƒVƒ…‚ğì¬
+	// ãƒ¡ãƒƒã‚·ãƒ¥ã‚’ä½œæˆ
 	auto mesh = std::make_shared<Mesh>();
 	hr = mesh->CreateMesh(meshVtx, desc);
 	if (FAILED(hr)) { return hr; }
@@ -123,8 +123,8 @@ HRESULT Geometry::CreatePlane()
 
 	struct Vtx
 	{
-		DirectX::XMFLOAT3 pos;			// ’¸“_À•W
-		DirectX::XMFLOAT2 uv;			// UVÀ•W
+		DirectX::XMFLOAT3 pos;			// é ‚ç‚¹åº§æ¨™
+		DirectX::XMFLOAT2 uv;			// UVåº§æ¨™
 	};
 
 	Vtx vtx[4]
@@ -137,11 +137,11 @@ HRESULT Geometry::CreatePlane()
 
 	int idx[6] = { 0,1,2,1,3,2 };
 
-	// ƒoƒbƒtƒ@‚Ìì¬
+	// ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 	std::vector<Mesh::MeshVertex> meshVtx;
 	Mesh::Description desc = {};
 
-	//’¸“_ƒf[ƒ^‚ğì¬
+	//é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿ã‚’ä½œæˆ
 	meshVtx.resize(4);
 	for (UINT i = 0; i < 4; i++)
 	{
@@ -151,17 +151,17 @@ HRESULT Geometry::CreatePlane()
 		meshVtx[i].color = { 1.0f, 1.0f, 1.0f, 1.0f };
 	}
 
-	//ƒCƒ“ƒfƒbƒNƒXƒf[ƒ^‚ğì¬
+	//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒ‡ãƒ¼ã‚¿ã‚’ä½œæˆ
 	desc.idx.resize(6);
 	for (UINT i = 0; i < 6; i++)
 	{
 		desc.idx[i] = idx[i];
 	}
 
-	//‚»‚Ì‘¼‚Ìƒf[ƒ^‚ğİ’è
+	//ãã®ä»–ã®ãƒ‡ãƒ¼ã‚¿ã‚’è¨­å®š
 	desc.topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 
-	// ƒƒbƒVƒ…‚ğì¬
+	// ãƒ¡ãƒƒã‚·ãƒ¥ã‚’ä½œæˆ
 	auto mesh = std::make_shared<Mesh>();
 	hr = mesh->CreateMesh(meshVtx, desc);
 	if (FAILED(hr)) { return hr; }

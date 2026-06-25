@@ -6,7 +6,7 @@
 #include <memory>
 
 /**
- * @brief ƒ‚ƒfƒ‹ƒf[ƒ^‚ðˆµ‚¤
+ * @brief ãƒ¢ãƒ‡ãƒ«ãƒ‡ãƒ¼ã‚¿ã‚’æ‰±ã†
  */
 class Model
 {
@@ -16,11 +16,11 @@ public:
 
 	bool Load(const std::string& filePath);
 
-	/// ƒ‚ƒfƒ‹—pƒƒbƒVƒ…\‘¢
+	/// ãƒ¢ãƒ‡ãƒ«ç”¨ãƒ¡ãƒƒã‚·ãƒ¥æ§‹é€ 
 	struct ModelMesh
 	{
-		std::shared_ptr<Mesh> mesh;				// ƒƒbƒVƒ…
-		int materialID;							// ƒ}ƒeƒŠƒAƒ‹ID
+		std::shared_ptr<Mesh> mesh;				// ãƒ¡ãƒƒã‚·ãƒ¥
+		int materialID;							// ãƒžãƒ†ãƒªã‚¢ãƒ«ID
 	};
 
 	std::vector<ModelMesh> GetMeshes()
@@ -33,19 +33,19 @@ private:
 	using NodeIndex = int;
 	static constexpr NodeIndex NODE_NONE = -1;
 
-	/// ƒm[ƒh\‘¢
+	/// ãƒŽãƒ¼ãƒ‰æ§‹é€ 
 	struct Node
 	{
-		std::string name;						// ƒm[ƒh–¼
-		NodeIndex parentID;						// eƒm[ƒhID
-		std::vector<NodeIndex> childrenIDs;		// Žqƒm[ƒhID
-		DirectX::XMMATRIX worldMatrix;			// ƒ[ƒ‹ƒh•ÏŠ·s—ñ
+		std::string name;						// ãƒŽãƒ¼ãƒ‰å
+		NodeIndex parentID;						// è¦ªãƒŽãƒ¼ãƒ‰ID
+		std::vector<NodeIndex> childrenIDs;		// å­ãƒŽãƒ¼ãƒ‰ID
+		DirectX::XMMATRIX worldMatrix;			// ãƒ¯ãƒ¼ãƒ«ãƒ‰å¤‰æ›è¡Œåˆ—
 	};
 
-	/// ƒm[ƒh”z—ñ
+	/// ãƒŽãƒ¼ãƒ‰é…åˆ—
 	std::vector<Node> m_nodes;
 
-	/// ƒƒbƒVƒ…”z—ñ
+	/// ãƒ¡ãƒƒã‚·ãƒ¥é…åˆ—
 	std::vector<ModelMesh> m_meshes;
 
 	void CreateNode(const aiScene* pScene);

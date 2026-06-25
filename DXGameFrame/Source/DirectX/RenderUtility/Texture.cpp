@@ -28,11 +28,11 @@ HRESULT Texture::Load(const std::string& filePath)
 {
 	HRESULT hr = S_OK;
 
-	// ƒtƒ@ƒCƒ‹‚©‚çƒeƒNƒXƒ`ƒƒ‚ğ“Ç‚İ‚Ş
+	// ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’èª­ã¿è¾¼ã‚€
 	hr = LoadFromFile(filePath);
 	if (FAILED(hr))
 	{
-		Debug::ErrorMessage(filePath + "‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½B");
+		Debug::ErrorMessage(filePath + "ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
 		return hr;
 	}
 
@@ -44,11 +44,11 @@ HRESULT Texture::LoadFromFile(const std::string& filePath)
 {
 	HRESULT hr = S_OK;
 
-	// •¶š•ÏŠ· (DirectXTex‚Å‚Íwchar_t*‚ğg—p‚µ‚Ü‚·)
+	// æ–‡å­—å¤‰æ› (DirectXTexã§ã¯wchar_t*ã‚’ä½¿ç”¨ã—ã¾ã™)
 	wchar_t wPath[MAX_PATH];
 	MultiByteToWideChar(0, 0, filePath.c_str(), -1, wPath, MAX_PATH);
 
-	// ƒtƒ@ƒCƒ‹•Ê“Ç‚İ‚İ
+	// ãƒ•ã‚¡ã‚¤ãƒ«åˆ¥èª­ã¿è¾¼ã¿
 	DirectX::TexMetadata mdata;
 	DirectX::ScratchImage image;
 	if (strstr(filePath.c_str(), ".tga"))
@@ -61,7 +61,7 @@ HRESULT Texture::LoadFromFile(const std::string& filePath)
 	}
 	if (FAILED(hr)) { return hr; }
 
-	// ƒVƒF[ƒ_ƒŠƒ\[ƒXƒrƒ…[‚ğì¬
+	// ã‚·ã‚§ãƒ¼ãƒ€ãƒªã‚½ãƒ¼ã‚¹ãƒ“ãƒ¥ãƒ¼ã‚’ä½œæˆ
 	hr = CreateShaderResourceView(
 		Direct3D::GetDevice(),
 		image.GetImages(),
@@ -71,7 +71,7 @@ HRESULT Texture::LoadFromFile(const std::string& filePath)
 	);
 	if (FAILED(hr)) { return hr; }
 
-	// ƒtƒ@ƒCƒ‹ƒTƒCƒY‚ğ•Û‘¶
+	// ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚ºã‚’ä¿å­˜
 	m_size.x = (UINT)mdata.width;
 	m_size.y = (UINT)mdata.height;
 

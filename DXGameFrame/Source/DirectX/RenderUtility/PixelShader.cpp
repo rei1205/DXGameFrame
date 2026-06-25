@@ -2,7 +2,6 @@
 #include "PixelShader.h"
 #include "../Direct3D.h"
 
-
 PixelShader::PixelShader() :
 	m_pPS(nullptr)
 {
@@ -11,29 +10,29 @@ PixelShader::PixelShader() :
 HRESULT PixelShader::LoadFromCSOFile(const std::string& filePath)
 {
 	HRESULT hr = S_OK;
-	FILE* fp;			// ƒtƒ@ƒCƒ‹ƒ|ƒCƒ“ƒ^
-	char* data;			// ƒtƒ@ƒCƒ‹“Ç‚Ýž‚Ýæ
-	long dataSize;		// ƒtƒ@ƒCƒ‹ƒTƒCƒY
+	FILE* fp;			// ãƒ•ã‚¡ã‚¤ãƒ«ãƒã‚¤ãƒ³ã‚¿
+	char* data;			// ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿å…ˆ
+	long dataSize;		// ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚º
 
-	// csoƒtƒ@ƒCƒ‹‚ðŠJ‚­
+	// csoãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã
 	fopen_s(&fp, filePath.c_str(), "rb");
 	if (fp == nullptr)
 		return E_FAIL;
 
-	// ƒtƒ@ƒCƒ‹ƒTƒCƒY‚ðŽæ“¾
+	// ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚ºã‚’å–å¾—
 	fseek(fp, 0, SEEK_END);
 	dataSize = ftell(fp);
 	fseek(fp, 0, SEEK_SET);
 
-	// ƒtƒ@ƒCƒ‹“Ç‚Ýž‚Ý
+	// ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿
 	data = new char[dataSize];
 	fread_s(data, dataSize, 1, dataSize, fp);
 	fclose(fp);
 
-	// ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚ðì¬
+	// ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ä½œæˆ
 	hr = CreatePixelShader(data, dataSize);
 
-	// ƒƒ‚ƒŠ‰ð•ú
+	// ãƒ¡ãƒ¢ãƒªè§£æ”¾
 	delete[] data;
 
 	return hr;
@@ -43,7 +42,7 @@ HRESULT PixelShader::CreatePixelShader(const char* data, int dataSize)
 {
 	HRESULT hr = S_OK;
 
-	// ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚ðì¬
+	// ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ä½œæˆ
 	hr = Direct3D::GetDevice()->CreatePixelShader(
 		data,
 		dataSize,

@@ -4,7 +4,7 @@
 #include <ImGui/imgui.h>
 
 HierarchyGUI::HierarchyGUI() :
-    EditorWindow("Hierarchy"),
+    EditorWindow("ãƒ’ã‚¨ãƒ©ãƒ«ã‚­ãƒ¼"),
     m_operationEvent(nullptr)
 {
 }
@@ -17,7 +17,7 @@ void HierarchyGUI::OnGUI()
     auto& objManager = pScene->GetGameObjectManager();
     auto& gameObjects = objManager.GetGameObjects();
 
-    // ƒEƒBƒ“ƒhƒEã‚Ì‰EƒNƒŠƒbƒNƒƒjƒ…[
+    // ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ä¸Šã®å³ã‚¯ãƒªãƒƒã‚¯ãƒ¡ãƒ‹ãƒ¥ãƒ¼
     if (ImGui::BeginPopupContextWindow())
     {
         if (ImGui::MenuItem("Create Empty"))
@@ -31,12 +31,12 @@ void HierarchyGUI::OnGUI()
         ImGui::EndPopup();
     }
 
-    // ƒƒCƒ“•`‰æ
+    // ãƒ¡ã‚¤ãƒ³æç”»
     if (DrawRootNode())
     {
         for (auto& obj : gameObjects)
         {
-            // ƒV[ƒ“’¼‰º‚Ì‚İ‘ÎÛ
+            // ã‚·ãƒ¼ãƒ³ç›´ä¸‹ã®ã¿å¯¾è±¡
             if (obj->GetTransform()->GetParent() != nullptr)
                 continue;
 
@@ -46,7 +46,7 @@ void HierarchyGUI::OnGUI()
         ImGui::TreePop();
     }
 
-    // ƒIƒuƒWƒFƒNƒg‘€ìƒCƒxƒ“ƒg‚Ìˆ—
+    // ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆæ“ä½œã‚¤ãƒ™ãƒ³ãƒˆã®å‡¦ç†
     if (m_operationEvent != nullptr)
     {
         m_operationEvent();
@@ -60,26 +60,26 @@ bool HierarchyGUI::DrawRootNode()
     auto& objManager = pScene->GetGameObjectManager();
     auto& gameObjects = objManager.GetGameObjects();
 
-    // “®ìİ’è
+    // å‹•ä½œè¨­å®š
     ImGuiTreeNodeFlags flags =
         ImGuiTreeNodeFlags_DefaultOpen |
         ImGuiTreeNodeFlags_OpenOnArrow |
         ImGuiTreeNodeFlags_OpenOnDoubleClick |
         ImGuiTreeNodeFlags_SpanAvailWidth;
 
-    // ƒIƒuƒWƒFƒNƒg‚ª‚È‚¢ê‡‚Ìİ’è
+    // ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒãªã„å ´åˆã®è¨­å®š
     if (gameObjects.empty())
         flags |= ImGuiTreeNodeFlags_Leaf;
 
     bool open = ImGui::TreeNodeEx(pScene, flags, "Scene");
 
-    // ‘I‘ğ‚Ìˆ—
+    // é¸æŠæ™‚ã®å‡¦ç†
     if (ImGui::IsItemClicked())
     {
         Editor::SetTargetGameObject(nullptr);
     }
 
-    // ƒhƒƒbƒvæ
+    // ãƒ‰ãƒ­ãƒƒãƒ—å…ˆ
     if (ImGui::BeginDragDropTarget())
     {
         const ImGuiPayload* payload = ImGui::AcceptDragDropPayload(
@@ -105,7 +105,7 @@ void HierarchyGUI::DrawNode(Transform* pTransform)
 {
     auto children = pTransform->GetChildren();
 
-    // “®ìİ’è
+    // å‹•ä½œè¨­å®š
     ImGuiTreeNodeFlags flags =
         ImGuiTreeNodeFlags_OpenOnArrow |
         ImGuiTreeNodeFlags_OpenOnDoubleClick |
@@ -117,19 +117,19 @@ void HierarchyGUI::DrawNode(Transform* pTransform)
     bool selected = pTransform->GetGameObject() == Editor::GetTargetGameObject();
     if (selected)
     {
-        // ‘I‘ğ’†ƒXƒ^ƒCƒ‹
+        // é¸æŠä¸­ã‚¹ã‚¿ã‚¤ãƒ«
         flags |= ImGuiTreeNodeFlags_Selected;
         ImGui::PushStyleColor(ImGuiCol_HeaderHovered, ImGui::GetStyle().Colors[ImGuiCol_Header]);
     }
 
-    // ƒm[ƒhì¬
+    // ãƒãƒ¼ãƒ‰ä½œæˆ
     bool open = ImGui::TreeNodeEx(pTransform, flags, pTransform->GetGameObject()->GetName().c_str());
     NodeInteraction(pTransform);
 
     if (selected)
         ImGui::PopStyleColor();
 
-    // q‚ğÄ‹A“I‚É•`‰æ
+    // å­ã‚’å†å¸°çš„ã«æç”»
     if (open)
     {
         for (auto* child : children)
@@ -142,13 +142,13 @@ void HierarchyGUI::DrawNode(Transform* pTransform)
 
 void HierarchyGUI::NodeInteraction(Transform* pTransform)
 {
-    // ‘I‘ğ‚Ìˆ—
+    // é¸æŠæ™‚ã®å‡¦ç†
     if (ImGui::IsItemClicked())
     {
         Editor::SetTargetGameObject(pTransform->GetGameObject());
     }
 
-    // ‰EƒNƒŠƒbƒNƒƒjƒ…[
+    // å³ã‚¯ãƒªãƒƒã‚¯ãƒ¡ãƒ‹ãƒ¥ãƒ¼
     if (ImGui::BeginPopupContextItem())
     {
         Editor::SetTargetGameObject(pTransform->GetGameObject());
@@ -173,19 +173,19 @@ void HierarchyGUI::NodeInteraction(Transform* pTransform)
         ImGui::EndPopup();
     }
 
-    // F‚ğæ“¾
+    // è‰²ã‚’å–å¾—
     ImGuiStyle& style = ImGui::GetStyle();
     ImU32 targetColor = ImGui::ColorConvertFloat4ToU32(style.Colors[ImGuiCol_Header]);
     ImU32 hoveredColor = ImGui::ColorConvertFloat4ToU32(style.Colors[ImGuiCol_HeaderHovered]);
 
-    // ƒJ[ƒ\ƒ‹‚ÌˆÊ’u‚ğæ“¾
+    // ã‚«ãƒ¼ã‚½ãƒ«ã®ä½ç½®ã‚’å–å¾—
     ImVec2 min = ImGui::GetItemRectMin();
     ImVec2 max = ImGui::GetItemRectMax();
     float mouseY = ImGui::GetMousePos().y;
     float height = max.y - min.y;
     float ratio = (mouseY - min.y) / height;
 
-    // ƒhƒƒbƒv‹““®‚ğæ“¾
+    // ãƒ‰ãƒ­ãƒƒãƒ—æŒ™å‹•ã‚’å–å¾—
     DropType dropType;
     if (ratio < 0.25f)
     {
@@ -200,7 +200,7 @@ void HierarchyGUI::NodeInteraction(Transform* pTransform)
         dropType = DropType::CHILD;
     }
 
-    // ƒhƒ‰ƒbƒOŒ³
+    // ãƒ‰ãƒ©ãƒƒã‚°å…ƒ
     if (ImGui::BeginDragDropSource())
     {
         ImGui::SetDragDropPayload("HIERARCHY_NODE", &pTransform, sizeof(pTransform));
@@ -208,14 +208,14 @@ void HierarchyGUI::NodeInteraction(Transform* pTransform)
         ImGui::EndDragDropSource();
     }
 
-    // ƒhƒƒbƒvæ
+    // ãƒ‰ãƒ­ãƒƒãƒ—å…ˆ
     if (ImGui::BeginDragDropTarget())
     {
         const ImGuiPayload* payload;
         payload = ImGui::AcceptDragDropPayload("HIERARCHY_NODE",
             ImGuiDragDropFlags_AcceptNoDrawDefaultRect);
 
-        // eqŠÖŒW‚ğˆÚ“®
+        // è¦ªå­é–¢ä¿‚ã‚’ç§»å‹•
         if (payload != nullptr)
         {
             Transform* drag = *(Transform**)payload->Data;
@@ -229,7 +229,7 @@ void HierarchyGUI::NodeInteraction(Transform* pTransform)
         }
         ImGui::EndDragDropTarget();
 
-        // ˆÚ“®‘ÎÛ•`‰æ
+        // ç§»å‹•å¯¾è±¡æç”»
         ImDrawList* drawList = ImGui::GetWindowDrawList();
         switch (dropType)
         {
@@ -254,10 +254,10 @@ void HierarchyGUI::DropObject(Transform* drag, Transform* target, DropType dropT
     if (pScene == nullptr)
         return;
 
-    // ‘€ìæƒCƒ“ƒfƒbƒNƒX‚ğæ“¾
+    // æ“ä½œå…ˆã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’å–å¾—
     size_t index = pScene->GetGameObjectManager().GetElementIndex(target->GetGameObject());
 
-    // ƒIƒuƒWƒFƒNƒgˆÚ“®
+    // ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆç§»å‹•
     switch (dropType)
     {
     case DropType::BEFORE:
@@ -276,7 +276,7 @@ void HierarchyGUI::DropObject(Transform* drag, Transform* target, DropType dropT
         break;
     }
 
-    // q—v‘f‚Ì•À‚Ñ‘Ö‚¦
+    // å­è¦ç´ ã®ä¸¦ã³æ›¿ãˆ
     Transform* parent = drag->GetParent();
     if (parent != nullptr)
     {
@@ -288,7 +288,7 @@ void HierarchyGUI::DropObject(Transform* drag, Transform* target, DropType dropT
         }
         else
         {
-            // ˆÚ“®æƒCƒ“ƒfƒbƒNƒX‚ğæ“¾
+            // ç§»å‹•å…ˆã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’å–å¾—
             size_t childIndex = parent->GetChildIndex(target);
 
             if (dropType == DropType::BEFORE)

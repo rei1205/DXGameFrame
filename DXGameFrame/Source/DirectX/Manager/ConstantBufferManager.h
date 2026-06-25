@@ -3,155 +3,155 @@
 #include "../DirectXInclude.h"
 #include <vector>
 
- /// Å‘åƒ{[ƒ“”
+ /// æœ€å¤§ãƒœãƒ¼ãƒ³æ•°
 constexpr UINT MaxBone = 64;
 
-/// ƒJƒXƒ^ƒ€’è”ƒoƒbƒtƒ@ƒTƒCƒY
+/// ã‚«ã‚¹ã‚¿ãƒ å®šæ•°ãƒãƒƒãƒ•ã‚¡ã‚µã‚¤ã‚º
 constexpr UINT CustomCBSize = 256;
 
-/// ƒfƒBƒŒƒNƒVƒ‡ƒiƒ‹ƒ‰ƒCƒg’è”ƒoƒbƒtƒ@
+/// ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒŠãƒ«ãƒ©ã‚¤ãƒˆå®šæ•°ãƒãƒƒãƒ•ã‚¡
 struct DirectionalLightCB
 {
-	DirectX::XMFLOAT3 lightDir;				// ƒ‰ƒCƒg•ûŒü
-	float lightIntensity;					// ƒ‰ƒCƒg‚Ì‹­‚³
-	DirectX::XMFLOAT3 lightColor;			// ƒ‰ƒCƒgF
-	float lightSize;						// ƒ‰ƒCƒg‚Ì‘å‚«‚³iƒVƒƒƒhƒE—pj
-	DirectX::XMFLOAT3 ambientColor;			// ŠÂ‹«Œõ
+	DirectX::XMFLOAT3 lightDir;				// ãƒ©ã‚¤ãƒˆæ–¹å‘
+	float lightIntensity;					// ãƒ©ã‚¤ãƒˆã®å¼·ã•
+	DirectX::XMFLOAT3 lightColor;			// ãƒ©ã‚¤ãƒˆè‰²
+	float lightSize;						// ãƒ©ã‚¤ãƒˆã®å¤§ãã•ï¼ˆã‚·ãƒ£ãƒ‰ã‚¦ç”¨ï¼‰
+	DirectX::XMFLOAT3 ambientColor;			// ç’°å¢ƒå…‰
 	float pad;
-	DirectX::XMFLOAT4X4 lightViewProj;		// ƒ‰ƒCƒgƒrƒ…[EƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ
+	DirectX::XMFLOAT4X4 lightViewProj;		// ãƒ©ã‚¤ãƒˆãƒ“ãƒ¥ãƒ¼ãƒ»ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—
 };
 
-/// ƒ{[ƒ“’è”ƒoƒbƒtƒ@
+/// ãƒœãƒ¼ãƒ³å®šæ•°ãƒãƒƒãƒ•ã‚¡
 struct BoneCB
 {
-	DirectX::XMFLOAT4X4 bones[MaxBone];		// ƒ{[ƒ“s—ñ
+	DirectX::XMFLOAT4X4 bones[MaxBone];		// ãƒœãƒ¼ãƒ³è¡Œåˆ—
 };
 
-/// ƒJƒXƒ^ƒ€’è”ƒoƒbƒtƒ@
+/// ã‚«ã‚¹ã‚¿ãƒ å®šæ•°ãƒãƒƒãƒ•ã‚¡
 struct CustomCB
 {
-	BYTE data[CustomCBSize];	// ƒJƒXƒ^ƒ€ƒpƒ‰ƒ[ƒ^
+	BYTE data[CustomCBSize];	// ã‚«ã‚¹ã‚¿ãƒ ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 };
 
 /**
- * @brief ’è”ƒoƒbƒtƒ@‚ğˆµ‚¤
+ * @brief å®šæ•°ãƒãƒƒãƒ•ã‚¡ã‚’æ‰±ã†
  */
 class ConstantBufferManager
 {
 public:
 	/**
-	 * @brief ’è”ƒoƒbƒtƒ@‚Ì‰Šú‰»
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®åˆæœŸåŒ–
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	static HRESULT Init();
 
 	/**
-	 * @brief I—¹ˆ—
+	 * @brief çµ‚äº†å‡¦ç†
 	 */
 	static void Uninit();
 
 	/**
-	 * @brief ƒVƒF[ƒ_[‚É’è”ƒoƒbƒtƒ@‚ğƒZƒbƒg‚·‚é
+	 * @brief ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã«å®šæ•°ãƒãƒƒãƒ•ã‚¡ã‚’ã‚»ãƒƒãƒˆã™ã‚‹
 	 */
 	static void ShaderSetBuffer();
 
 	/**
-	 * @brief ƒ[ƒ‹ƒhs—ñ‚ğİ’è‚·‚é
-	 * @param world İ’è‚·‚éƒ[ƒ‹ƒhs—ñ
+	 * @brief ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã‚’è¨­å®šã™ã‚‹
+	 * @param world è¨­å®šã™ã‚‹ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—
 	 */
 	static void SetWorld(const DirectX::XMMATRIX& world);
 
 	/**
-	 * @brief ƒrƒ…[s—ñ‚ğİ’è‚·‚é
-	 * @param view İ’è‚·‚éƒrƒ…[s—ñ
+	 * @brief ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã‚’è¨­å®šã™ã‚‹
+	 * @param view è¨­å®šã™ã‚‹ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—
 	 */
 	static void SetView(const DirectX::XMMATRIX& view);
 
 	/**
-	 * @brief ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ‚ğİ’è‚·‚é
-	 * @param view İ’è‚·‚éƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ
+	 * @brief ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—ã‚’è¨­å®šã™ã‚‹
+	 * @param view è¨­å®šã™ã‚‹ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—
 	 */
 	static void SetProjection(const DirectX::XMMATRIX& projection);
 
 	/**
-	 * @brief ƒ‰ƒCƒg’è”ƒoƒbƒtƒ@‚ğİ’è‚·‚é
-	 * @param light İ’è‚·‚éƒ‰ƒCƒg’è”ƒoƒbƒtƒ@î•ñ
+	 * @brief ãƒ©ã‚¤ãƒˆå®šæ•°ãƒãƒƒãƒ•ã‚¡ã‚’è¨­å®šã™ã‚‹
+	 * @param light è¨­å®šã™ã‚‹ãƒ©ã‚¤ãƒˆå®šæ•°ãƒãƒƒãƒ•ã‚¡æƒ…å ±
 	 */
 	static void SetLight(const DirectionalLightCB& light);
 
 	/**
-	 * @brief Œ»İ‚ÌŒo‰ßŠÔ‚ğİ’è‚·‚é
-	 * @param time ƒQ[ƒ€ŠJn‚©‚çŒ»İ‚ÌŒo‰ßŠÔ
+	 * @brief ç¾åœ¨ã®çµŒéæ™‚é–“ã‚’è¨­å®šã™ã‚‹
+	 * @param time ã‚²ãƒ¼ãƒ é–‹å§‹ã‹ã‚‰ç¾åœ¨ã®çµŒéæ™‚é–“
 	 */
 	static void SetTime(float time);
 
 	/**
-	 * @brief ƒ{[ƒ“î•ñ‚ğİ’è‚·‚é
-	 * @param bones ƒ{[ƒ“’è”ƒoƒbƒtƒ@
+	 * @brief ãƒœãƒ¼ãƒ³æƒ…å ±ã‚’è¨­å®šã™ã‚‹
+	 * @param bones ãƒœãƒ¼ãƒ³å®šæ•°ãƒãƒƒãƒ•ã‚¡
 	 */
 	static void SetBone(DirectX::XMFLOAT4X4 bones[MaxBone]);
 
 	/**
-	 * @brief ƒJƒXƒ^ƒ€ƒf[ƒ^‚ğİ’è‚·‚é
-	 * @param data ƒJƒXƒ^ƒ€ƒf[ƒ^‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	 * @brief ã‚«ã‚¹ã‚¿ãƒ ãƒ‡ãƒ¼ã‚¿ã‚’è¨­å®šã™ã‚‹
+	 * @param data ã‚«ã‚¹ã‚¿ãƒ ãƒ‡ãƒ¼ã‚¿ã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	 */
 	static void SetCustomData(const std::vector<BYTE>& data);
 
 	/**
-	 * @brief ƒtƒŒ[ƒ€XV’è”ƒoƒbƒtƒ@‚ğXV‚·‚é
+	 * @brief ãƒ•ãƒ¬ãƒ¼ãƒ æ›´æ–°å®šæ•°ãƒãƒƒãƒ•ã‚¡ã‚’æ›´æ–°ã™ã‚‹
 	 */
 	static void UpdateFrameCB();
 
 private:
 	ConstantBufferManager() = delete;
 
-	/// WVP’è”ƒoƒbƒtƒ@‚ÌƒXƒƒbƒg”Ô†
+	/// WVPå®šæ•°ãƒãƒƒãƒ•ã‚¡ã®ã‚¹ãƒ­ãƒƒãƒˆç•ªå·
 	enum class SlotNum : UINT
 	{
-		WORLD,		// ƒ[ƒ‹ƒhs—ñ
-		FRAME,		// ƒtƒŒ[ƒ€XVî•ñ
-		BONE,		// ƒ{[ƒ“î•ñ
-		CUSTOM,		// ƒJƒXƒ^ƒ€ƒpƒ‰ƒ[ƒ^
-		COUNT		// g—pƒXƒƒbƒg”
+		WORLD,		// ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—
+		FRAME,		// ãƒ•ãƒ¬ãƒ¼ãƒ æ›´æ–°æƒ…å ±
+		BONE,		// ãƒœãƒ¼ãƒ³æƒ…å ±
+		CUSTOM,		// ã‚«ã‚¹ã‚¿ãƒ ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
+		COUNT		// ä½¿ç”¨ã‚¹ãƒ­ãƒƒãƒˆæ•°
 	};
 
-	/// ƒ[ƒ‹ƒhs—ñ’è”ƒoƒbƒtƒ@
+	/// ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—å®šæ•°ãƒãƒƒãƒ•ã‚¡
 	struct WorldCB
 	{
-		DirectX::XMFLOAT4X4 world;		// ƒ[ƒ‹ƒhs—ñ
-		DirectX::XMFLOAT4X4 invWorld;	// ƒ[ƒ‹ƒh‹ts—ñ
+		DirectX::XMFLOAT4X4 world;		// ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—
+		DirectX::XMFLOAT4X4 invWorld;	// ãƒ¯ãƒ¼ãƒ«ãƒ‰é€†è¡Œåˆ—
 	};
 
-	/// ƒtƒŒ[ƒ€XV’è”ƒoƒbƒtƒ@
+	/// ãƒ•ãƒ¬ãƒ¼ãƒ æ›´æ–°å®šæ•°ãƒãƒƒãƒ•ã‚¡
 	struct FrameCB
 	{
-		DirectX::XMFLOAT4X4 view;			// ƒrƒ…[s—ñ
-		DirectX::XMFLOAT4X4 projection;		// ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ
+		DirectX::XMFLOAT4X4 view;			// ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—
+		DirectX::XMFLOAT4X4 projection;		// ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—
 
-		DirectX::XMFLOAT3 cameraPos;		// ƒJƒƒ‰ˆÊ’u
-		float time;							// Œo‰ßŠÔ
+		DirectX::XMFLOAT3 cameraPos;		// ã‚«ãƒ¡ãƒ©ä½ç½®
+		float time;							// çµŒéæ™‚é–“
 
-		DirectionalLightCB lightCB;			// ƒ‰ƒCƒg’è”ƒoƒbƒtƒ@
+		DirectionalLightCB lightCB;			// ãƒ©ã‚¤ãƒˆå®šæ•°ãƒãƒƒãƒ•ã‚¡
 	};
 
-	// ƒtƒŒ[ƒ€XV’è”ƒoƒbƒtƒ@‚Ìî•ñ
+	// ãƒ•ãƒ¬ãƒ¼ãƒ æ›´æ–°å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®æƒ…å ±
 	static FrameCB s_frameCB;
 
-	/// ƒ[ƒ‹ƒhs—ñ’è”ƒoƒbƒtƒ@
+	/// ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—å®šæ•°ãƒãƒƒãƒ•ã‚¡
 	static ComPtr<ID3D11Buffer> s_pWorldBuffer;
 
-	/// ƒtƒŒ[ƒ€XV’è”ƒoƒbƒtƒ@
+	/// ãƒ•ãƒ¬ãƒ¼ãƒ æ›´æ–°å®šæ•°ãƒãƒƒãƒ•ã‚¡
 	static ComPtr<ID3D11Buffer> s_pFrameBuffer;
 
-	/// ƒ{[ƒ“’è”ƒoƒbƒtƒ@
+	/// ãƒœãƒ¼ãƒ³å®šæ•°ãƒãƒƒãƒ•ã‚¡
 	static ComPtr<ID3D11Buffer> s_pBoneBuffer;
 
-	/// ƒJƒXƒ^ƒ€’è”ƒoƒbƒtƒ@
+	/// ã‚«ã‚¹ã‚¿ãƒ å®šæ•°ãƒãƒƒãƒ•ã‚¡
 	static ComPtr<ID3D11Buffer> s_pCustomBuffer;
 
 	/**
-	 * @brief ‘S‚Ä‚Ì’è”ƒoƒbƒtƒ@‚ğì¬‚·‚é
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief å…¨ã¦ã®å®šæ•°ãƒãƒƒãƒ•ã‚¡ã‚’ä½œæˆã™ã‚‹
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	static HRESULT CreateAllBuffer();
 };

@@ -4,7 +4,7 @@
 #include <string>
 
 /**
- * @brief ƒuƒŒƒ“ƒhƒXƒe[ƒg‚ğˆµ‚¤
+ * @brief ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆã‚’æ‰±ã†
  */
 class BlendState
 {
@@ -13,16 +13,16 @@ public:
 	~BlendState() = default;
 
 	/**
-	 * @brief ƒuƒŒƒ“ƒhƒXƒe[ƒg‚ğì¬‚·‚é
-	 * @param pDesc ƒuƒŒƒ“ƒhƒXƒe[ƒgİ’èî•ñ‚Ö‚Ìƒ|ƒCƒ“ƒ^
-	 * @param name ƒuƒŒƒ“ƒhƒXƒe[ƒg–¼
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆã™ã‚‹
+	 * @param pDesc ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆè¨­å®šæƒ…å ±ã¸ã®ãƒã‚¤ãƒ³ã‚¿
+	 * @param name ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆå
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	HRESULT Create(const D3D11_BLEND_DESC* pDesc, const std::string& name);
 
 	/**
-	 * @brief Direct3D‚ÌƒuƒŒƒ“ƒhƒXƒe[ƒg‚ğæ“¾‚·‚é
-	 * @return ƒuƒŒƒ“ƒhƒXƒe[ƒg‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	 * @brief Direct3Dã®ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆã‚’å–å¾—ã™ã‚‹
+	 * @return ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	 */
 	ID3D11BlendState* GetBlendState()
 	{
@@ -30,8 +30,8 @@ public:
 	}
 
 	/**
-	 * @brief ƒuƒŒƒ“ƒhƒXƒe[ƒg–¼‚ğæ“¾‚·‚é
-	 * @return ƒuƒŒƒ“ƒhƒXƒe[ƒg–¼
+	 * @brief ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆåã‚’å–å¾—ã™ã‚‹
+	 * @return ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆå
 	 */
 	std::string GetName()
 	{
@@ -39,9 +39,9 @@ public:
 	}
 
 private:
-	/// ƒuƒŒƒ“ƒhƒXƒe[ƒg
+	/// ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆ
 	ComPtr<ID3D11BlendState> m_pBlendState;
 
-	/// ƒuƒŒƒ“ƒhƒXƒe[ƒg–¼
+	/// ãƒ–ãƒ¬ãƒ³ãƒ‰ã‚¹ãƒ†ãƒ¼ãƒˆå
 	std::string m_name;
 };

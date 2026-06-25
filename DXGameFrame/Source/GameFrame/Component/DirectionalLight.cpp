@@ -35,7 +35,7 @@ void DirectionalLight::SetLightColor(Color color)
 
 DirectionalLightCB DirectionalLight::GetLightCB()
 {
-	// ���C�g�萔�o�b�t�@�p�f�[�^���쐬
+	// ライト定数バッファ用データを作成
 	DirectionalLightCB lightCB = {};
 	Vector3 lightDir = GetTransform()->GetQuaternion() * Vector3::forward;
 	lightCB.lightDir = { lightDir.x, lightDir.y, lightDir.z };

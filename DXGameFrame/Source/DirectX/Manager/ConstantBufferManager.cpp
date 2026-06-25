@@ -12,13 +12,13 @@ HRESULT ConstantBufferManager::Init()
 {
 	HRESULT hr = S_OK;
 
-	DirectX::XMFLOAT4X4 identity;	// s—ñ‰Šú’l
+	DirectX::XMFLOAT4X4 identity;	// è¡Œåˆ—åˆæœŸå€¤
 	DirectX::XMStoreFloat4x4(
 		&identity,
 		DirectX::XMMatrixIdentity()
 	);
 
-	// s—ñ‚Ì‰Šú‰»
+	// è¡Œåˆ—ã®åˆæœŸåŒ–
 	s_frameCB.view = identity;
 	s_frameCB.projection = identity;
 
@@ -26,7 +26,7 @@ HRESULT ConstantBufferManager::Init()
 	s_frameCB.cameraPos = { 0.0f, 0.0f, 0.0f };
 	s_frameCB.lightCB = {};
 
-	// ’è”ƒoƒbƒtƒ@‚ðì¬
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡ã‚’ä½œæˆ
 	hr = CreateAllBuffer();
 	if (FAILED(hr)) { return hr; }
 
@@ -55,33 +55,33 @@ void ConstantBufferManager::ShaderSetBuffer()
 
 void ConstantBufferManager::SetWorld(const DirectX::XMMATRIX& world)
 {
-	WorldCB worldCB;					// “]‘——pƒf[ƒ^
-	DirectX::XMMATRIX worldMat;			// ŒvŽZ—pƒ[ƒ‹ƒhs—ñ
-	DirectX::XMMATRIX invWorldMat;		// ŒvŽZ—pƒ[ƒ‹ƒh‹ts—ñ
+	WorldCB worldCB;					// è»¢é€ç”¨ãƒ‡ãƒ¼ã‚¿
+	DirectX::XMMATRIX worldMat;			// è¨ˆç®—ç”¨ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—
+	DirectX::XMMATRIX invWorldMat;		// è¨ˆç®—ç”¨ãƒ¯ãƒ¼ãƒ«ãƒ‰é€†è¡Œåˆ—
 
-	// ƒ[ƒ‹ƒhs—ñ‚ðƒZƒbƒg
+	// ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã‚’ã‚»ãƒƒãƒˆ
 	worldMat = DirectX::XMMatrixTranspose(world);
 	DirectX::XMStoreFloat4x4(&worldCB.world, worldMat);
 
-	// ƒ[ƒ‹ƒh‹ts—ñ‚ðƒZƒbƒg
+	// ãƒ¯ãƒ¼ãƒ«ãƒ‰é€†è¡Œåˆ—ã‚’ã‚»ãƒƒãƒˆ
 	invWorldMat = DirectX::XMMatrixInverse(nullptr, world);
 	invWorldMat = DirectX::XMMatrixTranspose(invWorldMat);
 	DirectX::XMStoreFloat4x4(&worldCB.invWorld, invWorldMat);
 
-	// ’è”ƒoƒbƒtƒ@‚ðXV
+	// å®šæ•°ãƒãƒƒãƒ•ã‚¡ã‚’æ›´æ–°
 	Direct3D::GetContext()->UpdateSubresource(s_pWorldBuffer.Get(), 0, nullptr, &worldCB, 0, 0);
 }
 
 void ConstantBufferManager::SetView(const DirectX::XMMATRIX& view)
 {
-	DirectX::XMMATRIX viewMat;			// ŒvŽZ—pƒrƒ…[s—ñ
-	DirectX::XMMATRIX invViewMat;		// ŒvŽZ—pƒrƒ…[‹ts—ñ
+	DirectX::XMMATRIX viewMat;			// è¨ˆç®—ç”¨ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—
+	DirectX::XMMATRIX invViewMat;		// è¨ˆç®—ç”¨ãƒ“ãƒ¥ãƒ¼é€†è¡Œåˆ—
 
-	// ƒrƒ…[s—ñ‚ðƒZƒbƒg
+	// ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã‚’ã‚»ãƒƒãƒˆ
 	viewMat = DirectX::XMMatrixTranspose(view);
 	DirectX::XMStoreFloat4x4(&s_frameCB.view, viewMat);
 
-	// ƒJƒƒ‰À•W‚ðƒZƒbƒg
+	// ã‚«ãƒ¡ãƒ©åº§æ¨™ã‚’ã‚»ãƒƒãƒˆ
 	invViewMat = DirectX::XMMatrixInverse(nullptr, view);
 	s_frameCB.cameraPos.x = DirectX::XMVectorGetX(invViewMat.r[3]);
 	s_frameCB.cameraPos.y = DirectX::XMVectorGetY(invViewMat.r[3]);
@@ -90,7 +90,7 @@ void ConstantBufferManager::SetView(const DirectX::XMMATRIX& view)
 
 void ConstantBufferManager::SetProjection(const DirectX::XMMATRIX& projection)
 {
-	// ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ‚ðƒZƒbƒg
+	// ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—ã‚’ã‚»ãƒƒãƒˆ
 	DirectX::XMStoreFloat4x4(
 		&s_frameCB.projection,
 		DirectX::XMMatrixTranspose(projection)
@@ -99,7 +99,7 @@ void ConstantBufferManager::SetProjection(const DirectX::XMMATRIX& projection)
 
 void ConstantBufferManager::SetLight(const DirectionalLightCB& light)
 {
-	// ƒ‰ƒCƒg’è”ƒoƒbƒtƒ@‚ðƒZƒbƒg
+	// ãƒ©ã‚¤ãƒˆå®šæ•°ãƒãƒƒãƒ•ã‚¡ã‚’ã‚»ãƒƒãƒˆ
 	s_frameCB.lightCB = light;
 }
 
@@ -110,7 +110,7 @@ void ConstantBufferManager::SetTime(float time)
 
 void ConstantBufferManager::SetBone(DirectX::XMFLOAT4X4 bones[MaxBone])
 {
-	// ƒ{[ƒ“’è”ƒoƒbƒtƒ@‚ÌXV
+	// ãƒœãƒ¼ãƒ³å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®æ›´æ–°
 	Direct3D::GetContext()->UpdateSubresource(s_pBoneBuffer.Get(), 0, nullptr, bones, 0, 0);
 }
 
@@ -119,18 +119,18 @@ void ConstantBufferManager::SetCustomData(const std::vector<BYTE>& data)
 	if (data.size() == 0 || data.size() > CustomCBSize)
 		return;
 
-	// ŒÅ’è’·”z—ñ‚Éƒf[ƒ^ƒRƒs[
+	// å›ºå®šé•·é…åˆ—ã«ãƒ‡ãƒ¼ã‚¿ã‚³ãƒ”ãƒ¼
 	BYTE customData[CustomCBSize] = {};
 	size_t dataSize = (size_t)(sizeof(BYTE) * data.size());
 	memcpy(customData, data.data(), dataSize);
 
-	// ƒJƒXƒ^ƒ€’è”ƒoƒbƒtƒ@‚ÌXV
+	// ã‚«ã‚¹ã‚¿ãƒ å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®æ›´æ–°
 	Direct3D::GetContext()->UpdateSubresource(s_pCustomBuffer.Get(), 0, nullptr, customData, 0, 0);
 }
 
 void ConstantBufferManager::UpdateFrameCB()
 {
-	// ƒtƒŒ[ƒ€XV’è”ƒoƒbƒtƒ@‚ÌXV
+	// ãƒ•ãƒ¬ãƒ¼ãƒ æ›´æ–°å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®æ›´æ–°
 	Direct3D::GetContext()->UpdateSubresource(s_pFrameBuffer.Get(), 0, nullptr, &s_frameCB, 0, 0);
 }
 
@@ -140,7 +140,7 @@ HRESULT ConstantBufferManager::CreateAllBuffer()
 
 	for (int i = 0; i < (UINT)SlotNum::COUNT; ++i)
 	{
-		// ’è”ƒoƒbƒtƒ@‚ÌÝ’è
+		// å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®è¨­å®š
 		D3D11_BUFFER_DESC cbDesc = {};
 		cbDesc.Usage = D3D11_USAGE_DEFAULT;
 		cbDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
@@ -148,29 +148,29 @@ HRESULT ConstantBufferManager::CreateAllBuffer()
 		cbDesc.MiscFlags = 0;
 		cbDesc.StructureByteStride = 0;
 
-		// ’è”ƒoƒbƒtƒ@‚ðì¬‚·‚é
+		// å®šæ•°ãƒãƒƒãƒ•ã‚¡ã‚’ä½œæˆã™ã‚‹
 		switch ((SlotNum)i)
 		{
 		case ConstantBufferManager::SlotNum::WORLD:
-			// WVP’è”ƒoƒbƒtƒ@‚Ìì¬
+			// WVPå®šæ•°ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 			cbDesc.ByteWidth = sizeof(WorldCB);
 			hr = Direct3D::GetDevice()->CreateBuffer(&cbDesc, nullptr, s_pWorldBuffer.GetAddressOf());
 			break;
 
 		case ConstantBufferManager::SlotNum::FRAME:
-			// ƒtƒŒ[ƒ€XV’è”ƒoƒbƒtƒ@‚Ìì¬
+			// ãƒ•ãƒ¬ãƒ¼ãƒ æ›´æ–°å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 			cbDesc.ByteWidth = sizeof(FrameCB);
 			hr = Direct3D::GetDevice()->CreateBuffer(&cbDesc, nullptr, s_pFrameBuffer.GetAddressOf());
 			break;
 
 		case ConstantBufferManager::SlotNum::BONE:
-			// ƒ{[ƒ“’è”ƒoƒbƒtƒ@‚Ìì¬
+			// ãƒœãƒ¼ãƒ³å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 			cbDesc.ByteWidth = sizeof(BoneCB);
 			hr = Direct3D::GetDevice()->CreateBuffer(&cbDesc, nullptr, s_pBoneBuffer.GetAddressOf());
 			break;
 
 		case ConstantBufferManager::SlotNum::CUSTOM:
-			// ƒJƒXƒ^ƒ€’è”ƒoƒbƒtƒ@‚Ìì¬
+			// ã‚«ã‚¹ã‚¿ãƒ å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 			cbDesc.ByteWidth = sizeof(CustomCB);
 			hr = Direct3D::GetDevice()->CreateBuffer(&cbDesc, nullptr, s_pCustomBuffer.GetAddressOf());
 			break;

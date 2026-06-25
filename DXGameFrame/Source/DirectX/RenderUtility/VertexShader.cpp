@@ -11,35 +11,35 @@ VertexShader::VertexShader() :
 HRESULT VertexShader::LoadFromCSOFile(const std::string& filePath)
 {
 	HRESULT hr = S_OK;
-	FILE* fp;			// ƒtƒ@ƒCƒ‹ƒ|ƒCƒ“ƒ^
-	char* data;			// ƒtƒ@ƒCƒ‹“Ç‚İ‚İæ
-	long dataSize;		// ƒtƒ@ƒCƒ‹ƒTƒCƒY 
+	FILE* fp;			// ãƒ•ã‚¡ã‚¤ãƒ«ãƒã‚¤ãƒ³ã‚¿
+	char* data;			// ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿å…ˆ
+	long dataSize;		// ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚º 
 
-	// csoƒtƒ@ƒCƒ‹‚ğŠJ‚­
+	// csoãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã
 	fopen_s(&fp, filePath.c_str(), "rb");
 	if (fp == nullptr)
 		return E_FAIL;
 
-	// ƒtƒ@ƒCƒ‹ƒTƒCƒY‚ğæ“¾
+	// ãƒ•ã‚¡ã‚¤ãƒ«ã‚µã‚¤ã‚ºã‚’å–å¾—
 	fseek(fp, 0, SEEK_END);
 	dataSize = ftell(fp);
 	fseek(fp, 0, SEEK_SET);
 
-	// ƒtƒ@ƒCƒ‹“Ç‚İ‚İ
+	// ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿
 	data = new char[dataSize];
 	fread_s(data, dataSize, 1, dataSize, fp);
 	fclose(fp);
 
-	// ’¸“_ƒVƒF[ƒ_[‚ğì¬
+	// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ä½œæˆ
 	hr = CreateVertexShader(data, dataSize);
 
 	if (SUCCEEDED(hr))
 	{
-		// “ü—ÍƒŒƒCƒAƒEƒg‚ğì¬
+		// å…¥åŠ›ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚’ä½œæˆ
 		hr = CreateInputLayout(data, dataSize);
 	}
 
-	// ƒƒ‚ƒŠ‰ğ•ú
+	// ãƒ¡ãƒ¢ãƒªè§£æ”¾
 	delete[] data;
 
 	return hr;
@@ -49,7 +49,7 @@ HRESULT VertexShader::CreateVertexShader(const char* data, int dataSize)
 {
 	HRESULT hr = S_OK;
 
-	// ’¸“_ƒVƒF[ƒ_[‚ğì¬
+	// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ä½œæˆ
 	hr = Direct3D::GetDevice()->CreateVertexShader(
 		data,
 		dataSize,
@@ -64,20 +64,20 @@ HRESULT VertexShader::CreateInputLayout(const char* data, int dataSize)
 {
 	HRESULT hr = S_OK;
 
-	ComPtr<ID3D11ShaderReflection> reflection;	// ƒVƒF[ƒ_[‚Ì”½ËƒCƒ“ƒ^[ƒtƒF[ƒX
+	ComPtr<ID3D11ShaderReflection> reflection;	// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®åå°„ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹
 
-	// ƒVƒF[ƒ_[‚Ì”½ËƒCƒ“ƒ^[ƒtƒF[ƒX‚ğæ“¾
+	// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®åå°„ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã‚’å–å¾—
 	hr = D3DReflect(
-		data,										// ƒRƒ“ƒpƒCƒ‹‚³‚ê‚½’¸“_ƒVƒF[ƒ_[
-		dataSize,									// ƒRƒ“ƒpƒCƒ‹‚³‚ê‚½’¸“_ƒVƒF[ƒ_[‚ÌƒTƒCƒY
-		IID_PPV_ARGS(&reflection)					// «2‚Â‚ğ©“®‚Ås‚¤B«‚ÌƒR[ƒh‚¾‚Æ"error LNK2001"
-		//IID_ID3D11ShaderReflection,				// ƒCƒ“ƒ^[ƒtƒF[ƒX‚Ì¯•Êq
-		//(void**)reflection.GetAddressOf()			// æ“¾‚µ‚½”½ËƒCƒ“ƒ^[ƒtƒF[ƒX‚ğŠi”[‚·‚é
+		data,										// ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã•ã‚ŒãŸé ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼
+		dataSize,									// ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã•ã‚ŒãŸé ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ã‚µã‚¤ã‚º
+		IID_PPV_ARGS(&reflection)					// â†“2ã¤ã‚’è‡ªå‹•ã§è¡Œã†ã€‚â†“ã®ã‚³ãƒ¼ãƒ‰ã ã¨"error LNK2001"
+		//IID_ID3D11ShaderReflection,				// ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã®è­˜åˆ¥å­
+		//(void**)reflection.GetAddressOf()			// å–å¾—ã—ãŸåå°„ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã‚’æ ¼ç´ã™ã‚‹
 	);
 	if (FAILED(hr)) { return hr; }
 
-	// ƒtƒH[ƒ}ƒbƒgİ’è
-	DXGI_FORMAT formats[][4] =		// ƒtƒH[ƒ}ƒbƒgİ’è‚ğ—ñ‹“
+	// ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆè¨­å®š
+	DXGI_FORMAT formats[][4] =		// ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆè¨­å®šã‚’åˆ—æŒ™
 	{
 		{
 			DXGI_FORMAT_R32_UINT,
@@ -97,28 +97,28 @@ HRESULT VertexShader::CreateInputLayout(const char* data, int dataSize)
 		}
 	};
 
-	// ƒVƒF[ƒ_[‚Ì“ü—ÍƒVƒOƒlƒ`ƒƒ‚ğæ“¾
-	D3D11_SHADER_DESC shaderDesc;				// ƒVƒF[ƒ_[‚Ìİ’èî•ñ
+	// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®å…¥åŠ›ã‚·ã‚°ãƒãƒãƒ£ã‚’å–å¾—
+	D3D11_SHADER_DESC shaderDesc;				// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®è¨­å®šæƒ…å ±
 	reflection->GetDesc(&shaderDesc);
 
-	// “ü—ÍƒŒƒCƒAƒEƒg‚Ìİ’è‚ğì¬
-	D3D11_INPUT_ELEMENT_DESC* inputDescs;		// “ü—ÍƒŒƒCƒAƒEƒg‚Ìİ’èî•ñ
+	// å…¥åŠ›ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã®è¨­å®šã‚’ä½œæˆ
+	D3D11_INPUT_ELEMENT_DESC* inputDescs;		// å…¥åŠ›ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã®è¨­å®šæƒ…å ±
 	inputDescs = new D3D11_INPUT_ELEMENT_DESC[shaderDesc.InputParameters];
 
 	for (UINT i = 0; i < shaderDesc.InputParameters; ++i)
 	{
-		// “ü—Íƒpƒ‰ƒ[ƒ^‚ÌÚ×‚ğæ“¾
-		D3D11_SIGNATURE_PARAMETER_DESC paramDesc;			// “ü—Íƒpƒ‰ƒ[ƒ^‚ÌÚ×
+		// å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®è©³ç´°ã‚’å–å¾—
+		D3D11_SIGNATURE_PARAMETER_DESC paramDesc;			// å…¥åŠ›ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®è©³ç´°
 		reflection->GetInputParameterDesc(i, &paramDesc);
 
-		// “ü—ÍƒŒƒCƒAƒEƒg‚Ìİ’è
-		inputDescs[i].SemanticName = paramDesc.SemanticName;			// ƒZƒ}ƒ“ƒeƒBƒbƒN–¼
-		inputDescs[i].SemanticIndex = paramDesc.SemanticIndex;			// ƒZƒ}ƒ“ƒeƒBƒbƒNƒCƒ“ƒfƒbƒNƒX
-		inputDescs[i].InputSlot = 0;									// ’¸“_ƒoƒbƒtƒ@‚Ì“ü—ÍƒXƒƒbƒg
-		inputDescs[i].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;		// ’¸“_ƒf[ƒ^‚ÌƒNƒ‰ƒX
-		inputDescs[i].InstanceDataStepRate = 0;							// ƒCƒ“ƒXƒ^ƒ“ƒXƒf[ƒ^‚ÌƒXƒeƒbƒvƒŒ[ƒg
+		// å…¥åŠ›ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã®è¨­å®š
+		inputDescs[i].SemanticName = paramDesc.SemanticName;			// ã‚»ãƒãƒ³ãƒ†ã‚£ãƒƒã‚¯å
+		inputDescs[i].SemanticIndex = paramDesc.SemanticIndex;			// ã‚»ãƒãƒ³ãƒ†ã‚£ãƒƒã‚¯ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+		inputDescs[i].InputSlot = 0;									// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®å…¥åŠ›ã‚¹ãƒ­ãƒƒãƒˆ
+		inputDescs[i].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;		// é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿ã®ã‚¯ãƒ©ã‚¹
+		inputDescs[i].InstanceDataStepRate = 0;							// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãƒ‡ãƒ¼ã‚¿ã®ã‚¹ãƒ†ãƒƒãƒ—ãƒ¬ãƒ¼ãƒˆ
 
-		// ƒoƒCƒgƒIƒtƒZƒbƒg
+		// ãƒã‚¤ãƒˆã‚ªãƒ•ã‚»ãƒƒãƒˆ
 		if (i == 0)
 		{
 			inputDescs[i].AlignedByteOffset = 0;
@@ -128,12 +128,12 @@ HRESULT VertexShader::CreateInputLayout(const char* data, int dataSize)
 			inputDescs[i].AlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
 		}
 
-		// ƒrƒbƒgƒ}ƒXƒN‚©‚ç‘¶İ‚·‚éƒRƒ“ƒ|[ƒlƒ“ƒg‚Ì—v‘f”‚ğŒvZ
+		// ãƒ“ãƒƒãƒˆãƒã‚¹ã‚¯ã‹ã‚‰å­˜åœ¨ã™ã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®è¦ç´ æ•°ã‚’è¨ˆç®—
 		BYTE elementCount = paramDesc.Mask;
 		elementCount = (elementCount & 0x01) + ((elementCount >> 1) & 0x01)
 			+ ((elementCount >> 2) & 0x01) + ((elementCount >> 3) & 0x01);
 
-		// ƒf[ƒ^ƒtƒH[ƒ}ƒbƒg
+		// ãƒ‡ãƒ¼ã‚¿ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ
 		switch (paramDesc.ComponentType)
 		{
 		case D3D_REGISTER_COMPONENT_UINT32:
@@ -150,7 +150,7 @@ HRESULT VertexShader::CreateInputLayout(const char* data, int dataSize)
 		}
 	}
 
-	// ’¸“_“ü—ÍƒŒƒCƒAƒEƒgì¬
+	// é ‚ç‚¹å…¥åŠ›ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆä½œæˆ
 	hr = Direct3D::GetDevice()->CreateInputLayout(
 		inputDescs,
 		shaderDesc.InputParameters,
@@ -159,7 +159,7 @@ HRESULT VertexShader::CreateInputLayout(const char* data, int dataSize)
 		m_pInputLayout.GetAddressOf()
 	);
 
-	// ƒƒ‚ƒŠ‰ğ•ú
+	// ãƒ¡ãƒ¢ãƒªè§£æ”¾
 	delete[] inputDescs;
 
 	if (FAILED(hr)) { return hr; }

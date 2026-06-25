@@ -14,12 +14,15 @@ Scene::~Scene()
 
 void Scene::Update()
 {
-	// コンポーネントの更新
+	// 繧ｳ繝ｳ繝昴�ｼ繝阪Φ繝医�ｮ譖ｴ譁ｰ
 	m_componentManager.StartAll();
 	m_componentManager.UpdateAll();
 	m_componentManager.LateUpdateAll();
+}
 
-	// 削除を適用
+void Scene::ApplyDestroy()
+{
+	// 蜑企勁繧帝←逕ｨ
 	m_componentManager.ApplyDestroy();
 	m_gameObjectManager.ApplyDestroy();
 }

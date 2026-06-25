@@ -4,7 +4,7 @@
 #include <vector>
 
 /**
- * @brief ƒƒbƒVƒ…î•ñ‚ğˆµ‚¤
+ * @brief ãƒ¡ãƒƒã‚·ãƒ¥æƒ…å ±ã‚’æ‰±ã†
  */
 class Mesh
 {
@@ -12,102 +12,102 @@ public:
 	Mesh();
 	~Mesh() = default;
 
-	/// ƒƒbƒVƒ…‚Ìí—Ş
+	/// ãƒ¡ãƒƒã‚·ãƒ¥ã®ç¨®é¡
 	enum class MeshType
 	{
 		MESH,
 		SKIN_MESH
 	};
 
-	/// ƒƒbƒVƒ…’¸“_î•ñ
+	/// ãƒ¡ãƒƒã‚·ãƒ¥é ‚ç‚¹æƒ…å ±
 	struct MeshVertex
 	{
-		DirectX::XMFLOAT3 pos;			// À•W
-		DirectX::XMFLOAT3 normal;		// –@ü
-		DirectX::XMFLOAT2 uv;			// UVÀ•W
-		DirectX::XMFLOAT3 tangent;		// ƒ^ƒ“ƒWƒFƒ“ƒg
-		DirectX::XMFLOAT4 color;		// ’¸“_ƒJƒ‰[
+		DirectX::XMFLOAT3 pos;			// åº§æ¨™
+		DirectX::XMFLOAT3 normal;		// æ³•ç·š
+		DirectX::XMFLOAT2 uv;			// UVåº§æ¨™
+		DirectX::XMFLOAT3 tangent;		// ã‚¿ãƒ³ã‚¸ã‚§ãƒ³ãƒˆ
+		DirectX::XMFLOAT4 color;		// é ‚ç‚¹ã‚«ãƒ©ãƒ¼
 	};
 
-	/// ƒXƒLƒ“ƒƒbƒVƒ…’¸“_î•ñ
+	/// ã‚¹ã‚­ãƒ³ãƒ¡ãƒƒã‚·ãƒ¥é ‚ç‚¹æƒ…å ±
 	struct SkinMeshVertex
 	{
-		DirectX::XMFLOAT3 pos;			// À•W
-		DirectX::XMFLOAT3 normal;		// –@ü
-		DirectX::XMFLOAT2 uv;			// UVÀ•W
-		DirectX::XMFLOAT4 color;		// ’¸“_ƒJƒ‰[
-		float weight[4];				// ƒ{[ƒ“‚Ö‚ÌƒEƒFƒCƒg
-		UINT index[4];					// ‘Î‰‚·‚éƒ{[ƒ“‚Ö‚ÌƒCƒ“ƒfƒbƒNƒX
+		DirectX::XMFLOAT3 pos;			// åº§æ¨™
+		DirectX::XMFLOAT3 normal;		// æ³•ç·š
+		DirectX::XMFLOAT2 uv;			// UVåº§æ¨™
+		DirectX::XMFLOAT4 color;		// é ‚ç‚¹ã‚«ãƒ©ãƒ¼
+		float weight[4];				// ãƒœãƒ¼ãƒ³ã¸ã®ã‚¦ã‚§ã‚¤ãƒˆ
+		UINT index[4];					// å¯¾å¿œã™ã‚‹ãƒœãƒ¼ãƒ³ã¸ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
 	};
 
-	/// ƒƒbƒVƒ…î•ñ
+	/// ãƒ¡ãƒƒã‚·ãƒ¥æƒ…å ±
 	struct Description
 	{
-		std::vector<UINT> idx;				// ƒCƒ“ƒfƒbƒNƒX”z—ñ
-		std::vector<UINT> boneIndexes;		// ‘Î‰ƒ{[ƒ“ƒCƒ“ƒfƒbƒNƒX”z—ñ
-		bool isWrite;						// “®“I‚È’¸“_‚Ì‘‚«Š·‚¦‰Â”\ƒtƒ‰ƒO
-		D3D11_PRIMITIVE_TOPOLOGY topology;	// ƒgƒ|ƒƒW[İ’è
+		std::vector<UINT> idx;				// ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹é…åˆ—
+		std::vector<UINT> boneIndexes;		// å¯¾å¿œãƒœãƒ¼ãƒ³ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹é…åˆ—
+		bool isWrite;						// å‹•çš„ãªé ‚ç‚¹ã®æ›¸ãæ›ãˆå¯èƒ½ãƒ•ãƒ©ã‚°
+		D3D11_PRIMITIVE_TOPOLOGY topology;	// ãƒˆãƒãƒ­ã‚¸ãƒ¼è¨­å®š
 	};
 
 	/**
-	 * @brief ƒƒbƒVƒ…‚ğì¬‚·‚é
-	 * @param vtx ’¸“_”z—ñ
-	 * @param desc ƒƒbƒVƒ…î•ñ
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief ãƒ¡ãƒƒã‚·ãƒ¥ã‚’ä½œæˆã™ã‚‹
+	 * @param vtx é ‚ç‚¹é…åˆ—
+	 * @param desc ãƒ¡ãƒƒã‚·ãƒ¥æƒ…å ±
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	HRESULT CreateMesh(const std::vector<MeshVertex>& vtx, const Description& desc);
 
 	/**
-	 * @brief ƒXƒLƒ“ƒƒbƒVƒ…‚ğì¬‚·‚é
-	 * @param vtx ’¸“_”z—ñ
-	 * @param desc ƒƒbƒVƒ…î•ñ
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief ã‚¹ã‚­ãƒ³ãƒ¡ãƒƒã‚·ãƒ¥ã‚’ä½œæˆã™ã‚‹
+	 * @param vtx é ‚ç‚¹é…åˆ—
+	 * @param desc ãƒ¡ãƒƒã‚·ãƒ¥æƒ…å ±
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	HRESULT CreateSkinMesh(const std::vector<SkinMeshVertex>& vtx, const Description& desc);
 
 	/**
-	 * @brief ƒƒbƒVƒ…‚ğ•`‰æ‚·‚é
+	 * @brief ãƒ¡ãƒƒã‚·ãƒ¥ã‚’æç”»ã™ã‚‹
 	 */
 	void Draw();
 
 private:
-	/// ƒƒbƒVƒ…‚Ìí—Ş
+	/// ãƒ¡ãƒƒã‚·ãƒ¥ã®ç¨®é¡
 	MeshType m_meshType;
 
-	/// ’¸“_ƒoƒbƒtƒ@
+	/// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
 	ComPtr<ID3D11Buffer> m_pVtxBuffer;
 
-	/// ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@
+	/// ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡
 	ComPtr<ID3D11Buffer> m_pIdxBuffer;
 
-	/// ’¸“_”
+	/// é ‚ç‚¹æ•°
 	UINT m_vertexCount;
 
-	/// ƒCƒ“ƒfƒbƒNƒX”
+	/// ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹æ•°
 	UINT m_indexCount;
 
-	/// ‘Î‰ƒ{[ƒ“‚ÌƒCƒ“ƒfƒbƒNƒX”z—ñ
+	/// å¯¾å¿œãƒœãƒ¼ãƒ³ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹é…åˆ—
 	std::vector<UINT> m_boneIndexes;
 
-	/// “®“I‚È’¸“_‚Ì‘‚«Š·‚¦‰Â”\ƒtƒ‰ƒO
+	/// å‹•çš„ãªé ‚ç‚¹ã®æ›¸ãæ›ãˆå¯èƒ½ãƒ•ãƒ©ã‚°
 	bool m_isWrite;
 
-	/// ƒgƒ|ƒƒW[İ’è
+	/// ãƒˆãƒãƒ­ã‚¸ãƒ¼è¨­å®š
 	D3D11_PRIMITIVE_TOPOLOGY m_topology;
 
 	/**
-	 * @brief ’¸“_ƒoƒbƒtƒ@‚ğì¬‚·‚é
-	 * @param vtx ’¸“_”z—ñ‚Ìæ“ªƒ|ƒCƒ“ƒ^
-	 * @param vtxSize ’¸“_”z—ñ‚Ìƒƒ‚ƒŠƒTƒCƒY
-	 * @param isWrite ‘‚«‚İ‰Â”\ƒtƒ‰ƒO
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ä½œæˆã™ã‚‹
+	 * @param vtx é ‚ç‚¹é…åˆ—ã®å…ˆé ­ãƒã‚¤ãƒ³ã‚¿
+	 * @param vtxSize é ‚ç‚¹é…åˆ—ã®ãƒ¡ãƒ¢ãƒªã‚µã‚¤ã‚º
+	 * @param isWrite æ›¸ãè¾¼ã¿å¯èƒ½ãƒ•ãƒ©ã‚°
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	HRESULT CreateVertexBuffer(const void* vtx, UINT vtxSize, bool isWrite);
 
 	/**
-	 * @brief ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚ğì¬‚·‚é
-	 * @param pIdx ƒCƒ“ƒfƒbƒNƒX”z—ñ
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ä½œæˆã™ã‚‹
+	 * @param pIdx ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹é…åˆ—
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	HRESULT CreateIndexBuffer(const std::vector<UINT>& idx);
 };

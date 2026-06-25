@@ -17,22 +17,22 @@ HRESULT Mesh::CreateMesh(const std::vector<MeshVertex>& vtx, const Description& 
 {
 	HRESULT hr = S_OK;
 
-	// ’¸“_ƒoƒbƒtƒ@ì¬
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ä½œæˆ
 	hr = CreateVertexBuffer(vtx.data(), sizeof(MeshVertex) * (UINT)vtx.size(), desc.isWrite);
 	if (FAILED(hr)) { return hr; }
 
-	// ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@ì¬
+	// ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ä½œæˆ
 	if (!desc.idx.empty())
 	{
 		hr = CreateIndexBuffer(desc.idx);
 		if (FAILED(hr)) { return hr; }
 	}
 
-	// ’¸“_EƒCƒ“ƒfƒbƒNƒX”‚ğ•Û
+	// é ‚ç‚¹ãƒ»ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹æ•°ã‚’ä¿æŒ
 	m_vertexCount = (UINT)vtx.size();
 	m_indexCount = (UINT)desc.idx.size();
 
-	// ƒƒbƒVƒ…î•ñ‚Ìİ’è
+	// ãƒ¡ãƒƒã‚·ãƒ¥æƒ…å ±ã®è¨­å®š
 	m_meshType = MeshType::MESH;
 	m_boneIndexes = desc.boneIndexes;
 	m_isWrite = desc.isWrite;
@@ -45,22 +45,22 @@ HRESULT Mesh::CreateSkinMesh(const std::vector<SkinMeshVertex>& vtx, const Descr
 {
 	HRESULT hr = S_OK;
 
-	// ’¸“_ƒoƒbƒtƒ@ì¬
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ä½œæˆ
 	hr = CreateVertexBuffer(vtx.data(), sizeof(SkinMeshVertex) * (UINT)vtx.size(), desc.isWrite);
 	if (FAILED(hr)) { return hr; }
 
-	// ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@ì¬
+	// ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ä½œæˆ
 	if (!desc.idx.empty())
 	{
 		hr = CreateIndexBuffer(desc.idx);
 		if (FAILED(hr)) { return hr; }
 	}
 
-	// ’¸“_EƒCƒ“ƒfƒbƒNƒX”‚ğ•Û
+	// é ‚ç‚¹ãƒ»ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹æ•°ã‚’ä¿æŒ
 	m_vertexCount = (UINT)vtx.size();
 	m_indexCount = (UINT)desc.idx.size();
 
-	// ƒƒbƒVƒ…î•ñ‚Ìİ’è
+	// ãƒ¡ãƒƒã‚·ãƒ¥æƒ…å ±ã®è¨­å®š
 	m_meshType = MeshType::SKIN_MESH;
 	m_boneIndexes = desc.boneIndexes;
 	m_isWrite = desc.isWrite;
@@ -85,19 +85,19 @@ void Mesh::Draw()
 		break;
 	}
 
-	// •`‰æ—pî•ñ‚ğƒZƒbƒg
+	// æç”»ç”¨æƒ…å ±ã‚’ã‚»ãƒƒãƒˆ
 	pContext->IASetPrimitiveTopology(m_topology);
 	pContext->IASetVertexBuffers(0, 1, m_pVtxBuffer.GetAddressOf(), &stride, &offset);
 
-	// •`‰æ
+	// æç”»
 	if (m_indexCount == 0)
 	{
-		// ’¸“_ƒoƒbƒtƒ@‚Ì‚İ‚Å•`‰æ
+		// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®ã¿ã§æç”»
 		pContext->Draw(m_vertexCount, 0);
 	}
 	else
 	{
-		// ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚ğg—p‚µ‚Ä•`‰æ
+		// ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ä½¿ç”¨ã—ã¦æç”»
 		DXGI_FORMAT format = {};
 		switch (sizeof(UINT))
 		{
@@ -115,8 +115,8 @@ HRESULT Mesh::CreateVertexBuffer(const void* vtx, UINT vtxSize, bool isWrite)
 {
 	HRESULT hr = S_OK;
 
-	// ’¸“_ƒoƒbƒtƒ@‚Ìİ’è
-	D3D11_BUFFER_DESC bufDesc = {};		// ’¸“_ƒoƒbƒtƒ@İ’èî•ñ
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®è¨­å®š
+	D3D11_BUFFER_DESC bufDesc = {};		// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡è¨­å®šæƒ…å ±
 	bufDesc.ByteWidth = vtxSize;
 	bufDesc.Usage = D3D11_USAGE_DEFAULT;
 	bufDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
@@ -126,11 +126,11 @@ HRESULT Mesh::CreateVertexBuffer(const void* vtx, UINT vtxSize, bool isWrite)
 		bufDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 	}
 
-	// ‰Šú‰»—pƒf[ƒ^İ’è
+	// åˆæœŸåŒ–ç”¨ãƒ‡ãƒ¼ã‚¿è¨­å®š
 	D3D11_SUBRESOURCE_DATA subResource = {};
 	subResource.pSysMem = vtx;
 
-	// ’¸“_ƒoƒbƒtƒ@‚Ìì¬
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 	ID3D11Device* pDevice = Direct3D::GetDevice();
 	hr = pDevice->CreateBuffer(&bufDesc, &subResource, m_pVtxBuffer.GetAddressOf());
 	if (FAILED(hr)) { return hr; }
@@ -142,17 +142,17 @@ HRESULT Mesh::CreateIndexBuffer(const std::vector<UINT>& idx)
 {
 	HRESULT hr = S_OK;
 
-	// ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ìİ’è
+	// ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã®è¨­å®š
 	D3D11_BUFFER_DESC bufDesc = {};
 	bufDesc.ByteWidth = sizeof(UINT) * (UINT)idx.size();
 	bufDesc.Usage = D3D11_USAGE_DEFAULT;
 	bufDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
 
-	// ‰Šú‰»—pƒf[ƒ^İ’è
+	// åˆæœŸåŒ–ç”¨ãƒ‡ãƒ¼ã‚¿è¨­å®š
 	D3D11_SUBRESOURCE_DATA subResource = {};
 	subResource.pSysMem = idx.data();
 
-	// ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ìì¬
+	// ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 	ID3D11Device* pDevice = Direct3D::GetDevice();
 	hr = pDevice->CreateBuffer(&bufDesc, &subResource, m_pIdxBuffer.GetAddressOf());
 

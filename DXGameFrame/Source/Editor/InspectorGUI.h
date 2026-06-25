@@ -5,7 +5,7 @@
 #include <functional>
 
 /**
- * @brief ƒIƒuƒWƒFƒNƒgÚ×‚ÌGUI
+ * @brief ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆè©³ç´°ã®GUI
  */
 class InspectorGUI : public EditorWindow
 {
@@ -14,21 +14,21 @@ public:
 	~InspectorGUI() = default;
 
 private:
-	/// ƒRƒ“ƒ|[ƒlƒ“ƒg‘€ìƒCƒxƒ“ƒg
+	/// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆæ“ä½œã‚¤ãƒ™ãƒ³ãƒˆ
 	std::function<void()> m_operationEvent;
-
+	
 	/**
-	 * @brief GUI‚Ì•`‰æ‚ğs‚¤
+	 * @brief GUIã®æç”»ã‚’è¡Œã†
 	 */
 	void OnGUI() override;
 
 	/**
-	 * @brief ƒRƒ“ƒ|[ƒlƒ“ƒgî•ñ‚Ì•`‰æ‚ğs‚¤
+	 * @brief ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆæƒ…å ±ã®æç”»ã‚’è¡Œã†
 	 */
 	void DrawComponent(Component* pComponent);
 
 	/**
-	 * @brief ƒRƒ“ƒ|[ƒlƒ“ƒg’Ç‰Áƒ{ƒ^ƒ“‚ÌGUI
+	 * @brief ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆè¿½åŠ ãƒœã‚¿ãƒ³ã®GUI
 	 */
 	void AddComponentButton();
 };

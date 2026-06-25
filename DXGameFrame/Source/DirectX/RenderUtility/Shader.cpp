@@ -6,7 +6,7 @@ void Shader::Load(const std::string& filePath)
 {
 	if (FAILED(LoadFromCSOFile(filePath)))
 	{
-		Debug::ErrorMessage(filePath + "�̓ǂݍ��݂Ɏ��s���܂����B\n�v���O�������I�����܂��B");
+		Debug::ErrorMessage(filePath + "の読み込みに失敗しました。\nプログラムを終了します。");
 		exit(0);
 	}
 

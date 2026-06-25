@@ -3,63 +3,63 @@
 #include "DirectXInclude.h"
 
 /**
- * @brief Direct3D‚ğˆµ‚¤ƒNƒ‰ƒX
+ * @brief Direct3Dã‚’æ‰±ã†ã‚¯ãƒ©ã‚¹
  */
 class Direct3D
 {
 public:
-	/// 0`1‚É³‹K‰»‚³‚ê‚½ƒrƒ…[ƒ|[ƒg
+	/// 0ï½1ã«æ­£è¦åŒ–ã•ã‚ŒãŸãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆ
 	struct NormalizedViewport
 	{
-		float top = 0.0f;		// ã’[
-		float left = 0.0f;		// ¶’[
-		float width = 1.0f;		// •
-		float height = 1.0f;	// ‚‚³
+		float top = 0.0f;		// ä¸Šç«¯
+		float left = 0.0f;		// å·¦ç«¯
+		float width = 1.0f;		// å¹…
+		float height = 1.0f;	// é«˜ã•
 	};
 
 	/**
-	 * @brief DirectX‚Ì‰Šú‰»‚ğs‚¤
-	 * @param hWnd ƒEƒBƒ“ƒhƒEƒnƒ“ƒhƒ‹
-	 * @param width ƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ‚Ì•
-	 * @param height ƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ‚Ì‚‚³
-	 * @param fullScreen ƒtƒ‹ƒXƒNƒŠ[ƒ“İ’è
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief DirectXã®åˆæœŸåŒ–ã‚’è¡Œã†
+	 * @param hWnd ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
+	 * @param width ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸã®å¹…
+	 * @param height ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸã®é«˜ã•
+	 * @param fullScreen ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³è¨­å®š
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	static HRESULT Init(HWND hWnd, UINT width, UINT height, bool fullScreen);
 
 	/**
-	 * @brief DirectX‚ÌI—¹ˆ—
+	 * @brief DirectXã®çµ‚äº†å‡¦ç†
 	 */
 	static void Uninit();
 
 	/**
-	 * @brief ƒEƒBƒ“ƒhƒEƒTƒCƒY‚ª•ÏX‚ÉŒÄ‚Ôˆ—
-	 * @param width ƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ‚Ì•
-	 * @param height ƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ‚Ì‚‚³
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚µã‚¤ã‚ºãŒå¤‰æ›´æ™‚ã«å‘¼ã¶å‡¦ç†
+	 * @param width ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸã®å¹…
+	 * @param height ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸã®é«˜ã•
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	static HRESULT Resize(UINT width, UINT height);
 
 	/**
-	 * @brief ƒrƒ…[ƒ|[ƒg‚ğİ’è‚·‚é
-	 * @param viewport ³‹K‰»‚³‚ê‚½ƒrƒ…[ƒ|[ƒgİ’è
+	 * @brief ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆã‚’è¨­å®šã™ã‚‹
+	 * @param viewport æ­£è¦åŒ–ã•ã‚ŒãŸãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆè¨­å®š
 	 */
 	static void SetViewport(NormalizedViewport viewport);
 
 	/**
-	 * @brief •`‰æ‚ğŠJn‚·‚é
-	 * @param clearColor ‰æ–ÊƒNƒŠƒAF
+	 * @brief æç”»ã‚’é–‹å§‹ã™ã‚‹
+	 * @param clearColor ç”»é¢ã‚¯ãƒªã‚¢è‰²
 	 */
 	static void BeginDraw(const float clearColor[4]);
 
 	/**
-	 * @brief •`‰æ‚ğI—¹‚µ‰æ–Ê‚Éo—Í‚·‚é
+	 * @brief æç”»ã‚’çµ‚äº†ã—ç”»é¢ã«å‡ºåŠ›ã™ã‚‹
 	 */
 	static void EndDraw();
 
 	/**
-	 * @brief Direct3DƒfƒoƒCƒX‚ğæ“¾‚·‚é
-	 * @return Direct3DƒfƒoƒCƒX‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	 * @brief Direct3Dãƒ‡ãƒã‚¤ã‚¹ã‚’å–å¾—ã™ã‚‹
+	 * @return Direct3Dãƒ‡ãƒã‚¤ã‚¹ã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	 */
 	static ID3D11Device* GetDevice()
 	{
@@ -67,8 +67,8 @@ public:
 	}
 
 	/**
-	 * @brief Direct3DƒfƒoƒCƒXƒRƒ“ƒeƒLƒXƒg‚ğæ“¾‚·‚é
-	 * @return Direct3DƒfƒoƒCƒXƒRƒ“ƒeƒLƒXƒg‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	 * @brief Direct3Dãƒ‡ãƒã‚¤ã‚¹ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã‚’å–å¾—ã™ã‚‹
+	 * @return Direct3Dãƒ‡ãƒã‚¤ã‚¹ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	 */
 	static ID3D11DeviceContext* GetContext()
 	{
@@ -76,8 +76,8 @@ public:
 	}
 
 	/**
-	 * @brief ƒoƒbƒNƒoƒbƒtƒ@‚ÌRTV‚ğæ“¾‚·‚é
-	 * @return ƒoƒbƒNƒoƒbƒtƒ@‚ÌRTV‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	 * @brief ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®RTVã‚’å–å¾—ã™ã‚‹
+	 * @return ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®RTVã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	 */
 	static ID3D11RenderTargetView* GetBackBufferRTV()
 	{
@@ -85,60 +85,60 @@ public:
 	}
 
 private:
-	/// Direct3DƒfƒoƒCƒX
+	/// Direct3Dãƒ‡ãƒã‚¤ã‚¹
 	static ComPtr<ID3D11Device> s_pDevice;
 
-	/// Direct3DƒfƒoƒCƒXƒRƒ“ƒeƒLƒXƒg
+	/// Direct3Dãƒ‡ãƒã‚¤ã‚¹ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆ
 	static ComPtr<ID3D11DeviceContext> s_pContext;
 
-	/// ƒXƒƒbƒvƒ`ƒFƒCƒ“
+	/// ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³
 	static ComPtr<IDXGISwapChain> s_pSwapChain;
 
-	/// ƒoƒbƒNƒoƒbƒtƒ@
+	/// ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡
 	static ComPtr<ID3D11Texture2D> s_pBackBuffer;
 
-	/// ƒoƒbƒNƒoƒbƒtƒ@‚ÌRTV
+	/// ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®RTV
 	static ComPtr<ID3D11RenderTargetView> s_pBackBufferRTV;
 
-	/// ‰æ–Ê‚Ì•
+	/// ç”»é¢ã®å¹…
 	static UINT s_width;
 
-	/// ‰æ–Ê‚Ì‚‚³
+	/// ç”»é¢ã®é«˜ã•
 	static UINT s_height;
 
-	/// ³‹K‰»‚³‚ê‚½ƒrƒ…[ƒ|[ƒg
+	/// æ­£è¦åŒ–ã•ã‚ŒãŸãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆ
 	static NormalizedViewport s_normalizedViewport;
 
 	/**
-	 * @brief Direct3DƒfƒoƒCƒX‚ÆƒXƒƒbƒvƒ`ƒFƒCƒ“‚ğì¬‚·‚é
-	 * @param hWnd ƒEƒBƒ“ƒhƒEƒnƒ“ƒhƒ‹
-	 * @param width ƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ‚Ì•
-	 * @param height ƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ‚Ì‚‚³
-	 * @param fullScreen ƒtƒ‹ƒXƒNƒŠ[ƒ“İ’è
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief Direct3Dãƒ‡ãƒã‚¤ã‚¹ã¨ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³ã‚’ä½œæˆã™ã‚‹
+	 * @param hWnd ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
+	 * @param width ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸã®å¹…
+	 * @param height ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸã®é«˜ã•
+	 * @param fullScreen ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³è¨­å®š
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	static HRESULT CreateDeviceAndSwapChain(HWND hWnd, UINT width, UINT height, bool fullScreen);
 
 	/**
-	 * @brief ƒoƒbƒNƒoƒbƒtƒ@‚ÌRTV‚ğì¬‚·‚é
-	 * @param width ƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ‚Ì•
-	 * @param height ƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ‚Ì‚‚³
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®RTVã‚’ä½œæˆã™ã‚‹
+	 * @param width ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸã®å¹…
+	 * @param height ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸã®é«˜ã•
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	static HRESULT CreateBackBufferRTV(UINT width, UINT height);
 
 	/**
-	 * @brief ƒXƒƒbƒvƒ`ƒFƒCƒ“‚ÌƒTƒCƒY‚ğ•ÏX‚·‚é
-	 * @param width ƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ‚Ì•
-	 * @param height ƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ‚Ì‚‚³
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³ã®ã‚µã‚¤ã‚ºã‚’å¤‰æ›´ã™ã‚‹
+	 * @param width ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸã®å¹…
+	 * @param height ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸã®é«˜ã•
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	static HRESULT ResizeSwapChain(UINT width, UINT height);
 
 	/**
-	 * @brief ƒrƒ…[ƒ|[ƒg‚ÉÀÛ‚ÌƒTƒCƒY‚ğİ’è‚·‚é
-	 * @param width ƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ‚Ì•
-	 * @param height ƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ‚Ì‚‚³
+	 * @brief ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆã«å®Ÿéš›ã®ã‚µã‚¤ã‚ºã‚’è¨­å®šã™ã‚‹
+	 * @param width ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸã®å¹…
+	 * @param height ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸã®é«˜ã•
 	 */
 	static void SetViewportSize(UINT width, UINT height);
 };

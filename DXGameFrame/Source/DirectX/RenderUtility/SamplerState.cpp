@@ -12,7 +12,7 @@ HRESULT SamplerState::Create(const D3D11_SAMPLER_DESC* pDesc, const std::string&
 {
 	HRESULT hr = S_OK;
 
-	// �T���v���[�X�e�[�g�̍쐬
+	// サンプラーステートの作成
 	hr = Direct3D::GetDevice()->CreateSamplerState(pDesc, m_pSamplerState.GetAddressOf());
 	if (FAILED(hr)) { return hr; }
 

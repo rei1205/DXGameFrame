@@ -4,25 +4,25 @@
 #include <string>
 
 /**
- * @brief [“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg‚ğˆµ‚¤
+ * @brief æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆã‚’æ‰±ã†
  */
 class DepthStencilState
 {
 public:
 	DepthStencilState();
 	~DepthStencilState() = default;
-
+	
 	/**
-	 * @brief [“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg‚ğì¬‚·‚é
-	 * @param pDesc [“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒgİ’èî•ñ‚Ö‚Ìƒ|ƒCƒ“ƒ^
-	 * @param name [“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg–¼
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆã™ã‚‹
+	 * @param pDesc æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆè¨­å®šæƒ…å ±ã¸ã®ãƒã‚¤ãƒ³ã‚¿
+	 * @param name æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆå
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	HRESULT Create(const D3D11_DEPTH_STENCIL_DESC* pDesc, const std::string& name);
 
 	/**
-	 * @brief Direct3D‚Ì[“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg‚ğæ“¾‚·‚é
-	 * @return [“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	 * @brief Direct3Dã®æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆã‚’å–å¾—ã™ã‚‹
+	 * @return æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	 */
 	ID3D11DepthStencilState* GetDepthStencilState()
 	{
@@ -30,8 +30,8 @@ public:
 	}
 
 	/**
-	 * @brief [“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg–¼‚ğæ“¾‚·‚é
-	 * @return [“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg–¼
+	 * @brief æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆåã‚’å–å¾—ã™ã‚‹
+	 * @return æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆå
 	 */
 	std::string GetName()
 	{
@@ -39,9 +39,9 @@ public:
 	}
 
 private:
-	/// [“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg
+	/// æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆ
 	ComPtr<ID3D11DepthStencilState> m_pDepthStencilState;
 
-	/// [“xƒXƒeƒ“ƒVƒ‹ƒXƒe[ƒg–¼
+	/// æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¹ãƒ†ãƒ¼ãƒˆå
 	std::string m_name;
 };

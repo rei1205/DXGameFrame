@@ -4,46 +4,46 @@
 #include <unordered_map>
 #include <memory>
 
-/// ƒeƒNƒXƒ`ƒƒ‚ÌƒXƒƒbƒg”Ô†
+/// ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ã‚¹ãƒ­ãƒƒãƒˆç•ªå·
 namespace TextureSlot
 {
-	constexpr UINT MaterialSlotCount = 8;		// ƒ}ƒeƒŠƒAƒ‹‚Ìg—p‰Â”\ƒXƒƒbƒg”
-	constexpr UINT Main = 0;					// ƒƒCƒ“ƒeƒNƒXƒ`ƒƒ
+	constexpr UINT MaterialSlotCount = 8;		// ãƒãƒ†ãƒªã‚¢ãƒ«ã®ä½¿ç”¨å¯èƒ½ã‚¹ãƒ­ãƒƒãƒˆæ•°
+	constexpr UINT Main = 0;					// ãƒ¡ã‚¤ãƒ³ãƒ†ã‚¯ã‚¹ãƒãƒ£
 }
 
 /**
- * @brief ƒeƒNƒXƒ`ƒƒ‚ğŠÇ—‚·‚é
+ * @brief ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ç®¡ç†ã™ã‚‹
  */
 class TextureManager
 {
 public:
 	/**
-	 * @brief ‘½d“Ç‚İ‚İ‚ğ–h‚¬‚Â‚ÂƒeƒNƒXƒ`ƒƒ‚ğ“Ç‚İ‚Ş
-	 * @param filePath ƒeƒNƒXƒ`ƒƒ‰æ‘œ‚Ö‚Ìƒtƒ@ƒCƒ‹ƒpƒX
-	 * @return ƒeƒNƒXƒ`ƒƒ‚Ö‚Ìƒ|ƒCƒ“ƒ^(shared_ptr)
+	 * @brief å¤šé‡èª­ã¿è¾¼ã¿ã‚’é˜²ãã¤ã¤ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’èª­ã¿è¾¼ã‚€
+	 * @param filePath ãƒ†ã‚¯ã‚¹ãƒãƒ£ç”»åƒã¸ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹
+	 * @return ãƒ†ã‚¯ã‚¹ãƒãƒ£ã¸ã®ãƒã‚¤ãƒ³ã‚¿(shared_ptr)
 	 */
 	static std::shared_ptr<Texture> LoadTexture(const std::string& filePath);
 
 	/**
-	 * @brief ƒeƒNƒXƒ`ƒƒ‚ğƒZƒbƒg‚·‚é
-	 * @param pTexture ƒeƒNƒXƒ`ƒƒ‚Ö‚Ìƒ|ƒCƒ“ƒ^
-	 * @param slot ƒZƒbƒg‚·‚éƒXƒƒbƒg”Ô†
+	 * @brief ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ã‚»ãƒƒãƒˆã™ã‚‹
+	 * @param pTexture ãƒ†ã‚¯ã‚¹ãƒãƒ£ã¸ã®ãƒã‚¤ãƒ³ã‚¿
+	 * @param slot ã‚»ãƒƒãƒˆã™ã‚‹ã‚¹ãƒ­ãƒƒãƒˆç•ªå·
 	 */
 	static void SetTexture(Texture* pTexture, UINT slot = TextureSlot::Main);
 
 	/**
-	 * @brief g—p‚µ‚Ä‚¢‚È‚¢ƒAƒZƒbƒg‚ğ‰ğ•ú‚·‚é
+	 * @brief ä½¿ç”¨ã—ã¦ã„ãªã„ã‚¢ã‚»ãƒƒãƒˆã‚’è§£æ”¾ã™ã‚‹
 	 */
 	static void CollectGarbage();
 
 	/**
-	 * @brief ‘S‚Ä‚ÌƒeƒNƒXƒ`ƒƒ‚ğ‰ğ•ú‚·‚é
+	 * @brief å…¨ã¦ã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’è§£æ”¾ã™ã‚‹
 	 */
 	static void Clear();
 
 private:
 	TextureManager() = delete;
 
-	/// ƒeƒNƒXƒ`ƒƒ‚Æƒtƒ@ƒCƒ‹ƒpƒX‚Ìƒ}ƒbƒv
+	/// ãƒ†ã‚¯ã‚¹ãƒãƒ£ã¨ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã®ãƒãƒƒãƒ—
 	static std::unordered_map<std::string, std::shared_ptr<Texture>> s_textures;
 };

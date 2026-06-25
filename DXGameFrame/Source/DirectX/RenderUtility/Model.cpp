@@ -31,7 +31,7 @@ bool Model::Load(const std::string& filePath)
 
     if (pScene == nullptr)
     {
-        Debug::ErrorMessage(filePath + "‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½B");
+        Debug::ErrorMessage(filePath + "ã®èª­ã¿è¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
         return false;
     }
 
@@ -50,32 +50,32 @@ bool Model::Load(const std::string& filePath)
 
 void Model::CreateNode(const aiScene* pScene)
 {
-	// Ä‹Aˆ—‚ÅAssimp‚Ìƒm[ƒhî•ñ‚ğ“Ç‚İæ‚è
+	// å†å¸°å‡¦ç†ã§Assimpã®ãƒãƒ¼ãƒ‰æƒ…å ±ã‚’èª­ã¿å–ã‚Š
 	using FuncRecurciveMakeNodes = std::function<NodeIndex(aiNode*, NodeIndex, DirectX::XMMATRIX)>;
 	FuncRecurciveMakeNodes func = [&func, this](aiNode* assimpNode, NodeIndex parent, DirectX::XMMATRIX mat)
 		{
-			// assimp‘¤‚ÅŠK‘wî•ñ‚ª×‚©‚­•ªŠ„‚³‚ê‚Ä‚¢‚éê‡‚Ìˆ—
+			// assimpå´ã§éšå±¤æƒ…å ±ãŒç´°ã‹ãåˆ†å‰²ã•ã‚Œã¦ã„ã‚‹å ´åˆã®å‡¦ç†
 			std::string name = assimpNode->mName.data;
 			if (name.find("$AssimpFbx") != std::string::npos)
 			{
-				// •ªŠ„‘O‚Ìƒm[ƒh‚É“’B‚·‚é‚Ü‚ÅAŠes—ñ‚ğŠ|‚¯‡‚í‚¹‚Ä‚¢‚­
+				// åˆ†å‰²å‰ã®ãƒãƒ¼ãƒ‰ã«åˆ°é”ã™ã‚‹ã¾ã§ã€å„è¡Œåˆ—ã‚’æ›ã‘åˆã‚ã›ã¦ã„ã
 				DirectX::XMMATRIX transform = GetMatrixFromAssimpMatrix(assimpNode->mTransformation);
 				mat = transform * mat;
 				return func(assimpNode->mChildren[0], parent, mat);
 			}
 
-			// Assimp‚Ìƒm[ƒhî•ñ‚ğŠi”[
+			// Assimpã®ãƒãƒ¼ãƒ‰æƒ…å ±ã‚’æ ¼ç´
 			Node bone;
 			bone.name = name;
 			bone.parentID = parent;
 			bone.childrenIDs.resize(assimpNode->mNumChildren);
 			bone.worldMatrix = mat;
 
-			// ƒm[ƒh‚Ìˆê——‚É’Ç‰Á
+			// ãƒãƒ¼ãƒ‰ã®ä¸€è¦§ã«è¿½åŠ 
 			m_nodes.push_back(bone);
 			NodeIndex nodeIndex = static_cast<NodeIndex>(m_nodes.size() - 1);
 
-			// q—v‘f‚Ìî•ñ‚ğ’Ç‰Á
+			// å­è¦ç´ ã®æƒ…å ±ã‚’è¿½åŠ 
 			for (UINT i = 0; i < assimpNode->mNumChildren; ++i)
 			{
 				m_nodes[nodeIndex].childrenIDs[i] =
@@ -85,48 +85,48 @@ void Model::CreateNode(const aiScene* pScene)
 			return nodeIndex;
 		};
 
-	// ƒm[ƒhì¬
+	// ãƒãƒ¼ãƒ‰ä½œæˆ
 	func(pScene->mRootNode, NODE_NONE, DirectX::XMMatrixIdentity());
 }
 
 int Model::CreateMesh(const aiScene* pScene)
 {
-	// –‘O€”õ
+	// äº‹å‰æº–å‚™
 	aiVector3D zero3(0.0f, 0.0f, 0.0f);
 	aiColor4D one4(1.0f, 1.0f, 1.0f, 1.0f);
-	UINT meshCount = pScene->mNumMeshes;	// ƒƒbƒVƒ…”
-	UINT sumVtxCount = 0;					// ‡Œv’¸“_”
+	UINT meshCount = pScene->mNumMeshes;	// ãƒ¡ãƒƒã‚·ãƒ¥æ•°
+	UINT sumVtxCount = 0;					// åˆè¨ˆé ‚ç‚¹æ•°
 
-	// ƒƒbƒVƒ…”z—ñ‚ÌƒTƒCƒYİ’è
+	// ãƒ¡ãƒƒã‚·ãƒ¥é…åˆ—ã®ã‚µã‚¤ã‚ºè¨­å®š
 	m_meshes.resize(meshCount);
 
-	// ƒƒbƒVƒ…‚Ìì¬
+	// ãƒ¡ãƒƒã‚·ãƒ¥ã®ä½œæˆ
 	for (UINT i = 0; i < meshCount; ++i)
 	{
 		std::vector<Mesh::MeshVertex> vtx;
 		Mesh::Description desc;
 	
-		// ƒƒbƒVƒ…“Ç‚İ‚İ€”õ
+		// ãƒ¡ãƒƒã‚·ãƒ¥èª­ã¿è¾¼ã¿æº–å‚™
 		aiMesh* pMesh = pScene->mMeshes[i];
 		UINT vtxCount = pMesh->mNumVertices;
 		UINT faceCount = pMesh->mNumFaces;
 		sumVtxCount += vtxCount;
 
-		// ’¸“_EƒCƒ“ƒfƒbƒNƒX”z—ñ‚ÌƒTƒCƒYİ’è
+		// é ‚ç‚¹ãƒ»ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹é…åˆ—ã®ã‚µã‚¤ã‚ºè¨­å®š
 		vtx.resize(vtxCount);
-		desc.idx.resize(faceCount * 3);		// 1ƒ|ƒŠƒSƒ“‚Å3ƒCƒ“ƒfƒbƒNƒX
+		desc.idx.resize(faceCount * 3);		// 1ãƒãƒªã‚´ãƒ³ã§3ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
 
-		// ’¸“_ƒf[ƒ^‚Ì‘‚«‚İ
+		// é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿ã®æ›¸ãè¾¼ã¿
 		for (UINT j = 0; j < vtxCount; ++j)
 		{
-			// ƒ‚ƒfƒ‹ƒf[ƒ^‚©‚ç’l‚Ìæ“¾
+			// ãƒ¢ãƒ‡ãƒ«ãƒ‡ãƒ¼ã‚¿ã‹ã‚‰å€¤ã®å–å¾—
 			aiVector3D pos = pMesh->mVertices[j];
 			aiVector3D normal = pMesh->HasNormals() ? pMesh->mNormals[j] : zero3;
 			aiVector3D uv = pMesh->HasTextureCoords(0) ? pMesh->mTextureCoords[0][j] : zero3;
 			aiVector3D tangent = pMesh->HasTangentsAndBitangents() ? pMesh->mTangents[j] : zero3;
 			aiColor4D color = pMesh->HasVertexColors(0) ? pMesh->mColors[0][j] : one4;
 
-			// ’l‚ğİ’è
+			// å€¤ã‚’è¨­å®š
 			vtx[j].pos = DirectX::XMFLOAT3(pos.x, pos.y, pos.z);
 			vtx[j].normal = DirectX::XMFLOAT3(normal.x, normal.y, normal.z);
 			vtx[j].uv = DirectX::XMFLOAT2(uv.x, uv.y);
@@ -134,24 +134,24 @@ int Model::CreateMesh(const aiScene* pScene)
 			vtx[j].color = DirectX::XMFLOAT4(color.r, color.g, color.b, color.a);
 		}
 
-		// ƒCƒ“ƒfƒbƒNƒX‚Ì‘‚«‚İ
+		// ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã®æ›¸ãè¾¼ã¿
 		for (UINT j = 0; j < faceCount; ++j)
 		{
-			// ƒ‚ƒfƒ‹ƒf[ƒ^‚©‚ç’l‚Ìæ“¾
+			// ãƒ¢ãƒ‡ãƒ«ãƒ‡ãƒ¼ã‚¿ã‹ã‚‰å€¤ã®å–å¾—
 			aiFace face = pScene->mMeshes[i]->mFaces[j];
 
-			// ’l‚ğİ’è
+			// å€¤ã‚’è¨­å®š
 			UINT idxOffset = j * 3;
 			desc.idx[idxOffset + 0] = face.mIndices[0];
 			desc.idx[idxOffset + 1] = face.mIndices[1];
 			desc.idx[idxOffset + 2] = face.mIndices[2];
 		}
 
-		// ‚»‚Ì‘¼‚Ìİ’è
+		// ãã®ä»–ã®è¨­å®š
 		desc.isWrite = false;
 		desc.topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 
-		// ƒƒbƒVƒ…ì¬
+		// ãƒ¡ãƒƒã‚·ãƒ¥ä½œæˆ
 		auto mesh = std::make_shared<Mesh>();
 		mesh->CreateMesh(vtx, desc);
 		m_meshes[i].mesh = mesh;

@@ -11,7 +11,7 @@ std::vector<std::unique_ptr<Scene>> SceneManager::s_sceneList;
 
 void SceneManager::Init()
 {
-	// ‰ŠúƒV[ƒ““o˜^
+	// åˆæœŸã‚·ãƒ¼ãƒ³ç™»éŒ²
 	auto scene = std::make_unique<Scene>();
 	s_pActiveScene = scene.get();
 	s_sceneList.push_back(std::move(scene));
@@ -30,7 +30,7 @@ void SceneManager::Execute()
 	if (s_pActiveScene == nullptr)
 		return;
 
-	// ƒV[ƒ“XV
+	// ã‚·ãƒ¼ãƒ³æ›´æ–°
 	ImGuiManager::BeginFrame();
 	s_pActiveScene->Update();
 
@@ -38,11 +38,11 @@ void SceneManager::Execute()
 	Direct3D::BeginDraw(clearColor);
 
 	Editor::SetTargetScene(s_pActiveScene);
-	Editor::Update();
 
+	s_pActiveScene->ApplyDestroy();
 	s_pActiveScene->Draw();
 
-	// •`‰æ‘ÎÛRTV‚ğİ’è
+	// æç”»å¯¾è±¡RTVã‚’è¨­å®š
 	auto rtv = Direct3D::GetBackBufferRTV();
 	Direct3D::GetContext()->OMSetRenderTargets(1, &rtv, nullptr);
 	ImGuiManager::EndFrame();

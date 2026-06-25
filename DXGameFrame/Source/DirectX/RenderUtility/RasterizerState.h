@@ -4,25 +4,25 @@
 #include <string>
 
 /**
- * @brief ƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒg‚ğˆµ‚¤
+ * @brief ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã‚’æ‰±ã†
  */
 class RasterizerState
 {
 public:
 	RasterizerState();
 	~RasterizerState() = default;
-
+	
 	/**
-	 * @brief ƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒg‚ğì¬‚·‚é
-	 * @param pDesc ƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒgİ’èî•ñ‚Ö‚Ìƒ|ƒCƒ“ƒ^
-	 * @param name ƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒg–¼
-	 * @return ¬Œ÷‚µ‚½‚©‚ğ•Ô‚·
+	 * @brief ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆã™ã‚‹
+	 * @param pDesc ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆè¨­å®šæƒ…å ±ã¸ã®ãƒã‚¤ãƒ³ã‚¿
+	 * @param name ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆå
+	 * @return æˆåŠŸã—ãŸã‹ã‚’è¿”ã™
 	 */
 	HRESULT Create(const D3D11_RASTERIZER_DESC* pDesc, const std::string& name);
 
 	/**
-	 * @brief Direct3D‚Ìƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒg‚ğæ“¾‚·‚é
-	 * @return ƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒg‚Ö‚Ìƒ|ƒCƒ“ƒ^
+	 * @brief Direct3Dã®ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã‚’å–å¾—ã™ã‚‹
+	 * @return ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã¸ã®ãƒã‚¤ãƒ³ã‚¿
 	 */
 	ID3D11RasterizerState* GetRasterizerState()
 	{
@@ -30,8 +30,8 @@ public:
 	}
 
 	/**
-	 * @brief ƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒg–¼‚ğæ“¾‚·‚é
-	 * @return ƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒg–¼
+	 * @brief ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆåã‚’å–å¾—ã™ã‚‹
+	 * @return ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆå
 	 */
 	std::string GetName()
 	{
@@ -39,9 +39,9 @@ public:
 	}
 
 private:
-	/// ƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒg
+	/// ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆ
 	ComPtr<ID3D11RasterizerState> m_pRasterizerState;
 
-	/// ƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒg–¼
+	/// ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆå
 	std::string m_name;
 };
