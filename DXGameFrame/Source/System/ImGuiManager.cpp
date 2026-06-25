@@ -1,5 +1,6 @@
 // ImGuiManager.cpp
 #include "ImGuiManager.h"
+#include "ImGuiStyleSetting.h"
 #include <ImGui/imgui_impl_dx11.h>
 #include <ImGui/imgui_impl_win32.h>
 
@@ -23,13 +24,14 @@ void ImGuiManager::Init(HWND hWnd, ID3D11Device* pDevice, ID3D11DeviceContext* p
         nullptr,
         io.Fonts->GetGlyphRangesJapanese()
     );
-    ImGui::StyleColorsDark();
+
+    // スタイル設定
+    ImGuiColorSetting();
+    ImGuiSizeSetting();
 
     // バックエンド初期化
     ImGui_ImplWin32_Init(hWnd);
     ImGui_ImplDX11_Init(pDevice, pContext);
-
-
 
     m_isInitialized = true;
 }
@@ -66,26 +68,32 @@ void ImGuiManager::EndFrame()
     ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 }
 
-void ImGuiManager::SetStyle()
-{
-    ImGuiStyle& style = ImGui::GetStyle();
-
-    // 基本カラー
-    style.Colors[ImGuiCol_Header] = ImVec4(0.20f, 0.50f, 1.00f, 1.00f);
-    style.Colors[ImGuiCol_HeaderHovered] = ImVec4(0.35f, 0.35f, 0.35f, 0.40f);
-    style.Colors[ImGuiCol_HeaderActive] = ImVec4(0.45f, 0.45f, 0.45f, 0.60f);
-
-    // 角丸め
-    style.FrameRounding = 6.0f;
-    style.GrabRounding = 6.0f;
-    style.PopupRounding = 6.0f;
-    style.ScrollbarRounding = 6.0f;
-    style.ChildRounding = 6.0f;
-}
+//void ImGuiManager::SetStyle()
+//{
+//    
+//
+//    // 角丸め
+//    style.WindowRounding = 0.0f;
+//    style.FrameRounding = 4.0f;
+//    style.GrabRounding = 4.0f;
+//    style.PopupRounding = 4.0f;
+//    style.ScrollbarRounding = 4.0f;
+//    style.ChildRounding = 4.0f;
+//
+//    style.WindowBorderSize = 0.0f;
+//    style.FrameBorderSize = 0.0f;
+//}
 
 void ImGuiManager::DrawDockSpace()
 {
     ImGuiViewport* viewport = ImGui::GetMainViewport();
+    ImGuiStyle& style = ImGui::GetStyle();
+
+    ImGui::PushStyleColor(ImGuiCol_WindowBg, style.Colors[ImGuiCol_DockingEmptyBg]);
+
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(4, 4));
 
     ImGui::SetNextWindowPos(viewport->WorkPos);
     ImGui::SetNextWindowSize(viewport->WorkSize);
@@ -106,4 +114,7 @@ void ImGuiManager::DrawDockSpace()
     ImGui::DockSpace(dockspaceID);
 
     ImGui::End();
+
+    ImGui::PopStyleVar(3);
+    ImGui::PopStyleColor();
 }

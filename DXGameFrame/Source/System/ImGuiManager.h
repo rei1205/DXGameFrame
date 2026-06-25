@@ -37,11 +37,6 @@ private:
 	static bool m_isInitialized;
 
 	/**
-	 * @brief ImGuiのスタイル設定
-	 */
-	static void SetStyle();
-
-	/**
 	 * @brief ドッキングスペースを描画
 	 */
 	static void DrawDockSpace();

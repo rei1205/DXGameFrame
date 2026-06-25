@@ -218,6 +218,9 @@
     <ClCompile Include="Source\System\ImGuiManager.cpp">
       <Filter>ソース ファイル\System</Filter>
     </ClCompile>
+    <ClCompile Include="Source\System\ImGuiStyleSetting.cpp">
+      <Filter>ソース ファイル\System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\ThirdParty\ImGui\imconfig.h">
@@ -416,6 +419,9 @@
       <Filter>ソース ファイル\GameFrame\Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\System\ImGuiManager.h">
+      <Filter>ソース ファイル\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\ImGuiStyleSetting.h">
       <Filter>ソース ファイル\System</Filter>
     </ClInclude>
   </ItemGroup>
