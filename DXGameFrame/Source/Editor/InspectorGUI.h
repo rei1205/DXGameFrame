@@ -23,9 +23,15 @@ private:
 	void OnGUI() override;
 
 	/**
-	 * @brief コンポーネント情報の描画を行う
+	 * @brief ゲームオブジェクト情報のGUI
 	 */
-	void DrawComponent(Component* pComponent);
+	void GameObjectGUI();
+
+	/**
+	 * @brief コンポーネント情報のGUI
+	 * @param pComponent コンポーネントへのポインタ
+	 */
+	void ComponentGUI(Component* pComponent);
 
 	/**
 	 * @brief コンポーネント追加ボタンのGUI

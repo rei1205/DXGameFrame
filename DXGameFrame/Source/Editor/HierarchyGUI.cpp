@@ -114,6 +114,7 @@ void HierarchyGUI::DrawNode(Transform* pTransform)
     if (children.empty())
         flags |= ImGuiTreeNodeFlags_Leaf;
 
+    // スタイル変更
     bool selected = pTransform->GetGameObject() == Editor::GetTargetGameObject();
     if (selected)
     {
@@ -121,13 +122,26 @@ void HierarchyGUI::DrawNode(Transform* pTransform)
         flags |= ImGuiTreeNodeFlags_Selected;
         ImGui::PushStyleColor(ImGuiCol_HeaderHovered, ImGui::GetStyle().Colors[ImGuiCol_Header]);
     }
+    bool isActive = pTransform->GetGameObject()->IsActiveHierarchy();
+    if (!isActive)
+    {
+        // 非アクティブスタイル
+        ImGui::PushStyleColor(ImGuiCol_Text, ImGui::GetStyle().Colors[ImGuiCol_TextDisabled]);
+    }
 
     // ノード作成
     bool open = ImGui::TreeNodeEx(pTransform, flags, pTransform->GetGameObject()->GetName().c_str());
     NodeInteraction(pTransform);
 
+    // スタイルを戻す
     if (selected)
+    {
         ImGui::PopStyleColor();
+    }
+    if (!isActive)
+    {
+        ImGui::PopStyleColor();
+    }
 
     // 子を再帰的に描画
     if (open)

@@ -7,7 +7,7 @@
 #define IMGUI_BACKGROUND (Col255(50, 50, 50))
 #define IMGUI_BLACK (Col255(44, 54, 63))
 #define IMGUI_DARKGRAY (Col255(71, 87, 102))
-#define IMGUI_LIGHTGRAY (Col255(180, 180, 180))
+#define IMGUI_LIGHTGRAY (Col255(160, 160, 160))
 #define IMGUI_WHITE (Col255(240, 240, 240))
 
 #define IMGUI_RED (Col255(214, 40, 57))
@@ -69,8 +69,8 @@ void ImGuiColorSetting()
     style.Colors[ImGuiCol_ScrollbarGrabActive] = IMGUI_ACTIVE;
 
     // チェックマーク
-    //style.Colors[ImGuiCol_CheckMark] = IMGUI_ACTIVE;
-    //style.Colors[ImGuiCol_CheckboxSelectedBg] = IMGUI_ACTIVE;
+    style.Colors[ImGuiCol_CheckMark] = IMGUI_WHITE;
+    style.Colors[ImGuiCol_CheckboxSelectedBg] = IMGUI_MAINAREA;
 
     // スライダー
     //style.Colors[ImGuiCol_SliderGrab] = IMGUI_ACTIVE;
@@ -122,7 +122,7 @@ void ImGuiColorSetting()
     //style.Colors[ImGuiCol_TableRowBg] = IMGUI_ACTIVE;
     //style.Colors[ImGuiCol_TableRowBgAlt] = IMGUI_ACTIVE;
     //style.Colors[ImGuiCol_TextLink] = IMGUI_ACTIVE;
-    //style.Colors[ImGuiCol_TextSelectedBg] = IMGUI_ACTIVE;
+    style.Colors[ImGuiCol_TextSelectedBg] = IMGUI_ACTIVE;
     //style.Colors[ImGuiCol_TreeLines] = IMGUI_ACTIVE;
     //style.Colors[ImGuiCol_DragDropTarget] = IMGUI_ACTIVE;
     //style.Colors[ImGuiCol_DragDropTargetBg] = IMGUI_ACTIVE;
@@ -137,16 +137,27 @@ void ImGuiSizeSetting()
 {
     ImGuiStyle& style = ImGui::GetStyle();
 
-    // 角丸め
-    style.WindowRounding = 0.0f;
-    style.FrameRounding = 4.0f;
-    style.GrabRounding = 4.0f;
-    style.PopupRounding = 4.0f;
-    style.ScrollbarRounding = 4.0f;
-    style.ChildRounding = 4.0f;
+    // 余白
+    style.WindowPadding = ImVec2(10, 10);
+    style.FramePadding = ImVec2(5, 3);
+    style.ItemSpacing = ImVec2(10, 5);
+    style.ItemInnerSpacing = ImVec2(5, 5);
+    style.TouchExtraPadding = ImVec2(0, 0);
+    style.IndentSpacing = 26.0f;
+    style.GrabMinSize = 15.0f;
 
     // 枠の幅
     style.WindowBorderSize = 1.0f;
-    style.DockingSeparatorSize = 1.0f;
+    style.ChildBorderSize = 1.0f;
+    style.PopupBorderSize = 1.0f;
     style.FrameBorderSize = 0.0f;
+    style.DockingSeparatorSize = 1.0f;
+
+    // 角丸め
+    style.WindowRounding = 0.0f;
+    style.ChildRounding = 4.0f;
+    style.PopupRounding = 4.0f;
+    style.FrameRounding = 4.0f;
+    style.GrabRounding = 4.0f;
+    style.ScrollbarRounding = 4.0f;
 }
