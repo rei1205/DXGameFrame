@@ -1,8 +1,10 @@
 // Texture.cpp
 #include "Texture.h"
 #include "../Direct3D.h"
+#include "AssetType.h"
 #include "../../System/Debug.h"
 #include <DirectXTex/DirectXTex.h>
+#include <format>
 
 #ifdef _X86_
 #ifdef _DEBUG
@@ -20,6 +22,8 @@
 
 Texture::Texture() :
 	m_pSRV(nullptr),
+	m_pDSV(nullptr),
+	m_pRTV(nullptr),
 	m_size{}
 {
 }
@@ -29,7 +33,7 @@ HRESULT Texture::Load(const std::string& filePath)
 	HRESULT hr = S_OK;
 
 	// ファイルからテクスチャを読み込む
-	hr = LoadFromFile(filePath);
+	hr = LoadFromImageFile(filePath);
 	if (FAILED(hr))
 	{
 		Debug::ErrorMessage(filePath + "の読み込みに失敗しました。");
@@ -40,7 +44,77 @@ HRESULT Texture::Load(const std::string& filePath)
 	return hr;
 }
 
-HRESULT Texture::LoadFromFile(const std::string& filePath)
+HRESULT Texture::Create(const TextureDesc& textureDesc)
+{
+	HRESULT hr = S_OK;
+
+	D3D11_TEXTURE2D_DESC desc = {};
+	desc.Width = textureDesc.width;
+	desc.Height = textureDesc.height;
+	desc.MipLevels = 1;
+	desc.ArraySize = 1;
+	desc.Format = textureDesc.format;
+	desc.SampleDesc.Count = 1;
+
+	// テクスチャタイプごとの設定
+	switch (textureDesc.textureType)
+	{
+	case TextureType::TEXTURE2D:
+		desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
+		break;
+
+	case TextureType::RENDER_TARGET:
+		desc.BindFlags =
+			D3D11_BIND_SHADER_RESOURCE |
+			D3D11_BIND_RENDER_TARGET;
+		break;
+
+	case TextureType::DEPTH_STENCIL:
+		desc.BindFlags =
+			D3D11_BIND_SHADER_RESOURCE |
+			D3D11_BIND_DEPTH_STENCIL;
+		break;
+
+	case TextureType::DYNAMIC:
+		desc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
+		desc.Usage = D3D11_USAGE_DYNAMIC;
+		desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+		break;
+	}
+
+	// テクスチャ生成
+	ComPtr<ID3D11Texture2D> pTexture;
+	hr = Direct3D::GetDevice()->CreateTexture2D(&desc, nullptr, pTexture.GetAddressOf());
+	if (FAILED(hr)) { return hr; }
+
+	if (desc.BindFlags & D3D11_BIND_SHADER_RESOURCE)
+	{
+		// SRV作成
+		hr = Direct3D::GetDevice()->CreateShaderResourceView(pTexture.Get(), nullptr, m_pSRV.GetAddressOf());
+		if (FAILED(hr)) { return hr; }
+	}
+	if (desc.BindFlags & D3D11_BIND_RENDER_TARGET)
+	{
+		// RTV作成
+		hr = Direct3D::GetDevice()->CreateRenderTargetView(pTexture.Get(), nullptr, m_pRTV.GetAddressOf());
+		if (FAILED(hr)) { return hr; }
+	}
+	if (desc.BindFlags & D3D11_BIND_DEPTH_STENCIL)
+	{
+		// DSV作成
+		hr = Direct3D::GetDevice()->CreateDepthStencilView(pTexture.Get(), nullptr, m_pDSV.GetAddressOf());
+		if (FAILED(hr)) { return hr; }
+	}
+
+	m_size.x = desc.Width;
+	m_size.y = desc.Height;
+
+	std::string message = std::format("Create Texture : {} * {}", desc.Width, desc.Height);
+	Debug::ConsoleLog(message);
+	return hr;
+}
+
+HRESULT Texture::LoadFromImageFile(const std::string& filePath)
 {
 	HRESULT hr = S_OK;
 

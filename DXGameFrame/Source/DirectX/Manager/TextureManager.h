@@ -7,7 +7,7 @@
 /// テクスチャのスロット番号
 namespace TextureSlot
 {
-	constexpr UINT MaterialSlotCount = 8;		// マテリアルの使用可能スロット数
+	constexpr UINT MaterialSlotCount = 8;		// マテリアルの使用可能テクスチャスロット数
 	constexpr UINT Main = 0;					// メインテクスチャ
 }
 

@@ -6,6 +6,7 @@
 #include "../RenderUtility/SamplerState.h"
 #include <memory>
 #include <unordered_map>
+#include <array>
 
 /// 初期ブレンドステート名
 namespace BlendStateName
@@ -55,6 +56,9 @@ namespace SamplerStateName
 
 	constexpr const char* Default = Linear_Wrap;						// デフォルトサンプラーステート
 }
+
+/// 最大サンプラーステートスロット数
+constexpr UINT SamplerStateSlotCount = D3D11_COMMONSHADER_SAMPLER_SLOT_COUNT;
 
 /**
  * @brief パイプラインステートを扱う
@@ -166,7 +170,7 @@ public:
 		s_pCurrentBlendState = nullptr;
 		s_pCurrentDepthStencilState = nullptr;
 		s_pCurrentRasterizerState = nullptr;
-		s_pCurrentSamplerState = nullptr;
+		s_pCurrentSamplerState.fill(nullptr);
 	}
 
 private:
@@ -194,7 +198,7 @@ private:
 	static RasterizerState* s_pCurrentRasterizerState;
 
 	/// 現在セットされているブレンドステート
-	static SamplerState* s_pCurrentSamplerState;
+	static std::array<SamplerState*, SamplerStateSlotCount> s_pCurrentSamplerState;
 
 	/**
 	 * @brief 初期ブレンドステートを作成する

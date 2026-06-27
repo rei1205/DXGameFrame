@@ -33,6 +33,7 @@
     <ClInclude Include="Source\DirectX\Manager\PipelineStateManager.h" />
     <ClInclude Include="Source\DirectX\Manager\ShaderManager.h" />
     <ClInclude Include="Source\DirectX\Manager\TextureManager.h" />
+    <ClInclude Include="Source\DirectX\RenderUtility\AssetType.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\BlendState.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\DepthStencilState.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\Geometry.h" />
@@ -48,6 +49,7 @@
     <ClInclude Include="Source\DXGameFrame.h" />
     <ClInclude Include="Source\Editor\Editor.h" />
     <ClInclude Include="Source\Editor\EditorWindow.h" />
+    <ClInclude Include="Source\Editor\GameWindowGUI.h" />
     <ClInclude Include="Source\Editor\HierarchyGUI.h" />
     <ClInclude Include="Source\Editor\InspectorGUI.h" />
     <ClInclude Include="Source\GameFrame\Component\Camera.h" />
@@ -70,7 +72,6 @@
     <ClInclude Include="Source\GameFrame\Core\Scene.h" />
     <ClInclude Include="Source\GameFrame\Core\SceneManager.h" />
     <ClInclude Include="Source\GameFrame\RenderSystem\DefaultRenderPass.h" />
-    <ClInclude Include="Source\GameFrame\RenderSystem\RenderLayer.h" />
     <ClInclude Include="Source\GameFrame\RenderSystem\RenderPass.h" />
     <ClInclude Include="Source\GameFrame\RenderSystem\RenderSystem.h" />
     <ClInclude Include="Source\System\Debug.h" />
@@ -99,6 +100,7 @@
     <ClCompile Include="Source\DirectX\Manager\PipelineStateManager.cpp" />
     <ClCompile Include="Source\DirectX\Manager\ShaderManager.cpp" />
     <ClCompile Include="Source\DirectX\Manager\TextureManager.cpp" />
+    <ClCompile Include="Source\DirectX\RenderUtility\AssetType.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\BlendState.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\DepthStencil.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\Geometry.cpp" />
@@ -114,12 +116,12 @@
     <ClCompile Include="Source\DXGameFrame.cpp" />
     <ClCompile Include="Source\Editor\Editor.cpp" />
     <ClCompile Include="Source\Editor\EditorWindow.cpp" />
+    <ClCompile Include="Source\Editor\GameWindowGUI.cpp" />
     <ClCompile Include="Source\Editor\HierarchyGUI.cpp" />
     <ClCompile Include="Source\Editor\InspectorGUI.cpp" />
     <ClCompile Include="Source\GameFrame\Component\Camera.cpp" />
     <ClCompile Include="Source\GameFrame\Component\DirectionalLight.cpp" />
     <ClCompile Include="Source\GameFrame\Component\MeshRenderer.cpp" />
-    <ClCompile Include="Source\GameFrame\Component\Renderer.cpp" />
     <ClCompile Include="Source\GameFrame\Component\Transform.cpp" />
     <ClCompile Include="Source\GameFrame\Core\Component.cpp" />
     <ClCompile Include="Source\GameFrame\Core\ComponentManager.cpp" />
@@ -130,7 +132,6 @@
     <ClCompile Include="Source\GameFrame\Core\Scene.cpp" />
     <ClCompile Include="Source\GameFrame\Core\SceneManager.cpp" />
     <ClCompile Include="Source\GameFrame\RenderSystem\DefaultRenderPass.cpp" />
-    <ClCompile Include="Source\GameFrame\RenderSystem\RenderLayer.cpp" />
     <ClCompile Include="Source\GameFrame\RenderSystem\RenderPass.cpp" />
     <ClCompile Include="Source\GameFrame\RenderSystem\RenderSystem.cpp" />
     <ClCompile Include="Source\main.cpp" />

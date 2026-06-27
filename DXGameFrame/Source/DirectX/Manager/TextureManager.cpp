@@ -1,6 +1,7 @@
 // TextureManager.cpp
 #include "TextureManager.h"
 #include "../Direct3D.h"
+#include "../../System/Debug.h"
 
 std::unordered_map<std::string, std::shared_ptr<Texture>> TextureManager::s_textures;
 
@@ -43,9 +44,13 @@ void TextureManager::CollectGarbage()
 
 		it = s_textures.erase(it);
 	}
+
+	Debug::ConsoleLog("TextureManager : CollectGarbage");
+	Debug::ConsoleLog("- Current = " + s_textures.size());
 }
 
 void TextureManager::Clear()
 {
 	s_textures.clear();
+	Debug::ConsoleLog("TextureManager : Clear");
 }

@@ -4,6 +4,7 @@
 Scene::Scene():
 	m_gameObjectManager(this)
 {
+	m_renderSystem.Init(this);
 }
 
 Scene::~Scene()

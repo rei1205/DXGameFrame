@@ -86,9 +86,6 @@
     <ClCompile Include="Source\GameFrame\Component\MeshRenderer.cpp">
       <Filter>ソース ファイル\GameFrame\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameFrame\Component\Renderer.cpp">
-      <Filter>ソース ファイル\GameFrame\Component</Filter>
-    </ClCompile>
     <ClCompile Include="Source\GameFrame\Component\Transform.cpp">
       <Filter>ソース ファイル\GameFrame\Component</Filter>
     </ClCompile>
@@ -182,9 +179,6 @@
     <ClCompile Include="Source\GameFrame\RenderSystem\DefaultRenderPass.cpp">
       <Filter>ソース ファイル\GameFrame\RenderSystem</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameFrame\RenderSystem\RenderLayer.cpp">
-      <Filter>ソース ファイル\GameFrame\RenderSystem</Filter>
-    </ClCompile>
     <ClCompile Include="Source\GameFrame\RenderSystem\RenderPass.cpp">
       <Filter>ソース ファイル\GameFrame\RenderSystem</Filter>
     </ClCompile>
@@ -220,6 +214,12 @@
     </ClCompile>
     <ClCompile Include="Source\System\ImGuiStyleSetting.cpp">
       <Filter>ソース ファイル\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX\RenderUtility\AssetType.cpp">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Editor\GameWindowGUI.cpp">
+      <Filter>ソース ファイル\Editor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -367,9 +367,6 @@
     <ClInclude Include="Source\GameFrame\RenderSystem\DefaultRenderPass.h">
       <Filter>ソース ファイル\GameFrame\RenderSystem</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameFrame\RenderSystem\RenderLayer.h">
-      <Filter>ソース ファイル\GameFrame\RenderSystem</Filter>
-    </ClInclude>
     <ClInclude Include="Source\GameFrame\RenderSystem\RenderPass.h">
       <Filter>ソース ファイル\GameFrame\RenderSystem</Filter>
     </ClInclude>
@@ -423,6 +420,12 @@
     </ClInclude>
     <ClInclude Include="Source\System\ImGuiStyleSetting.h">
       <Filter>ソース ファイル\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\RenderUtility\AssetType.h">
+      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Editor\GameWindowGUI.h">
+      <Filter>ソース ファイル\Editor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

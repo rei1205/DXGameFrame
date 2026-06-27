@@ -1,6 +1,7 @@
 // ConstantBufferManager.cpp
 #include "ConstantBufferManager.h"
 #include "../Direct3D.h"
+#include "../../System/Debug.h"
 
 ConstantBufferManager::FrameCB ConstantBufferManager::s_frameCB;
 ComPtr<ID3D11Buffer> ConstantBufferManager::s_pWorldBuffer = nullptr;
@@ -30,6 +31,7 @@ HRESULT ConstantBufferManager::Init()
 	hr = CreateAllBuffer();
 	if (FAILED(hr)) { return hr; }
 
+	Debug::ConsoleLog("ConstantBufferManager : Initialized");
 	return hr;
 }
 
@@ -39,6 +41,8 @@ void ConstantBufferManager::Uninit()
 	s_pFrameBuffer.Reset();
 	s_pBoneBuffer.Reset();
 	s_pCustomBuffer.Reset();
+
+	Debug::ConsoleLog("ConstantBufferManager : Uninitialized");
 }
 
 void ConstantBufferManager::ShaderSetBuffer()

@@ -11,23 +11,6 @@ DirectionalLight::DirectionalLight() :
 {
 }
 
-void DirectionalLight::Awake()
-{
-	if (GetScene()->GetRenderSystem().GetMainLight() == nullptr)
-		SetMain();
-}
-
-void DirectionalLight::OnDestroy()
-{
-	if (GetScene()->GetRenderSystem().GetMainLight() == this)
-		GetScene()->GetRenderSystem().SetMainLight(nullptr);
-}
-
-void DirectionalLight::SetMain()
-{
-	GetScene()->GetRenderSystem().SetMainLight(this);
-}
-
 void DirectionalLight::SetLightColor(Color color)
 {
 	m_lightColor = color;
@@ -69,9 +52,4 @@ Color DirectionalLight::GetLightColor()
 Color DirectionalLight::GetAmbientColor()
 {
 	return m_ambientColor;
-}
-
-DirectionalLight* DirectionalLight::GetMain(Scene* pScene)
-{
-	return pScene->GetRenderSystem().GetMainLight();
 }

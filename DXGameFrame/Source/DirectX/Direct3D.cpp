@@ -9,7 +9,6 @@ ComPtr<ID3D11Texture2D> Direct3D::s_pBackBuffer = nullptr;
 ComPtr<ID3D11RenderTargetView> Direct3D::s_pBackBufferRTV = nullptr;
 UINT Direct3D::s_width = 0;
 UINT Direct3D::s_height = 0;
-Direct3D::NormalizedViewport Direct3D::s_normalizedViewport;
 
 HRESULT Direct3D::Init(HWND hWnd, UINT width, UINT height, bool fullScreen)
 {
@@ -38,6 +37,8 @@ void Direct3D::Uninit()
 	s_pSwapChain.Reset();
 	s_pContext.Reset();
 	s_pDevice.Reset();
+
+	Debug::ConsoleLog("Direct3D : Uninitialized");
 }
 
 HRESULT Direct3D::Resize(UINT width, UINT height)
@@ -57,24 +58,8 @@ HRESULT Direct3D::Resize(UINT width, UINT height)
 
 	// ビューポート再設定
 	SetViewportSize(width, height);
-	SetViewport(s_normalizedViewport);
 
 	return hr;
-}
-
-void Direct3D::SetViewport(NormalizedViewport viewport)
-{
-	D3D11_VIEWPORT vp = {};
-	vp.TopLeftX = viewport.left * (float)s_width;
-	vp.TopLeftY = viewport.top * (float)s_height;
-	vp.Width = viewport.width * (float)s_width;
-	vp.Height = viewport.height * (float)s_height;
-	vp.MinDepth = 0.0f;
-	vp.MaxDepth = 1.0f;
-
-	// ビューポートを設定
-	s_pContext->RSSetViewports(1, &vp);
-	s_normalizedViewport = viewport;
 }
 
 void Direct3D::BeginDraw(const float clearColor[4])

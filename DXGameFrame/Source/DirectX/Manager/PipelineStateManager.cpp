@@ -10,7 +10,7 @@ std::unordered_map<std::string, std::shared_ptr<SamplerState>> PipelineStateMana
 BlendState* PipelineStateManager::s_pCurrentBlendState = nullptr;
 DepthStencilState* PipelineStateManager::s_pCurrentDepthStencilState = nullptr;
 RasterizerState* PipelineStateManager::s_pCurrentRasterizerState = nullptr;
-SamplerState* PipelineStateManager::s_pCurrentSamplerState = nullptr;
+std::array<SamplerState*, D3D11_COMMONSHADER_SAMPLER_SLOT_COUNT> PipelineStateManager::s_pCurrentSamplerState = {};
 
 HRESULT PipelineStateManager::Init()
 {
@@ -44,7 +44,7 @@ void PipelineStateManager::Uninit()
     s_pCurrentBlendState = nullptr;
     s_pCurrentDepthStencilState = nullptr;
     s_pCurrentRasterizerState = nullptr;
-    s_pCurrentSamplerState = nullptr;
+    s_pCurrentSamplerState.fill(nullptr);
 }
 
 void PipelineStateManager::SetBlendState(BlendState* pBlendState)
@@ -82,13 +82,16 @@ void PipelineStateManager::SetRasterizerState(RasterizerState* pRasterizerState)
 
 void PipelineStateManager::SetSamplerState(SamplerState* pSamplerState, UINT slot)
 {
-    if (pSamplerState == s_pCurrentSamplerState)
+    if (slot >= SamplerStateSlotCount)
+        return;
+
+    if (pSamplerState == s_pCurrentSamplerState[slot])
         return;
 
     ID3D11SamplerState* pState = pSamplerState->GetSamplerState();
     Direct3D::GetContext()->VSSetSamplers(slot, 1, &pState);
     Direct3D::GetContext()->PSSetSamplers(slot, 1, &pState);
-    s_pCurrentSamplerState = pSamplerState;
+    s_pCurrentSamplerState[slot] = pSamplerState;
 }
 
 BlendState* PipelineStateManager::GetBlendState(const std::string& name)

@@ -14,22 +14,6 @@ Camera::Camera():
 {
 }
 
-void Camera::Awake()
-{
-	GetScene()->GetRenderSystem().RegisterCamera(this);
-}
-
-void Camera::OnDestroy()
-{
-	GetScene()->GetRenderSystem().UnregisterCamera(this);
-}
-
-void Camera::SetPriority(int priority)
-{
-	m_priority = priority;
-	GetScene()->GetRenderSystem().SetCameraSortDirty();
-}
-
 DirectX::XMMATRIX Camera::GetViewMatrix()
 {
 	DirectX::XMMATRIX view;		// 計算用ビュー行列
@@ -76,7 +60,7 @@ DirectX::XMMATRIX Camera::GetOrthographicProjectionMatrix()
 
 Camera* Camera::GetMain(Scene* pScnen)
 {
-	return pScnen->GetRenderSystem().GetMainCamera();
+	return nullptr;
 }
 
 DirectX::XMMATRIX Camera::GetDefaultViewMatrix()
