@@ -13,39 +13,80 @@
 
 DirectX::XMMATRIX GetMatrixFromAssimpMatrix(aiMatrix4x4 M);
 
-Model::Model()
+Model::Model() :
+	m_sumVertex(0)
 {
 }
 
 bool Model::Load(const std::string& filePath)
 {
-    Assimp::Importer importer;
+	// assimpシーン読み込み
+	Assimp::Importer importer;
+	const aiScene* pScene = importer.ReadFile(
+		filePath,
+		aiProcess_Triangulate |
+		aiProcess_GenSmoothNormals |
+		aiProcess_CalcTangentSpace |
+		aiProcess_JoinIdenticalVertices
+	);
+	if (pScene == nullptr)
+	{
+		Debug::ErrorMessage(filePath + "の読み込みに失敗しました。");
+		return false;
+	}
 
-    const aiScene* pScene = importer.ReadFile(
-        filePath,
-        aiProcess_Triangulate |
-        aiProcess_GenSmoothNormals |
-        aiProcess_CalcTangentSpace |
-        aiProcess_JoinIdenticalVertices
-    );
+	// ディレクトリの読み取り
+	std::string directory = filePath;
+	auto strIt = directory.begin();
+	while (strIt != directory.end()) {
+		if (*strIt == '/')
+			*strIt = '\\';
+		++strIt;
+	}
+	directory = directory.substr(0, directory.find_last_of('\\') + 1);
 
-    if (pScene == nullptr)
-    {
-        Debug::ErrorMessage(filePath + "の読み込みに失敗しました。");
-        return false;
-    }
-
-	CreateNode(pScene);
-    int sumVtxCount = CreateMesh(pScene);
+	// モデルデータ読み込み
+	if (!CreateModelData(pScene, directory))
+	{
+		Debug::ErrorMessage(filePath + "のモデルデータ作成に失敗しました。");
+		return false;
+	}
 
 	int nodeCount = (int)m_nodes.size();
 	int meshCount = (int)m_meshes.size();
-
-    Debug::ConsoleLog("Load Model : " + filePath);
+	int materialCount = (int)m_materials.size();
+	Debug::ConsoleLog("Load Model : " + filePath);
 	Debug::ConsoleLog("- Node : " + std::to_string(nodeCount));
-	Debug::ConsoleLog("- Mesh : " + std::to_string(nodeCount));
-	Debug::ConsoleLog("- Vertex : " + std::to_string(sumVtxCount));
-    return true;
+	Debug::ConsoleLog("- Mesh : " + std::to_string(meshCount));
+	Debug::ConsoleLog("- Vertex : " + std::to_string(m_sumVertex));
+	Debug::ConsoleLog("- Material : " + std::to_string(materialCount));
+	return true;
+}
+
+void Model::Draw(const std::vector<Material>& materials)
+{
+	for (auto& mesh : m_meshes)
+	{
+		m_materials[mesh.materialID].Bind();
+		mesh.mesh->Draw();
+	}
+}
+
+bool Model::CreateModelData(const aiScene* pScene, const std::string& directory)
+{
+	HRESULT hr = S_OK;
+
+	// 親子階層作成
+	CreateNode(pScene);
+
+	// メッシュ作成
+	hr = CreateMesh(pScene, &m_sumVertex);
+	if (FAILED(hr)) return false;
+
+	// マテリアル作成
+	CreateMaterial(pScene, directory);
+
+	return true;
 }
 
 void Model::CreateNode(const aiScene* pScene)
@@ -89,13 +130,15 @@ void Model::CreateNode(const aiScene* pScene)
 	func(pScene->mRootNode, NODE_NONE, DirectX::XMMatrixIdentity());
 }
 
-int Model::CreateMesh(const aiScene* pScene)
+HRESULT Model::CreateMesh(const aiScene* pScene, int* sumVertex)
 {
+	HRESULT hr = S_OK;
+
 	// 事前準備
 	aiVector3D zero3(0.0f, 0.0f, 0.0f);
 	aiColor4D one4(1.0f, 1.0f, 1.0f, 1.0f);
 	UINT meshCount = pScene->mNumMeshes;	// メッシュ数
-	UINT sumVtxCount = 0;					// 合計頂点数
+	*sumVertex = 0;
 
 	// メッシュ配列のサイズ設定
 	m_meshes.resize(meshCount);
@@ -105,12 +148,12 @@ int Model::CreateMesh(const aiScene* pScene)
 	{
 		std::vector<Mesh::MeshVertex> vtx;
 		Mesh::Description desc;
-	
+
 		// メッシュ読み込み準備
 		aiMesh* pMesh = pScene->mMeshes[i];
 		UINT vtxCount = pMesh->mNumVertices;
 		UINT faceCount = pMesh->mNumFaces;
-		sumVtxCount += vtxCount;
+		*sumVertex += vtxCount;
 
 		// 頂点・インデックス配列のサイズ設定
 		vtx.resize(vtxCount);
@@ -153,13 +196,39 @@ int Model::CreateMesh(const aiScene* pScene)
 
 		// メッシュ作成
 		auto mesh = std::make_shared<Mesh>();
-		mesh->CreateMesh(vtx, desc);
+		hr = mesh->CreateMesh(vtx, desc);
+		if (FAILED(hr)) { return hr; }
+
 		m_meshes[i].mesh = mesh;
 		m_meshes[i].materialID = pMesh->mMaterialIndex;
-
 	}
 
-	return sumVtxCount;
+	return hr;
+}
+
+void Model::CreateMaterial(const aiScene* pScene, const std::string& directory)
+{
+	// マテリアル数取得
+	UINT materialCount;
+	materialCount = pScene->mNumMaterials;
+
+	// マテリアル配列の初期化
+	m_materials.clear();
+	m_materials.resize(materialCount);
+
+	// マテリアルパラメータの設定
+	for (UINT i = 0; i < materialCount; ++i)
+	{
+		// テクスチャ読み込み処理
+		aiString path;
+
+		// テクスチャのパス情報を読み込み
+		if (pScene->mMaterials[i]->Get(AI_MATKEY_TEXTURE_DIFFUSE(0), path) != AI_SUCCESS)
+			continue;
+
+		// テクスチャの読み込み
+		m_materials[i].SetTexture(directory + path.C_Str());
+	}
 }
 
 DirectX::XMMATRIX GetMatrixFromAssimpMatrix(aiMatrix4x4 M)

@@ -30,6 +30,7 @@
     <ClInclude Include="Source\DirectX\Direct3D.h" />
     <ClInclude Include="Source\DirectX\DirectXInclude.h" />
     <ClInclude Include="Source\DirectX\Manager\ConstantBufferManager.h" />
+    <ClInclude Include="Source\DirectX\Manager\ModelManager.h" />
     <ClInclude Include="Source\DirectX\Manager\PipelineStateManager.h" />
     <ClInclude Include="Source\DirectX\Manager\ShaderManager.h" />
     <ClInclude Include="Source\DirectX\Manager\TextureManager.h" />
@@ -97,6 +98,7 @@
     <ClCompile Include="..\ThirdParty\ImGui\imgui_widgets.cpp" />
     <ClCompile Include="Source\DirectX\Direct3D.cpp" />
     <ClCompile Include="Source\DirectX\Manager\ConstantBufferManager.cpp" />
+    <ClCompile Include="Source\DirectX\Manager\ModelManager.cpp" />
     <ClCompile Include="Source\DirectX\Manager\PipelineStateManager.cpp" />
     <ClCompile Include="Source\DirectX\Manager\ShaderManager.cpp" />
     <ClCompile Include="Source\DirectX\Manager\TextureManager.cpp" />

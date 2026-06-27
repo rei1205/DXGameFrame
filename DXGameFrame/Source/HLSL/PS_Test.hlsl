@@ -20,6 +20,6 @@ float4 main(PS_IN pin) : SV_TARGET
     t *= -1.0f;
     t = saturate(t);
     float4 color = float4(1.0f, 1.0f, 1.0f, 1.0f);
-    color.rgb *= t;
+    //color.rgb *= t;
     return color * tex.Sample(samp, pin.uv);
 }

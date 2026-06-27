@@ -221,6 +221,9 @@
     <ClCompile Include="Source\Editor\GameWindowGUI.cpp">
       <Filter>ソース ファイル\Editor</Filter>
     </ClCompile>
+    <ClCompile Include="Source\DirectX\Manager\ModelManager.cpp">
+      <Filter>ソース ファイル\DirectX\Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\ThirdParty\ImGui\imconfig.h">
@@ -426,6 +429,9 @@
     </ClInclude>
     <ClInclude Include="Source\Editor\GameWindowGUI.h">
       <Filter>ソース ファイル\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\Manager\ModelManager.h">
+      <Filter>ソース ファイル\DirectX\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
