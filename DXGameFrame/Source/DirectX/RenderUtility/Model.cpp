@@ -1,4 +1,4 @@
-// Model.cpp
+﻿// Model.cpp
 #include "Model.h"
 #include "../../System/Debug.h"
 #include <assimp/Importer.hpp>

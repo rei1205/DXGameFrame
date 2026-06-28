@@ -16,7 +16,10 @@ std::shared_ptr<Model> ModelManager::Load(const std::string& filePath)
 
 	// モデルデータ作成
 	auto model = std::make_shared<Model>();
-	model->Load(filePath);
+	if (!model->Load(filePath))
+	{
+		return nullptr;
+	}
 	s_models[filePath] = model;
 
 	return model;

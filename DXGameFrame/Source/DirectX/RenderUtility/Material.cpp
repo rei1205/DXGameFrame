@@ -1,8 +1,12 @@
-// Material.cpp
+﻿// Material.cpp
 #include "Material.h"
+#include "../Manager/ShaderManager.h"
 
 Material::Material()
 {
+	m_pVertexShader = ShaderManager::LoadVertexShader("output/x64/Debug/VS_Test.cso");
+	m_pPixelShader = ShaderManager::LoadPixelShader("output/x64/Debug/PS_Test.cso");
+
 	SetBlendState(BlendStateName::Default);
 	SetDepthStencilState(DepthStencilStateName::Default);
 	SetRasterizerState(RasterizerStateName::Default);

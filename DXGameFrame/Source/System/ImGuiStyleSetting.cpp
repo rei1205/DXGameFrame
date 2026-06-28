@@ -1,4 +1,4 @@
-// ImGuiStyleSetting.cpp
+﻿// ImGuiStyleSetting.cpp
 #include "ImGuiStyleSetting.h"
 #include <ImGui/imgui.h>
 #include <ImGui/imgui_internal.h>

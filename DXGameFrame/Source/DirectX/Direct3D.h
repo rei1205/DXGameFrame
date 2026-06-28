@@ -1,4 +1,4 @@
-// Direct3D.h
+﻿// Direct3D.h
 #pragma once
 #include "DirectXInclude.h"
 
@@ -123,4 +123,15 @@ private:
 	 * @param height クライアント領域の高さ
 	 */
 	static void SetViewportSize(UINT width, UINT height);
+
+	/**
+	 * @brief 描画リソースのマネージャーの初期化
+	 * @return 成功したかを返す
+	 */
+	static HRESULT InitManager();
+
+	/**
+	 * @brief 描画リソースのマネージャーの終了処理
+	 */
+	static void UninitManager();
 };

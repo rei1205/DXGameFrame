@@ -1,8 +1,10 @@
 // MeshRenderer.h
 #pragma once
 #include "Renderer.h"
-#include "../../DirectX/RenderUtility/Mesh.h"
-#include "../../DirectX/RenderUtility/Geometry.h"
+#include "../Core/ComponentRegisterMeta.h"
+#include "../../DirectX/RenderUtility/Model.h"
+
+REGISTER_COMPONENT(MeshRenderer);
 
 class MeshRenderer : public Renderer
 {
@@ -11,26 +13,37 @@ public:
 	~MeshRenderer() = default;
 
 	/**
-	 * @brief メッシュの描画を行う
-	 * @param materialIndex 描画に使用するマテリアルのインデックス
+	 * @brief 描画を行う
 	 */
 	void Draw() override;
 
 	/**
-	 * @brief ジオメトリのメッシュをセットする
-	 * @param geometryType ジオメトリタイプ
+	 * @brief モデルデータを読み込む
+	 * @param filePath モデルファイルへのファイルパス
 	 */
-	void SetGeometry(Geometry::Type geometryType);
+	void LoadModel(const std::string filePath);
 
 	/**
-	 * @brief メッシュをセットする
-	 * @param pMesh メッシュへのポインタ (shared_ptr)
+	 * @brief マテリアル配列を取得する
+	 * @return マテリアル配列へのポインタ
 	 */
-	void SetMesh(std::shared_ptr<Mesh> pMesh)
+	std::vector<Material>& GetMaterials()
 	{
-		m_pMesh = pMesh;
+		return m_materials;
 	}
 
+	/**
+	 * @brief インスペクターでの表示
+	 */
+	virtual void OnInspectorGUI() override;
+
 private:
-	std::shared_ptr<Mesh> m_pMesh;
+	/// モデルへのポインタ
+	std::shared_ptr<Model> m_pModel;
+
+	/// マテリアル配列
+	std::vector<Material> m_materials;
+
+	/// 現在の入力中ファイルパス
+	std::string m_filePath;
 };

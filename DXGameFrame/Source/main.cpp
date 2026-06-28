@@ -1,4 +1,4 @@
-// main.cpp
+﻿// main.cpp
 #include <iostream>
 #include "DXGameFrame.h"
 #include "System/GameTime.h"
@@ -14,7 +14,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	config.fps = 60;
 	config.title = "Title";
 	config.fullScreen = false;
-	config.isEditorMode = false;
+	config.isEditorMode = true;
 
 	DXGameFrame::Init(config, hInstance, nCmdShow);
 	GameTime::SetShowProssingTime(true);

@@ -52,6 +52,7 @@ void RenderSystem::DrawAll()
 	{
 		renderContext.pDirectionalLight = nullptr;
 	}
+
 	// レンダーパスごとの描画を行う
 	for (auto& renderPass : m_renderPasses)
 	{
@@ -61,57 +62,4 @@ void RenderSystem::DrawAll()
 
 		renderPass->Render(renderers, renderContext);
 	}
-
-	//std::unordered_map<int, std::vector<RenderObject>> renderObjectsMap;
-	//for (Renderer* renderer : m_pRenderers)
-	//{
-	//	if (!renderer->IsActiveHierarchy())
-	//		continue;
-
-	//	int renderLayerID = renderer->GetRenderLayerID();
-	//	if (renderLayerID == RenderLayer::LayerID_None)
-	//		continue;
-
-	//	// マテリアルごとに描画オブジェクトを作成
-	//	std::vector<Material>& materials = renderer->GetMaterials();
-	//	UINT materialCount = (UINT)materials.size();
-	//	for (UINT i = 0; i < materialCount; ++i)
-	//	{
-	//		RenderObject renderObject;
-	//		renderObject.pRenderer = renderer;
-	//		renderObject.materialIndex = i;
-
-	//		// 描画オブジェクト登録
-	//		auto& vec = renderObjectsMap[renderLayerID];
-	//		vec.push_back(renderObject);
-	//	}
-	//}
-
-	//// カメラをソート
-	//if (m_cateraSortDirty)
-	//	CameraSort();
-
-	//// レンダーコンテキストを作成
-	//RenderContext renderContext;
-	//renderContext.pMainLight = m_pMainLight;
-
-	//// アクティブなカメラ配列を作成
-	//renderContext.pSortedCameras = m_pCameras;
-	//std::erase_if(renderContext.pSortedCameras,
-	//	[](Camera* ptr) { return!ptr->IsActiveHierarchy(); }
-	//);
-
-	//// レンダーパスごとの描画を行う
-	//for (auto& renderPass : m_renderPasses)
-	//{
-	//	int targetLayerID = renderPass->GetTargetRenderLayerID();
-	//	if (targetLayerID == RenderLayer::LayerID_None)
-	//		continue;
-
-	//	// 描画リソースのキャッシュを削除
-	//	ShaderManager::Refresh();
-	//	PipelineStateManager::Refresh();
-
-	//	renderPass->Render(renderObjectsMap[targetLayerID], renderContext);
-	//}
 }

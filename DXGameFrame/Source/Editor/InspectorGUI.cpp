@@ -1,4 +1,4 @@
-// Inspector.cpp
+﻿// Inspector.cpp
 #include "InspectorGUI.h"
 #include "Editor.h"
 #include "../GameFrame/Core/GameObject.h"
@@ -24,6 +24,8 @@ void InspectorGUI::OnGUI()
 	for (auto& component : components)
 	{
 		ComponentGUI(component);
+		ImGui::Dummy(ImVec2(0, 5));
+		ImGui::Separator();
 	}
 
 	// コンポーネント追加ボタン

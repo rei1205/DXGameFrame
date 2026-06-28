@@ -1,5 +1,7 @@
-// Direct3D.cpp
+﻿// Direct3D.cpp
 #include "Direct3D.h"
+#include "Manager/ConstantBufferManager.h"
+#include "Manager/PipelineStateManager.h"
 #include "../System/Debug.h"
 
 ComPtr<ID3D11Device> Direct3D::s_pDevice = nullptr;
@@ -25,12 +27,18 @@ HRESULT Direct3D::Init(HWND hWnd, UINT width, UINT height, bool fullScreen)
 	// ビューポート設定
 	SetViewportSize(width, height);
 
+	// 描画リソースマネージャーの初期化
+	hr = InitManager();
+	if (FAILED(hr)) { return hr; }
+
 	Debug::ConsoleLog("Direct3D : Initialized");
 	return hr;
 }
 
 void Direct3D::Uninit()
 {
+	UninitManager();
+
 	// リソースの解放
 	s_pBackBufferRTV.Reset();
 	s_pBackBuffer.Reset();
@@ -195,4 +203,23 @@ void Direct3D::SetViewportSize(UINT width, UINT height)
 	// 画面サイズを保持
 	s_width = width;
 	s_height = height;
+}
+
+HRESULT Direct3D::InitManager()
+{
+	HRESULT hr = S_OK;
+
+	hr = ConstantBufferManager::Init();
+	if (FAILED(hr)) { return hr; }
+
+	hr = PipelineStateManager::Init();
+	if (FAILED(hr)) { return hr; }
+
+	return hr;
+}
+
+void Direct3D::UninitManager()
+{
+	PipelineStateManager::Uninit();
+	ConstantBufferManager::Uninit();
 }

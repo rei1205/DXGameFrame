@@ -1,4 +1,4 @@
-// Editor.cpp
+﻿// Editor.cpp
 #include "Editor.h"
 #include "HierarchyGUI.h"
 #include "InspectorGUI.h"

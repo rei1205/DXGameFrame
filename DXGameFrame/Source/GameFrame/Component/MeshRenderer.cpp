@@ -1,31 +1,41 @@
-// MeshRenderer.cpp
+﻿// MeshRenderer.cpp
 #include "MeshRenderer.h"
 #include "Transform.h"
+#include "../../DirectX/Manager/ModelManager.h"
+#include "../../Utility/InspectorUtility.h"
 
 MeshRenderer::MeshRenderer() :
-	m_pMesh(nullptr)
+	m_pModel(nullptr)
 {
-	//m_pMesh = Geometry::GetModel(Geometry::Type::BOX);
-	//GetMaterials().clear();
-	//Material material;
-	//material.SetTexture("Assets/TestImage.png", TextureSlot::Main);
-	//material.SetVertexShader("output/x64/Debug/VS_Test.cso");
-	//material.SetPixelShader("output/x64/Debug/PS_Test.cso");
-	//GetMaterials().push_back(material);
 }
 
 void MeshRenderer::Draw()
 {
-	//// Transformからワールド行列をセット
-	//DirectX::XMMATRIX matrix;
-	//matrix = GetTransform()->GetWorldMatrix();
-	//ConstantBufferManager::SetWorld(matrix);
+	if (m_pModel == nullptr)
+		return;
 
-	//GetMaterials()[materialIndex].Bind();
-	//m_pMesh->Draw();
+	// Transformからワールド行列をセット
+	DirectX::XMMATRIX matrix;
+	matrix = GetTransform()->GetWorldMatrix();
+	ConstantBufferManager::SetWorld(matrix);
+
+	m_pModel->Draw(m_materials);
 }
 
-void MeshRenderer::SetGeometry(Geometry::Type geometryType)
+void MeshRenderer::LoadModel(const std::string filePath)
 {
-	m_pMesh = Geometry::GetModel(geometryType);
+	m_pModel = ModelManager::Load(filePath);
+}
+
+void MeshRenderer::OnInspectorGUI()
+{
+	// モデルパス入力欄
+	static char buffer[256] = {};
+	strncpy_s(buffer, sizeof(buffer), m_filePath.c_str(), _TRUNCATE);
+	ImGui::InputTextWithHint("FilePath", "path...", buffer, sizeof(buffer));
+	m_filePath = buffer;
+	if (ImGui::Button("Load Model"))
+	{
+		LoadModel(m_filePath);
+	}
 }
