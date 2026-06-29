@@ -7,6 +7,7 @@
 #include "GameFrame/Core/SceneManager.h"
 #include "Editor/Editor.h"
 #include "System/GameTime.h"
+#include <Windows.h>
 
 bool DXGameFrame::s_isExit = false;
 bool DXGameFrame::s_isEditorMode = false;
@@ -24,6 +25,15 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	{
 	case WM_CLOSE:
 		break;
+
+	case WM_SIZE:
+	{
+		// リサイズ処理
+		UINT width = LOWORD(lParam);
+		UINT height = HIWORD(lParam);
+		Direct3D::Resize(width, height);
+	}
+		return 0;
 
 	case WM_DESTROY:
 		// スレッドの終了をシステムに伝える

@@ -1,4 +1,13 @@
 root = true
 
 [*]
-charset = utf-8-bom
+charset = utf-8
+end_of_line = lf
+
+[*.hlsl]
+charset = utf-8
+end_of_line = lf
+
+[*.hlsli]
+charset = utf-8
+end_of_line = lf

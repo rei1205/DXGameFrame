@@ -215,14 +215,17 @@
     <ClCompile Include="Source\System\ImGuiStyleSetting.cpp">
       <Filter>ソース ファイル\System</Filter>
     </ClCompile>
-    <ClCompile Include="Source\DirectX\RenderUtility\AssetType.cpp">
-      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Editor\GameWindowGUI.cpp">
       <Filter>ソース ファイル\Editor</Filter>
     </ClCompile>
     <ClCompile Include="Source\DirectX\Manager\ModelManager.cpp">
       <Filter>ソース ファイル\DirectX\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX\Manager\RenderTargetManager.cpp">
+      <Filter>ソース ファイル\DirectX\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Editor\AssetWindowGUI.cpp">
+      <Filter>ソース ファイル\Editor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -424,14 +427,17 @@
     <ClInclude Include="Source\System\ImGuiStyleSetting.h">
       <Filter>ソース ファイル\System</Filter>
     </ClInclude>
-    <ClInclude Include="Source\DirectX\RenderUtility\AssetType.h">
-      <Filter>ソース ファイル\DirectX\RenderUtility</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Editor\GameWindowGUI.h">
       <Filter>ソース ファイル\Editor</Filter>
     </ClInclude>
     <ClInclude Include="Source\DirectX\Manager\ModelManager.h">
       <Filter>ソース ファイル\DirectX\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX\Manager\RenderTargetManager.h">
+      <Filter>ソース ファイル\DirectX\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Editor\AssetWindowGUI.h">
+      <Filter>ソース ファイル\Editor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -440,10 +446,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Source\HLSL\PS_Test.hlsl">
+    <FxCompile Include="Source\HLSL\VS_Test.hlsl">
       <Filter>ソース ファイル\HLSL</Filter>
     </FxCompile>
-    <FxCompile Include="Source\HLSL\VS_Test.hlsl">
+    <FxCompile Include="Source\HLSL\PS_Test.hlsl">
       <Filter>ソース ファイル\HLSL</Filter>
     </FxCompile>
   </ItemGroup>

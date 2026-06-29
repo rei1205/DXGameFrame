@@ -32,6 +32,13 @@ public:
 	 */
 	static void EndFrame();
 
+	/**
+	 * @brief ウィンドウサイズ変更時の処理
+	 * @param width 画面の幅
+	 * @param height 画面の高さ
+	 */
+	static void Resize(UINT width, UINT height);
+
 private:
 	/// 初期化済みフラグ
 	static bool m_isInitialized;

@@ -1,4 +1,4 @@
-﻿// main.cpp
+// main.cpp
 #include <iostream>
 #include "DXGameFrame.h"
 #include "System/GameTime.h"
@@ -15,8 +15,16 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	config.title = "Title";
 	config.fullScreen = false;
 	config.isEditorMode = true;
+	config.windowStyle =
+		WS_OVERLAPPED |
+		WS_CAPTION |
+		WS_SYSMENU |
+		WS_MINIMIZEBOX |
+		WS_MAXIMIZEBOX;
 
-	DXGameFrame::Init(config, hInstance, nCmdShow);
+	if (!DXGameFrame::Init(config, hInstance, nCmdShow))
+		return 0;
+
 	GameTime::SetShowProssingTime(true);
 	DXGameFrame::Run();
 	DXGameFrame::Uninit();

@@ -1,7 +1,6 @@
-// Texture.cpp
+﻿// Texture.cpp
 #include "Texture.h"
 #include "../Direct3D.h"
-#include "AssetType.h"
 #include "../../System/Debug.h"
 #include <DirectXTex/DirectXTex.h>
 #include <format>
@@ -87,22 +86,67 @@ HRESULT Texture::Create(const TextureDesc& textureDesc)
 	hr = Direct3D::GetDevice()->CreateTexture2D(&desc, nullptr, pTexture.GetAddressOf());
 	if (FAILED(hr)) { return hr; }
 
+	// SRV作成
 	if (desc.BindFlags & D3D11_BIND_SHADER_RESOURCE)
 	{
-		// SRV作成
-		hr = Direct3D::GetDevice()->CreateShaderResourceView(pTexture.Get(), nullptr, m_pSRV.GetAddressOf());
+		if (textureDesc.SRVFormatOverride == DXGI_FORMAT_UNKNOWN)
+		{
+			hr = Direct3D::GetDevice()->CreateShaderResourceView(pTexture.Get(), nullptr, m_pSRV.GetAddressOf());
+		}
+		else
+		{
+			D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc;
+			srvDesc.Format = textureDesc.SRVFormatOverride;
+			srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+			srvDesc.Texture2D.MostDetailedMip = 0;
+			srvDesc.Texture2D.MipLevels = desc.MipLevels;
+
+			hr = Direct3D::GetDevice()->CreateShaderResourceView(pTexture.Get(), &srvDesc, m_pSRV.GetAddressOf());
+		}
 		if (FAILED(hr)) { return hr; }
 	}
+
+	// RTV作成
 	if (desc.BindFlags & D3D11_BIND_RENDER_TARGET)
 	{
-		// RTV作成
-		hr = Direct3D::GetDevice()->CreateRenderTargetView(pTexture.Get(), nullptr, m_pRTV.GetAddressOf());
+		if (textureDesc.RTVFormatOverride == DXGI_FORMAT_UNKNOWN)
+		{
+			hr = Direct3D::GetDevice()->CreateRenderTargetView(
+				pTexture.Get(), nullptr, m_pRTV.GetAddressOf());
+		}
+		else
+		{
+			D3D11_RENDER_TARGET_VIEW_DESC rtvDesc = {};
+			rtvDesc.Format = textureDesc.RTVFormatOverride;
+			rtvDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
+			rtvDesc.Texture2D.MipSlice = 0;
+
+			hr = Direct3D::GetDevice()->CreateRenderTargetView(
+				pTexture.Get(), &rtvDesc, m_pRTV.GetAddressOf());
+		}
 		if (FAILED(hr)) { return hr; }
 	}
+
+	// DSV作成
 	if (desc.BindFlags & D3D11_BIND_DEPTH_STENCIL)
 	{
-		// DSV作成
-		hr = Direct3D::GetDevice()->CreateDepthStencilView(pTexture.Get(), nullptr, m_pDSV.GetAddressOf());
+		if (textureDesc.DSVFormatOverride == DXGI_FORMAT_UNKNOWN)
+		{
+			hr = Direct3D::GetDevice()->CreateDepthStencilView(
+				pTexture.Get(), nullptr, m_pDSV.GetAddressOf());
+		}
+		else
+		{
+			D3D11_DEPTH_STENCIL_VIEW_DESC dsvDesc = {};
+			dsvDesc.Format = textureDesc.DSVFormatOverride;
+			dsvDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+			dsvDesc.Flags = 0;
+			dsvDesc.Texture2D.MipSlice = 0;
+
+			hr = Direct3D::GetDevice()->CreateDepthStencilView(
+				pTexture.Get(), &dsvDesc, m_pDSV.GetAddressOf());
+		}
+
 		if (FAILED(hr)) { return hr; }
 	}
 

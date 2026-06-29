@@ -1,4 +1,4 @@
-// DefaultRenderPass.h
+﻿// DefaultRenderPass.h
 #pragma once
 #include "RenderPass.h"
 
@@ -18,7 +18,14 @@ public:
 
 private:
 	/**
+	 * @brief レンダーターゲットを設定する
+	 * @param renderContext	描画関連データ
+	 */
+	void SetRenderTarget(const RenderContext& renderContext);
+
+	/**
 	 * @brief フレーム定数バッファを更新する
+	 * 	 * @param renderContext	描画関連データ
 	 */
 	void UpdateFrameCB(const RenderContext& renderContext);
 };

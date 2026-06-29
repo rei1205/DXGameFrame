@@ -1,4 +1,4 @@
-﻿// ImGuiStyleSetting.cpp
+// ImGuiStyleSetting.cpp
 #include "ImGuiStyleSetting.h"
 #include <ImGui/imgui.h>
 #include <ImGui/imgui_internal.h>
@@ -121,11 +121,11 @@ void ImGuiColorSetting()
     //style.Colors[ImGuiCol_TableBorderLight] = IMGUI_ACTIVE;
     //style.Colors[ImGuiCol_TableRowBg] = IMGUI_ACTIVE;
     //style.Colors[ImGuiCol_TableRowBgAlt] = IMGUI_ACTIVE;
-    //style.Colors[ImGuiCol_TextLink] = IMGUI_ACTIVE;
+    style.Colors[ImGuiCol_TextLink] = IMGUI_BLUE;
     style.Colors[ImGuiCol_TextSelectedBg] = IMGUI_ACTIVE;
     //style.Colors[ImGuiCol_TreeLines] = IMGUI_ACTIVE;
-    //style.Colors[ImGuiCol_DragDropTarget] = IMGUI_ACTIVE;
-    //style.Colors[ImGuiCol_DragDropTargetBg] = IMGUI_ACTIVE;
+    style.Colors[ImGuiCol_DragDropTarget] = IMGUI_ACTIVE;
+    style.Colors[ImGuiCol_DragDropTargetBg] = IMGUI_HOVERED;
     //style.Colors[ImGuiCol_UnsavedMarker] = IMGUI_ACTIVE;
     //style.Colors[ImGuiCol_NavCursor] = IMGUI_ACTIVE;
     style.Colors[ImGuiCol_NavWindowingHighlight] = IMGUI_ACTIVE;

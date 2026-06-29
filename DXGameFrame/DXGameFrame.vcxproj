@@ -32,9 +32,9 @@
     <ClInclude Include="Source\DirectX\Manager\ConstantBufferManager.h" />
     <ClInclude Include="Source\DirectX\Manager\ModelManager.h" />
     <ClInclude Include="Source\DirectX\Manager\PipelineStateManager.h" />
+    <ClInclude Include="Source\DirectX\Manager\RenderTargetManager.h" />
     <ClInclude Include="Source\DirectX\Manager\ShaderManager.h" />
     <ClInclude Include="Source\DirectX\Manager\TextureManager.h" />
-    <ClInclude Include="Source\DirectX\RenderUtility\AssetType.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\BlendState.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\DepthStencilState.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\Geometry.h" />
@@ -48,6 +48,7 @@
     <ClInclude Include="Source\DirectX\RenderUtility\Texture.h" />
     <ClInclude Include="Source\DirectX\RenderUtility\VertexShader.h" />
     <ClInclude Include="Source\DXGameFrame.h" />
+    <ClInclude Include="Source\Editor\AssetWindowGUI.h" />
     <ClInclude Include="Source\Editor\Editor.h" />
     <ClInclude Include="Source\Editor\EditorWindow.h" />
     <ClInclude Include="Source\Editor\GameWindowGUI.h" />
@@ -100,9 +101,9 @@
     <ClCompile Include="Source\DirectX\Manager\ConstantBufferManager.cpp" />
     <ClCompile Include="Source\DirectX\Manager\ModelManager.cpp" />
     <ClCompile Include="Source\DirectX\Manager\PipelineStateManager.cpp" />
+    <ClCompile Include="Source\DirectX\Manager\RenderTargetManager.cpp" />
     <ClCompile Include="Source\DirectX\Manager\ShaderManager.cpp" />
     <ClCompile Include="Source\DirectX\Manager\TextureManager.cpp" />
-    <ClCompile Include="Source\DirectX\RenderUtility\AssetType.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\BlendState.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\DepthStencil.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\Geometry.cpp" />
@@ -116,6 +117,7 @@
     <ClCompile Include="Source\DirectX\RenderUtility\Texture.cpp" />
     <ClCompile Include="Source\DirectX\RenderUtility\VertexShader.cpp" />
     <ClCompile Include="Source\DXGameFrame.cpp" />
+    <ClCompile Include="Source\Editor\AssetWindowGUI.cpp" />
     <ClCompile Include="Source\Editor\Editor.cpp" />
     <ClCompile Include="Source\Editor\EditorWindow.cpp" />
     <ClCompile Include="Source\Editor\GameWindowGUI.cpp" />
@@ -155,9 +157,9 @@
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Source\HLSL\PS_Test.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
     </FxCompile>
     <FxCompile Include="Source\HLSL\VS_Test.hlsl">

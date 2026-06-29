@@ -1,4 +1,4 @@
-﻿// Material.cpp
+// Material.cpp
 #include "Material.h"
 #include "../Manager/ShaderManager.h"
 

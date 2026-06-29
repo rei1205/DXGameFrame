@@ -2,7 +2,8 @@
 #include "Camera.h"
 #include "Transform.h"
 #include "../Core/Scene.h"
-#include "../../System/GameWindow.h"
+#include "../../DirectX/Manager/RenderTargetManager.h"
+#include "../../Utility/InspectorUtility.h"
 
 Camera::Camera():
 	m_priority(0),
@@ -10,8 +11,15 @@ Camera::Camera():
 	m_nearZ(0.1f),
 	m_farZ(1000.0f),
 	m_cameraSize(5.0f),
-	m_isPerspective(true)
+	m_isPerspective(true),
+	m_pRTTexture(nullptr),
+	m_pDSTexture(nullptr)
 {
+	m_viewportTopLeft.SetVector(0.0f, 0.0f);
+	m_viewportSize.SetVector(1.0f, 1.0f);
+
+	m_pRTTexture = RenderTargetManager::GetRTVTexture(RTVType::SCENE);
+	m_pDSTexture = RenderTargetManager::GetDSVTexture(DSVType::SCENE);
 }
 
 DirectX::XMMATRIX Camera::GetViewMatrix()
@@ -28,8 +36,8 @@ DirectX::XMMATRIX Camera::GetPerspectiveProjectionMatrix()
 {
 	DirectX::XMMATRIX projection;		// 計算用プロジェクション行列
 
-	GameWindow::Size screenSize = GameWindow::GetClientSize();
-	float aspect = (float)screenSize.width / (float)screenSize.height;
+	Texture::Size RTSize = m_pRTTexture->GetSize();
+	float aspect = (float)RTSize.x / (float)RTSize.y;
 
 	// プロジェクション行列を求める
 	projection = DirectX::XMMatrixPerspectiveFovLH(
@@ -43,8 +51,8 @@ DirectX::XMMATRIX Camera::GetOrthographicProjectionMatrix()
 {
 	DirectX::XMMATRIX projection;		// 計算用プロジェクション行列
 
-	GameWindow::Size screenSize = GameWindow::GetClientSize();
-	float aspect = (float)screenSize.width / (float)screenSize.height;
+	Texture::Size RTSize = m_pRTTexture->GetSize();
+	float aspect = (float)RTSize.x / (float)RTSize.y;
 
 	// 投影サイズを求める
 	float halfWidth = m_cameraSize;
@@ -58,9 +66,37 @@ DirectX::XMMATRIX Camera::GetOrthographicProjectionMatrix()
 	return projection;
 }
 
+void Camera::OnInspectorGUI()
+{
+	ImGui::DragInt("カメラ優先度", &m_priority, 0.01f);
+
+	ImGui::Checkbox("透視投影", &m_isPerspective);
+	if (m_isPerspective)
+	{
+		ImGui::DragFloat("視野角", &m_fovAngle, 0.1f, 0.1f, 180.0f);
+	}
+	else
+	{
+		ImGui::DragFloat("カメラサイズ", &m_cameraSize, 0.01f, 0.01f, 100.0f);
+	}
+
+	ImGui::DragVector2("ビューポート左上座標", &m_viewportTopLeft, 0.01f, 0.0f, 1.0f);
+	ImGui::DragVector2("ビューポートサイズ", &m_viewportSize, 0.01f, 0.01f, 1.0f);
+}
+
 Camera* Camera::GetMain(Scene* pScnen)
 {
-	return nullptr;
+	auto cameras = pScnen->GetComponentManager().GetCameras();
+	auto it = std::max_element(cameras.begin(), cameras.end(),
+		[](Camera* a, Camera* b)
+		{
+			return a->GetPriority() < b->GetPriority();
+		});
+
+	if (it == cameras.end())
+		return nullptr;
+
+	return *it;
 }
 
 DirectX::XMMATRIX Camera::GetDefaultViewMatrix()

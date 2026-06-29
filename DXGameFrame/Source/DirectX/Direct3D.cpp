@@ -1,7 +1,8 @@
-﻿// Direct3D.cpp
+// Direct3D.cpp
 #include "Direct3D.h"
 #include "Manager/ConstantBufferManager.h"
 #include "Manager/PipelineStateManager.h"
+#include "Manager/RenderTargetManager.h"
 #include "../System/Debug.h"
 
 ComPtr<ID3D11Device> Direct3D::s_pDevice = nullptr;
@@ -25,11 +26,15 @@ HRESULT Direct3D::Init(HWND hWnd, UINT width, UINT height, bool fullScreen)
 	if (FAILED(hr)) { return hr; }
 
 	// ビューポート設定
-	SetViewportSize(width, height);
+	SetViewport(0.0f, 0.0f, (float)width, (float)height);
 
 	// 描画リソースマネージャーの初期化
-	hr = InitManager();
+	hr = InitManager(width, height);
 	if (FAILED(hr)) { return hr; }
+
+	// 画面サイズを保持
+	s_width = width;
+	s_height = height;
 
 	Debug::ConsoleLog("Direct3D : Initialized");
 	return hr;
@@ -51,6 +56,9 @@ void Direct3D::Uninit()
 
 HRESULT Direct3D::Resize(UINT width, UINT height)
 {
+	if (s_pSwapChain == nullptr)
+		return S_FALSE;
+
 	HRESULT hr = S_OK;
 
 	// 描画リソースのリセット
@@ -65,7 +73,11 @@ HRESULT Direct3D::Resize(UINT width, UINT height)
 	if (FAILED(hr)) { return hr; }
 
 	// ビューポート再設定
-	SetViewportSize(width, height);
+	SetViewport(0.0f, 0.0f, (float)width, (float)height);
+
+	// 画面サイズを保持
+	s_width = width;
+	s_height = height;
 
 	return hr;
 }
@@ -74,11 +86,34 @@ void Direct3D::BeginDraw(const float clearColor[4])
 {
 	// 画面クリア
 	s_pContext->ClearRenderTargetView(s_pBackBufferRTV.Get(), clearColor);
+
+	// レンダーターゲットクリア
+	RenderTargetManager::ClearAllRenderTarget();
+	RenderTargetManager::ClearAllDepthStencil();
 }
 
 void Direct3D::EndDraw()
 {
 	s_pSwapChain->Present(0, 0);
+}
+
+void Direct3D::SetViewport(float posX, float posY, float width, float height)
+{
+	D3D11_VIEWPORT vp = {};
+	vp.TopLeftX = posX;
+	vp.TopLeftY = posY;
+	vp.Width = (float)width;
+	vp.Height = (float)height;
+	vp.MinDepth = 0.0f;
+	vp.MaxDepth = 1.0f;
+
+	// ビューポートを設定
+	s_pContext->RSSetViewports(1, &vp);
+}
+
+void Direct3D::ResetViewport()
+{
+	SetViewport(0.0f, 0.0f, (float)s_width, (float)s_height);
 }
 
 HRESULT Direct3D::CreateDeviceAndSwapChain(HWND hWnd, UINT width, UINT height, bool fullScreen)
@@ -187,25 +222,7 @@ HRESULT Direct3D::ResizeSwapChain(UINT width, UINT height)
 	return hr;
 }
 
-void Direct3D::SetViewportSize(UINT width, UINT height)
-{
-	D3D11_VIEWPORT vp = {};
-	vp.TopLeftX = 0.0f;
-	vp.TopLeftY = 0.0f;
-	vp.Width = (float)width;
-	vp.Height = (float)height;
-	vp.MinDepth = 0.0f;
-	vp.MaxDepth = 1.0f;
-
-	// ビューポートを設定
-	s_pContext->RSSetViewports(1, &vp);
-
-	// 画面サイズを保持
-	s_width = width;
-	s_height = height;
-}
-
-HRESULT Direct3D::InitManager()
+HRESULT Direct3D::InitManager(UINT width, UINT height)
 {
 	HRESULT hr = S_OK;
 
@@ -215,11 +232,15 @@ HRESULT Direct3D::InitManager()
 	hr = PipelineStateManager::Init();
 	if (FAILED(hr)) { return hr; }
 
+	hr = RenderTargetManager::Init(width, height);
+	if (FAILED(hr)) { return hr; }
+
 	return hr;
 }
 
 void Direct3D::UninitManager()
 {
+	RenderTargetManager::Uninit();
 	PipelineStateManager::Uninit();
 	ConstantBufferManager::Uninit();
 }

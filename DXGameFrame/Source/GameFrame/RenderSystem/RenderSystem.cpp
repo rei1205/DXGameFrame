@@ -1,4 +1,4 @@
-// RenderSystem.cpp
+﻿// RenderSystem.cpp
 #include "RenderSystem.h"
 #include "DefaultRenderPass.h"
 #include "../Core/Scene.h"
@@ -36,14 +36,7 @@ void RenderSystem::DrawAll()
 
 	// 仮で通常描画のみ行う
 	RenderContext renderContext;
-	if (!cameras.empty())
-	{
-		renderContext.pCamera = cameras.back();
-	}
-	else
-	{
-		renderContext.pCamera = nullptr;
-	}
+	renderContext.pCamera = Camera::GetMain(m_pScene);
 	if (!directionalLights.empty())
 	{
 		renderContext.pDirectionalLight = directionalLights.back();

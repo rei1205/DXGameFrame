@@ -1,4 +1,4 @@
-﻿// MeshRenderer.cpp
+// MeshRenderer.cpp
 #include "MeshRenderer.h"
 #include "Transform.h"
 #include "../../DirectX/Manager/ModelManager.h"
@@ -34,6 +34,7 @@ void MeshRenderer::OnInspectorGUI()
 	strncpy_s(buffer, sizeof(buffer), m_filePath.c_str(), _TRUNCATE);
 	ImGui::InputTextWithHint("FilePath", "path...", buffer, sizeof(buffer));
 	m_filePath = buffer;
+	ImGui::GetDragAssets(&m_filePath);
 	if (ImGui::Button("Load Model"))
 	{
 		LoadModel(m_filePath);

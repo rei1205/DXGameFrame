@@ -1,4 +1,4 @@
-﻿// Model.cpp
+// Model.cpp
 #include "Model.h"
 #include "../../System/Debug.h"
 #include <assimp/Importer.hpp>
@@ -25,9 +25,11 @@ bool Model::Load(const std::string& filePath)
 	const aiScene* pScene = importer.ReadFile(
 		filePath,
 		aiProcess_Triangulate |
+		aiProcess_FlipUVs |
 		aiProcess_GenSmoothNormals |
 		aiProcess_CalcTangentSpace |
 		aiProcess_JoinIdenticalVertices
+
 	);
 	if (pScene == nullptr)
 	{

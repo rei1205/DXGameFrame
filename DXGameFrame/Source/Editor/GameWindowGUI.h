@@ -9,5 +9,8 @@ public:
 	~GameWindowGUI() = default;
 
 private:
+	/**
+	 * @brief GUIの描画を行う
+	 */
 	void OnGUI() override;
 };

@@ -1,7 +1,9 @@
-﻿// Editor.cpp
+// Editor.cpp
 #include "Editor.h"
 #include "HierarchyGUI.h"
 #include "InspectorGUI.h"
+#include "GameWindowGUI.h"
+#include "AssetWindowGUI.h"
 #include "../DirectX/Direct3D.h"
 #include "../GameFrame/Core/SceneManager.h"
 #include "../System/ImGuiManager.h"
@@ -18,6 +20,8 @@ void Editor::Init()
 
 	s_editorWindows.push_back(std::make_unique<HierarchyGUI>());
 	s_editorWindows.push_back(std::make_unique<InspectorGUI>());
+	s_editorWindows.push_back(std::make_unique<GameWindowGUI>());
+	s_editorWindows.push_back(std::make_unique<AssetWindowGUI>());
 	s_initialized = true;
 }
 
@@ -45,6 +49,10 @@ void Editor::Execute()
 	float clearColor[] = { 0.4f, 0.8f, 0.8f, 1.0f };
 	Direct3D::BeginDraw(clearColor);
 
+	// シーンの処理
+	pScene->ApplyDestroy();
+	pScene->Draw();
+
 	// エディタウィンドウ更新
 	RootWindowGUI();
 	for (auto& window : s_editorWindows)
@@ -52,12 +60,6 @@ void Editor::Execute()
 		window->Update();
 	}
 
-	// シーンの処理
-	pScene->ApplyDestroy();
-	pScene->Draw();
-
-	auto rtv = Direct3D::GetBackBufferRTV();
-	Direct3D::GetContext()->OMSetRenderTargets(1, &rtv, nullptr);
 	ImGuiManager::EndFrame();
 	Direct3D::EndDraw();
 }

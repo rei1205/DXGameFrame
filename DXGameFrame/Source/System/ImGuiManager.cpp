@@ -1,6 +1,7 @@
 // ImGuiManager.cpp
 #include "ImGuiManager.h"
 #include "ImGuiStyleSetting.h"
+#include "../DirectX/Direct3D.h"
 #include <ImGui/imgui_impl_dx11.h>
 #include <ImGui/imgui_impl_win32.h>
 
@@ -22,7 +23,7 @@ void ImGuiManager::Init(HWND hWnd, ID3D11Device* pDevice, ID3D11DeviceContext* p
     // フォント追加
     io.Fonts->AddFontFromFileTTF(
         "Assets/keinanmaru_pop.ttf",
-        14.0f,
+        12.0f,
         nullptr,
         io.Fonts->GetGlyphRangesJapanese()
     );
@@ -64,6 +65,18 @@ void ImGuiManager::EndFrame()
 {
     if (!m_isInitialized)
         return;
+
+    // 描画先設定
+    auto rtv = Direct3D::GetBackBufferRTV();
+    Direct3D::GetContext()->OMSetRenderTargets(1, &rtv, nullptr);
+    Direct3D::ResetViewport();
+
     ImGui::Render();
     ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+}
+
+void ImGuiManager::Resize(UINT width, UINT height)
+{
+    ImGuiIO& io = ImGui::GetIO();
+    io.DisplaySize = ImVec2((float)width, (float)height);
 }

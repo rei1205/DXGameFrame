@@ -5,6 +5,7 @@
 #include "../../Utility/Vector2.h"
 #include "../Core/ComponentManager.h"
 #include "../Core/ComponentRegisterMeta.h"
+#include "../../DirectX/RenderUtility/Texture.h"
 
 REGISTER_COMPONENT(Camera);
 
@@ -151,6 +152,42 @@ public:
 	}
 
 	/**
+	 * @brief レンダーターゲット用テクスチャを設定する
+	 * @param pRTTexture レンダーターゲット用テクスチャへのポインタ
+	 */
+	void SetRTTexture(Texture* pRTTexture)
+	{
+		m_pRTTexture = pRTTexture;
+	}
+
+	/**
+	 * @brief レンダーターゲット用テクスチャを取得する
+	 * @return レンダーターゲット用テクスチャへのポインタ
+	 */
+	Texture* GetRTTexture()
+	{
+		return m_pRTTexture;
+	}
+
+	/**
+	 * @brief 深度ステンシル用テクスチャを設定する
+	 * @param pDSTexture 深度ステンシル用テクスチャへのポインタ
+	 */
+	void SetDSTexture(Texture* pDSTexture)
+	{
+		m_pDSTexture = pDSTexture;
+	}
+
+	/**
+	 * @brief 深度ステンシル用テクスチャを取得する
+	 * @return 深度ステンシル用テクスチャへのポインタ
+	 */
+	Texture* GetDSTexture()
+	{
+		return m_pDSTexture;
+	}
+
+	/**
 	 * @brief このカメラからビュー行列を作成する
 	 * @return ビュー行列
 	 */
@@ -167,6 +204,8 @@ public:
 	 * @return プロジェクション行列
 	 */
 	DirectX::XMMATRIX GetOrthographicProjectionMatrix();
+
+	void OnInspectorGUI() override;
 
 private:
 	/// カメラ優先度
@@ -192,6 +231,12 @@ private:
 
 	/// ビューポートのサイズ
 	Vector2 m_viewportSize;
+
+	/// レンダーターゲット用テクスチャへのポインタ
+	Texture* m_pRTTexture;
+
+	/// 深度ステンシル用テクスチャへのポインタ
+	Texture* m_pDSTexture;
 
 public:
 	/**

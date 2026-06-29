@@ -1,4 +1,4 @@
-// Texture.h
+﻿// Texture.h
 #pragma once
 #include "../DirectXInclude.h"
 #include <string>
@@ -26,6 +26,15 @@ struct TextureDesc
 
 	/// テクスチャフォーマット
 	DXGI_FORMAT format = DXGI_FORMAT_R8G8B8A8_UNORM;
+
+	/// SRV用フォーマット
+	DXGI_FORMAT SRVFormatOverride = DXGI_FORMAT_UNKNOWN;
+
+	/// RTV用フォーマット
+	DXGI_FORMAT RTVFormatOverride = DXGI_FORMAT_UNKNOWN;
+
+	/// DSVフォーマット
+	DXGI_FORMAT DSVFormatOverride = DXGI_FORMAT_UNKNOWN;
 };
 
 /**

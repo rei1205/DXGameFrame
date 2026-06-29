@@ -69,6 +69,20 @@ public:
 		return s_pBackBufferRTV.Get();
 	}
 
+	/**
+	 * @brief ビューポートのサイズを設定する
+	 * @param posX ビューポートの左端
+	 * @param posY ビューポートの上端
+	 * @param width ビューポートの幅
+	 * @param height ビューポートの高さ
+	 */
+	static void SetViewport(float posX, float posY, float width, float height);
+
+	/**
+	 * @brief ビューポートのサイズを画面サイズに設定する
+	 */
+	static void ResetViewport();
+
 private:
 	/// Direct3Dデバイス
 	static ComPtr<ID3D11Device> s_pDevice;
@@ -118,17 +132,12 @@ private:
 	static HRESULT ResizeSwapChain(UINT width, UINT height);
 
 	/**
-	 * @brief ビューポートに実際のサイズを設定する
+	 * @brief 描画リソースのマネージャーの初期化
 	 * @param width クライアント領域の幅
 	 * @param height クライアント領域の高さ
-	 */
-	static void SetViewportSize(UINT width, UINT height);
-
-	/**
-	 * @brief 描画リソースのマネージャーの初期化
 	 * @return 成功したかを返す
 	 */
-	static HRESULT InitManager();
+	static HRESULT InitManager(UINT width, UINT height);
 
 	/**
 	 * @brief 描画リソースのマネージャーの終了処理
