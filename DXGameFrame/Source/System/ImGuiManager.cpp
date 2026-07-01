@@ -23,7 +23,7 @@ void ImGuiManager::Init(HWND hWnd, ID3D11Device* pDevice, ID3D11DeviceContext* p
     // フォント追加
     io.Fonts->AddFontFromFileTTF(
         "Assets/keinanmaru_pop.ttf",
-        12.0f,
+        14.0f,
         nullptr,
         io.Fonts->GetGlyphRangesJapanese()
     );
@@ -77,6 +77,9 @@ void ImGuiManager::EndFrame()
 
 void ImGuiManager::Resize(UINT width, UINT height)
 {
+    if (!m_isInitialized)
+        return;
+
     ImGuiIO& io = ImGui::GetIO();
     io.DisplaySize = ImVec2((float)width, (float)height);
 }

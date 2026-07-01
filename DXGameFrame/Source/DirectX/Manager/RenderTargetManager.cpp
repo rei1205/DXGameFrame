@@ -1,10 +1,12 @@
-﻿// RenderTargetManager.cpp
+// RenderTargetManager.cpp
 #include "RenderTargetManager.h"
 #include "../Direct3D.h"
 #include "../../System/Debug.h"
 
 std::array<std::unique_ptr<Texture>, (UINT)RTVType::COUNT> RenderTargetManager::s_RTVTextures;
 std::array<std::unique_ptr<Texture>, (UINT)DSVType::COUNT> RenderTargetManager::s_DSVTextures;
+std::array<TextureDesc, (UINT)RTVType::COUNT> RenderTargetManager::s_RTVTextureDescs;
+std::array<TextureDesc, (UINT)DSVType::COUNT> RenderTargetManager::s_DSVTextureDescs;
 
 HRESULT RenderTargetManager::Init(UINT width, UINT height)
 {
@@ -32,6 +34,44 @@ void RenderTargetManager::Uninit()
     }
 
     Debug::ConsoleLog("RenderTargetManager : Unitialized");
+}
+
+HRESULT RenderTargetManager::ReSize(UINT width, UINT height)
+{
+    if (width == 0 || height == 0)
+        return S_FALSE;
+
+    HRESULT hr = S_OK;
+
+    // RTVリサイズ
+    for (UINT i = 0; i < (UINT)RTVType::COUNT; ++i)
+    {
+        switch ((RTVType)i)
+        {
+        case RTVType::SCENE:
+        case RTVType::EDITOR_SCENE:
+            s_RTVTextureDescs[i].width = width;
+            s_RTVTextureDescs[i].height = height;
+            hr = s_RTVTextures[i]->Create(s_RTVTextureDescs[i]);
+            if (FAILED(hr)) { return hr; }
+        }
+    }
+
+    // DSVリサイズ
+    for (UINT i = 0; i < (UINT)DSVType::COUNT; ++i)
+    {
+        switch ((DSVType)i)
+        {
+        case DSVType::SCENE:
+        case DSVType::EDITOR_SCENE:
+            s_DSVTextureDescs[i].width = width;
+            s_DSVTextureDescs[i].height = height;
+            hr = s_DSVTextures[i]->Create(s_DSVTextureDescs[i]);
+            if (FAILED(hr)) { return hr; }
+        }
+    }
+
+    return hr;
 }
 
 void RenderTargetManager::ClearAllRenderTarget()
@@ -99,6 +139,7 @@ HRESULT RenderTargetManager::CreateAllRenderTargetTexture(UINT width, UINT heigh
         if (FAILED(hr)) { return hr; }
 
         s_RTVTextures[i] = std::move(texture);
+        s_RTVTextureDescs[i] = desc;
     }
 
     return hr;
@@ -139,6 +180,7 @@ HRESULT RenderTargetManager::CreateAllDepthStencilTexture(UINT width, UINT heigh
         if (FAILED(hr)) { return hr; }
 
         s_DSVTextures[i] = std::move(texture);
+        s_DSVTextureDescs[i] = desc;
     }
 
     return hr;

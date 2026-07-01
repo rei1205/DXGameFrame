@@ -1,4 +1,4 @@
-﻿// Texture.h
+// Texture.h
 #pragma once
 #include "../DirectXInclude.h"
 #include <string>
@@ -115,6 +115,11 @@ private:
 
 	/// テクスチャ画像のサイズ
 	Size m_size;
+
+	/**
+	 * @brief テクスチャを初期化する
+	 */
+	void Reset();
 
 	/**
 	 * @brief 画像ファイルからテクスチャを読み込む

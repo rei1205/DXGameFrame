@@ -101,10 +101,7 @@ public:
 	/**
 	 * @brief このゲームオブジェクトを削除する
 	 */
-	void Destroy()
-	{
-		m_isDestroyed = true;
-	}
+	void Destroy();
 
 	/**
 	 * @brief このゲームオブジェクトの削除フラグを取得する

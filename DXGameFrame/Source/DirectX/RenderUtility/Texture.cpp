@@ -1,4 +1,4 @@
-﻿// Texture.cpp
+// Texture.cpp
 #include "Texture.h"
 #include "../Direct3D.h"
 #include "../../System/Debug.h"
@@ -31,6 +31,8 @@ HRESULT Texture::Load(const std::string& filePath)
 {
 	HRESULT hr = S_OK;
 
+	Reset();
+
 	// ファイルからテクスチャを読み込む
 	hr = LoadFromImageFile(filePath);
 	if (FAILED(hr))
@@ -46,6 +48,8 @@ HRESULT Texture::Load(const std::string& filePath)
 HRESULT Texture::Create(const TextureDesc& textureDesc)
 {
 	HRESULT hr = S_OK;
+
+	Reset();
 
 	D3D11_TEXTURE2D_DESC desc = {};
 	desc.Width = textureDesc.width;
@@ -156,6 +160,14 @@ HRESULT Texture::Create(const TextureDesc& textureDesc)
 	std::string message = std::format("Create Texture : {} * {}", desc.Width, desc.Height);
 	Debug::ConsoleLog(message);
 	return hr;
+}
+
+void Texture::Reset()
+{
+	m_pSRV.Reset();
+	m_pRTV.Reset();
+	m_pDSV.Reset();
+	m_size = {};
 }
 
 HRESULT Texture::LoadFromImageFile(const std::string& filePath)

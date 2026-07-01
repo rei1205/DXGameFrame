@@ -1,4 +1,4 @@
-﻿// RenderTargetManager.h
+// RenderTargetManager.h
 #pragma once
 #include "../RenderUtility/Texture.h"
 #include <memory>
@@ -38,6 +38,14 @@ public:
 	 * @brief 終了処理
 	 */
 	static void Uninit();
+
+	/**
+	 * @brief ウィンドウサイズ変更時の処理
+	 * @param width 画面の幅
+	 * @param height 画面の高さ
+	 * @return 成功したかを返す
+	 */
+	static HRESULT ReSize(UINT width, UINT height);
 
 	/**
 	 * @brief レンダーターゲットを全てクリアする
@@ -87,4 +95,10 @@ private:
 
 	/// 深度ステンシルビューのテクスチャ
 	static std::array<std::unique_ptr<Texture>, (UINT)DSVType::COUNT> s_DSVTextures;
+
+	/// レンダーターゲットビューのテクスチャ生成情報
+	static std::array<TextureDesc, (UINT)RTVType::COUNT> s_RTVTextureDescs;
+
+	/// 深度ステンシルビューのテクスチャ生成情報
+	static std::array<TextureDesc, (UINT)DSVType::COUNT> s_DSVTextureDescs;
 };

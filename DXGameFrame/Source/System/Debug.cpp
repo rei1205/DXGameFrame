@@ -1,4 +1,4 @@
-﻿// Debug.cpp
+// Debug.cpp
 #include "Debug.h"
 #include <Windows.h>
 

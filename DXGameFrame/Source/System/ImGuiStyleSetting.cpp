@@ -127,7 +127,7 @@ void ImGuiColorSetting()
     style.Colors[ImGuiCol_DragDropTarget] = IMGUI_ACTIVE;
     style.Colors[ImGuiCol_DragDropTargetBg] = IMGUI_HOVERED;
     //style.Colors[ImGuiCol_UnsavedMarker] = IMGUI_ACTIVE;
-    //style.Colors[ImGuiCol_NavCursor] = IMGUI_ACTIVE;
+    style.Colors[ImGuiCol_NavCursor] = IMGUI_ACTIVE;
     style.Colors[ImGuiCol_NavWindowingHighlight] = IMGUI_ACTIVE;
     //style.Colors[ImGuiCol_NavWindowingDimBg] = IMGUI_ACTIVE;
     //style.Colors[ImGuiCol_ModalWindowDimBg] = IMGUI_ACTIVE;

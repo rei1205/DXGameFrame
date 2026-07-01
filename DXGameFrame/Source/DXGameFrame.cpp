@@ -31,7 +31,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		// リサイズ処理
 		UINT width = LOWORD(lParam);
 		UINT height = HIWORD(lParam);
+		GameWindow::Resize(width, height);
 		Direct3D::Resize(width, height);
+		ImGuiManager::Resize(width, height);
 	}
 		return 0;
 

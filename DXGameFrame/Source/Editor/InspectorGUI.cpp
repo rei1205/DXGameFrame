@@ -1,4 +1,4 @@
-﻿// Inspector.cpp
+// Inspector.cpp
 #include "InspectorGUI.h"
 #include "Editor.h"
 #include "../GameFrame/Core/GameObject.h"
@@ -43,7 +43,6 @@ void InspectorGUI::GameObjectGUI()
 {
 	GameObject* pGameObject = Editor::GetTargetGameObject();
 	bool isActive = pGameObject->IsActiveSelf();
-	std::string name = pGameObject->GetName();
 
 	// アクティブ状態設定
 	if (ImGui::Checkbox("##Active", &isActive))
@@ -53,7 +52,9 @@ void InspectorGUI::GameObjectGUI()
 
 	// 名前入力欄
 	ImGui::SameLine();
-	if (ImGui::InputTextWithHint("##Name", "Name...", name.data(), sizeof(name)))
+	static char name[64] = "";
+	strcpy_s(name, sizeof(name), pGameObject->GetName().c_str());
+	if (ImGui::InputTextWithHint("##Name", "Name...", name, sizeof(name)))
 	{
 		pGameObject->SetName(name);
 	}

@@ -63,6 +63,7 @@ HRESULT Direct3D::Resize(UINT width, UINT height)
 
 	// 描画リソースのリセット
 	s_pBackBuffer.Reset();
+	s_pBackBufferRTV.Reset();
 
 	// スワップチェインのサイズを変更
 	hr = ResizeSwapChain(width, height);
@@ -74,6 +75,10 @@ HRESULT Direct3D::Resize(UINT width, UINT height)
 
 	// ビューポート再設定
 	SetViewport(0.0f, 0.0f, (float)width, (float)height);
+
+	// レンダーターゲットのリサイズ
+	hr = RenderTargetManager::ReSize(width, height);
+	if (FAILED(hr)) { return hr; }
 
 	// 画面サイズを保持
 	s_width = width;
@@ -212,10 +217,12 @@ HRESULT Direct3D::ResizeSwapChain(UINT width, UINT height)
 	if (s_pSwapChain == nullptr)
 		return S_FALSE;
 
+	s_pContext->OMSetRenderTargets(0, nullptr, nullptr);
+
 	hr = s_pSwapChain->ResizeBuffers(
 		0, width, height,
 		DXGI_FORMAT_UNKNOWN,
-		DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH
+		0
 	);
 	if (FAILED(hr)) { return hr; }
 
