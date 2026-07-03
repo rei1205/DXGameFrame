@@ -37,7 +37,7 @@ public:
 	 * @param width 画面の幅
 	 * @param height 画面の高さ
 	 */
-	static void Resize(UINT width, UINT height);
+	static void OnResize(UINT width, UINT height);
 
 private:
 	/// 初期化済みフラグ

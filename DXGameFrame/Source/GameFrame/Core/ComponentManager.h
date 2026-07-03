@@ -89,6 +89,9 @@ private:
 	/// コンポーネント配列のマップ
 	ComponentArrayMap m_componentArrayMap;
 
+    /// レンダラーコンポーネント配列のリスト
+	std::vector<IComponentArray*> m_rendererComponentArrays;
+
     /**
      * @brief 指定した型のコンポーネント配列を取得
      * @return コンポーネント配列へのポインタ
@@ -137,6 +140,12 @@ inline ComponentArray<T>* ComponentManager::GetComponentArray()
     {
         // 新しくコンポーネント配列を生成
         m_componentArrayMap[classID] = std::make_unique<ComponentArray<T>>();
+
+		// レンダラーコンポーネントの場合は、レンダラーコンポーネント配列のリストに追加
+        if constexpr (std::is_base_of<Renderer, T>::value)
+        {
+            m_rendererComponentArrays.push_back(m_componentArrayMap[classID].get());
+		}
     }
 
     return static_cast<ComponentArray<T>*>(m_componentArrayMap[classID].get());

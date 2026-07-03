@@ -54,6 +54,7 @@
     <ClInclude Include="Source\Editor\GameWindowGUI.h" />
     <ClInclude Include="Source\Editor\HierarchyGUI.h" />
     <ClInclude Include="Source\Editor\InspectorGUI.h" />
+    <ClInclude Include="Source\Editor\SceneMasterGUI.h" />
     <ClInclude Include="Source\GameFrame\Component\Camera.h" />
     <ClInclude Include="Source\GameFrame\Component\DirectionalLight.h" />
     <ClInclude Include="Source\GameFrame\Component\MeshRenderer.h" />
@@ -79,10 +80,10 @@
     <ClInclude Include="Source\System\Debug.h" />
     <ClInclude Include="Source\System\GameTime.h" />
     <ClInclude Include="Source\System\GameWindow.h" />
-    <ClInclude Include="Source\System\IDManager.h" />
     <ClInclude Include="Source\System\ImGuiManager.h" />
     <ClInclude Include="Source\System\ImGuiStyleSetting.h" />
     <ClInclude Include="Source\Utility\Color.h" />
+    <ClInclude Include="Source\Utility\IDManager.h" />
     <ClInclude Include="Source\Utility\InspectorUtility.h" />
     <ClInclude Include="Source\Utility\Math.h" />
     <ClInclude Include="Source\Utility\Quaternion.h" />
@@ -123,6 +124,7 @@
     <ClCompile Include="Source\Editor\GameWindowGUI.cpp" />
     <ClCompile Include="Source\Editor\HierarchyGUI.cpp" />
     <ClCompile Include="Source\Editor\InspectorGUI.cpp" />
+    <ClCompile Include="Source\Editor\SceneMasterGUI.cpp" />
     <ClCompile Include="Source\GameFrame\Component\Camera.cpp" />
     <ClCompile Include="Source\GameFrame\Component\DirectionalLight.cpp" />
     <ClCompile Include="Source\GameFrame\Component\MeshRenderer.cpp" />
@@ -142,10 +144,10 @@
     <ClCompile Include="Source\System\Debug.cpp" />
     <ClCompile Include="Source\System\GameTime.cpp" />
     <ClCompile Include="Source\System\GameWindow.cpp" />
-    <ClCompile Include="Source\System\IDManager.cpp" />
     <ClCompile Include="Source\System\ImGuiManager.cpp" />
     <ClCompile Include="Source\System\ImGuiStyleSetting.cpp" />
     <ClCompile Include="Source\Utility\Color.cpp" />
+    <ClCompile Include="Source\Utility\IDManager.cpp" />
     <ClCompile Include="Source\Utility\InspectorUtility.cpp" />
     <ClCompile Include="Source\Utility\Math.cpp" />
     <ClCompile Include="Source\Utility\Quaternion.cpp" />

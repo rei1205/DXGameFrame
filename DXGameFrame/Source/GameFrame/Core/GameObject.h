@@ -3,6 +3,7 @@
 #include "Component.h"
 #include <string>
 #include <vector>
+#include <objbase.h>
 
 class Scene;
 
@@ -75,6 +76,15 @@ public:
 	}
 
 	/**
+	 * @brief GUIDを取得する
+	 * @return このゲームオブジェクトのGUID
+	 */
+	GUID GetGUID() const
+	{
+		return m_guid;
+	}
+
+	/**
 	 * @brief 親子関係を考慮した有効状態を取得する
 	 * @return ヒエラルキー上の有効状態
 	 */
@@ -126,6 +136,30 @@ public:
 		return m_components;
 	}
 
+	/**
+	 * @brief ゲームオブジェクトをシリアライズする
+	 * @param jsonData 書き込み先jsonデータへの参照
+	 */
+	void Serialize(nlohmann::json& jsonData);
+
+	/**
+	 * @brief ゲームオブジェクトをデシリアライズする
+	 * @param jsonData 読み込み先jsonデータへの参照
+	 */
+	void Deserialize(nlohmann::json& jsonData);
+
+	/**
+	 * @brief ゲームオブジェクトが持つコンポーネントをシリアライズする
+	 * @param jsonData 書き込み先jsonデータへの参照
+	 */
+	void SerializeComponents(nlohmann::json& jsonData);
+
+	/**
+	 * @brief ゲームオブジェクトが持つコンポーネントをデシリアライズする
+	 * @param jsonData 読み込み先jsonデータへの参照
+	 */
+	void DeserializeComponents(nlohmann::json& jsonData);
+
 private:
 	/// ゲームオブジェクト名
 	std::string m_name;
@@ -138,6 +172,9 @@ private:
 
 	/// Transformコンポーネントへのポインタ
 	Transform* m_pTransform;
+
+	/// ゲームオブジェクトのGUID
+	GUID m_guid;
 
 	/// このゲームオブジェクトの有効状態
 	bool m_isActive;

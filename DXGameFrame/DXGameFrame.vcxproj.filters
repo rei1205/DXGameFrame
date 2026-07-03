@@ -173,9 +173,6 @@
     <ClCompile Include="Source\System\GameWindow.cpp">
       <Filter>ソース ファイル\System</Filter>
     </ClCompile>
-    <ClCompile Include="Source\System\IDManager.cpp">
-      <Filter>ソース ファイル\System</Filter>
-    </ClCompile>
     <ClCompile Include="Source\GameFrame\RenderSystem\DefaultRenderPass.cpp">
       <Filter>ソース ファイル\GameFrame\RenderSystem</Filter>
     </ClCompile>
@@ -225,6 +222,12 @@
       <Filter>ソース ファイル\DirectX\Manager</Filter>
     </ClCompile>
     <ClCompile Include="Source\Editor\AssetWindowGUI.cpp">
+      <Filter>ソース ファイル\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utility\IDManager.cpp">
+      <Filter>ソース ファイル\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Editor\SceneMasterGUI.cpp">
       <Filter>ソース ファイル\Editor</Filter>
     </ClCompile>
   </ItemGroup>
@@ -367,9 +370,6 @@
     <ClInclude Include="Source\System\GameWindow.h">
       <Filter>ソース ファイル\System</Filter>
     </ClInclude>
-    <ClInclude Include="Source\System\IDManager.h">
-      <Filter>ソース ファイル\System</Filter>
-    </ClInclude>
     <ClInclude Include="Source\GameFrame\RenderSystem\DefaultRenderPass.h">
       <Filter>ソース ファイル\GameFrame\RenderSystem</Filter>
     </ClInclude>
@@ -437,6 +437,12 @@
       <Filter>ソース ファイル\DirectX\Manager</Filter>
     </ClInclude>
     <ClInclude Include="Source\Editor\AssetWindowGUI.h">
+      <Filter>ソース ファイル\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utility\IDManager.h">
+      <Filter>ソース ファイル\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Editor\SceneMasterGUI.h">
       <Filter>ソース ファイル\Editor</Filter>
     </ClInclude>
   </ItemGroup>

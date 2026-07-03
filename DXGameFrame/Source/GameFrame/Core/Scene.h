@@ -55,6 +55,18 @@ public:
 		return m_renderSystem;
 	}
 
+	/**
+	 * @brief シーンをシリアライズする
+	 * @param jsonData 書き込み先jsonデータへの参照
+	 */
+	void Serialize(nlohmann::json& jsonData);
+
+	/**
+	 * @brief シーンをデシリアライズする
+	 * @param jsonData 読み込み先jsonデータへの参照
+	 */
+	void Deserialize(nlohmann::json& jsonData);
+
 private:
 	/// ゲームオブジェクト管理機能
 	GameObjectManager m_gameObjectManager;

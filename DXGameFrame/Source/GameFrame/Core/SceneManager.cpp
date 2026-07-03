@@ -4,6 +4,7 @@
 #include "../../System/Debug.h"
 #include "../../System/ImGuiManager.h"
 #include "../../Editor/Editor.h"
+#include <fstream>
 
 Scene* SceneManager::s_pActiveScene = nullptr;
 Scene* SceneManager::s_pNextScene = nullptr;
@@ -56,6 +57,28 @@ void SceneManager::ChangeScene(Scene* pNextScene)
 Scene* SceneManager::GetActiveScene()
 {
 	return s_pActiveScene;
+}
+
+void SceneManager::SerializeScene(const std::string& filePath)
+{
+	nlohmann::json jsonData;
+	jsonData["Scene"];
+	s_pActiveScene->Serialize(jsonData["Scene"]);
+
+	std::ofstream file(filePath.c_str());
+	file << jsonData.dump(4);
+}
+
+void SceneManager::DeserializeScene(const std::string& filePath)
+{
+	std::ifstream file(filePath, std::ios::binary);
+	if (!file)return;
+
+	nlohmann::json jsonData;
+	file >> jsonData;
+
+	s_pActiveScene = std::make_unique<Scene>().release();
+	s_pActiveScene->Deserialize(jsonData["Scene"]);
 }
 
 void SceneManager::ApplyChangeScene()

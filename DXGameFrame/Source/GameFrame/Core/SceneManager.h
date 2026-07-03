@@ -31,10 +31,31 @@ public:
 	static void ChangeScene(Scene* pNextScene);
 
 	/**
+	 * @brief シーンを変更する
+	 * @details 同じフレームで複数回呼ばれた場合は最初に呼ばれたものが有効になります
+	 * @param filePath シーンファイルへのパス
+	 */
+	static void ChangeScene(const std::string& filePath);
+
+	/**
 	 * @brief 現在のアクティブなシーンを取得する
 	 * @return アクティブなシーンへのポインタ
 	 */
 	static Scene* GetActiveScene();
+
+	/**
+	 * @brief シーンをシリアライズする
+	 * フレーム処理中に呼ばないでください
+	 * @param filePath シーンファイルへのパス
+	 */
+	static void SerializeScene(const std::string& filePath);
+
+	/**
+	 * @brief シーンをデシリアライズする
+	 * フレーム処理中に呼ばないでください
+	 * @param filePath シーンファイルへのパス
+	 */
+	static void DeserializeScene(const std::string& filePath);
 
 private:
 	/// 現在のシーン

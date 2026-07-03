@@ -190,6 +190,18 @@ public:
 	 */
 	void OnInspectorGUI() override;
 
+	/**
+	 * @brief コンポーネントをシリアライズする
+	 * @param jsonData 書き込み先jsonデータへの参照
+	 */
+	void Serialize(nlohmann::json& jsonData) override;
+
+	/**
+	 * @brief コンポーネントをデシリアライズする
+	 * @param jsonData 読み込み先jsonデータへの参照
+	 */
+	void Deserialize(nlohmann::json& jsonData) override;
+
 private:
 	// Transformクラスでは隠す
 	using Component::SetEnabled;

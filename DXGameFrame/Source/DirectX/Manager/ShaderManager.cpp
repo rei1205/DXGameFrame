@@ -1,6 +1,7 @@
 // ShaderManager.cpp
 #include "ShaderManager.h"
 #include "../Direct3D.h"
+#include "../../System/Debug.h"
 
 std::unordered_map<std::string, std::shared_ptr<VertexShader>> ShaderManager::s_vertexShaders;
 std::unordered_map<std::string, std::shared_ptr<PixelShader>> ShaderManager::s_pixelShaders;
@@ -70,4 +71,6 @@ void ShaderManager::Clear()
 	s_pixelShaders.clear();
 	s_pCurrentVS = nullptr;
 	s_pCurrentPS = nullptr;
+
+	Debug::ConsoleLog("Clear : ShaderManager");
 }

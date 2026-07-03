@@ -1,5 +1,6 @@
 // Transform.cpp
 #include "Transform.h"
+#include "../Core/Scene.h"
 #include "../Core/GameObject.h"
 #include "../../Utility/VectorUtility.h"
 #include "../../Utility/InspectorUtility.h"
@@ -298,4 +299,45 @@ void Transform::OnInspectorGUI()
 	ImGui::DragVector3("Position", &m_localPosition, 0.01f);
 	ImGui::DragVector3("Scale", &m_localScale, 0.01f);
 	ImGui::DragRotation("Rotation", &m_localQuaternion, 0.2f);
+}
+
+void Transform::Serialize(nlohmann::json& jsonData)
+{
+	jsonData["Position"] = { m_localPosition.x, m_localPosition.y, m_localPosition.z };
+	jsonData["Scale"] = { m_localScale.x, m_localScale.y, m_localScale.z };
+	jsonData["Rotation"] = { m_localQuaternion.x, m_localQuaternion.y, m_localQuaternion.z, m_localQuaternion.w };
+
+	// 親子関係保存
+	GUID paretGuid = {};
+	if(m_pParent == nullptr)
+	{
+
+		paretGuid = GUID_NULL;
+	}
+	else
+	{
+		paretGuid = m_pParent->GetGameObject()->GetGUID();
+	}
+	wchar_t buffer[39];
+	StringFromGUID2(paretGuid, buffer, 39);
+	std::wstring ws(buffer);
+	std::string guidStr(ws.begin(), ws.end());
+	jsonData["ParentGUID"] = guidStr;
+}
+
+void Transform::Deserialize(nlohmann::json& jsonData)
+{
+	m_localPosition.SetVector(jsonData["Position"][0], jsonData["Position"][1], jsonData["Position"][2]);
+	m_localScale.SetVector(jsonData["Scale"][0], jsonData["Scale"][1], jsonData["Scale"][2]);
+	m_localQuaternion.SetQuaternion(jsonData["Rotation"][0], jsonData["Rotation"][1], jsonData["Rotation"][2], jsonData["Rotation"][3]);
+
+	// 親子関係復元
+	GUID paretGuid = {};
+	std::string guidStr = jsonData["ParentGUID"];
+	std::wstring wGuidStr(guidStr.begin(), guidStr.end());
+	HRESULT hr = CLSIDFromString(wGuidStr.c_str(), &paretGuid);
+	if (paretGuid != GUID_NULL)
+	{
+		SetParent(GetScene()->GetGameObjectManager().FindGameObjectByGUID(paretGuid));
+	}
 }

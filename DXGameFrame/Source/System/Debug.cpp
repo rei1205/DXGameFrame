@@ -4,20 +4,13 @@
 
 void MessageBoxUTF8(const std::string& message, const std::string& title, UINT type)
 {
+	// stringをUTF-8からUTF-16に変換するためのラムダ関数
     auto ToWide = [](const std::string& s)
         {
-            int size = MultiByteToWideChar(
-                CP_UTF8, 0,
-                s.c_str(), -1,
-                nullptr, 0);
-
+            int size = MultiByteToWideChar(CP_UTF8, 0, s.c_str(), -1, nullptr, 0);
             std::wstring ws(size, L'\0');
 
-            MultiByteToWideChar(
-                CP_UTF8, 0,
-                s.c_str(), -1,
-                ws.data(), size);
-
+            MultiByteToWideChar(CP_UTF8, 0, s.c_str(), -1, ws.data(), size);
             ws.pop_back();   // 終端文字を除く
             return ws;
         };

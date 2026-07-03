@@ -5,6 +5,7 @@
 #include "Manager/RenderTargetManager.h"
 #include "../System/Debug.h"
 
+bool Direct3D::s_isInitialized = false;
 ComPtr<ID3D11Device> Direct3D::s_pDevice = nullptr;
 ComPtr<ID3D11DeviceContext> Direct3D::s_pContext = nullptr;
 ComPtr<IDXGISwapChain> Direct3D::s_pSwapChain = nullptr;
@@ -15,6 +16,9 @@ UINT Direct3D::s_height = 0;
 
 HRESULT Direct3D::Init(HWND hWnd, UINT width, UINT height, bool fullScreen)
 {
+	if (s_isInitialized)
+		return S_FALSE;
+
 	HRESULT hr = S_OK;
 
 	// デバイス・スワップチェインを作成
@@ -36,12 +40,16 @@ HRESULT Direct3D::Init(HWND hWnd, UINT width, UINT height, bool fullScreen)
 	s_width = width;
 	s_height = height;
 
-	Debug::ConsoleLog("Direct3D : Initialized");
+	s_isInitialized = true;
+	Debug::ConsoleLog("Initialized : Direct3D");
 	return hr;
 }
 
 void Direct3D::Uninit()
 {
+	if (!s_isInitialized)
+		return;
+
 	UninitManager();
 
 	// リソースの解放
@@ -51,12 +59,13 @@ void Direct3D::Uninit()
 	s_pContext.Reset();
 	s_pDevice.Reset();
 
-	Debug::ConsoleLog("Direct3D : Uninitialized");
+	s_isInitialized = false;
+	Debug::ConsoleLog("Uninitialized : Direct3D");
 }
 
-HRESULT Direct3D::Resize(UINT width, UINT height)
+HRESULT Direct3D::OnResize(UINT width, UINT height)
 {
-	if (s_pSwapChain == nullptr)
+	if (!s_isInitialized)
 		return S_FALSE;
 
 	HRESULT hr = S_OK;
@@ -89,6 +98,9 @@ HRESULT Direct3D::Resize(UINT width, UINT height)
 
 void Direct3D::BeginDraw(const float clearColor[4])
 {
+	if (!s_isInitialized)
+		return;
+
 	// 画面クリア
 	s_pContext->ClearRenderTargetView(s_pBackBufferRTV.Get(), clearColor);
 
@@ -99,11 +111,17 @@ void Direct3D::BeginDraw(const float clearColor[4])
 
 void Direct3D::EndDraw()
 {
+	if (!s_isInitialized)
+		return;
+
 	s_pSwapChain->Present(0, 0);
 }
 
 void Direct3D::SetViewport(float posX, float posY, float width, float height)
 {
+	if (!s_isInitialized)
+		return;
+
 	D3D11_VIEWPORT vp = {};
 	vp.TopLeftX = posX;
 	vp.TopLeftY = posY;
@@ -118,6 +136,9 @@ void Direct3D::SetViewport(float posX, float posY, float width, float height)
 
 void Direct3D::ResetViewport()
 {
+	if (!s_isInitialized)
+		return;
+
 	SetViewport(0.0f, 0.0f, (float)s_width, (float)s_height);
 }
 
@@ -219,11 +240,7 @@ HRESULT Direct3D::ResizeSwapChain(UINT width, UINT height)
 
 	s_pContext->OMSetRenderTargets(0, nullptr, nullptr);
 
-	hr = s_pSwapChain->ResizeBuffers(
-		0, width, height,
-		DXGI_FORMAT_UNKNOWN,
-		0
-	);
+	hr = s_pSwapChain->ResizeBuffers(0, width, height, DXGI_FORMAT_UNKNOWN, 0);
 	if (FAILED(hr)) { return hr; }
 
 	return hr;

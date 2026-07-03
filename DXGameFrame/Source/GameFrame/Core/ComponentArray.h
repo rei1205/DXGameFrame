@@ -47,12 +47,6 @@ public:
     virtual void Remove(Component* pComponent) = 0;
 
     /**
-     * @brief レンダラーコンポーネントかの判定
-     * @return レンダラーコンポーネントの場合trueを返す
-     */
-    virtual bool IsRenderer() = 0;
-
-    /**
      * @brief 全てのコンポーネントを取得する
      * @return コンポーネント配列
      */
@@ -118,12 +112,6 @@ public:
     void Remove(Component* pComponent) override;
 
     /**
-     * @brief レンダラーコンポーネントかの判定
-     * @return レンダラーコンポーネントの場合trueを返す
-     */
-    bool IsRenderer() override;
-
-    /**
      * @brief 全てのコンポーネントを取得する
      * @return コンポーネント配列
      */
@@ -135,46 +123,6 @@ private:
 
     /// Awake呼び出し保留リスト
     std::vector<T*> m_pendingAwakeList;
-
-private:
-    /// Awake関数所持判定
-    static constexpr bool HasAwake =
-        requires(T t)
-    {
-        t.Awake();
-    };
-
-    /// Start関数所持判定
-    static constexpr bool HasStart =
-        requires(T t)
-    {
-        t.Start();
-    };
-
-    /// Update関数所持判定
-    static constexpr bool HasUpdate =
-        requires(T t)
-    {
-        t.Update();
-    };
-
-    /// LateUpdate関数所持判定
-    static constexpr bool HasLateUpdate =
-        requires(T t)
-    {
-        t.LateUpdate();
-    };
-
-    /// OnDestroy関数所持判定
-    static constexpr bool HasOnDestroy =
-        requires(T t)
-    {
-        t.OnDestroy();
-    };
-
-    /// Rendererコンポーネント判定
-    static constexpr bool BaseIsRenderer =
-        std::is_base_of_v<Renderer, T>;
 };
 
 
@@ -184,10 +132,7 @@ inline void ComponentArray<T>::InvokePendingAwake()
     // 呼ばれていないAwake処理呼び出し
     while (!m_pendingAwakeList.empty())
     {
-        if constexpr (HasAwake)
-        {
-            m_pendingAwakeList.back()->Awake();
-        }
+        m_pendingAwakeList.back()->Awake();
 		static_cast<Component*>(m_pendingAwakeList.back())->m_awakeCalled = true;
         m_pendingAwakeList.pop_back();
     }
@@ -204,10 +149,7 @@ inline void ComponentArray<T>::StartAll()
             !component->IsStartCalled())
         {
             // Start関数を呼び出す
-            if constexpr (HasStart)
-            {
-                component->Start();
-            }
+            component->Start();
             static_cast<Component*>(component)->m_startCalled = true;
         }
     }
@@ -216,18 +158,15 @@ inline void ComponentArray<T>::StartAll()
 template<typename T>
 inline void ComponentArray<T>::UpdateAll()
 {
-    if constexpr (HasUpdate)
+    // Update関数を呼び出す
+    int count = (int)m_components.size();
+    for (int i = 0; i < count; ++i)
     {
-        // Update関数を呼び出す
-        int count = (int)m_components.size();
-        for (int i = 0; i < count; ++i)
+        T* component = m_components[i].get();
+        if (component->IsActiveHierarchy() &&
+            component->IsStartCalled())
         {
-            T* component = m_components[i].get();
-            if (component->IsActiveHierarchy() &&
-                component->IsStartCalled())
-            {
-                component->Update();
-            }
+            component->Update();
         }
     }
 }
@@ -235,18 +174,15 @@ inline void ComponentArray<T>::UpdateAll()
 template<typename T>
 inline void ComponentArray<T>::LateUpdateAll()
 {
-    if constexpr (HasLateUpdate)
+    // LateUpdate関数を呼び出す
+    int count = (int)m_components.size();
+    for (int i = 0; i < count; ++i)
     {
-        // LateUpdate関数を呼び出す
-        int count = (int)m_components.size();
-        for (int i = 0; i < count; ++i)
+        T* component = m_components[i].get();
+        if (component->IsActiveHierarchy() &&
+            component->IsStartCalled())
         {
-            T* component = m_components[i].get();
-            if (component->IsActiveHierarchy() &&
-                component->IsStartCalled())
-            {
-                component->LateUpdate();
-            }
+            component->LateUpdate();
         }
     }
 }
@@ -264,11 +200,9 @@ inline void ComponentArray<T>::ApplyDestroy()
             continue;
 
         // コンポーネント削除時の処理
-        if constexpr (HasOnDestroy)
-        {
-            if (component->IsAwakeCalled())
-                component->OnDestroy();
-        }
+        if (component->IsAwakeCalled())
+            component->OnDestroy();
+
         component->Uninit();
 
         // Awake処理登録を削除
@@ -293,10 +227,7 @@ inline T* ComponentArray<T>::Add(GameObject* pGameObject)
 
     // コンポーネント生成時の処理
     ptr->Init(pGameObject, ClassID<T>::GetID());
-    if constexpr (HasAwake)
-    {
-        ptr->Awake();
-    }
+    ptr->Awake();
 	static_cast<Component*>(ptr)->m_awakeCalled = true;
 
     return ptr;
@@ -332,11 +263,9 @@ inline void ComponentArray<T>::Remove(Component* pComponent)
 
     // コンポーネント削除時の処理
     T* component = static_cast<T*>(pComponent);
-    if constexpr (HasOnDestroy)
-    {
-        if (component->IsAwakeCalled())
-            component->OnDestroy();
-    }
+    if (component->IsAwakeCalled())
+        component->OnDestroy();
+
     component->Uninit();
 
     // Awake処理登録を削除
@@ -347,11 +276,6 @@ inline void ComponentArray<T>::Remove(Component* pComponent)
     m_components.erase(it);
 }
 
-template<typename T>
-inline bool ComponentArray<T>::IsRenderer()
-{
-    return BaseIsRenderer;
-}
 
 template<typename T>
 inline std::vector<Component*> ComponentArray<T>::GetComponents()

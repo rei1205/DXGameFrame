@@ -31,7 +31,7 @@ HRESULT ConstantBufferManager::Init()
 	hr = CreateAllBuffer();
 	if (FAILED(hr)) { return hr; }
 
-	Debug::ConsoleLog("ConstantBufferManager : Initialized");
+	Debug::ConsoleLog("Initialized : ConstantBufferManager");
 	return hr;
 }
 
@@ -42,7 +42,7 @@ void ConstantBufferManager::Uninit()
 	s_pBoneBuffer.Reset();
 	s_pCustomBuffer.Reset();
 
-	Debug::ConsoleLog("ConstantBufferManager : Uninitialized");
+	Debug::ConsoleLog("Uninitialized : ConstantBufferManager");
 }
 
 void ConstantBufferManager::ShaderSetBuffer()

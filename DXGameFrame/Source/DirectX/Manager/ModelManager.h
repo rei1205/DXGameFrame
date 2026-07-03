@@ -25,6 +25,13 @@ public:
 	 */
 	static void Clear();
 
+	/**
+	 * @brief モデルデータからファイルパスを取得する
+	 * @param pModel モデルデータへのポインタ
+	 * @return ファイルパス
+	 */
+	static std::string GetFilePathFromModel(Model* pModel);
+
 private:
 	ModelManager() = delete;
 

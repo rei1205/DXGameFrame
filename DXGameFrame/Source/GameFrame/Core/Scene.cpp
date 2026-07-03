@@ -32,3 +32,31 @@ void Scene::Draw()
 {
 	m_renderSystem.DrawAll();
 }
+
+void Scene::Serialize(nlohmann::json& jsonData)
+{
+	for(auto& gameObject : m_gameObjectManager.GetGameObjects())
+	{
+		nlohmann::json gameObjectJson;
+		gameObject->Serialize(gameObjectJson);
+		gameObject->SerializeComponents(gameObjectJson);
+		jsonData["GameObjects"].push_back(gameObjectJson);
+	}
+}
+
+void Scene::Deserialize(nlohmann::json& jsonData)
+{
+	for (auto& gameObjectJson : jsonData["GameObjects"])
+	{
+		GameObject* gameObject = m_gameObjectManager.CreateGameObject();
+		gameObject->Deserialize(gameObjectJson);
+	}
+
+	auto& gameObjects = m_gameObjectManager.GetGameObjects();
+	int index = 0;
+	for (auto& gameObjectJson : jsonData["GameObjects"])
+	{
+		gameObjects[index]->DeserializeComponents(gameObjectJson);
+		index++;
+	}
+}

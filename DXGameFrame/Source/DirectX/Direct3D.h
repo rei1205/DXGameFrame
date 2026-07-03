@@ -1,4 +1,4 @@
-﻿// Direct3D.h
+// Direct3D.h
 #pragma once
 #include "DirectXInclude.h"
 
@@ -29,7 +29,7 @@ public:
 	 * @param height クライアント領域の高さ
 	 * @return 成功したかを返す
 	 */
-	static HRESULT Resize(UINT width, UINT height);
+	static HRESULT OnResize(UINT width, UINT height);
 
 	/**
 	 * @brief 描画を開始する
@@ -84,6 +84,9 @@ public:
 	static void ResetViewport();
 
 private:
+	/// 初期化済みフラグ
+	static bool s_isInitialized;
+
 	/// Direct3Dデバイス
 	static ComPtr<ID3D11Device> s_pDevice;
 

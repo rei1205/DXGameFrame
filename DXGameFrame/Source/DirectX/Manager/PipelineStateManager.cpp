@@ -32,6 +32,7 @@ HRESULT PipelineStateManager::Init()
     hr = CreateDefaultSamplerStates();
     if (FAILED(hr)) { return hr; }
 
+    Debug::ConsoleLog("Initialized : PipelineStateManager");
     return hr;
 }
 
@@ -45,6 +46,8 @@ void PipelineStateManager::Uninit()
     s_pCurrentDepthStencilState = nullptr;
     s_pCurrentRasterizerState = nullptr;
     s_pCurrentSamplerState.fill(nullptr);
+
+    Debug::ConsoleLog("Unnitialized : PipelineStateManager");
 }
 
 void PipelineStateManager::SetBlendState(BlendState* pBlendState)

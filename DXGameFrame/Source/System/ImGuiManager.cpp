@@ -1,6 +1,7 @@
 // ImGuiManager.cpp
 #include "ImGuiManager.h"
 #include "ImGuiStyleSetting.h"
+#include "Debug.h"
 #include "../DirectX/Direct3D.h"
 #include <ImGui/imgui_impl_dx11.h>
 #include <ImGui/imgui_impl_win32.h>
@@ -23,9 +24,7 @@ void ImGuiManager::Init(HWND hWnd, ID3D11Device* pDevice, ID3D11DeviceContext* p
     // フォント追加
     io.Fonts->AddFontFromFileTTF(
         "Assets/keinanmaru_pop.ttf",
-        14.0f,
-        nullptr,
-        io.Fonts->GetGlyphRangesJapanese()
+        14.0f, nullptr, io.Fonts->GetGlyphRangesJapanese()
     );
 
     // スタイル設定
@@ -37,6 +36,7 @@ void ImGuiManager::Init(HWND hWnd, ID3D11Device* pDevice, ID3D11DeviceContext* p
     ImGui_ImplDX11_Init(pDevice, pContext);
 
     m_isInitialized = true;
+    Debug::ConsoleLog("Initialized : ImGuiManager");
 }
 
 void ImGuiManager::Uninit()
@@ -49,6 +49,7 @@ void ImGuiManager::Uninit()
     ImGui::DestroyContext();
 
     m_isInitialized = false;
+    Debug::ConsoleLog("Uninitialized : ImGuiManage");
 }
 
 void ImGuiManager::BeginFrame()
@@ -75,7 +76,7 @@ void ImGuiManager::EndFrame()
     ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 }
 
-void ImGuiManager::Resize(UINT width, UINT height)
+void ImGuiManager::OnResize(UINT width, UINT height)
 {
     if (!m_isInitialized)
         return;

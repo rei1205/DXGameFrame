@@ -45,12 +45,12 @@ void TextureManager::CollectGarbage()
 		it = s_textures.erase(it);
 	}
 
-	Debug::ConsoleLog("TextureManager : CollectGarbage");
+	Debug::ConsoleLog("Garbage Collection : TextureManager");
 	Debug::ConsoleLog("- Current = " + s_textures.size());
 }
 
 void TextureManager::Clear()
 {
 	s_textures.clear();
-	Debug::ConsoleLog("TextureManager : Clear");
+	Debug::ConsoleLog("Clear : TextureManager");
 }

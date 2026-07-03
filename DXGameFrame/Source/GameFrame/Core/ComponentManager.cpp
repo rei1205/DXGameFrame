@@ -59,12 +59,8 @@ std::vector<Renderer*> ComponentManager::GetRenderers()
 {
 	std::vector<Renderer*> result;
 
-	auto componentArrays = GetAllComponentArrays();
-	for (auto& array : componentArrays)
+	for (auto& array : m_rendererComponentArrays)
 	{
-		if (!array->IsRenderer())
-			continue;
-		
 		// コンポーネントをリストに追加
 		auto components = array->GetComponents();
 		for (auto& ptr : components)

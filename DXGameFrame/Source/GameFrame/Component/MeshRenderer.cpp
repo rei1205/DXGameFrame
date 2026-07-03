@@ -40,3 +40,17 @@ void MeshRenderer::OnInspectorGUI()
 		LoadModel(m_filePath);
 	}
 }
+
+void MeshRenderer::Serialize(nlohmann::json& jsonData)
+{
+	jsonData["FilePath"] = ModelManager::GetFilePathFromModel(m_pModel.get());
+}
+
+void MeshRenderer::Deserialize(nlohmann::json& jsonData)
+{
+	m_filePath = jsonData.value("FilePath", "");
+	if(m_filePath != "")
+	{
+		LoadModel(m_filePath);
+	}
+}

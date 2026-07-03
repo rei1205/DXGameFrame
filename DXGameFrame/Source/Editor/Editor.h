@@ -3,6 +3,7 @@
 #include "EditorWindow.h"
 #include "../GameFrame/Core/Scene.h"
 #include "../GameFrame/Core/ObjPtr.h"
+#include <functional>
 
 /**
  * @brief エディタGUIを扱う
@@ -61,6 +62,18 @@ public:
 		return s_pTargetGameObject.Get();
 	}
 
+	/**
+	 * @brief シーンのシリアライズを予約する
+	 * @param filePath シーンファイルへのパス
+	 */
+	static void SceneSerialize(std::string filePath);
+
+	/**
+	 * @brief シーンのデシリアライズを予約する
+	 * @param filePath シーンファイルへのパス
+	 */
+	static void SceneDeserialize(std::string filePath);
+
 private:
 	Editor() = delete;
 
@@ -72,6 +85,9 @@ private:
 
 	/// エディタウィンドウ配列
 	static std::vector<std::unique_ptr<EditorWindow>> s_editorWindows;
+
+	/// シーンのシリアライズ操作
+	static std::function<void()> s_sceneSerializeFunc;
 
 	/// 初期化済みフラグ
 	static bool s_initialized;

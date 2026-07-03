@@ -68,6 +68,11 @@ public:
 	HRESULT Create(const TextureDesc& textureDesc);
 
 	/**
+	 * @brief テクスチャを初期化する
+	 */
+	void Reset();
+
+	/**
 	 * @brief シェーダーリソースビューを取得する
 	 * @return シェーダーリソースビューへのポインタ
 	 */
@@ -115,11 +120,6 @@ private:
 
 	/// テクスチャ画像のサイズ
 	Size m_size;
-
-	/**
-	 * @brief テクスチャを初期化する
-	 */
-	void Reset();
 
 	/**
 	 * @brief 画像ファイルからテクスチャを読み込む

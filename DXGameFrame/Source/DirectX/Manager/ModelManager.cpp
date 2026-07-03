@@ -39,11 +39,25 @@ void ModelManager::CollectGarbage()
 		it = s_models.erase(it);
 	}
 
-	Debug::ConsoleLog("TextureManager : CollectGarbage");
+	Debug::ConsoleLog("Garbage Collection : ModelManager");
 	Debug::ConsoleLog("- Current = " + s_models.size());
 }
 
 void ModelManager::Clear()
 {
 	s_models.clear();
+
+	Debug::ConsoleLog("Clear : ModelManager");
+}
+
+std::string ModelManager::GetFilePathFromModel(Model* pModel)
+{
+	for (const auto& pair : s_models)
+	{
+		if (pair.second.get() == pModel)
+		{
+			return pair.first;
+		}
+	}
+	return "";
 }
