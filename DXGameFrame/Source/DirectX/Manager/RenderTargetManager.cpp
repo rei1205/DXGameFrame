@@ -49,7 +49,6 @@ HRESULT RenderTargetManager::ReSize(UINT width, UINT height)
         switch ((RTVType)i)
         {
         case RTVType::SCENE:
-        case RTVType::EDITOR_SCENE:
             s_RTVTextureDescs[i].width = width;
             s_RTVTextureDescs[i].height = height;
             hr = s_RTVTextures[i]->Create(s_RTVTextureDescs[i]);
@@ -63,7 +62,6 @@ HRESULT RenderTargetManager::ReSize(UINT width, UINT height)
         switch ((DSVType)i)
         {
         case DSVType::SCENE:
-        case DSVType::EDITOR_SCENE:
             s_DSVTextureDescs[i].width = width;
             s_DSVTextureDescs[i].height = height;
             hr = s_DSVTextures[i]->Create(s_DSVTextureDescs[i]);

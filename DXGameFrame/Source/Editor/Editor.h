@@ -89,6 +89,9 @@ private:
 	/// シーンのシリアライズ操作
 	static std::function<void()> s_sceneSerializeFunc;
 
+	/// 再生中フラグ
+	static bool isPlayMode;
+
 	/// 初期化済みフラグ
 	static bool s_initialized;
 

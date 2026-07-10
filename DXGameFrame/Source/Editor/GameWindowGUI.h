@@ -9,6 +9,9 @@ public:
 	~GameWindowGUI() = default;
 
 private:
+	/// 画面サイズ
+	int m_screenSize[2];
+
 	/**
 	 * @brief GUIの描画を行う
 	 */

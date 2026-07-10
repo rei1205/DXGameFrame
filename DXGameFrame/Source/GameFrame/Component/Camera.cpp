@@ -4,6 +4,7 @@
 #include "../Core/Scene.h"
 #include "../../DirectX/Manager/RenderTargetManager.h"
 #include "../../Utility/InspectorUtility.h"
+#include "../../Utility/SerializeUtility.h"
 
 Camera::Camera():
 	m_priority(0),
@@ -66,7 +67,7 @@ DirectX::XMMATRIX Camera::GetOrthographicProjectionMatrix()
 	return projection;
 }
 
-void Camera::OnInspectorGUI()
+void Camera::OnInspector()
 {
 	ImGui::DragInt("カメラ優先度", &m_priority, 0.01f);
 
@@ -82,6 +83,26 @@ void Camera::OnInspectorGUI()
 
 	ImGui::DragVector2("ビューポート左上座標", &m_viewportTopLeft, 0.01f, 0.0f, 1.0f);
 	ImGui::DragVector2("ビューポートサイズ", &m_viewportSize, 0.01f, 0.01f, 1.0f);
+}
+
+void Camera::Serialize(nlohmann::json& jsonData)
+{
+	SerializeUtility::SerializeValue(jsonData, "m_priority", m_priority);
+	SerializeUtility::SerializeValue(jsonData, "m_isPerspective", m_isPerspective);
+	SerializeUtility::SerializeValue(jsonData, "m_fovAngle", m_fovAngle);
+	SerializeUtility::SerializeValue(jsonData, "m_cameraSize", m_cameraSize);
+	SerializeUtility::SerializeValue(jsonData, "m_viewportTopLeft", m_viewportTopLeft);
+	SerializeUtility::SerializeValue(jsonData, "m_viewportSize", m_viewportSize);
+}
+
+void Camera::Deserialize(const nlohmann::json& jsonData)
+{
+	SerializeUtility::DeserializeValue(jsonData, "m_priority", m_priority);
+	SerializeUtility::DeserializeValue(jsonData, "m_isPerspective", m_isPerspective);
+	SerializeUtility::DeserializeValue(jsonData, "m_fovAngle", m_fovAngle);
+	SerializeUtility::DeserializeValue(jsonData, "m_cameraSize", m_cameraSize);
+	SerializeUtility::DeserializeValue(jsonData, "m_viewportTopLeft", m_viewportTopLeft);
+	SerializeUtility::DeserializeValue(jsonData, "m_viewportSize", m_viewportSize);
 }
 
 Camera* Camera::GetMain(Scene* pScnen)

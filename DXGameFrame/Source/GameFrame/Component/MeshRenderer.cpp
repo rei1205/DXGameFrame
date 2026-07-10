@@ -27,7 +27,7 @@ void MeshRenderer::LoadModel(const std::string filePath)
 	m_pModel = ModelManager::Load(filePath);
 }
 
-void MeshRenderer::OnInspectorGUI()
+void MeshRenderer::OnInspector()
 {
 	// モデルパス入力欄
 	static char buffer[256] = {};
@@ -46,7 +46,7 @@ void MeshRenderer::Serialize(nlohmann::json& jsonData)
 	jsonData["FilePath"] = ModelManager::GetFilePathFromModel(m_pModel.get());
 }
 
-void MeshRenderer::Deserialize(nlohmann::json& jsonData)
+void MeshRenderer::Deserialize(const nlohmann::json& jsonData)
 {
 	m_filePath = jsonData.value("FilePath", "");
 	if(m_filePath != "")

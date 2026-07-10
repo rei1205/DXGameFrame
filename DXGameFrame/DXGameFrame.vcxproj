@@ -87,6 +87,7 @@
     <ClInclude Include="Source\Utility\InspectorUtility.h" />
     <ClInclude Include="Source\Utility\Math.h" />
     <ClInclude Include="Source\Utility\Quaternion.h" />
+    <ClInclude Include="Source\Utility\SerializeUtility.h" />
     <ClInclude Include="Source\Utility\Vector2.h" />
     <ClInclude Include="Source\Utility\Vector3.h" />
     <ClInclude Include="Source\Utility\VectorUtility.h" />
@@ -151,6 +152,7 @@
     <ClCompile Include="Source\Utility\InspectorUtility.cpp" />
     <ClCompile Include="Source\Utility\Math.cpp" />
     <ClCompile Include="Source\Utility\Quaternion.cpp" />
+    <ClCompile Include="Source\Utility\SerializeUtility.cpp" />
     <ClCompile Include="Source\Utility\Vector2.cpp" />
     <ClCompile Include="Source\Utility\Vector3.cpp" />
   </ItemGroup>

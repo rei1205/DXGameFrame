@@ -3,6 +3,7 @@
 #include "../Component/Transform.h"
 #include "ComponentRegister.h"
 #include "Scene.h"
+#include "../../Utility/SerializeUtility.h"
 
 GameObject::GameObject() :
 	m_pScene(nullptr),
@@ -51,24 +52,16 @@ void GameObject::OnDestroy()
 
 void GameObject::Serialize(nlohmann::json& jsonData)
 {
-	wchar_t buffer[39];
-	StringFromGUID2(m_guid, buffer, 39);
-	std::wstring ws(buffer);
-	std::string guid(ws.begin(), ws.end());
-	jsonData["GUID"] = guid;
-
-	jsonData["Name"] = m_name;
-	jsonData["Active"] = m_isActive;
+	SerializeUtility::SerializeValue(jsonData, "GUID", m_guid);
+	SerializeUtility::SerializeValue(jsonData, "Name", m_name);
+	SerializeUtility::SerializeValue(jsonData, "Active", m_isActive);
 }
 
-void GameObject::Deserialize(nlohmann::json& jsonData)
+void GameObject::Deserialize(const nlohmann::json& jsonData)
 {
-	std::string guidStr = jsonData["GUID"];
-	std::wstring wGuidStr(guidStr.begin(), guidStr.end());
-	HRESULT hr = CLSIDFromString(wGuidStr.c_str(), &m_guid);
-
-	m_name = jsonData["Name"];
-	m_isActive = jsonData["Active"];
+	SerializeUtility::DeserializeValue(jsonData, "GUID", m_guid);
+	SerializeUtility::DeserializeValue(jsonData, "Name", m_name);
+	SerializeUtility::DeserializeValue(jsonData, "Active", m_isActive);
 }
 
 void GameObject::SerializeComponents(nlohmann::json& jsonData)
@@ -83,7 +76,7 @@ void GameObject::SerializeComponents(nlohmann::json& jsonData)
 	}
 }
 
-void GameObject::DeserializeComponents(nlohmann::json& jsonData)
+void GameObject::DeserializeComponents(const nlohmann::json& jsonData)
 {
 	for(auto& compJson : jsonData["Components"])
 	{

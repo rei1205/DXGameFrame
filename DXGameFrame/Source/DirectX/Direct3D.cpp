@@ -85,10 +85,6 @@ HRESULT Direct3D::OnResize(UINT width, UINT height)
 	// ビューポート再設定
 	SetViewport(0.0f, 0.0f, (float)width, (float)height);
 
-	// レンダーターゲットのリサイズ
-	hr = RenderTargetManager::ReSize(width, height);
-	if (FAILED(hr)) { return hr; }
-
 	// 画面サイズを保持
 	s_width = width;
 	s_height = height;

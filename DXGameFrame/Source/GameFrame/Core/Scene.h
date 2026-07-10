@@ -7,7 +7,7 @@
 /**
  * @brief シーン情報を持つクラス
  */
-class Scene
+class Scene : public Object
 {
 public:
 	Scene();
@@ -59,13 +59,13 @@ public:
 	 * @brief シーンをシリアライズする
 	 * @param jsonData 書き込み先jsonデータへの参照
 	 */
-	void Serialize(nlohmann::json& jsonData);
+	void Serialize(nlohmann::json& jsonData) override;
 
 	/**
 	 * @brief シーンをデシリアライズする
 	 * @param jsonData 読み込み先jsonデータへの参照
 	 */
-	void Deserialize(nlohmann::json& jsonData);
+	void Deserialize(const nlohmann::json& jsonData) override;
 
 private:
 	/// ゲームオブジェクト管理機能

@@ -26,13 +26,6 @@ public:
 	/**
 	 * @brief シーンを変更する
 	 * @details 同じフレームで複数回呼ばれた場合は最初に呼ばれたものが有効になります
-	 * @param pNextScene 次のシーン
-	 */
-	static void ChangeScene(Scene* pNextScene);
-
-	/**
-	 * @brief シーンを変更する
-	 * @details 同じフレームで複数回呼ばれた場合は最初に呼ばれたものが有効になります
 	 * @param filePath シーンファイルへのパス
 	 */
 	static void ChangeScene(const std::string& filePath);
@@ -59,13 +52,13 @@ public:
 
 private:
 	/// 現在のシーン
-	static Scene* s_pActiveScene;
+	static std::unique_ptr<Scene> s_pActiveScene;
 
-	/// 変更先シーン
-	static Scene* s_pNextScene;
+	/// シーン変更フラグ
+	static bool s_sceneChangeFlag;
 
-	/// シーン配列
-	static std::vector<std::unique_ptr<Scene>> s_sceneList;
+	/// 変更先シーンファイルへのパス
+	static std::string s_nextSceneFilePath;
 
 	/**
 	 * @brief シーンの変更を適用する

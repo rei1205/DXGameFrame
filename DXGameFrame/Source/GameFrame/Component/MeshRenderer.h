@@ -35,7 +35,7 @@ public:
 	/**
 	 * @brief インスペクターでの表示
 	 */
-	virtual void OnInspectorGUI() override;
+	virtual void OnInspector() override;
 
 	/**
 	 * @brief コンポーネントをシリアライズする
@@ -47,7 +47,7 @@ public:
 	 * @brief コンポーネントをデシリアライズする
 	 * @param jsonData 読み込み先jsonデータへの参照
 	 */
-	void Deserialize(nlohmann::json& jsonData) override;
+	void Deserialize(const nlohmann::json& jsonData) override;
 
 private:
 	/// モデルへのポインタ

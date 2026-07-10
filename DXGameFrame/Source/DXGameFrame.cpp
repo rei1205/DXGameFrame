@@ -9,6 +9,7 @@
 #include "System/GameTime.h"
 #include <Windows.h>
 
+bool DXGameFrame::s_isInitialized = false;
 bool DXGameFrame::s_isExit = false;
 bool DXGameFrame::s_isEditorMode = false;
 
@@ -31,7 +32,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		// リサイズ処理
 		UINT width = LOWORD(lParam);
 		UINT height = HIWORD(lParam);
-		GameWindow::Resize(width, height);
+		GameWindow::OnResize(width, height);
 		Direct3D::OnResize(width, height);
 		ImGuiManager::OnResize(width, height);
 	}
@@ -49,6 +50,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 bool DXGameFrame::Init(SetupConfig config, HINSTANCE hInstance, int nCmdShow)
 {
+	if (s_isInitialized)
+		return false;
+
 	SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
 
 	// コンソールウィンドウ作成
@@ -83,21 +87,31 @@ bool DXGameFrame::Init(SetupConfig config, HINSTANCE hInstance, int nCmdShow)
 		Editor::Init();
 
 	// FPS設定
+	s_isEditorMode = config.isEditorMode;
 	GameTime::Init(config.fps);
 
-	s_isEditorMode = config.isEditorMode;
+	s_isInitialized = true;
 	return true;
 }
 
 void DXGameFrame::Uninit()
 {
-	ImGuiManager::Uninit();
+	if (!s_isInitialized)
+		return;
+
+	Editor::Uninit();
 	SceneManager::Uninit();
+	ImGuiManager::Uninit();
 	Direct3D::Uninit();
+
+	s_isInitialized = false;
 }
 
 void DXGameFrame::Run()
 {
+	if (!s_isInitialized)
+		return;
+
 	// メッセージループ
 	MSG message = {};
 
@@ -126,8 +140,8 @@ void DXGameFrame::Run()
 
 void DXGameFrame::Exit()
 {
-	Editor::Uninit();
-	SceneManager::Uninit();
-	ImGuiManager::Uninit();
-	Direct3D::Uninit();
+	if (!s_isInitialized)
+		return;
+
+	s_isExit = true;
 }

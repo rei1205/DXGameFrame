@@ -205,7 +205,9 @@ public:
 	 */
 	DirectX::XMMATRIX GetOrthographicProjectionMatrix();
 
-	void OnInspectorGUI() override;
+	void OnInspector() override;
+	void Serialize(nlohmann::json& jsonData) override;
+	void Deserialize(const nlohmann::json& jsonData) override;
 
 private:
 	/// カメラ優先度

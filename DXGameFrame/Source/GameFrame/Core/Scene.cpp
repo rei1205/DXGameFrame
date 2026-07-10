@@ -44,7 +44,7 @@ void Scene::Serialize(nlohmann::json& jsonData)
 	}
 }
 
-void Scene::Deserialize(nlohmann::json& jsonData)
+void Scene::Deserialize(const nlohmann::json& jsonData)
 {
 	for (auto& gameObjectJson : jsonData["GameObjects"])
 	{

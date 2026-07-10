@@ -73,8 +73,8 @@ void ImGuiColorSetting()
     style.Colors[ImGuiCol_CheckboxSelectedBg] = IMGUI_MAINAREA;
 
     // スライダー
-    //style.Colors[ImGuiCol_SliderGrab] = IMGUI_ACTIVE;
-    //style.Colors[ImGuiCol_SliderGrabActive] = IMGUI_ACTIVE;
+    style.Colors[ImGuiCol_SliderGrab] = IMGUI_HOVERED;
+    style.Colors[ImGuiCol_SliderGrabActive] = IMGUI_ACTIVE;
 
     // ボタン
     style.Colors[ImGuiCol_Button] = IMGUI_MAINAREA;
@@ -124,8 +124,11 @@ void ImGuiColorSetting()
     style.Colors[ImGuiCol_TextLink] = IMGUI_BLUE;
     style.Colors[ImGuiCol_TextSelectedBg] = IMGUI_ACTIVE;
     //style.Colors[ImGuiCol_TreeLines] = IMGUI_ACTIVE;
+
+    // ドラッグ対象
     style.Colors[ImGuiCol_DragDropTarget] = IMGUI_ACTIVE;
     style.Colors[ImGuiCol_DragDropTargetBg] = IMGUI_HOVERED;
+
     //style.Colors[ImGuiCol_UnsavedMarker] = IMGUI_ACTIVE;
     style.Colors[ImGuiCol_NavCursor] = IMGUI_ACTIVE;
     style.Colors[ImGuiCol_NavWindowingHighlight] = IMGUI_ACTIVE;

@@ -3,13 +3,32 @@
 #include "../DirectX/Manager/RenderTargetManager.h"
 #include <ImGui/imgui.h>
 
-GameWindowGUI::GameWindowGUI():
-	EditorWindow("ゲームビュー")
+GameWindowGUI::GameWindowGUI() :
+    EditorWindow("ゲームビュー"),
+    m_screenSize{ 1280, 720 }
 {
 }
 
 void GameWindowGUI::OnGUI()
 {
+    if (ImGui::Button("Play"))
+    {
+
+    }
+
+    ImGui::SameLine();
+    if (ImGui::InputInt2("画面サイズ", m_screenSize))
+    {
+        for (int i = 0; i < 2; ++i)
+        {
+            if (m_screenSize[i] < 1)
+                m_screenSize[i] = 1;
+        }
+
+        RenderTargetManager::ReSize(m_screenSize[0], m_screenSize[1]);
+    }
+    ImGui::Separator();
+
     // シーン描画結果を取得
     auto RTTexture = RenderTargetManager::GetRTVTexture(RTVType::SCENE);
     auto srv = RTTexture->GetSRV();

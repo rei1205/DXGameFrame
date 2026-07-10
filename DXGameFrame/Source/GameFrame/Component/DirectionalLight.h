@@ -58,6 +58,10 @@ public:
 	 */
 	Color GetAmbientColor();
 
+	void OnInspector() override;
+	void Serialize(nlohmann::json& jsonData) override;
+	void Deserialize(const nlohmann::json& jsonData) override;
+
 private:
 	/// 光源カラー
 	Color m_lightColor;

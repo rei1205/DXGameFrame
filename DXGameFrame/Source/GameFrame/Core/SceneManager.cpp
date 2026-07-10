@@ -3,27 +3,27 @@
 #include "../../DirectX/Direct3D.h"
 #include "../../System/Debug.h"
 #include "../../System/ImGuiManager.h"
-#include "../../Editor/Editor.h"
 #include <fstream>
 
-Scene* SceneManager::s_pActiveScene = nullptr;
-Scene* SceneManager::s_pNextScene = nullptr;
-std::vector<std::unique_ptr<Scene>> SceneManager::s_sceneList;
+std::unique_ptr<Scene> SceneManager::s_pActiveScene = nullptr;
+bool SceneManager::s_sceneChangeFlag = false;
+std::string SceneManager::s_nextSceneFilePath;
 
 void SceneManager::Init()
 {
-	// 初期シーン登録
-	auto scene = std::make_unique<Scene>();
-	s_pActiveScene = scene.get();
-	s_sceneList.push_back(std::move(scene));
+	// 初期シーン作成
+	s_pActiveScene  = std::make_unique<Scene>();
 
-	Debug::ConsoleLog("SceneManager : Initialized");
+	Debug::ConsoleLog("Initialized : SceneManager");
 }
 
 void SceneManager::Uninit()
 {
 	s_pActiveScene = nullptr;
-	s_pNextScene = nullptr;
+	s_sceneChangeFlag = false;
+	s_nextSceneFilePath.clear();
+
+	Debug::ConsoleLog("Uninitialized : SceneManager");
 }
 
 void SceneManager::Execute()
@@ -34,37 +34,38 @@ void SceneManager::Execute()
 	// シーン更新
 	ImGuiManager::BeginFrame();
 	s_pActiveScene->Update();
+	s_pActiveScene->ApplyDestroy();
 
+	// シーン描画
 	float clearColor[] = { 0.4f, 0.8f, 0.8f, 1.0f };
 	Direct3D::BeginDraw(clearColor);
-
-	Editor::SetTargetScene(s_pActiveScene);
-
-	s_pActiveScene->ApplyDestroy();
 	s_pActiveScene->Draw();
-
-	// 描画対象RTVを設定
-	auto rtv = Direct3D::GetBackBufferRTV();
-	Direct3D::GetContext()->OMSetRenderTargets(1, &rtv, nullptr);
 	ImGuiManager::EndFrame();
 	Direct3D::EndDraw();
 }
 
-void SceneManager::ChangeScene(Scene* pNextScene)
+void SceneManager::ChangeScene(const std::string& filePath)
 {
+	if (s_sceneChangeFlag)
+		return;
+
+	s_sceneChangeFlag = true;
+	s_nextSceneFilePath = filePath;
 }
 
 Scene* SceneManager::GetActiveScene()
 {
-	return s_pActiveScene;
+	return s_pActiveScene .get();
 }
 
 void SceneManager::SerializeScene(const std::string& filePath)
 {
+	// シーンシリアライズ
 	nlohmann::json jsonData;
 	jsonData["Scene"];
 	s_pActiveScene->Serialize(jsonData["Scene"]);
 
+	// ファイルに保存
 	std::ofstream file(filePath.c_str());
 	file << jsonData.dump(4);
 }
@@ -77,10 +78,17 @@ void SceneManager::DeserializeScene(const std::string& filePath)
 	nlohmann::json jsonData;
 	file >> jsonData;
 
-	s_pActiveScene = std::make_unique<Scene>().release();
+	// シーンデシリアライズ
+	s_pActiveScene = std::make_unique<Scene>();
 	s_pActiveScene->Deserialize(jsonData["Scene"]);
 }
 
 void SceneManager::ApplyChangeScene()
 {
+	if (s_sceneChangeFlag)
+	{
+		s_sceneChangeFlag = false;
+		DeserializeScene(s_nextSceneFilePath);
+		s_pActiveScene->GetComponentManager().InvokePendingAwake();
+	}
 }

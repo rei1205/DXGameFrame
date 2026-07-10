@@ -52,6 +52,7 @@ void ModelManager::Clear()
 
 std::string ModelManager::GetFilePathFromModel(Model* pModel)
 {
+	// モデル検索
 	for (const auto& pair : s_models)
 	{
 		if (pair.second.get() == pModel)

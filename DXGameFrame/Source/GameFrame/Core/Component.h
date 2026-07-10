@@ -2,7 +2,6 @@
 #pragma once
 #include "Object.h"
 #include "ClassID.h"
-#include <nlohmann/json.hpp>
 
 class Scene;
 class GameObject;
@@ -161,19 +160,7 @@ public:
 	/**
 	 * @brief インスペクターでの表示
 	 */
-	virtual void OnInspectorGUI() {}
-
-	/**
-	 * @brief コンポーネントをシリアライズする
-	 * @param jsonData 書き込み先jsonデータへの参照
-	 */
-	virtual void Serialize(nlohmann::json& jsonData) {}
-
-	/**
-	 * @brief コンポーネントをデシリアライズする
-	 * @param jsonData 読み込み先jsonデータへの参照
-	 */
-	virtual void Deserialize(nlohmann::json& jsonData) {}
+	virtual void OnInspector() {}
 
 private:
 	/// 親ゲームオブジェクトへのポインタ

@@ -1,3 +1,4 @@
+/// InspectorUtility.h
 #include "InspectorUtility.h"
 
 bool ImGui::DragVector2(const char* label, Vector2* pVector, float v_speed, float v_min, float v_max, const char* format, ImGuiSliderFlags flags)
@@ -43,11 +44,23 @@ bool ImGui::DragRotation(const char* label, Quaternion* pQuaternion, float v_spe
     return false;
 }
 
+bool ImGui::ColorPicker(const char* label, Color* pColor, ImGuiSliderFlags flags)
+{
+    float fColor[4] = { pColor->r, pColor->g, pColor->b, pColor->a };
+    if (ImGui::ColorEdit4(label, fColor, flags))
+    {
+        pColor->r = fColor[0];
+        pColor->g = fColor[1];
+        pColor->b = fColor[2];
+        pColor->a = fColor[3];
+        return true;
+    }
+    return false;
+}
+
 bool ImGui::GetDragAssets(std::string* pOutPath)
 {
-    bool isGet = ImGui::BeginDragDropTarget();
-
-    if (isGet)
+    if (ImGui::BeginDragDropTarget())
     {
         if (const ImGuiPayload* payload =
             ImGui::AcceptDragDropPayload("ASSET_PATH"))
@@ -56,7 +69,7 @@ bool ImGui::GetDragAssets(std::string* pOutPath)
         }
 
         ImGui::EndDragDropTarget();
+        return true;
     }
-
-    return isGet;
+    return false;
 }

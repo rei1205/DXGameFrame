@@ -2,12 +2,12 @@ root = true
 
 [*]
 charset = utf-8
-end_of_line = lf
+end_of_line = crlf
 
 [*.hlsl]
 charset = utf-8
-end_of_line = lf
+end_of_line = crlf
 
 [*.hlsli]
 charset = utf-8
-end_of_line = lf
+end_of_line = crlf

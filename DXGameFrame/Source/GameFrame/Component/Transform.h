@@ -185,22 +185,9 @@ public:
 	 */
 	void MoveChildIndex(Transform* pChild, size_t index);
 
-	/**
-	 * @brief インスペクターでの表示
-	 */
-	void OnInspectorGUI() override;
-
-	/**
-	 * @brief コンポーネントをシリアライズする
-	 * @param jsonData 書き込み先jsonデータへの参照
-	 */
+	void OnInspector() override;
 	void Serialize(nlohmann::json& jsonData) override;
-
-	/**
-	 * @brief コンポーネントをデシリアライズする
-	 * @param jsonData 読み込み先jsonデータへの参照
-	 */
-	void Deserialize(nlohmann::json& jsonData) override;
+	void Deserialize(const nlohmann::json& jsonData) override;
 
 private:
 	// Transformクラスでは隠す

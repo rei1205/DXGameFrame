@@ -140,13 +140,13 @@ public:
 	 * @brief ゲームオブジェクトをシリアライズする
 	 * @param jsonData 書き込み先jsonデータへの参照
 	 */
-	void Serialize(nlohmann::json& jsonData);
+	void Serialize(nlohmann::json& jsonData) override;
 
 	/**
 	 * @brief ゲームオブジェクトをデシリアライズする
 	 * @param jsonData 読み込み先jsonデータへの参照
 	 */
-	void Deserialize(nlohmann::json& jsonData);
+	void Deserialize(const nlohmann::json& jsonData) override;
 
 	/**
 	 * @brief ゲームオブジェクトが持つコンポーネントをシリアライズする
@@ -158,7 +158,7 @@ public:
 	 * @brief ゲームオブジェクトが持つコンポーネントをデシリアライズする
 	 * @param jsonData 読み込み先jsonデータへの参照
 	 */
-	void DeserializeComponents(nlohmann::json& jsonData);
+	void DeserializeComponents(const nlohmann::json& jsonData);
 
 private:
 	/// ゲームオブジェクト名

@@ -4,6 +4,7 @@
 #include "../Core/GameObject.h"
 #include "../../Utility/VectorUtility.h"
 #include "../../Utility/InspectorUtility.h"
+#include "../../Utility/SerializeUtility.h"
 
 Transform::Transform() :
 	m_localPosition(0.0f, 0.0f, 0.0f),
@@ -294,7 +295,7 @@ void Transform::MoveChildIndex(Transform* pChild, size_t index)
 	VectorUtility::MoveElement<Transform*>(m_pChildren, currentIndex, index);
 }
 
-void Transform::OnInspectorGUI()
+void Transform::OnInspector()
 {
 	ImGui::DragVector3("Position", &m_localPosition, 0.01f);
 	ImGui::DragVector3("Scale", &m_localScale, 0.01f);
@@ -303,41 +304,35 @@ void Transform::OnInspectorGUI()
 
 void Transform::Serialize(nlohmann::json& jsonData)
 {
-	jsonData["Position"] = { m_localPosition.x, m_localPosition.y, m_localPosition.z };
-	jsonData["Scale"] = { m_localScale.x, m_localScale.y, m_localScale.z };
-	jsonData["Rotation"] = { m_localQuaternion.x, m_localQuaternion.y, m_localQuaternion.z, m_localQuaternion.w };
+	SerializeUtility::SerializeValue(jsonData, "m_localPosition", m_localPosition);
+	SerializeUtility::SerializeValue(jsonData, "m_localScale", m_localScale);
+	SerializeUtility::SerializeValue(jsonData, "m_localQuaternion", m_localQuaternion);
 
 	// 親子関係保存
-	GUID paretGuid = {};
+	GUID parentGuid = {};
 	if(m_pParent == nullptr)
 	{
 
-		paretGuid = GUID_NULL;
+		parentGuid = GUID_NULL;
 	}
 	else
 	{
-		paretGuid = m_pParent->GetGameObject()->GetGUID();
+		parentGuid = m_pParent->GetGameObject()->GetGUID();
 	}
-	wchar_t buffer[39];
-	StringFromGUID2(paretGuid, buffer, 39);
-	std::wstring ws(buffer);
-	std::string guidStr(ws.begin(), ws.end());
-	jsonData["ParentGUID"] = guidStr;
+	SerializeUtility::SerializeValue(jsonData, "ParentGUID", parentGuid);
 }
 
-void Transform::Deserialize(nlohmann::json& jsonData)
+void Transform::Deserialize(const nlohmann::json& jsonData)
 {
-	m_localPosition.SetVector(jsonData["Position"][0], jsonData["Position"][1], jsonData["Position"][2]);
-	m_localScale.SetVector(jsonData["Scale"][0], jsonData["Scale"][1], jsonData["Scale"][2]);
-	m_localQuaternion.SetQuaternion(jsonData["Rotation"][0], jsonData["Rotation"][1], jsonData["Rotation"][2], jsonData["Rotation"][3]);
+	SerializeUtility::DeserializeValue(jsonData, "m_localPosition", m_localPosition);
+	SerializeUtility::DeserializeValue(jsonData, "m_localScale", m_localScale);
+	SerializeUtility::DeserializeValue(jsonData, "m_localQuaternion", m_localQuaternion);
 
 	// 親子関係復元
-	GUID paretGuid = {};
-	std::string guidStr = jsonData["ParentGUID"];
-	std::wstring wGuidStr(guidStr.begin(), guidStr.end());
-	HRESULT hr = CLSIDFromString(wGuidStr.c_str(), &paretGuid);
-	if (paretGuid != GUID_NULL)
+	GUID parentGuid = {};
+	SerializeUtility::DeserializeValue(jsonData, "ParentGUID", parentGuid);
+	if (parentGuid != GUID_NULL)
 	{
-		SetParent(GetScene()->GetGameObjectManager().FindGameObjectByGUID(paretGuid));
+		SetParent(GetScene()->GetGameObjectManager().FindGameObjectByGUID(parentGuid));
 	}
 }

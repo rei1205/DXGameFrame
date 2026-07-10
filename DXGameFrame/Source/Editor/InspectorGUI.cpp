@@ -108,7 +108,7 @@ void InspectorGUI::ComponentGUI(Component* pComponent)
 
 	if (open)
 	{
-		pComponent->OnInspectorGUI();
+		pComponent->OnInspector();
 		ImGui::TreePop();
 	}
 }
