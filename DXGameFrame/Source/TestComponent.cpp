@@ -1,6 +1,7 @@
 // TestComponent.cpp
 #include "TestComponent.h"
 #include "GameFrame/Component/Transform.h"
+#include "GameFrame/Core/SceneManager.h"
 #include "System/GameTime.h"
 #include "Utility/Input.h"
 
@@ -22,6 +23,10 @@ void TestComponent::Update()
 	if (Input::GetKeyHold(KeyCode::W))
 	{
 		input.y += 1.0f;
+	}
+	if (Input::GetKeyDown(KeyCode::ENTER))
+	{
+		SceneManager::ChangeScene("Assets/Scene/TestScene.scene");
 	}
 
 	Vector3 move = Vector3(input.x, 0.0f, input.y);

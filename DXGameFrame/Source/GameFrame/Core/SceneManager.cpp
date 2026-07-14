@@ -79,7 +79,7 @@ bool SceneManager::DeserializeScene(const std::string& filePath)
 {
 	std::ifstream file(filePath, std::ios::binary);
 	if (!file) return false;
-
+	
 	nlohmann::json jsonData;
 	file >> jsonData;
 
