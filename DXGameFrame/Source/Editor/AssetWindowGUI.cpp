@@ -23,6 +23,7 @@ void AssetWindowGUI::DrawNode(const AssetNode* pNode)
 
     if (pNode->isFolder)
     {
+        // 再帰的にツリー描画
         if (ImGui::TreeNode(name.c_str()))
         {
             for (auto& child : pNode->children)
@@ -35,6 +36,7 @@ void AssetWindowGUI::DrawNode(const AssetNode* pNode)
     {
         ImGui::Selectable(name.c_str());
 
+        // ドラッグ元設定
         if (ImGui::BeginDragDropSource())
         {
             std::string path = pNode->path.string();
@@ -47,6 +49,7 @@ void AssetWindowGUI::DrawNode(const AssetNode* pNode)
 
 void AssetWindowGUI::Refresh()
 {
+	// アセットノードを再構築
     m_root = std::move(BuildAssetNode("Assets"));
 }
 
@@ -60,8 +63,8 @@ std::unique_ptr<AssetNode> AssetWindowGUI::BuildAssetNode(const std::filesystem:
     if (!node->isFolder)
         return node;
 
+	// アセットノードを再帰的に構築
     std::error_code errorCode;
-
     for (const auto& entry : std::filesystem::directory_iterator(path, errorCode))
     {
         if (errorCode) continue;

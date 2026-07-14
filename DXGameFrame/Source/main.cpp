@@ -7,22 +7,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-	// 初期化用設定
-	SetupConfig config;
-	config.clientWidth = 1280;
-	config.clientHeight = 720;
-	config.fps = 60;
-	config.title = "Title";
-	config.fullScreen = false;
-	config.isEditorMode = true;
-	config.windowStyle =
-		WS_OVERLAPPED |
-		WS_CAPTION |
-		WS_SYSMENU |
-		WS_MINIMIZEBOX |
-		WS_MAXIMIZEBOX;
-
-	if (!DXGameFrame::Init(config, hInstance, nCmdShow))
+	if (!DXGameFrame::InitEditor(hInstance, nCmdShow))
 		return 0;
 
 	GameTime::SetShowProssingTime(true);

@@ -17,9 +17,6 @@ private:
 	 */
 	void OnGUI() override;
 
-	/// 現在のシーンファイルへのパス
-	std::string m_currentScenePath;
-
 	// 現在入力中のシーンファイルへのパス
 	std::string m_inputScenePath;
 };

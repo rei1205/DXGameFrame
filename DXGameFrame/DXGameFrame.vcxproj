@@ -82,8 +82,11 @@
     <ClInclude Include="Source\System\GameWindow.h" />
     <ClInclude Include="Source\System\ImGuiManager.h" />
     <ClInclude Include="Source\System\ImGuiStyleSetting.h" />
+    <ClInclude Include="Source\System\ProjectData.h" />
+    <ClInclude Include="Source\TestComponent.h" />
     <ClInclude Include="Source\Utility\Color.h" />
     <ClInclude Include="Source\Utility\IDManager.h" />
+    <ClInclude Include="Source\Utility\Input.h" />
     <ClInclude Include="Source\Utility\InspectorUtility.h" />
     <ClInclude Include="Source\Utility\Math.h" />
     <ClInclude Include="Source\Utility\Quaternion.h" />
@@ -147,8 +150,11 @@
     <ClCompile Include="Source\System\GameWindow.cpp" />
     <ClCompile Include="Source\System\ImGuiManager.cpp" />
     <ClCompile Include="Source\System\ImGuiStyleSetting.cpp" />
+    <ClCompile Include="Source\System\ProjectData.cpp" />
+    <ClCompile Include="Source\TestComponent.cpp" />
     <ClCompile Include="Source\Utility\Color.cpp" />
     <ClCompile Include="Source\Utility\IDManager.cpp" />
+    <ClCompile Include="Source\Utility\Input.cpp" />
     <ClCompile Include="Source\Utility\InspectorUtility.cpp" />
     <ClCompile Include="Source\Utility\Math.cpp" />
     <ClCompile Include="Source\Utility\Quaternion.cpp" />

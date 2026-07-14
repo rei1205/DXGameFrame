@@ -1,5 +1,7 @@
 // GameWindowGUI.cpp
 #include "GameWindowGUI.h"
+#include "Editor.h"
+#include "../System/ProjectData.h"
 #include "../DirectX/Manager/RenderTargetManager.h"
 #include <ImGui/imgui.h>
 
@@ -11,9 +13,20 @@ GameWindowGUI::GameWindowGUI() :
 
 void GameWindowGUI::OnGUI()
 {
-    if (ImGui::Button("Play"))
+    // 再生ボタン
+    if (Editor::IsPlayMode())
     {
-
+        if (ImGui::Button("Stop"))
+        {
+			Editor::StopPlayMode();
+        }
+    }
+    else
+    {
+        if (ImGui::Button("Play"))
+        {
+			Editor::StartPlayMode();
+        }
     }
 
     ImGui::SameLine();

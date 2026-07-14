@@ -2,6 +2,7 @@
 #include "ImGuiManager.h"
 #include "ImGuiStyleSetting.h"
 #include "Debug.h"
+#include "ProjectData.h"
 #include "../DirectX/Direct3D.h"
 #include <ImGui/imgui_impl_dx11.h>
 #include <ImGui/imgui_impl_win32.h>
@@ -23,7 +24,7 @@ void ImGuiManager::Init(HWND hWnd, ID3D11Device* pDevice, ID3D11DeviceContext* p
 
     // フォント追加
     io.Fonts->AddFontFromFileTTF(
-        "Assets/keinanmaru_pop.ttf",
+        (ProjectData::GetEditorFolderPath() + "Font/keinanmaru_pop.ttf").c_str(),
         14.0f, nullptr, io.Fonts->GetGlyphRangesJapanese()
     );
 

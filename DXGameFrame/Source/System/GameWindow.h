@@ -9,13 +9,6 @@
 class GameWindow
 {
 public:
-	/// ウィンドウのサイズ
-	struct Size
-	{
-		UINT width;
-		UINT height;
-	};
-	
 	/**
 	 * @brief ウィンドウを作成する
 	 * @param hInstance インスタンスハンドル
@@ -43,13 +36,6 @@ public:
 	static void Resize(UINT clientWidth, UINT clientHeight);
 
 	/**
-	 * @brief ウィンドウサイズ変更時の処理を行う
-	 * @param clientWidth クライアント領域の幅
-	 * @param clientHeight クライアント領域の高さ
-	 */
-	static void OnResize(UINT clientWidth, UINT clientHeight);
-
-	/**
 	 * @brief ウィンドウハンドルを取得する
 	 * @return 現在のウィンドウのウィンドウハンドル
 	 */
@@ -58,36 +44,19 @@ public:
 		return s_hWnd;
 	}
 
-	/**
-	 * @brief クライアント領域のサイズを取得する
-	 * @return 現在のウィンドウのクライアント領域のサイズ
-	 */
-	static Size GetClientSize()
-	{
-		return s_clientSize;
-	}
-
-	/**
-	 * @brief ウィンドウサイズを取得する
-	 * @return 現在のウィンドウのサイズ
-	 */
-	static Size GetWindowSize()
-	{
-		return s_windowSize;
-	}
-
 private:
+	/// ウィンドウのサイズ
+	struct Size
+	{
+		UINT width;
+		UINT height;
+	};
+
 	/// ウィンドウハンドル
 	static HWND s_hWnd;
 
 	/// ウィンドウスタイル
 	static UINT s_windowStyle;
-
-	/// ウィンドウのサイズ
-	static Size s_windowSize;
-
-	/// クライアント領域のサイズ
-	static Size s_clientSize;
 
 	/**
 	 * @brief クライアント領域のサイズから実際のウィンドウサイズを求める

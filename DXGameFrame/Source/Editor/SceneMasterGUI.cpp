@@ -3,6 +3,7 @@
 #include "Editor.h"
 #include "../GameFrame/Core/SceneManager.h"
 #include "../Utility/InspectorUtility.h"
+#include "../System/ProjectData.h"
 #include <ImGui/imgui.h>
 
 SceneMasterGUI::SceneMasterGUI():
@@ -13,10 +14,10 @@ SceneMasterGUI::SceneMasterGUI():
 void SceneMasterGUI::OnGUI()
 {
 	ImGui::Text("CurrentScene");
-	ImGui::Text(m_currentScenePath.c_str());
+	ImGui::Text(SceneManager::GetCurrentSceneFilePath().c_str());
 	if (ImGui::Button("Save Scene"))
 	{
-		Editor::SceneSerialize(m_currentScenePath);
+		Editor::SceneSerialize(SceneManager::GetCurrentSceneFilePath());
 	}
 	ImGui::Dummy(ImVec2(0.0f, 5.0f));
 
@@ -28,7 +29,6 @@ void SceneMasterGUI::OnGUI()
 	ImGui::GetDragAssets(&m_inputScenePath);
 	if (ImGui::Button("Load Scene"))
 	{
-		m_currentScenePath = m_inputScenePath;
-		Editor::SceneDeserialize(m_currentScenePath);
+		Editor::SceneDeserialize(m_inputScenePath);
 	}
 }

@@ -1,6 +1,7 @@
 // HierarchyGUI.cpp
 #include "HierarchyGUI.h"
 #include "Editor.h"
+#include "../GameFrame/Core/SceneManager.h"
 #include <ImGui/imgui.h>
 
 HierarchyGUI::HierarchyGUI() :
@@ -71,7 +72,8 @@ bool HierarchyGUI::DrawRootNode()
     if (gameObjects.empty())
         flags |= ImGuiTreeNodeFlags_Leaf;
 
-    bool open = ImGui::TreeNodeEx(pScene, flags, "Scene");
+    bool open = ImGui::TreeNodeEx(pScene, flags, 
+        SceneManager::GetCurrentSceneName().c_str());
 
     // 選択時の処理
     if (ImGui::IsItemClicked())

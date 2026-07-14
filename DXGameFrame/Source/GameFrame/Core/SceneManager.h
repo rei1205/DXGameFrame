@@ -34,7 +34,25 @@ public:
 	 * @brief 現在のアクティブなシーンを取得する
 	 * @return アクティブなシーンへのポインタ
 	 */
-	static Scene* GetActiveScene();
+	static Scene* GetActiveScene()
+	{
+		return s_pActiveScene.get();
+	}
+
+	/**
+	 * @brief 現在のシーン名を取得する
+	 * @return シーン名
+	 */
+	static std::string GetCurrentSceneName();
+
+	/**
+	 * @brief 現在のシーンファイルへのパスを取得する
+	 * @return シーンファイルへのパス
+	 */
+	static std::string GetCurrentSceneFilePath()
+	{
+		return s_currentSceneFilePath;
+	}
 
 	/**
 	 * @brief シーンをシリアライズする
@@ -47,8 +65,15 @@ public:
 	 * @brief シーンをデシリアライズする
 	 * フレーム処理中に呼ばないでください
 	 * @param filePath シーンファイルへのパス
+	 * @return 成功したかを返す
 	 */
-	static void DeserializeScene(const std::string& filePath);
+	static bool DeserializeScene(const std::string& filePath);
+
+	/**
+	 * @brief シーンの変更を適用する
+	 * フレーム処理中に呼ばないでください
+	 */
+	static void ApplyChangeScene();
 
 private:
 	/// 現在のシーン
@@ -57,11 +82,9 @@ private:
 	/// シーン変更フラグ
 	static bool s_sceneChangeFlag;
 
+	/// 現在のシーンファイルへのパス
+	static std::string s_currentSceneFilePath;
+
 	/// 変更先シーンファイルへのパス
 	static std::string s_nextSceneFilePath;
-
-	/**
-	 * @brief シーンの変更を適用する
-	 */
-	static void ApplyChangeScene();
 };

@@ -1,12 +1,14 @@
 // DXGameFrame.cpp
 #include "DXGameFrame.h"
 #include "System/Debug.h"
+#include "System/ProjectData.h"
 #include "System/GameWindow.h"
 #include "DirectX/Direct3D.h"
 #include "System/ImGuiManager.h"
 #include "GameFrame/Core/SceneManager.h"
 #include "Editor/Editor.h"
 #include "System/GameTime.h"
+#include "Utility/Input.h"
 #include <Windows.h>
 
 bool DXGameFrame::s_isInitialized = false;
@@ -32,11 +34,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		// リサイズ処理
 		UINT width = LOWORD(lParam);
 		UINT height = HIWORD(lParam);
-		GameWindow::OnResize(width, height);
 		Direct3D::OnResize(width, height);
 		ImGuiManager::OnResize(width, height);
+		break;
 	}
-		return 0;
 
 	case WM_DESTROY:
 		// スレッドの終了をシステムに伝える
@@ -47,31 +48,110 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	return DefWindowProc(hWnd, message, wParam, lParam);
 }
 
-
-bool DXGameFrame::Init(SetupConfig config, HINSTANCE hInstance, int nCmdShow)
+bool DXGameFrame::InitGame(HINSTANCE hInstance, int nCmdShow)
 {
 	if (s_isInitialized)
 		return false;
 
 	SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
 
-	// コンソールウィンドウ作成
-	Debug::CreateConsoleWindow();
+	// プロジェクトデータの読み込み
+	if (!ProjectData::Load())
+	{
+		Debug::ConsoleLog("Failed : Load Project Data.");
+	}
+
+	// ウィンドゥスタイル設定
+	UINT windowStyle;
+	if (ProjectData::IsFullScreen())
+	{
+		// フルスクリーン
+		windowStyle =
+			WS_OVERLAPPED;
+	}
+	else
+	{
+		// ウィンドウ
+		windowStyle =
+			WS_OVERLAPPED |
+			WS_CAPTION |
+			WS_SYSMENU |
+			WS_MINIMIZEBOX;
+	}
 
 	// ウィンドウの作成
-	if (!GameWindow::Create(hInstance, WndProc, config.windowStyle,
-		config.title, config.clientWidth, config.clientHeight))
+	if (!GameWindow::Create(hInstance, WndProc, windowStyle,
+		ProjectData::GetProjectName(), ProjectData::GetScreenWidth(), ProjectData::GetScreenHeight()))
 	{
 		return false;
 	}
 	HWND hWnd = GameWindow::GetWindowHandle();
 
-	// ウィンドウの表示
+	// Direct3Dの初期化
+	if (FAILED(Direct3D::Init(hWnd, 
+		ProjectData::GetScreenWidth(), ProjectData::GetScreenHeight(), ProjectData::IsFullScreen())))
+	{
+		return false;
+	}
+
+	// ImGuiの初期化
+	ImGuiManager::Init(hWnd, Direct3D::GetDevice(), Direct3D::GetContext());
+
+	// シーンマネージャーの初期化
+	SceneManager::Init();
+
+	// 入力初期化
+	Input::Init();
+
+	// FPS設定
+	GameTime::Init(ProjectData::GetFPS());
+
+	s_isInitialized = true;
+	s_isEditorMode = false;
+
+	// 初期化後の処理
 	GameWindow::Show(nCmdShow);
+	SceneManager::DeserializeScene(ProjectData::GetStartScenePath());
+
+	return true;
+}
+
+bool DXGameFrame::InitEditor(HINSTANCE hInstance, int nCmdShow)
+{
+	if (s_isInitialized)
+		return false;
+
+	SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
+
+	// デバッグ用コンソールウィンドウの作成
+	Debug::CreateConsoleWindow();
+
+	// プロジェクトデータの読み込み
+	if (!ProjectData::Load())
+	{
+		Debug::ConsoleLog("Failed : Load Project Data.");
+	}
+
+	// ウィンドゥスタイル設定
+	UINT windowStyle =
+		WS_OVERLAPPED |
+		WS_CAPTION |
+		WS_SYSMENU |
+		WS_MINIMIZEBOX |
+		WS_MAXIMIZEBOX;
+
+	// ウィンドウの作成
+	if (!GameWindow::Create(hInstance, WndProc, windowStyle,
+		"DXGameFrame " + ProjectData::GetProjectName(), 
+		ProjectData::GetScreenWidth(), ProjectData::GetScreenHeight()))
+	{
+		return false;
+	}
+	HWND hWnd = GameWindow::GetWindowHandle();
 
 	// Direct3Dの初期化
-	if (FAILED(Direct3D::Init(
-		hWnd, config.clientWidth, config.clientHeight, config.fullScreen)))
+	if (FAILED(Direct3D::Init(hWnd,
+		ProjectData::GetScreenWidth(), ProjectData::GetScreenHeight(), ProjectData::IsFullScreen())))
 	{
 		return false;
 	}
@@ -83,14 +163,21 @@ bool DXGameFrame::Init(SetupConfig config, HINSTANCE hInstance, int nCmdShow)
 	SceneManager::Init();
 
 	// エディタの初期化
-	if (config.isEditorMode)
-		Editor::Init();
+	Editor::Init();
+
+	// 入力初期化
+	Input::Init();
 
 	// FPS設定
-	s_isEditorMode = config.isEditorMode;
-	GameTime::Init(config.fps);
+	GameTime::Init(ProjectData::GetFPS());
 
 	s_isInitialized = true;
+	s_isEditorMode = true;
+
+	// 初期化後の処理
+	GameWindow::Show(SW_MAXIMIZE);
+	SceneManager::DeserializeScene(ProjectData::GetEditorScenePath());
+
 	return true;
 }
 
@@ -103,6 +190,8 @@ void DXGameFrame::Uninit()
 	SceneManager::Uninit();
 	ImGuiManager::Uninit();
 	Direct3D::Uninit();
+
+	ProjectData::Save();
 
 	s_isInitialized = false;
 }
@@ -125,6 +214,7 @@ void DXGameFrame::Run()
 		else
 		{
 			// メイン処理
+			Input::Update();
 			GameTime::Update();
 			if (s_isEditorMode)
 			{

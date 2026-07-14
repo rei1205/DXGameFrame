@@ -7,12 +7,15 @@
 #include "SceneMasterGUI.h"
 #include "../DirectX/Direct3D.h"
 #include "../GameFrame/Core/SceneManager.h"
+#include "../System/ProjectData.h"
 #include "../System/ImGuiManager.h"
 
 Scene* Editor::s_pTargetScene = nullptr;
 ObjPtr<GameObject> Editor::s_pTargetGameObject = nullptr;
 std::vector<std::unique_ptr<EditorWindow>> Editor::s_editorWindows;
 std::function<void()> Editor::s_sceneSerializeFunc = nullptr;
+std::function<void()> Editor::s_changePlayModeFunc = nullptr;
+bool Editor::s_isPlayMode = false;
 bool Editor::s_initialized = false;
 
 void Editor::Init()
@@ -20,6 +23,7 @@ void Editor::Init()
 	if (s_initialized)
 		return;
 
+	// エディタウィンドウの作成
 	s_editorWindows.push_back(std::make_unique<HierarchyGUI>());
 	s_editorWindows.push_back(std::make_unique<InspectorGUI>());
 	s_editorWindows.push_back(std::make_unique<GameWindowGUI>());
@@ -49,6 +53,12 @@ void Editor::Execute()
 
 	ImGuiManager::BeginFrame();
 
+	if (s_isPlayMode)
+	{
+		// シーンの更新
+		pScene->Update();
+	}
+
 	float clearColor[] = { 0.4f, 0.8f, 0.8f, 1.0f };
 	Direct3D::BeginDraw(clearColor);
 
@@ -66,10 +76,25 @@ void Editor::Execute()
 	ImGuiManager::EndFrame();
 	Direct3D::EndDraw();
 
-	if (s_sceneSerializeFunc != nullptr)
+	// シーン変更処理
+	if (s_isPlayMode)
 	{
-		s_sceneSerializeFunc();
-		s_sceneSerializeFunc = nullptr;
+		SceneManager::ApplyChangeScene();
+	}
+	else
+	{
+		if (s_sceneSerializeFunc != nullptr)
+		{
+			s_sceneSerializeFunc();
+			s_sceneSerializeFunc = nullptr;
+		}
+	}
+
+	// プレイモード切り替え処理
+	if (s_changePlayModeFunc != nullptr)
+	{
+		s_changePlayModeFunc();
+		s_changePlayModeFunc = nullptr;
 	}
 }
 
@@ -82,7 +107,43 @@ void Editor::SceneSerialize(std::string filePath)
 void Editor::SceneDeserialize(std::string filePath)
 {
 	s_sceneSerializeFunc = [filePath]()
-		{ SceneManager::DeserializeScene(filePath); };
+		{ 
+			if (SceneManager::DeserializeScene(filePath))
+			{
+				ProjectData::SetEditorScenePath(filePath);
+			}
+		};
+}
+
+void Editor::StartPlayMode()
+{
+	if (s_isPlayMode)
+		return;
+
+	s_changePlayModeFunc = []()
+		{
+			if (s_pTargetScene == nullptr)
+				return;
+
+			// 現在のシーンを保存
+			SceneManager::SerializeScene(ProjectData::GetEditorScenePath());
+			
+			s_pTargetScene->GetComponentManager().InvokePendingAwake();
+			s_isPlayMode = true;
+		};
+}
+
+void Editor::StopPlayMode()
+{
+	if (!s_isPlayMode)
+		return;
+
+	s_changePlayModeFunc = []()
+		{
+			// 最後に開いたシーンを復元
+			SceneManager::DeserializeScene(ProjectData::GetEditorScenePath());
+			s_isPlayMode = false;
+		};
 }
 
 void Editor::RootWindowGUI()

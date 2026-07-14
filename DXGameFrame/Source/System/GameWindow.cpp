@@ -4,8 +4,6 @@
 
 HWND GameWindow::s_hWnd = nullptr;
 UINT GameWindow::s_windowStyle;
-GameWindow::Size GameWindow::s_clientSize;
-GameWindow::Size GameWindow::s_windowSize;
 
 bool GameWindow::Create(HINSTANCE hInstance, WNDPROC wndProc, UINT windowStyle,
 	const std::string& title, UINT clientWidth, UINT clientHeight)
@@ -30,10 +28,7 @@ bool GameWindow::Create(HINSTANCE hInstance, WNDPROC wndProc, UINT windowStyle,
 	}
 
 	// ウィンドウサイズを求める
-	s_clientSize.width = clientWidth;
-	s_clientSize.height = clientHeight;
-	s_windowStyle = windowStyle;
-	s_windowSize = AdjustWindowSize(clientWidth, clientHeight, windowStyle);
+	Size windowSize = AdjustWindowSize(clientWidth, clientHeight, windowStyle);
 
 	// ウィンドウの作成
 	s_hWnd = CreateWindowExA(
@@ -42,7 +37,7 @@ bool GameWindow::Create(HINSTANCE hInstance, WNDPROC wndProc, UINT windowStyle,
 		title.c_str(),								// ウィンドウのタイトル
 		windowStyle,								// ウィンドウの見た目 (スタイル)
 		CW_USEDEFAULT, CW_USEDEFAULT,				// ウィンドウの位置
-		s_windowSize.width, s_windowSize.height,	// ウィンドウのサイズ
+		windowSize.width, windowSize.height,		// ウィンドウのサイズ
 		HWND_DESKTOP,								// 親ウィンドウ
 		NULL,										// 子ウィンドウ又はメニュー
 		hInstance, NULL
@@ -76,17 +71,9 @@ void GameWindow::Resize(UINT clientWidth, UINT clientHeight)
 		return;
 
 	// ウィンドウサイズを変更
-	s_windowSize = AdjustWindowSize(clientWidth, clientHeight, s_windowStyle);
+	Size windowSize = AdjustWindowSize(clientWidth, clientHeight, s_windowStyle);
 	SetWindowPos(s_hWnd, nullptr, 0, 0,
-		s_windowSize.width, s_windowSize.height, SWP_NOMOVE | SWP_NOZORDER);
-
-	OnResize(clientWidth, clientHeight);
-}
-
-void GameWindow::OnResize(UINT clientWidth, UINT clientHeight)
-{
-	s_clientSize.width = clientWidth;
-	s_clientSize.height = clientHeight;
+		windowSize.width, windowSize.height, SWP_NOMOVE | SWP_NOZORDER);
 }
 
 GameWindow::Size GameWindow::AdjustWindowSize(UINT clientWidth, UINT clientHeight, UINT windowStyle)

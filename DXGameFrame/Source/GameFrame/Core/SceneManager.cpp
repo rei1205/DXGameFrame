@@ -7,6 +7,7 @@
 
 std::unique_ptr<Scene> SceneManager::s_pActiveScene = nullptr;
 bool SceneManager::s_sceneChangeFlag = false;
+std::string SceneManager::s_currentSceneFilePath;
 std::string SceneManager::s_nextSceneFilePath;
 
 void SceneManager::Init()
@@ -42,6 +43,8 @@ void SceneManager::Execute()
 	s_pActiveScene->Draw();
 	ImGuiManager::EndFrame();
 	Direct3D::EndDraw();
+
+	ApplyChangeScene();
 }
 
 void SceneManager::ChangeScene(const std::string& filePath)
@@ -53,9 +56,11 @@ void SceneManager::ChangeScene(const std::string& filePath)
 	s_nextSceneFilePath = filePath;
 }
 
-Scene* SceneManager::GetActiveScene()
+std::string SceneManager::GetCurrentSceneName()
 {
-	return s_pActiveScene .get();
+	std::filesystem::path path = s_currentSceneFilePath;
+	std::string fileName = path.stem().string();
+	return fileName;
 }
 
 void SceneManager::SerializeScene(const std::string& filePath)
@@ -70,10 +75,10 @@ void SceneManager::SerializeScene(const std::string& filePath)
 	file << jsonData.dump(4);
 }
 
-void SceneManager::DeserializeScene(const std::string& filePath)
+bool SceneManager::DeserializeScene(const std::string& filePath)
 {
 	std::ifstream file(filePath, std::ios::binary);
-	if (!file)return;
+	if (!file) return false;
 
 	nlohmann::json jsonData;
 	file >> jsonData;
@@ -81,6 +86,9 @@ void SceneManager::DeserializeScene(const std::string& filePath)
 	// シーンデシリアライズ
 	s_pActiveScene = std::make_unique<Scene>();
 	s_pActiveScene->Deserialize(jsonData["Scene"]);
+
+	s_currentSceneFilePath = filePath;
+	return true;
 }
 
 void SceneManager::ApplyChangeScene()

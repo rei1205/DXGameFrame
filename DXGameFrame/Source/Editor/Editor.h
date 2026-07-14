@@ -74,6 +74,25 @@ public:
 	 */
 	static void SceneDeserialize(std::string filePath);
 
+	/**
+	 * @brief ゲームを再生する
+	 */
+	static void StartPlayMode();
+
+	/**
+	 * @brief ゲーム再生を終了する
+	 */
+	static void StopPlayMode();
+
+	/**
+	 * @brief ゲームが再生中かどうかを取得する
+	 * @return ゲーム再生状態
+	 */
+	static bool IsPlayMode()
+	{
+		return s_isPlayMode;
+	}
+
 private:
 	Editor() = delete;
 
@@ -89,8 +108,11 @@ private:
 	/// シーンのシリアライズ操作
 	static std::function<void()> s_sceneSerializeFunc;
 
+	/// シーン再生・停止操作
+	static std::function<void()> s_changePlayModeFunc;
+
 	/// 再生中フラグ
-	static bool isPlayMode;
+	static bool s_isPlayMode;
 
 	/// 初期化済みフラグ
 	static bool s_initialized;
